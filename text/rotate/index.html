@@ -20,7 +20,7 @@
         <header>
             <div id="header"></div>
         </header>
-        
+
         <div id="wrap">
             <div id="contents-wrap">
                 <div class="title">
@@ -63,6 +63,17 @@
 
                     <!--出力テキストエリア-->
                     <textarea name="output-text" id="output-textarea" style="height: 100px;" placeholder="回転後の文字列" class="simple-textarea"></textarea>
+                
+                    <!--コピーボタン-->
+                    <div class="button-area-center">
+                        <a href="javascript:OnCopyButtonClick();" id="copy-button">
+                            <div class="round-rect-button">
+                                <div class="middle-text">
+                                    クリップボードにコピーする
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
             </div>

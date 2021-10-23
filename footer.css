@@ -6,6 +6,25 @@ footer {
     height: 50px;
 }
 
+footer a {
+    color: #0088dd;
+
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+footer a:hover {
+    color: #00aaff;
+
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+
 #footer-wrap {
     font-size: 14px;
     

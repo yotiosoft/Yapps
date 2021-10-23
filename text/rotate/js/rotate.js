@@ -33,3 +33,9 @@ function OnRotateButtonClick() {
         }
     });
 }
+
+function OnCopyButtonClick() {
+    output_area = document.getElementById("output-textarea");
+    output_area.select();
+    document.execCommand("copy");
+}
