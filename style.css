@@ -21,12 +21,11 @@ body {
     margin: 0;
     background-color: #f8f8f8;
     color: #4b4b4b;
-}
 
-header {
-    width: 100%;
-    height: fit-content;
-    margin-bottom: 50px;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 50px;
+    box-sizing: border-box;
 }
 
 p {
@@ -43,10 +42,7 @@ a {
 #wrap {
     overflow: hidden;
 
-    min-height: 100vh;
     position: relative;
-    padding-bottom: 120px;
-    box-sizing: border-box;
 
     display: flex;
     justify-content: center;
