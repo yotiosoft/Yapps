@@ -1,0 +1,59 @@
+.box-area {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.box-wrap {
+    width: 20%;
+    min-width: 200px;
+    min-height: 250px;
+    padding: 10px;
+}
+.box {
+    width: 90%;
+    height: 90%;
+    
+    padding: 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+    box-shadow: 0 3px 6px #ccc;
+    background-color: #fafafa;
+
+    word-break: break-all;
+
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+.box:hover {
+    box-shadow: 0 10px 20px #ccc;
+    background-color: #fff;
+
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+.box img {
+    height: 5vw;
+}
+.box .tool-title {
+    width: 100%;
+
+    font-size: 20px;
+    text-align: center;
+}
+.box .summary {
+    font-size: 14px;
+}

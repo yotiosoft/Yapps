@@ -1,0 +1,272 @@
+{
+	"codes": [
+		{
+            "input": "A",
+            "output": "∀"
+		},
+		{
+            "input": "B",
+            "output": "ᗺ"
+		},
+		{
+            "input": "C",
+            "output": "Ↄ"
+		},
+		{
+            "input": "D",
+            "output": "ᗡ"
+		},
+		{
+            "input": "E",
+            "output": "Ǝ"
+		},
+		{
+            "input": "F",
+            "output": "Ⅎ"
+		},
+		{
+            "input": "G",
+            "output": "⅁"
+		},
+		{
+            "input": "H",
+            "output": "H"
+		},
+		{
+            "input": "I",
+            "output": "I"
+		},
+		{
+            "input": "J",
+            "output": "Ր"
+		},
+		{
+            "input": "K",
+            "output": "丬"
+		},
+		{
+            "input": "L",
+            "output": "⅂"
+		},
+		{
+            "input": "M",
+            "output": "W"
+		},
+		{
+            "input": "N",
+            "output": "N"
+		},
+		{
+            "input": "O",
+            "output": "O"
+		},
+		{
+            "input": "P",
+            "output": "Ԁ"
+		},
+		{
+            "input": "Q",
+            "output": "Ό"
+		},
+		{
+            "input": "R",
+            "output": "ᖈ"
+		},
+		{
+            "input": "S",
+            "output": "S"
+		},
+		{
+            "input": "T",
+            "output": "⊥"
+		},
+		{
+            "input": "U",
+            "output": "Ո"
+		},
+		{
+            "input": "V",
+            "output": "Λ"
+		},
+		{
+            "input": "W",
+            "output": "M"
+		},
+		{
+            "input": "X",
+            "output": "X"
+		},
+		{
+            "input": "Y",
+            "output": "⅄"
+		},
+		{
+            "input": "Z",
+            "output": "Z"
+		},
+		{
+            "input": "a",
+            "output": "ɐ"
+		},
+		{
+            "input": "b",
+            "output": "q"
+		},
+		{
+            "input": "c",
+            "output": "ɔ"
+		},
+		{
+            "input": "d",
+            "output": "p"
+		},
+		{
+            "input": "e",
+            "output": "ə"
+		},
+		{
+            "input": "f",
+            "output": "ɟ"
+		},
+		{
+            "input": "g",
+            "output": "ᵷ"
+		},
+		{
+            "input": "h",
+            "output": "ɥ"
+		},
+		{
+            "input": "i",
+            "output": "!"
+		},
+		{
+            "input": "j",
+            "output": "ɾ"
+		},
+		{
+            "input": "k",
+            "output": "ʞ"
+		},
+		{
+            "input": "l",
+            "output": "ꞁ"
+		},
+		{
+            "input": "m",
+            "output": "ɯ"
+		},
+		{
+            "input": "n",
+            "output": "u"
+		},
+		{
+            "input": "o",
+            "output": "o"
+		},
+		{
+            "input": "p",
+            "output": "d"
+		},
+		{
+            "input": "q",
+            "output": "b"
+		},
+		{
+            "input": "r",
+            "output": "ɹ"
+		},
+		{
+            "input": "s",
+            "output": "s"
+		},
+		{
+            "input": "t",
+            "output": "ʇ"
+		},
+		{
+            "input": "u",
+            "output": "n"
+		},
+		{
+            "input": "v",
+            "output": "ʌ"
+		},
+		{
+            "input": "w",
+            "output": "ʍ"
+		},
+		{
+            "input": "x",
+            "output": "x"
+		},
+		{
+            "input": "y",
+            "output": "ʎ"
+		},
+		{
+            "input": "z",
+            "output": "z"
+		},
+        {
+            "input": "0",
+            "output": "0"
+        },
+        {
+            "input": "1",
+            "output": "⇂"
+        },
+        {
+            "input": "2",
+            "output": "ᘔ"
+        },
+        {
+            "input": "3",
+            "output": "ε"
+        },
+        {
+            "input": "4",
+            "output": "߈"
+        },
+        {
+            "input": "5",
+            "output": "S"
+        },
+        {
+            "input": "6",
+            "output": "9"
+        },
+        {
+            "input": "7",
+            "output": "ㄥ"
+        },
+        {
+            "input": "8",
+            "output": "8"
+        },
+        {
+            "input": "9",
+            "output": "6"
+        },
+        {
+            "input": ".",
+            "output": "˙"
+        },
+        {
+            "input": ",",
+            "output": "‘"
+        },
+        {
+            "input": "!",
+            "output": "¡"
+        },
+        {
+            "input": "?",
+            "output": "¿"
+        },
+        {
+            "input": "&",
+            "output": "⅋"
+        }
+	]
+}

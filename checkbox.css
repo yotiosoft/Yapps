@@ -1,0 +1,13 @@
+.checkbox-area {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.checkbox {
+    margin-left: 10px;
+    margin-right: 10px;
+}

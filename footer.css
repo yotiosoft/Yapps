@@ -1,0 +1,13 @@
+footer {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+}
+
+#footer-wrap {
+    font-size: 14px;
+    margin: 10px 0px 10px 0px;
+
+    text-align: center;
+}
