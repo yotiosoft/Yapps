@@ -59,6 +59,7 @@ a {
 .column {
     width: 100%;
     display: block;
+    margin-bottom: 50px;
 }
 .column .title {
     width: 100%;

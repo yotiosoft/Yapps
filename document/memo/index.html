@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>メモ帳 - Yapps</title>
+        <link rel="icon" type="image/png" href="../../img/logo.png">
+
+        <link rel="stylesheet" href="../../style.css">
+		<link rel="stylesheet" href="../../app-page.css">
+		<link rel="stylesheet" href="../../simple-textarea.css">
+        <link rel="stylesheet" href="../../button.css">
+        <link rel="stylesheet" href="../../checkbox.css">
+        <link rel="stylesheet" href="../../information.css">
+
+        <script src="../../js/jquery-3.5.1.min.js"></script>
+        <script src="../../js/common.js"></script>
+
+		<script src="./js/memo.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id="header"></div>
+        </header>
+
+        <div id="wrap">
+            <div id="contents-wrap">
+                <div class="title">
+                    <img src="../../img/tools_icon/document/memo.svg" type=”image/svg+xml” width="48" height="48" alt="メモ帳">
+                    メモ帳
+                </div>
+                <p class="summary">
+                    文章を読み書きできます。内容はブラウザに保存されます。<br>
+                </p>
+                <div class="information" style="background-color: #0099cc; color: #fff;">
+                    このページではブラウザにメモを保存するためにLocal Storageを使用しており、読み込み・保存はすべてご利用のブラウザ上で行われます。<br>
+                    メモの内容がサーバーなど外部に送信・保存されることは一切ありませんのでご安心ください。
+                </div>
+                <div class="information" style="background-color: #dddd00; color: #000;">
+                    「ブラウザに保存」を選んだ場合、長期間経過するとブラウザによってメモが削除されてしまいます。<br>
+                    長期間保存したい場合は「txt形式でダウンロード」をお選びください。
+                </div>
+                
+                <div class="app-area" id="app-area-id">
+                    <!--タイトル-->
+                    <input type="text" id="title" name="title" placeholder="タイトル" class="simple-inputtext">
+
+                    <!--入力テキストエリア-->
+                    <textarea name="input-text" id="input-textarea" placeholder="内容" class="simple-textarea"></textarea>
+
+                    <!--変換ボタン-->
+                    <div class="button-area-center">
+                        <a href="javascript:OnSaveButtonClick();" id="save-button">
+                            <div class="round-rect-button">
+                                <div class="big-text">
+                                    ブラウザに保存
+                                </div>
+                            </div>
+                        </a>
+
+                        <a onclick="OnDownloadButtonClick();" id="download-button">
+                            <div class="round-rect-button">
+                                <div class="big-text">
+                                    txt形式でダウンロード
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="footer_class">
+            <div id="footer"></div>
+        </footer>
+    </body>
+</html>
