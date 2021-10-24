@@ -1,14 +1,31 @@
 function OnSaveButtonClick(halfToFull) {
     var title = document.getElementById("title").value;
     var str   = document.getElementById("input-textarea").value;
-
+    
+    var now   = new Date();
     var get_json = localStorage.getItem('yapps_memopad');
     var memo_array = [];
     if (get_json) {
         memo_array = JSON.parse(get_json);
     }
 
+    var time = {
+        'year'  : now.getFullYear(),
+        'month' : now.getMonth() + 1,
+        'date'  : now.getDate(),
+        'hour'  : now.getHours(),
+        'min'   : now.getMinutes(),
+        'sec'   : now.getSeconds()
+    }
+
+    var color_array = [
+        "f4d03f", "f5e653", "4ecdc4", "16a085", "89c4f4", "19b5fe", "d5b8ff"
+    ]
+    var color = color_array[Math.floor(Math.random() * color_array.length)];
+
     memo_array.push({
+        'color' : color,
+        'time'  : time,
         'title' : title,
         'text'  : str
     });
