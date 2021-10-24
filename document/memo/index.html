@@ -41,30 +41,34 @@
                 </div>
                 
                 <div class="app-area" id="app-area-id">
-                    <!--タイトル-->
-                    <input type="text" id="title" name="title" placeholder="タイトル" class="simple-inputtext">
+                    <div id="memo-area">
+                        <!--タイトル-->
+                        <input type="text" id="title" name="title" placeholder="タイトル" class="simple-inputtext">
 
-                    <!--入力テキストエリア-->
-                    <textarea name="input-text" id="input-textarea" placeholder="内容" class="simple-textarea"></textarea>
+                        <!--入力テキストエリア-->
+                        <textarea name="input-text" id="input-textarea" placeholder="内容" class="simple-textarea"></textarea>
 
-                    <!--変換ボタン-->
-                    <div class="button-area-center">
-                        <a href="javascript:OnSaveButtonClick();" id="save-button">
-                            <div class="round-rect-button">
-                                <div class="big-text">
-                                    ブラウザに保存
+                        <!--変換ボタン-->
+                        <div class="button-area-center">
+                            <a href="javascript:OnSaveButtonClick();" id="save-button">
+                                <div class="round-rect-button">
+                                    <div class="big-text">
+                                        ブラウザに保存
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
 
-                        <a onclick="OnDownloadButtonClick();" id="download-button">
-                            <div class="round-rect-button">
-                                <div class="big-text">
-                                    txt形式でダウンロード
+                            <a onclick="OnDownloadButtonClick();" id="download-button">
+                                <div class="round-rect-button">
+                                    <div class="big-text">
+                                        txt形式でダウンロード
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
+
+                    <script src="./js/load_memo.js"></script>
                 </div>
 
             </div>
