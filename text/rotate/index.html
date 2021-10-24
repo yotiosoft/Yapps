@@ -1,8 +1,8 @@
 <html>
     <head>
         <meta charset="utf8">
-        <title>英数字を回転 - Yapps</title>
-        <link rel="icon" type="image/png" href="../../img/icon.png">
+        <title>英数字を反転 - Yapps</title>
+        <link rel="icon" type="image/png" href="../../img/logo.png">
 
         <link rel="stylesheet" href="../../style.css">
 		<link rel="stylesheet" href="../../app-page.css">
@@ -24,11 +24,11 @@
         <div id="wrap">
             <div id="contents-wrap">
                 <div class="title">
-                    <img src="../../img/tools_icon/text/rotate.png">
-                    英数字を回転
+                    <img src="../../img/tools_icon/text/rotate.svg" type=”image/svg+xml” width="48" height="48" alt="英数字を反転">
+                    英数字を反転
                 </div>
                 <p class="summary">
-                    文章から英数字を（擬似的に）180°回転した文字に変換します。逆変換も可能です。<br>
+                    文章から英数字を（擬似的に）180°反転した文字に変換します。逆変換も可能です。<br>
                     <b>※全角文字には対応していません。</b>
                 </p>
                 <p class="summary">
@@ -40,7 +40,7 @@
                 
                 <div class="app-area" id="app-area-id">
                     <!--入力テキストエリア-->
-                    <textarea name="input-text" id="input-textarea" placeholder="回転させたい文章をここに入力" class="simple-textarea"></textarea>
+                    <textarea name="input-text" id="input-textarea" placeholder="反転させたい文章をここに入力" class="simple-textarea"></textarea>
 
                     <!--チェックボックス：文字列を逆順にする？-->
                     <div class="checkbox-area">
@@ -50,19 +50,19 @@
                         </div>
                     </div>
 
-                    <!--回転ボタン-->
+                    <!--反転ボタン-->
                     <div class="button-area-center">
                         <a href="javascript:OnRotateButtonClick();" id="rotate-button">
                             <div class="round-rect-button">
                                 <div class="big-text">
-                                    回転！
+                                    反転！
                                 </div>
                             </div>
                         </a>
                     </div>
 
                     <!--出力テキストエリア-->
-                    <textarea name="output-text" id="output-textarea" style="height: 100px;" placeholder="回転後の文字列" class="simple-textarea"></textarea>
+                    <textarea name="output-text" id="output-textarea" style="height: 100px;" placeholder="反転後の文字列" class="simple-textarea"></textarea>
                 
                     <!--コピーボタン-->
                     <div class="button-area-center">
