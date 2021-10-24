@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.50997696"
-     inkscape:cx="263.73741"
-     inkscape:cy="325.5049"
+     inkscape:zoom="1.6364594"
+     inkscape:cx="263.06794"
+     inkscape:cy="282.92789"
      inkscape:window-width="1680"
      inkscape:window-height="936"
-     inkscape:window-x="0"
+     inkscape:window-x="668"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="text12169" />
   <defs
      id="defs11648" />
   <g
@@ -220,16 +220,13 @@ G5nvVpJBpCoAAAAASUVORK5CYII=
        id="image11679"
        x="14.853911"
        y="13.865773" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:52.9167px;line-height:1.25;font-family:sans-serif;fill:#4b4b4b;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="46.651875"
-       y="81.972656"
-       id="text12169"><tspan
-         sodipodi:role="line"
-         id="tspan12167"
-         style="font-size:52.9167px;fill:#4b4b4b;fill-opacity:1;stroke-width:0.264583"
-         x="46.651875"
-         y="81.972656">A</tspan></text>
+    <g
+       aria-label="A"
+       id="text12169"
+       style="font-size:52.9167px;line-height:1.25;fill:#4b4b4b;stroke-width:0.264583">
+      <path
+         d="M 82.153605,81.972656 H 76.701738 L 72.929356,71.24979 H 56.289535 L 52.517153,81.972656 H 47.323669 L 61.32799,43.499529 h 6.821293 z M 71.353224,66.857291 64.609446,47.969543 57.839829,66.857291 Z"
+         id="path14995" />
+    </g>
   </g>
 </svg>
