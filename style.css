@@ -86,3 +86,12 @@ a {
     height: 48px;
     margin-right: 20px;
 }
+
+.flex-width100p-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
