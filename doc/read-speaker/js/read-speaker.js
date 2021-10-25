@@ -49,6 +49,10 @@ function OnSpeakButtonClick() {
 
 var stop_button_text = document.getElementById("stop-button-text")
 function OnStopButtonClick() {
+    if (speechSynthesis.empty) {
+        return;
+    }
+    
     if (!stop) {
         stop = true;
         stop_button_text.textContent = "再開"
