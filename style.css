@@ -87,6 +87,28 @@ a {
     margin-right: 20px;
 }
 
+.summary {
+    margin: 20px 0px 0px 10px;
+}
+.summary a {
+    color: #0088dd;
+
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+.summary a:hover {
+    color: #00aaff;
+
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+
 .flex-width100p-center {
     display: flex;
     flex-wrap: wrap;

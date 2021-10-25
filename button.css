@@ -40,6 +40,16 @@
 .round-rect-button .big-text {
     font-size: 22px;
 }
+.round-rect-button .big-text-white {
+    font-size: 22px;
+    color: #fff;
+}
 .round-rect-button .middle-text {
     font-size: 16px;
+    line-height: 20px;
+}
+.round-rect-button .middle-text-white {
+    font-size: 16px;
+    color: #fff;
+    line-height: 20px;
 }
