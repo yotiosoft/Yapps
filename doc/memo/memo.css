@@ -1,11 +1,17 @@
 .memo-paper-area {
     margin: 30px 0px 30px 0px;
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+
+    -webkit-column-count: 3;
+    -webkit-column-gap:   0px;
+    -moz-column-count:    3;
+    -moz-column-gap:      0px;
+    column-count:         3;
+    column-gap:           0px;
 }
 
 .memo-paper {
-    width: 30%;
+    width: 90%;
     min-width: 200px;
     height: fit-content;
     min-height: 200px;
@@ -14,6 +20,9 @@
 
     margin: 5px;
     padding: 10px;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 .memo-paper .title {
     font-size: 26px;
@@ -25,4 +34,9 @@
 }
 .memo-paper .text {
     font-size: 20px;
+}
+
+[data-grid] {
+    border: 1px solid;
+    padding: 1em;   
 }
