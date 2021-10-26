@@ -7,7 +7,7 @@
     -moz-column-count:    3;
     -moz-column-gap:      0px;
     column-count:         3;
-    column-gap:           0px;
+    column-gap:           10px;
 }
 
 .memo-paper {
@@ -15,10 +15,11 @@
     min-width: 200px;
     height: fit-content;
     min-height: 200px;
+    max-height: 400px;
 
     box-shadow: 0 3px 6px #ccc;
 
-    margin: 5px;
+    margin-bottom: 20px;
     padding: 10px;
 
     page-break-inside: avoid;
@@ -34,9 +35,9 @@
 }
 .memo-paper .text {
     font-size: 20px;
-}
+    max-height: 300px;
+    overflow: scroll;
 
-[data-grid] {
-    border: 1px solid;
-    padding: 1em;   
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
