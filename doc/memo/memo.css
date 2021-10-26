@@ -59,6 +59,12 @@
     max-height: 300px;
     overflow: scroll;
 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
     page-break-inside: avoid;
     break-inside: avoid;
+}
+.memo-paper .text::-webkit-scrollbar {
+    display: none;
 }
