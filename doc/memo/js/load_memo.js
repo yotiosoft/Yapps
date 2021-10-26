@@ -2,7 +2,8 @@ var get_json = localStorage.getItem('yapps_memopad');
 var memo_array = {};
 if (get_json) {
     memo_array = JSON.parse(get_json);
-
+    memo_array.reverse();
+    
     for (memo in memo_array) {
         var memo_title          = document.createElement('div');
         memo_title.className    = 'title';

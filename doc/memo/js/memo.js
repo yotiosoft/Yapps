@@ -19,18 +19,21 @@ function OnSaveButtonClick(halfToFull) {
     }
 
     var color_array = [
-        "f4d03f", "f5e653", "4ecdc4", "16a085", "89c4f4", "19b5fe", "d5b8ff"
+        "f4d03f", "f5e653", "4ecdc4", "7befb2", "89c4f4", "19b5fe", "d5b8ff"
     ]
     var color = color_array[Math.floor(Math.random() * color_array.length)];
 
-    memo_array.push({
-        'color' : color,
-        'time'  : time,
-        'title' : title,
-        'text'  : str
+    hash_sha256(now.getTime()+str).then(v => {
+        memo_array.push({
+            'hash'  : v,
+            'title' : title,
+            'color' : color,
+            'time'  : time,
+            'text'  : str
+        });
+    
+        localStorage.setItem('yapps_memopad', JSON.stringify(memo_array));
     });
-
-    localStorage.setItem('yapps_memopad', JSON.stringify(memo_array));
 }
 
 function OnDownloadButtonClick() {
