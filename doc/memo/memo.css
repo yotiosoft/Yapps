@@ -1,11 +1,12 @@
 .memo-paper-area {
     margin: 30px 0px 30px 0px;
     width: 100%;
+    padding: 10px;
 
     -webkit-column-count: 3;
-    -webkit-column-gap:   0px;
+    -webkit-column-gap:   10px;
     -moz-column-count:    3;
-    -moz-column-gap:      0px;
+    -moz-column-gap:      10px;
     column-count:         3;
     column-gap:           10px;
 }
