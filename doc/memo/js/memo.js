@@ -1,4 +1,4 @@
-function OnSaveButtonClick() {
+function OnSaveNewMemoButtonClick() {
     var title = document.getElementById("title").value;
     var str   = document.getElementById("input-textarea").value;
     
