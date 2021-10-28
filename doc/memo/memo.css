@@ -46,9 +46,7 @@
 
     page-break-inside: avoid;
     break-inside: avoid;
-    break-after: avoid;
     -webkit-break-inside: avoid;
-    -webkit-break-after: avoid;
 }
 .memo-paper .title-area {
     display: flex;
