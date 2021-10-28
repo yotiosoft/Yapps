@@ -21,9 +21,13 @@ function load_memo() {
             memo_title_area.appendChild(memo_title);
             var memo_buttons_area   = document.createElement('div');
             memo_buttons_area.style = 'display: flex; flex-wrap: wrap;'
-            makeImageButton(memo_buttons_area, "JavaScript:OnDownloadButtonClick(\""+ memo_array[memo].hash +"\", \"simple-img-button_"+memo_array[memo].hash+"\")", "/img/common/download.svg", memo_array[memo].hash, 24, 24, 'simple-img-button');
-            makeImageButton(memo_buttons_area, "JavaScript:OnDeleteButtonClick(\""+ memo_array[memo].hash +"\")", "/img/common/delete.svg", memo_array[memo].hash, 24, 24, 'simple-img-button');
-            memo_title_area.append(memo_buttons_area);
+
+            var download_button_link = makeImageButton("JavaScript:OnDownloadButtonClick(\""+ memo_array[memo].hash +"\", \"dlbtn_"+memo_array[memo].hash+"\")", "/img/common/download.svg", 24, 24, 'simple-img-button');
+            download_button_link.id  = 'dlbtn_' + memo_array[memo].hash;
+            memo_buttons_area.appendChild(download_button_link);
+            var delete_button_link   = makeImageButton("JavaScript:OnDeleteButtonClick(\""+ memo_array[memo].hash +"\")", "/img/common/delete.svg", 24, 24, 'simple-img-button');
+            memo_buttons_area.appendChild(delete_button_link);
+            memo_title_area.appendChild(memo_buttons_area);
     
             var memo_date           = document.createElement('div');
             memo_date.className     = 'date';
@@ -47,17 +51,17 @@ function load_memo() {
     }
 }
 
-function makeImageButton(parent, href, src, hash, w, h, className) {
+function makeImageButton(href, src, w, h, className) {
     var button_link = document.createElement('a');
-    button_link.href = href;
+    if (href != "")
+        button_link.href = href;
     var button  = document.createElement('img');
     button.src = src;
     button.width = w;
     button.height = h;
     button_link.appendChild(button);
     button_link.className = className;
-    button_link.id = className+"_"+hash;
-    parent.appendChild(button_link);
+    return button_link;
 }
 
 function zeroPadding(num,length){

@@ -84,6 +84,7 @@ function OnDownloadButtonClick(hash, download_button_id) {
                 else {
                     download_button.download = title+".txt";
                     download_button.href = window.URL.createObjectURL(blob);
+                    download_button.click();
                 }
             }
         });
