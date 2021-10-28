@@ -16,19 +16,14 @@ function load_memo() {
             memo_title.className    = 'title';
             memo_title.textContent  = memo_array[memo].title;
     
-            var memo_delete_button_link = document.createElement('a');
-            memo_delete_button_link.href = "JavaScript:OnDeleteButtonClick(\""+ memo_array[memo].hash +"\")";
-            var memo_delete_button  = document.createElement('img');
-            memo_delete_button.src = "/img/common/delete.svg";
-            memo_delete_button.width = 24;
-            memo_delete_button.height = 24;
-            memo_delete_button_link.appendChild(memo_delete_button);
-            memo_delete_button_link.className = 'simple-img-button';
-    
             var memo_title_area     = document.createElement('div');
             memo_title_area.className = 'title-area';
             memo_title_area.appendChild(memo_title);
-            memo_title_area.appendChild(memo_delete_button_link);
+            var memo_buttons_area   = document.createElement('div');
+            memo_buttons_area.style = 'display: flex; flex-wrap: wrap;'
+            makeImageButton(memo_buttons_area, "JavaScript:OnDownloadButtonClick(\""+ memo_array[memo].hash +"\", \"simple-img-button_"+memo_array[memo].hash+"\")", "/img/common/download.svg", memo_array[memo].hash, 24, 24, 'simple-img-button');
+            makeImageButton(memo_buttons_area, "JavaScript:OnDeleteButtonClick(\""+ memo_array[memo].hash +"\")", "/img/common/delete.svg", memo_array[memo].hash, 24, 24, 'simple-img-button');
+            memo_title_area.append(memo_buttons_area);
     
             var memo_date           = document.createElement('div');
             memo_date.className     = 'date';
@@ -50,6 +45,19 @@ function load_memo() {
             memo_paper_area.appendChild(memo_paper);
         }
     }
+}
+
+function makeImageButton(parent, href, src, hash, w, h, className) {
+    var button_link = document.createElement('a');
+    button_link.href = href;
+    var button  = document.createElement('img');
+    button.src = src;
+    button.width = w;
+    button.height = h;
+    button_link.appendChild(button);
+    button_link.className = className;
+    button_link.id = className+"_"+hash;
+    parent.appendChild(button_link);
 }
 
 function zeroPadding(num,length){

@@ -59,22 +59,33 @@ function OnDeleteButtonClick(hash) {
     }
 }
 
-function OnDownloadButtonClick() {
-    var title = document.getElementById("title").value;
-    var str   = document.getElementById("input-textarea").value;
-    var download_button = document.getElementById("download-button");
+function OnDownloadButtonClick(hash, download_button_id) {
+    var download_button = document.getElementById(download_button_id);
+    var get_json = localStorage.getItem('yapps_memopad');
+    var memo_array = [];
+    if (get_json) {
+        memo_array = JSON.parse(get_json);
 
-    var blob = new Blob(
-        [ str ], 
-        { "type": "text/plain"}
-    );
-    var file_name = title+".txt";
-    if (window.navigator.msSaveBlob) {
-        window.navigator.msSaveBlob(blob, file_name);
-        window.navigator.msSaveOrOpenBlob(blob, file_name);
-    }
-    else {
-        download_button.download = title+".txt";
-        download_button.href = window.URL.createObjectURL(blob);
+        // ハッシュが一致する要素をダウンロード
+        memo_array.some(function(v, i) {
+            if (v.hash == hash) {
+                var title   = v.title;
+                var str     = v.text;
+
+                var blob = new Blob(
+                    [ str ], 
+                    { "type": "text/plain"}
+                );
+                var file_name = title+".txt";
+                if (window.navigator.msSaveBlob) {
+                    window.navigator.msSaveBlob(blob, file_name);
+                    window.navigator.msSaveOrOpenBlob(blob, file_name);
+                }
+                else {
+                    download_button.download = title+".txt";
+                    download_button.href = window.URL.createObjectURL(blob);
+                }
+            }
+        });
     }
 }
