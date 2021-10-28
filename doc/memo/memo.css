@@ -1,6 +1,7 @@
 .memo-paper-area {
     margin: 30px 0px 30px 0px;
     width: 100%;
+    min-height: 250px;
     padding: 10px;
 
     -webkit-column-count: 3;
@@ -9,6 +10,7 @@
     -moz-column-gap:      10px;
     column-count:         3;
     column-gap:           10px;
+    
 }
 @media (max-width: 700px) {
     .memo-paper-area {
@@ -40,11 +42,13 @@
 
     box-shadow: 0 3px 6px #ccc;
 
-    margin-bottom: 20px;
     padding: 10px;
 
     page-break-inside: avoid;
     break-inside: avoid;
+    break-after: avoid;
+    -webkit-break-inside: avoid;
+    -webkit-break-after: avoid;
 }
 .memo-paper .title-area {
     display: flex;
