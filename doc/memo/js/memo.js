@@ -31,9 +31,32 @@ function OnSaveButtonClick(halfToFull) {
             'time'  : time,
             'text'  : str
         });
-    
+        
+        // 保存
         localStorage.setItem('yapps_memopad', JSON.stringify(memo_array));
+        // 再読み込み
+        load_memo();
     });
+}
+
+function OnDeleteButtonClick(hash) {
+    var get_json = localStorage.getItem('yapps_memopad');
+    var memo_array = [];
+    if (get_json) {
+        memo_array = JSON.parse(get_json);
+
+        // ハッシュが一致する要素を削除
+        memo_array.some(function(v, i) {
+            if (v.hash == hash) {
+                memo_array.splice(i, 1);
+            }
+        });
+
+        // 保存
+        localStorage.setItem('yapps_memopad', JSON.stringify(memo_array));
+        // 再読み込み
+        load_memo();
+    }
 }
 
 function OnDownloadButtonClick() {

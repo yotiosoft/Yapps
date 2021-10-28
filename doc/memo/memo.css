@@ -46,9 +46,15 @@
     page-break-inside: avoid;
     break-inside: avoid;
 }
+.memo-paper .title-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 .memo-paper .title {
     font-size: 26px;
     font-weight: bold;
+    width: fit-content;
 }
 .memo-paper .date {
     font-size: 16px;
