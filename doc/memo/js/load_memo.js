@@ -33,11 +33,14 @@ function loadMemoOnce(memo, memo_paper_area) {
     memo_buttons_area.style = 'display: flex; flex-wrap: wrap;'
 
     var edit_button_link   = makeImageButton("JavaScript:OnEditButtonClick(\""+ memo.hash +"\", memo_paper_wrap_"+ memo.hash + ')', "/img/common/edit.svg", 24, 24, 'simple-img-button');
+    edit_button_link.title = "編集";
     memo_buttons_area.appendChild(edit_button_link);
     var download_button_link = makeImageButton("JavaScript:OnDownloadButtonClick(\""+ memo.hash +"\", \"dlbtn_"+memo.hash+"\")", "/img/common/download.svg", 24, 24, 'simple-img-button');
     download_button_link.id  = 'dlbtn_' + memo.hash;
+    download_button_link.title = "ダウンロード";
     memo_buttons_area.appendChild(download_button_link);
     var delete_button_link   = makeImageButton("JavaScript:OnDeleteButtonClick(\""+ memo.hash +"\")", "/img/common/delete.svg", 24, 24, 'simple-img-button');
+    delete_button_link.title = "削除";
     memo_buttons_area.appendChild(delete_button_link);
     memo_title_area.appendChild(memo_buttons_area);
 
