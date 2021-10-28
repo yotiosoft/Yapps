@@ -45,8 +45,12 @@ function load_memo() {
             memo_paper.appendChild(memo_title_area);
             memo_paper.appendChild(memo_date);
             memo_paper.appendChild(memo_text);
+
+            var memo_paper_wrap     = document.createElement('div');
+            memo_paper_wrap.className = 'memo-paper-wrap';
+            memo_paper_wrap.appendChild(memo_paper);
     
-            memo_paper_area.appendChild(memo_paper);
+            memo_paper_area.appendChild(memo_paper_wrap);
         }
     }
 }

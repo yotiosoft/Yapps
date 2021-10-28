@@ -33,8 +33,19 @@
     }
 }
 
+.memo-paper-wrap {
+    padding: 10px;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+    -webkit-break-inside: avoid;
+}
 .memo-paper {
-    width: 90%;
+    width: 95%;
     min-width: 200px;
     height: fit-content;
     min-height: 200px;
