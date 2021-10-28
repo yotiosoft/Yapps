@@ -39,7 +39,7 @@ function loadMemoOnce(memo, memo_paper_area) {
     download_button_link.id  = 'dlbtn_' + memo.hash;
     download_button_link.title = "ダウンロード";
     memo_buttons_area.appendChild(download_button_link);
-    var delete_button_link   = makeImageButton("JavaScript:OnDeleteButtonClick(\""+ memo.hash +"\")", "/img/common/delete.svg", 24, 24, 'simple-img-button');
+    var delete_button_link   = makeImageButton("JavaScript:OnDeleteButtonClick(\""+ memo.hash +"\", "+ true +")", "/img/common/delete.svg", 24, 24, 'simple-img-button');
     delete_button_link.title = "削除";
     memo_buttons_area.appendChild(delete_button_link);
     memo_title_area.appendChild(memo_buttons_area);

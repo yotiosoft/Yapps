@@ -44,7 +44,7 @@ function OnSaveButtonClick(hash, color) {
     var str   = document.getElementById("textarea_" + hash).value;
 
     // 更新前の要素は削除
-    OnDeleteButtonClick(hash);
+    OnDeleteButtonClick(hash, false);
     
     var now   = new Date();
     var get_json = localStorage.getItem('yapps_memopad');
@@ -78,7 +78,7 @@ function OnSaveButtonClick(hash, color) {
     });
 }
 
-function OnDeleteButtonClick(hash) {
+function OnDeleteButtonClick(hash, need_confirm) {
     var get_json = localStorage.getItem('yapps_memopad');
     var memo_array = [];
     if (get_json) {
@@ -88,11 +88,16 @@ function OnDeleteButtonClick(hash) {
         memo_array.some(function(v, i) {
             if (v.hash == hash) {
                 // 確認
-                if (confirm("次のメモが削除されます：\n" +
+                var confirm_ok = false;
+                if (need_confirm) {
+                    confirm_ok = confirm("次のメモが削除されます：\n" +
                     "タイトル："+v.title+"\n" +
                     "最終更新日時："+v.time.year + '/' + zeroPadding(v.time.month, 2) + '/' + zeroPadding(v.time.date, 2) + ' '
                     + zeroPadding(v.time.hour, 2) + ':' + zeroPadding(v.time.min, 2) + ':' + zeroPadding(v.time.sec, 2) +
-                    "\n\nよろしいですか？")) {
+                    "\n\nよろしいですか？");
+                }
+
+                if (confirm_ok || !need_confirm) {
                     memo_array.splice(i, 1);
                 }
                 else {
