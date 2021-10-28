@@ -1,5 +1,5 @@
 function load_memo() {
-    var memo_paper_area = document.getElementById("memo-paper-area-id");
+    var memo_paper_area = document.getElementById("memo_paper_area_id");
     var get_json = localStorage.getItem('yapps_memopad');
     var memo_array = {};
 
@@ -12,47 +12,55 @@ function load_memo() {
         }
     
         for (memo in memo_array) {
-            var memo_title          = document.createElement('div');
-            memo_title.className    = 'title';
-            memo_title.textContent  = memo_array[memo].title;
-    
-            var memo_title_area     = document.createElement('div');
-            memo_title_area.className = 'title-area';
-            memo_title_area.appendChild(memo_title);
-            var memo_buttons_area   = document.createElement('div');
-            memo_buttons_area.style = 'display: flex; flex-wrap: wrap;'
-
-            var download_button_link = makeImageButton("JavaScript:OnDownloadButtonClick(\""+ memo_array[memo].hash +"\", \"dlbtn_"+memo_array[memo].hash+"\")", "/img/common/download.svg", 24, 24, 'simple-img-button');
-            download_button_link.id  = 'dlbtn_' + memo_array[memo].hash;
-            memo_buttons_area.appendChild(download_button_link);
-            var delete_button_link   = makeImageButton("JavaScript:OnDeleteButtonClick(\""+ memo_array[memo].hash +"\")", "/img/common/delete.svg", 24, 24, 'simple-img-button');
-            memo_buttons_area.appendChild(delete_button_link);
-            memo_title_area.appendChild(memo_buttons_area);
-    
-            var memo_date           = document.createElement('div');
-            memo_date.className     = 'date';
-            memo_date.textContent   = memo_array[memo].time.year + '/' + zeroPadding(memo_array[memo].time.month, 2) + '/' + zeroPadding(memo_array[memo].time.date, 2) + ' ' 
-                + zeroPadding(memo_array[memo].time.hour, 2) + ':' + zeroPadding(memo_array[memo].time.min, 2) + ':' + zeroPadding(memo_array[memo].time.sec, 2);
-    
-            var memo_text           = document.createElement('div');
-            memo_text.className     = 'text';
-            memo_text.style         = 'white-space: pre-wrap;';
-            memo_text.textContent   = memo_array[memo].text;
-        
-            var memo_paper          = document.createElement('div');
-            memo_paper.className    = 'memo-paper';
-            memo_paper.style        = 'background-color: #'+memo_array[memo].color+';';
-            memo_paper.appendChild(memo_title_area);
-            memo_paper.appendChild(memo_date);
-            memo_paper.appendChild(memo_text);
-
-            var memo_paper_wrap     = document.createElement('div');
-            memo_paper_wrap.className = 'memo-paper-wrap';
-            memo_paper_wrap.appendChild(memo_paper);
-    
-            memo_paper_area.appendChild(memo_paper_wrap);
+            loadMemoOnce(memo_array[memo], memo_paper_area);
         }
     }
+}
+
+function loadMemoOnce(memo, memo_paper_area) {
+    var memo_paper_wrap     = document.createElement('div');
+    memo_paper_wrap.className = 'memo-paper-wrap';
+    memo_paper_wrap.id      = 'memo_paper_wrap_' + memo.hash;
+
+    var memo_title          = document.createElement('div');
+    memo_title.className    = 'title';
+    memo_title.textContent  = memo.title;
+
+    var memo_title_area     = document.createElement('div');
+    memo_title_area.className = 'title-area';
+    memo_title_area.appendChild(memo_title);
+    var memo_buttons_area   = document.createElement('div');
+    memo_buttons_area.style = 'display: flex; flex-wrap: wrap;'
+
+    var edit_button_link   = makeImageButton("JavaScript:OnEditButtonClick(\""+ memo.hash +"\", memo_paper_wrap_"+ memo.hash + ')', "/img/common/edit.svg", 24, 24, 'simple-img-button');
+    memo_buttons_area.appendChild(edit_button_link);
+    var download_button_link = makeImageButton("JavaScript:OnDownloadButtonClick(\""+ memo.hash +"\", \"dlbtn_"+memo.hash+"\")", "/img/common/download.svg", 24, 24, 'simple-img-button');
+    download_button_link.id  = 'dlbtn_' + memo.hash;
+    memo_buttons_area.appendChild(download_button_link);
+    var delete_button_link   = makeImageButton("JavaScript:OnDeleteButtonClick(\""+ memo.hash +"\")", "/img/common/delete.svg", 24, 24, 'simple-img-button');
+    memo_buttons_area.appendChild(delete_button_link);
+    memo_title_area.appendChild(memo_buttons_area);
+
+    var memo_date           = document.createElement('div');
+    memo_date.className     = 'date';
+    memo_date.textContent   = memo.time.year + '/' + zeroPadding(memo.time.month, 2) + '/' + zeroPadding(memo.time.date, 2) + ' ' 
+        + zeroPadding(memo.time.hour, 2) + ':' + zeroPadding(memo.time.min, 2) + ':' + zeroPadding(memo.time.sec, 2);
+
+    var memo_text           = document.createElement('div');
+    memo_text.className     = 'text';
+    memo_text.style         = 'white-space: pre-wrap;';
+    memo_text.textContent   = memo.text;
+
+    var memo_paper          = document.createElement('div');
+    memo_paper.className    = 'memo-paper';
+    memo_paper.style        = 'background-color: #'+memo.color+';';
+    memo_paper.appendChild(memo_title_area);
+    memo_paper.appendChild(memo_date);
+    memo_paper.appendChild(memo_text);
+
+    memo_paper_wrap.appendChild(memo_paper);
+
+    memo_paper_area.appendChild(memo_paper_wrap);
 }
 
 function makeImageButton(href, src, w, h, className) {
