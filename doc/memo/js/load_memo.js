@@ -7,8 +7,8 @@ function load_memo() {
         memo_array = JSON.parse(get_json);
         memo_array.reverse();
 
-        while(memo_paper_area.firstChild) {
-            memo_paper_area.removeChild(memo_paper_area.firstChild);
+        while(memo_paper_area.childNodes.length > 2) {
+            memo_paper_area.removeChild(memo_paper_area.lastChild);
         }
     
         for (memo in memo_array) {

@@ -34,44 +34,33 @@
                 <p class="summary">
                     文章を読み書きできます。内容はブラウザに保存されます。<br>
                 </p>
-                <div class="information" style="background-color: #0099cc; color: #fff;">
+                <div class="information" style="background-color: #0088ff; color: #fff;">
                     このページではブラウザにメモを保存するためにLocal Storageを使用しており、読み込み・保存はすべてご利用のブラウザ上で行われます。<br>
                     メモの内容がサーバーなど外部に送信・保存されることは一切ありませんのでご安心ください。
                 </div>
-                <div class="information" style="background-color: #dddd00; color: #000;">
-                    「ブラウザに保存」を選んだ場合、長期間経過するとブラウザによってメモが削除されてしまいます。<br>
-                    長期間保存したい場合は「txt形式でダウンロード」をお選びください。
-                </div>
                 
                 <div class="app-area" id="app-area-id">
-                    <div id="memo-area">
-                        <!--タイトル-->
-                        <input type="text" id="title" name="title" placeholder="タイトル" class="simple-inputtext">
-
-                        <!--入力テキストエリア-->
-                        <textarea name="input-text" id="input-textarea" placeholder="内容" class="simple-textarea"></textarea>
-
-                        <!--変換ボタン-->
-                        <div class="button-area-center">
-                            <a href="javascript:OnSaveNewMemoButtonClick();" id="save-button">
-                                <div class="round-rect-button">
-                                    <div class="big-text">
-                                        ブラウザに保存
+                    <div class="memo-paper-area" id="memo_paper_area_id">
+                        <div class="memo-paper-wrap">
+                            <div class="memo-paper" style="min-height: 250px; height: fit-content;" id="new_memo_form">
+                                <p style="font-size: 20px;">新しいメモ</p>
+                                <!--タイトル-->
+                                <input type="text" id="title" name="title" placeholder="タイトル" class="simple-inputtext">
+    
+                                <!--入力テキストエリア-->
+                                <textarea name="input-text" id="input-textarea" placeholder="内容" class="simple-textarea" style="height: 130px;"></textarea>
+    
+                                <!--保存ボタン-->
+                                <a href="JavaScript:OnSaveNewMemoButtonClick();" id="save_button">
+                                    <div class="round-rect-button" style="min-width: 50px; height: 30px; padding: 5px; margin: 5px; float: right;">
+                                        <div class="middle-text">
+                                            追加
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-
-                            <a onclick="OnDownloadButtonClick();" id="download-button">
-                                <div class="round-rect-button">
-                                    <div class="big-text">
-                                        txt形式でダウンロード
-                                    </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="memo-paper-area" id="memo_paper_area_id"></div>
 
                     <script>
                         load_memo();

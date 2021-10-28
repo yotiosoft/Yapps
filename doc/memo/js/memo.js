@@ -87,7 +87,17 @@ function OnDeleteButtonClick(hash) {
         // ハッシュが一致する要素を削除
         memo_array.some(function(v, i) {
             if (v.hash == hash) {
-                memo_array.splice(i, 1);
+                // 確認
+                if (confirm("次のメモが削除されます：\n" +
+                    "タイトル："+v.title+"\n" +
+                    "最終更新日時："+v.time.year + '/' + zeroPadding(v.time.month, 2) + '/' + zeroPadding(v.time.date, 2) + ' '
+                    + zeroPadding(v.time.hour, 2) + ':' + zeroPadding(v.time.min, 2) + ':' + zeroPadding(v.time.sec, 2) +
+                    "\n\nよろしいですか？")) {
+                    memo_array.splice(i, 1);
+                }
+                else {
+                    return;
+                }
             }
         });
 
