@@ -92,9 +92,7 @@ function OnDeleteButtonClick(hash, need_confirm) {
                 if (need_confirm) {
                     confirm_ok = confirm("次のメモが削除されます：\n" +
                     "タイトル："+v.title+"\n" +
-                    "最終更新日時："+v.time.year + '/' + zeroPadding(v.time.month, 2) + '/' + zeroPadding(v.time.date, 2) + ' '
-                    + zeroPadding(v.time.hour, 2) + ':' + zeroPadding(v.time.min, 2) + ':' + zeroPadding(v.time.sec, 2) +
-                    "\n\nよろしいですか？");
+                    "最終更新日時：" + printTime(v.time) + "\n\nよろしいですか？");
                 }
 
                 if (confirm_ok || !need_confirm) {
@@ -198,4 +196,9 @@ function OnEditButtonClick(hash, memo_paper_wrap, memo_paper_area) {
             }
         });
     }
+}
+
+function printTime(time) {
+    return time.year + '/' + zeroPadding(time.month, 2) + '/' + zeroPadding(time.date, 2) + ' '
+    + zeroPadding(time.hour, 2) + ':' + zeroPadding(time.min, 2) + ':' + zeroPadding(time.sec, 2);
 }

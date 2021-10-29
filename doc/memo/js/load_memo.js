@@ -46,8 +46,7 @@ function loadMemoOnce(memo, memo_paper_area) {
 
     var memo_date           = document.createElement('div');
     memo_date.className     = 'date';
-    memo_date.textContent   = memo.time.year + '/' + zeroPadding(memo.time.month, 2) + '/' + zeroPadding(memo.time.date, 2) + ' ' 
-        + zeroPadding(memo.time.hour, 2) + ':' + zeroPadding(memo.time.min, 2) + ':' + zeroPadding(memo.time.sec, 2);
+    memo_date.textContent   = printTime(memo.time);
 
     var memo_text           = document.createElement('div');
     memo_text.className     = 'text';
