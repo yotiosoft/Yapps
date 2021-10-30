@@ -1,4 +1,4 @@
-function OnCheckButtonClick() {
+$('#input-textarea').keyup(function() {
     var input  = document.getElementById("input-textarea");
     var output = document.getElementById("output-area");
 
@@ -33,4 +33,4 @@ function OnCheckButtonClick() {
         if (bcg != null)
             output.appendChild(bcg);
     }
-}
+});
