@@ -46,7 +46,7 @@
 	transition: all .3s;
 }
 .box img {
-    height: 5vw;
+    height: 30%;
 }
 .box .tool-title {
     width: 100%;
@@ -56,4 +56,6 @@
 }
 .box .summary {
     font-size: 14px;
+    margin: 0px;
+    padding: 5px;
 }
