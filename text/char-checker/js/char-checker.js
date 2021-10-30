@@ -6,18 +6,31 @@ function OnCheckButtonClick() {
         output.removeChild(output.firstChild);
     }
 
+    var full_char = false;
+    var bcg = null;
     for (var i=0; i<input.value.length; i++) {
         if (input.value[i].match(/^[^\x01-\x7E\xA1-\xDF]+$/)) { 
-            var bcg = document.createElement("span");
-            bcg.style = "background-color: #ffcc00;";
-            bcg.textContent = input.value[i];
-            output.appendChild(bcg);
+            if (!full_char) {
+                if (bcg != null)
+                    output.appendChild(bcg);
+
+                full_char = true;
+                bcg = document.createElement("span");
+                bcg.style = "background-color: #ffcc00;";
+            }
+            bcg.textContent += input.value[i];
         }
         else {
-            var char = document.createElement("span");
-            char.textContent = input.value[i];
-            output.appendChild(char);
+            if (full_char) {
+                if (bcg != null)
+                    output.appendChild(bcg);
+
+                full_char = false;
+                bcg = document.createElement("span");
+            }
+            bcg.textContent += input.value[i];
         }
-        console.log(input.value[i]);
+        if (bcg != null)
+            output.appendChild(bcg);
     }
 }
