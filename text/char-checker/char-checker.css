@@ -1,0 +1,6 @@
+.output-area {
+    width: 100%;
+    min-height: 300px;
+    height: fit-content;
+    background-color: #fff;
+}
