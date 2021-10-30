@@ -3,4 +3,5 @@
     min-height: 300px;
     height: fit-content;
     background-color: #fff;
+    white-space: pre-wrap;
 }
