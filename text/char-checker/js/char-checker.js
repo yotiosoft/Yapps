@@ -7,7 +7,7 @@ function OnCheckButtonClick() {
     }
 
     var full_char = false;
-    var bcg = null;
+    var bcg = document.createElement("span");
     for (var i=0; i<input.value.length; i++) {
         if (input.value[i].match(/^[^\x01-\x7E\xA1-\xDF]+$/)) { 
             if (!full_char) {
