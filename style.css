@@ -48,6 +48,13 @@ header {
     height: 100px;
 }
 
+#header {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
 #wrap {
     overflow: hidden;
 
@@ -55,8 +62,6 @@ header {
 
     display: flex;
     justify-content: center;
-
-    padding: 0px 20px 0px 20px;
 
     height: fit-content;
 }
