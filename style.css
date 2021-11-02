@@ -46,13 +46,16 @@ header {
     background-color: #333;
 
     height: 100px;
+
+    display: flex;
+    align-content: center;
 }
 
 #header {
     width: 100%;
+    max-width: 1200px;
 
     display: flex;
-    justify-content: center;
 }
 
 #wrap {
