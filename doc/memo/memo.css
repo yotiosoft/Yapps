@@ -10,7 +10,6 @@
     -moz-column-gap:      10px;
     column-count:         3;
     column-gap:           10px;
-    
 }
 @media (max-width: 700px) {
     .memo-paper-area {
@@ -41,7 +40,6 @@
     align-content: center;
     justify-content: center;
 
-    page-break-inside: avoid;
     break-inside: avoid;
     -webkit-break-inside: avoid;
 }
@@ -55,10 +53,10 @@
     box-shadow: 0 3px 6px #ccc;
 
     padding: 10px;
-
-    page-break-inside: avoid;
-    break-inside: avoid;
-    -webkit-break-inside: avoid;
+}
+/* FireFoxのみ別途対応 */
+_:lang(x)::-moz-placeholder, .memo-paper {
+    display:inline-table;
 }
 .memo-paper .title-area {
     display: flex;
