@@ -66,3 +66,58 @@
 
     text-align: center;
 }
+
+.box-nobreak {
+    width: 90%;
+    height: 90%;
+    
+    padding: 0px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+    box-shadow: 0 3px 6px #ccc;
+    background-color: #fafafa;
+
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+.box-nobreak:hover {
+    box-shadow: 0 10px 20px #ccc;
+    background-color: #fff;
+
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+.box-nobreak img {
+    height: 30%;
+    padding: 10%
+}
+.box-nobreak .tool-title {
+    width: 100%;
+
+    font-size: 20px;
+    text-align: center;
+}
+.box-nobreak .summary {
+    font-size: 14px;
+    margin: 0px;
+    padding: 5px;
+}
+.box-nobreak .summary-center {
+    font-size: 14px;
+    margin: 0px;
+    padding: 5px;
+
+    text-align: center;
+}
