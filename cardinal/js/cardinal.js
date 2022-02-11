@@ -84,9 +84,7 @@ function update_from_ncard(e) {
 function update_n(e) {
     n = document.getElementById("input_n_id").value;
 
-    if (dec_num.length > 0) {
-        update_outputs(dec_num);
-    }
+    update_outputs(dec_num);
 }
 
 function update_outputs(dec_num) {
