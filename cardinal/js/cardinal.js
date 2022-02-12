@@ -66,11 +66,6 @@ function update_from_hex(e) {
 }
 
 function update_from_ncard(e) {
-    if (n.length == 0) {
-        alert('基数を指定してください');
-        return;
-    }
-
     var ncard_num = parseInt(input_ncard.value, parseInt(n, 10));
 
     input_bin.value = "";
