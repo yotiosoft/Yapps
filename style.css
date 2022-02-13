@@ -141,3 +141,14 @@ header {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.update_table {
+    border-spacing: 20px 5px;
+}
+
+.blue_link {
+    color: #00aaff;
+}
+.blue_link:hover {
+    color: #0077ff;
+}
