@@ -1,0 +1,27 @@
+.input-table {
+    width: 50%;
+    min-width: 500px;
+    height: 30px;
+    line-height: 30px;
+}
+.input-table .summary {
+    width: 30%;
+}
+.input-table .summary .checkbox {
+    float: left;
+}
+.input-table .input {
+    width: 80%;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.input-table .input .simple-inputtext {
+    width: 100px;
+    padding-top: 10px;
+}
+
+.output-area {
+    width: 100%;
+    text-align: center;
+}
