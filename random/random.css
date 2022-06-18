@@ -20,6 +20,10 @@
     width: 100px;
     padding-top: 10px;
 }
+.input-table .wide {
+    width: 100%;
+    text-align: left;
+}
 
 .output-area {
     width: 100%;

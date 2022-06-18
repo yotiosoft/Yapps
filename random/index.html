@@ -57,6 +57,24 @@
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <th class="summary">
+                                <div class="checkbox">
+                                    試行回数
+                                </div>
+                            </th>
+                            <th class="input">
+                                <input type="number" id="id_trials" name="trials" placeholder="試行回数" class="simple-inputtext" value="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="wide">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="id_integer_mode" name="integer_mode" checked>
+                                    <label for="integer_mode">整数で生成</label>
+                                </div>
+                            </th>
+                        </tr>
                     </table>
 
                     <table class="input-table">
@@ -108,7 +126,7 @@
 
                     <div class="output-area">
                         <img src="/img/common/arrow_down.svg" style="width: 64px; height: 64px; margin-bottom: 30px;">
-                        <input type="number" id="id_output" placeholder="乱数" class="simple-inputtext" style="width: 200px; margin: 0 auto;">
+                        <textarea id="id_output" placeholder="乱数" class="simple-inputtext" style="width: 500px; max-width: 100%; height: 150px; margin: 0 auto;"></textarea>
                     </div>
 
                 </div>
