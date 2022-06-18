@@ -6,6 +6,27 @@ function update_output(rand_array) {
     }
 }
 
+function send_and_get(distribution, params) {
+    // 「接続中」と出力しておく
+    output = document.getElementById('id_output');
+    output.value = "接続中";
+
+    // パラメータからクエリを生成
+    const query = new URLSearchParams(params);
+
+    // JSONをフェッチ
+    fetch(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.hasOwnProperty('rand_array')) {
+            update_output(data.rand_array);     // 結果を出力
+        }
+        else if (data.hasOwnProperty('error_message')) {
+            alert(data.error_message);
+        }
+    });
+}
+
 function uniform() {
     // クエリパラメータの登録
     const params = {};
@@ -51,20 +72,9 @@ function uniform() {
         params["max"] = base_num;
         params["min"] = max_num;
     }
-    
-    const query = new URLSearchParams(params);
 
-    // JSONをフェッチ
-    fetch(`https://murmuring-taiga-39514.herokuapp.com/random/uniform?${query}`)
-    .then(response => response.json())
-    .then(data => {
-        if (data.hasOwnProperty('rand_array')) {
-            update_output(data.rand_array);     // 結果を出力
-        }
-        else if (data.hasOwnProperty('error_message')) {
-            alert(data.error_message);
-        }
-    });
+    // 乱数APIと送受信
+    send_and_get("uniform", params);
 }
 
 function norm_random() {
