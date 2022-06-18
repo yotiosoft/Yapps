@@ -6,6 +6,7 @@
 }
 .input-table .summary {
     width: 30%;
+    text-align: left;
 }
 .input-table .summary .checkbox {
     float: left;
@@ -28,4 +29,11 @@
 .output-area {
     width: 100%;
     text-align: center;
+}
+
+.random_options {
+    display: none;
+}
+.random_options.is_show {
+    display: block;
 }

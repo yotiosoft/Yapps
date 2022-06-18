@@ -28,21 +28,19 @@ function send_and_get(distribution, params) {
 }
 
 function uniform() {
-    // クエリパラメータの登録
-    const params = {};
-
+    // パラメータの取得
     var trials              = document.getElementById('id_trials');
     var integer_mode        = document.getElementById('id_integer_mode');
 
     var range               = document.getElementsByName('range');
-    var select_random       = document.getElementById('id_select_random');
 
     var input_limit_min     = document.getElementById('id_input_min');
     var input_limit_max     = document.getElementById('id_input_max');
 
     var input_digit         = document.getElementById('id_input_digit');
 
-    let random;
+    // クエリパラメータの登録
+    const params = {};
 
     if (integer_mode.checked) {
         params["type"] = "int";
@@ -52,13 +50,6 @@ function uniform() {
     }
 
     params["trials"] = trials.value;
-
-    if (select_random.value == "uniform") {
-        random = Math.random();
-    }
-    else if (select_random.value == "normal") {
-        random = norm_random();
-    }
  
     if (range[0].checked) {
         params["max"] = parseInt(input_limit_max.value);
@@ -75,6 +66,33 @@ function uniform() {
 
     // 乱数APIと送受信
     send_and_get("uniform", params);
+}
+
+function normal() {
+    // パラメータの取得
+    var trials              = document.getElementById('id_trials');
+    var integer_mode        = document.getElementById('id_integer_mode');
+
+    var input_mu            = document.getElementById('id_input_mu');
+    var input_sigma         = document.getElementById('id_input_sigma');
+
+    // クエリパラメータの登録
+    const params = {};
+
+    if (integer_mode.checked) {
+        params["type"] = "int";
+    }
+    else {
+        params["type"] = "float";
+    }
+
+    params["trials"] = trials.value;
+
+    params["mu"]    = parseInt(input_mu.value);
+    params["sigma"] = parseInt(input_sigma.value);
+
+    // 乱数APIと送受信
+    send_and_get("normal", params);
 }
 
 function norm_random() {
@@ -127,5 +145,12 @@ function make_number() {
 }
 
 function OnMakeButtonClick() {
-    uniform();
+    var select_random = document.getElementById("id_select_random");
+                            
+    if (select_random.value == "uniform") {
+        uniform();
+    }
+    else if (select_random.value == "normal") {
+        normal();
+    }
 }
