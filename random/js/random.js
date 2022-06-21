@@ -15,7 +15,7 @@ function send_and_get(distribution, params) {
     const query = new URLSearchParams(params);
 
     // JSONをフェッチ
-    console.log(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`);
+    //console.log(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`);
     fetch(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`)
     .then(response => response.json())
     .then(data => {
