@@ -15,6 +15,7 @@ function send_and_get(distribution, params) {
     const query = new URLSearchParams(params);
 
     // JSONをフェッチ
+    console.log(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`);
     fetch(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`)
     .then(response => response.json())
     .then(data => {
@@ -27,6 +28,7 @@ function send_and_get(distribution, params) {
     });
 }
 
+// 一様分布
 function uniform() {
     // パラメータの取得
     var trials              = document.getElementById('id_trials');
@@ -68,6 +70,7 @@ function uniform() {
     send_and_get("uniform", params);
 }
 
+// 正規分布
 function normal() {
     // パラメータの取得
     var trials              = document.getElementById('id_trials');
@@ -88,11 +91,39 @@ function normal() {
 
     params["trials"] = trials.value;
 
-    params["mu"]    = parseInt(input_mu.value);
-    params["sigma"] = parseInt(input_sigma.value);
+    params["mu"]    = input_mu.value;
+    params["sigma"] = input_sigma.value;
 
     // 乱数APIと送受信
     send_and_get("normal", params);
+}
+
+// ベータ分布
+function beta() {
+    // パラメータの取得
+    var trials              = document.getElementById('id_trials');
+    var integer_mode        = document.getElementById('id_integer_mode');
+
+    var input_alpha         = document.getElementById('id_input_alpha');
+    var input_beta          = document.getElementById('id_input_beta');
+
+    // クエリパラメータの登録
+    const params = {};
+
+    if (integer_mode.checked) {
+        params["type"] = "int";
+    }
+    else {
+        params["type"] = "float";
+    }
+
+    params["trials"] = trials.value;
+
+    params["alpha"] = input_alpha.value;
+    params["beta"]  = input_beta.value;
+
+    // 乱数APIと送受信
+    send_and_get("beta", params);
 }
 
 function norm_random() {
@@ -152,5 +183,8 @@ function OnMakeButtonClick() {
     }
     else if (select_random.value == "normal") {
         normal();
+    }
+    else if (select_random.value == "beta") {
+        beta();
     }
 }

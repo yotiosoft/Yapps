@@ -54,6 +54,7 @@
                                 <select name="pets" id="id_select_random" class="simple-select" style="width: 300px;">
                                     <option value="uniform">一様分布</option>
                                     <option value="normal">正規分布</option>
+                                    <option value="beta">ベータ分布</option>
                                 </select>
                             </td>
                         </tr>
@@ -96,11 +97,16 @@
                                 var options = document.getElementsByClassName("normal_options")[0];
                                 options.classList.add("is_show");
                             }
+                            else if (select_random.value == "beta") {
+                                // betaのオプション部分を可視化
+                                var options = document.getElementsByClassName("beta_options")[0];
+                                options.classList.add("is_show");
+                            }
                         });
                     </script>
 
+                    <!--パラメータ設定：一様分布-->
                     <table class="input-table random_options is_show uniform_options">
-                        <!--範囲設定-->
                         <tr>
                             <th class="summary">
                                 <div class="checkbox">
@@ -134,8 +140,8 @@
                             </th>
                         </tr>
                     </table>
+                    <!--パラメータ設定：正規分布-->
                     <table class="input-table random_options normal_options">
-                        <!--範囲設定-->
                         <tr>
                             <th class="summary">
                                 <div class="checkbox">
@@ -154,6 +160,29 @@
                             </th>
                             <th class="input">
                                 <input type="number" id="id_input_sigma" name="input_sigma" placeholder="標準偏差σ" class="simple-inputtext" value="1">
+                            </td>
+                        </tr>
+                    </table>
+                    <!--パラメータ設定：ベータ分布-->
+                    <table class="input-table random_options beta_options">
+                        <tr>
+                            <th class="summary">
+                                <div class="checkbox">
+                                    α
+                                </div>
+                            </th>
+                            <th class="input">
+                                <input type="number" id="id_input_alpha" name="input_alpha" placeholder="alpha" class="simple-inputtext" value="0.5">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="summary">
+                                <div class="checkbox">
+                                    β
+                                </div>
+                            </th>
+                            <th class="input">
+                                <input type="number" id="id_input_beta" name="input_beta" placeholder="beta" class="simple-inputtext" value="0.5">
                             </td>
                         </tr>
                     </table>
