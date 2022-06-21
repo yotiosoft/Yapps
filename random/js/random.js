@@ -15,7 +15,7 @@ function send_and_get(distribution, params) {
     const query = new URLSearchParams(params);
 
     // JSONをフェッチ
-    //console.log(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`);
+    console.log(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`);
     fetch(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`)
     .then(response => response.json())
     .then(data => {
@@ -34,12 +34,12 @@ function uniform() {
     var trials              = document.getElementById('id_trials');
     var integer_mode        = document.getElementById('id_integer_mode');
 
-    var range               = document.getElementsByName('range');
+    var range               = document.getElementsByName('range_uniform');
 
-    var input_limit_min     = document.getElementById('id_input_min');
-    var input_limit_max     = document.getElementById('id_input_max');
+    var input_limit_min     = document.getElementById('id_input_min_uniform');
+    var input_limit_max     = document.getElementById('id_input_max_uniform');
 
-    var input_digit         = document.getElementById('id_input_digit');
+    var input_digit         = document.getElementById('id_input_digit_uniform');
 
     // クエリパラメータの登録
     const params = {};
@@ -126,6 +126,52 @@ function beta() {
     send_and_get("beta", params);
 }
 
+// 三角分布
+function triangular() {
+    // パラメータの取得
+    var trials              = document.getElementById('id_trials');
+    var integer_mode        = document.getElementById('id_integer_mode');
+
+    var range               = document.getElementsByName('range_triangular');
+
+    var input_limit_min     = document.getElementById('id_input_min_triangular');
+    var input_limit_max     = document.getElementById('id_input_max_triangular');
+
+    var input_digit         = document.getElementById('id_input_digit_triangular');
+
+    var input_mode          = document.getElementById('id_input_mode');
+
+    // クエリパラメータの登録
+    const params = {};
+
+    if (integer_mode.checked) {
+        params["type"] = "int";
+    }
+    else {
+        params["type"] = "float";
+    }
+
+    params["trials"] = trials.value;
+ 
+    if (range[0].checked) {
+        params["max"] = parseInt(input_limit_max.value);
+        params["min"] = parseInt(input_limit_min.value);
+    }
+    else if (range[1].checked) {
+        let digits = parseInt(input_digit.value);
+        let base_num = Math.pow(10, digits-1);
+        let max_num = Math.pow(10, digits) - 1;
+        
+        params["max"] = base_num;
+        params["min"] = max_num;
+    }
+
+    params["mode"] = input_mode.value;
+
+    // 乱数APIと送受信
+    send_and_get("triangular", params);
+}
+
 function norm_random() {
     num = 0, i;
     for (i = 0; i < 12; i++) {
@@ -186,5 +232,8 @@ function OnMakeButtonClick() {
     }
     else if (select_random.value == "beta") {
         beta();
+    }
+    else if (select_random.value == "triangular") {
+        triangular();
     }
 }

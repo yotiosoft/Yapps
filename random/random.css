@@ -13,6 +13,7 @@
 }
 .input-table .input {
     width: 80%;
+    height: auto;
     padding-top: 10px;
     display: flex;
     flex-wrap: wrap;
