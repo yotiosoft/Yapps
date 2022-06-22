@@ -56,6 +56,7 @@
                                     <option value="normal">正規分布</option>
                                     <option value="beta">ベータ分布</option>
                                     <option value="triangular">三角分布</option>
+                                    <option value="lambda">ラムダ分布</option>
                                 </select>
                             </th>
                         </tr>
@@ -112,6 +113,12 @@
                             else if (select_random.value == "triangular") {
                                 // triangularのオプション部分を可視化
                                 var options = document.getElementsByClassName("triangular_options")[0];
+                                options.classList.add("is_show");
+                                options.style.height = "auto";
+                            }
+                            else if (select_random.value == "lambda") {
+                                // lambdaのオプション部分を可視化
+                                var options = document.getElementsByClassName("lambda_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
                             }
@@ -244,6 +251,19 @@
                             </th>
                             <th class="input">
                                 <input type="number" id="id_input_mode" name="input_mode" placeholder="mode" class="simple-inputtext" value="80">
+                            </th>
+                        </tr>
+                    </table>
+                    <!--パラメータ設定：ラムダ分布-->
+                    <table class="input-table random_options lambda_options">
+                        <tr>
+                            <th class="summary">
+                                <div class="checkbox">
+                                    λ
+                                </div>
+                            </th>
+                            <th class="input">
+                                <input type="number" id="id_input_lambda" name="input_lambda" placeholder="lambda" class="simple-inputtext" value="0.1">
                             </th>
                         </tr>
                     </table>
