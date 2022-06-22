@@ -172,6 +172,32 @@ function triangular() {
     send_and_get("triangular", params);
 }
 
+// ラムダ分布
+function lambda() {
+    // パラメータの取得
+    var trials              = document.getElementById('id_trials');
+    var integer_mode        = document.getElementById('id_integer_mode');
+
+    var input_lambda        = document.getElementById('id_input_lambda');
+
+    // クエリパラメータの登録
+    const params = {};
+
+    if (integer_mode.checked) {
+        params["type"] = "int";
+    }
+    else {
+        params["type"] = "float";
+    }
+
+    params["trials"] = trials.value;
+
+    params["lambda"] = input_lambda.value;
+
+    // 乱数APIと送受信
+    send_and_get("lambda", params);
+}
+
 function norm_random() {
     num = 0, i;
     for (i = 0; i < 12; i++) {
@@ -235,5 +261,8 @@ function OnMakeButtonClick() {
     }
     else if (select_random.value == "triangular") {
         triangular();
+    }
+    else if (select_random.value == "lambda") {
+        lambda();
     }
 }
