@@ -22,6 +22,10 @@
         </script>
 
         <script src="./js/random.js"></script>
+
+        <script>
+            wakeup();
+        </script>
     </head>
 
     <body>
@@ -38,7 +42,9 @@
                     乱数生成
                 </div>
                 <p class="summary">
-                    乱数を生成します。一様分布と正規分布から生成できます。
+                    乱数を生成します。
+                    一様分布、正規分布、ベータ分布、三角分布、ラムダ分布、ガンマ分布から選択可能です。<br>
+                    <b>注: Pythonプログラムで乱数を生成しています。プログラムの起動に多少時間がかかる場合があります。</b>
                 </p>
                 
                 <div class="app-area" id="app-area-id" style="display: flex; flex-wrap: wrap;">
@@ -310,7 +316,7 @@
                     </div>
 
                     <div class="output-area">
-                        <img src="/img/common/arrow_down.svg" style="width: 64px; height: 64px; margin-bottom: 30px;">
+                        <img src="/img/common/arrow_down.svg" style="width: 64px; height: 64px; margin-bottom: 20px;">
                         <textarea id="id_output" placeholder="乱数" class="simple-inputtext" style="width: 500px; max-width: 100%; height: 150px; margin: 0 auto;"></textarea>
                     </div>
 

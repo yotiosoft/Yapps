@@ -1,3 +1,16 @@
+// 接続確認用
+function wakeup() {
+    fetch('https://murmuring-taiga-39514.herokuapp.com/')
+    .then(response => {
+        if (!response.ok) {
+            alert("サーバーエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
+        }
+    })
+    .catch(error => {
+        alert(`乱数生成APIにアクセスできません。\nしばらくお待ちいただき、後でもう一度お試しください。\n\n${error}`);
+    });
+}
+
 function update_output(rand_array) {
     output = document.getElementById('id_output');
     output.value = "";
