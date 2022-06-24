@@ -57,6 +57,7 @@
                                     <option value="beta">ベータ分布</option>
                                     <option value="triangular">三角分布</option>
                                     <option value="lambda">ラムダ分布</option>
+                                    <option value="gamma">ガンマ分布</option>
                                 </select>
                             </th>
                         </tr>
@@ -119,6 +120,12 @@
                             else if (select_random.value == "lambda") {
                                 // lambdaのオプション部分を可視化
                                 var options = document.getElementsByClassName("lambda_options")[0];
+                                options.classList.add("is_show");
+                                options.style.height = "auto";
+                            }
+                            else if (select_random.value == "gamma") {
+                                // lambdaのオプション部分を可視化
+                                var options = document.getElementsByClassName("gamma_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
                             }
