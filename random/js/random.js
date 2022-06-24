@@ -3,7 +3,7 @@ function wakeup() {
     fetch('https://murmuring-taiga-39514.herokuapp.com/')
     .then(response => {
         if (!response.ok) {
-            alert("サーバーエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
+            alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
         }
     })
     .catch(error => {

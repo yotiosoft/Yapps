@@ -88,6 +88,7 @@
                     </table>
 
                     <script>
+                        // 選択が切り替わったときに処理を実行(addEventListener)
                         var select_random = document.getElementById("id_select_random");
                         select_random.addEventListener('change', function() {
                             // 現在のオプションを隠す
@@ -96,9 +97,6 @@
                                 current_options_column.classList.remove("is_show");
                             }
 
-                            var button_area = document.getElementsByClassName("button-area-center")[0];
-                                button_area.style.margin = "unset";
-
                             if (select_random.value == "uniform") {
                                 // uniformのオプション部分を可視化
                                 var options = document.getElementsByClassName("uniform_options")[0];
@@ -106,7 +104,7 @@
                                 options.style.height = "auto";
                             }
                             else if (select_random.value == "normal") {
-                                // uniformのオプション部分を可視化
+                                // normalのオプション部分を可視化
                                 var options = document.getElementsByClassName("normal_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
