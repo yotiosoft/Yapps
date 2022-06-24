@@ -198,6 +198,34 @@ function lambda() {
     send_and_get("lambda", params);
 }
 
+// ガンマ分布
+function gamma() {
+    // パラメータの取得
+    var trials              = document.getElementById('id_trials');
+    var integer_mode        = document.getElementById('id_integer_mode');
+
+    var input_alpha         = document.getElementById('id_input_gamma_alpha');
+    var input_beta          = document.getElementById('id_input_gamma_beta');
+
+    // クエリパラメータの登録
+    const params = {};
+
+    if (integer_mode.checked) {
+        params["type"] = "int";
+    }
+    else {
+        params["type"] = "float";
+    }
+
+    params["trials"] = trials.value;
+
+    params["alpha"] = input_alpha.value;
+    params["beta"]  = input_beta.value;
+
+    // 乱数APIと送受信
+    send_and_get("gamma", params);
+}
+
 function norm_random() {
     num = 0, i;
     for (i = 0; i < 12; i++) {
@@ -264,5 +292,8 @@ function OnMakeButtonClick() {
     }
     else if (select_random.value == "lambda") {
         lambda();
+    }
+    else if (select_random.value == "gamma") {
+        gamma();
     }
 }
