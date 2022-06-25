@@ -33,8 +33,8 @@
 }
 
 .random_options {
-    display: none;
+    display: none;      /*隠しておく（デフォルト）*/
 }
 .random_options.is_show {
-    display: block;
+    display: block;     /*可視化*/
 }
