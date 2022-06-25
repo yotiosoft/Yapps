@@ -20,9 +20,9 @@ function update_output(rand_array) {
 }
 
 function send_and_get(distribution, params) {
-    // 「接続中」と出力しておく
+    // 「乱数を生成中..」と出力しておく
     const output = document.getElementById('id_output');
-    output.value = "接続中";
+    output.value = "乱数を生成中..";
 
     // パラメータからクエリを生成
     const query = new URLSearchParams(params);
@@ -246,55 +246,6 @@ function gamma() {
 
     // 乱数APIと送受信
     send_and_get("gamma", params);
-}
-
-function norm_random() {
-    num = 0, i;
-    for (i = 0; i < 12; i++) {
-        num += Math.random();
-    }
-    num = num / 12;
-    console.log(num);
-    return num;
-}
-
-function make_number() {
-    var range               = document.getElementsByName("range");
-    var select_random       = document.getElementById('id_select_random');
-
-    var input_limit_min     = document.getElementById('id_input_min');
-    var input_limit_max     = document.getElementById('id_input_max');
-
-    var input_digit         = document.getElementById('id_input_digit');
-
-    let num = 0;
-    let random;
-
-    if (select_random.value == "uniform") {
-        random = Math.random();
-    }
-    else if (select_random.value == "normal") {
-        random = norm_random();
-    }
- 
-    if (range[0].checked) {
-        let limit_max = parseInt(input_limit_max.value);
-        let limit_min = parseInt(input_limit_min.value);
-        let range = limit_max - limit_min + 1;
-        num = Math.floor(random * range) + limit_min;
-    }
-    else if (range[1].checked) {
-        let digits = parseInt(input_digit.value);
-        let base_num = Math.pow(10, digits-1);
-        let max_num = Math.pow(10, digits) - 1;
-        let range = max_num - base_num + 1;
-        num = Math.floor(random * range) + base_num;
-    }
-    else if (range[2].checked) {
-        num = Math.floor(random * Number.MAX_SAFE_INTEGER);
-    }
-
-    return num;
 }
 
 function OnMakeButtonClick() {
