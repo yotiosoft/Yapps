@@ -289,7 +289,7 @@ function make_number() {
 }
 
 function OnMakeButtonClick() {
-    var select_random = document.getElementById("id_select_random");
+    const select_random = document.getElementById("id_select_random");
                             
     if (select_random.value == "uniform") {
         uniform();

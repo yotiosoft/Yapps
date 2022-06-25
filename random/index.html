@@ -89,52 +89,52 @@
 
                     <script>
                         // 選択が切り替わったときに処理を実行(addEventListener)
-                        var select_random = document.getElementById("id_select_random");
+                        const select_random = document.getElementById("id_select_random");
                         select_random.addEventListener('change', function() {
                             // 現在のオプションを隠す
-                            var current_options_column = document.getElementsByClassName("is_show")[0];
+                            const current_options_column = document.getElementsByClassName("is_show")[0];
                             if (current_options_column != null) {
                                 current_options_column.classList.remove("is_show");
                             }
 
                             if (select_random.value == "uniform") {
                                 // uniformのオプション部分を可視化
-                                var options = document.getElementsByClassName("uniform_options")[0];
+                                const options = document.getElementsByClassName("uniform_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
                             }
                             else if (select_random.value == "normal") {
                                 // normalのオプション部分を可視化
-                                var options = document.getElementsByClassName("normal_options")[0];
+                                const options = document.getElementsByClassName("normal_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
                             }
                             else if (select_random.value == "beta") {
                                 // betaのオプション部分を可視化
-                                var options = document.getElementsByClassName("beta_options")[0];
+                                const options = document.getElementsByClassName("beta_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
                             }
                             else if (select_random.value == "triangular") {
                                 // triangularのオプション部分を可視化
-                                var options = document.getElementsByClassName("triangular_options")[0];
+                                const options = document.getElementsByClassName("triangular_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
                             }
                             else if (select_random.value == "lambda") {
                                 // lambdaのオプション部分を可視化
-                                var options = document.getElementsByClassName("lambda_options")[0];
+                                const options = document.getElementsByClassName("lambda_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
                             }
                             else if (select_random.value == "gamma") {
                                 // lambdaのオプション部分を可視化
-                                var options = document.getElementsByClassName("gamma_options")[0];
+                                const options = document.getElementsByClassName("gamma_options")[0];
                                 options.classList.add("is_show");
                                 options.style.height = "auto";
                             }
 
-                            var button_area = document.getElementsByClassName("button-area-center")[0];
+                            const button_area = document.getElementsByClassName("button-area-center")[0];
                             button_area.style.margin = "30px 0px 30px 0px";
                         });
                     </script>
