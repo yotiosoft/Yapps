@@ -12,7 +12,7 @@ function wakeup() {
 }
 
 function update_output(rand_array) {
-    output = document.getElementById('id_output');
+    const output = document.getElementById('id_output');
     output.value = "";
     for (i=0; i<rand_array.length; i++) {
         output.value += rand_array[i] + '\n';
@@ -21,7 +21,7 @@ function update_output(rand_array) {
 
 function send_and_get(distribution, params) {
     // 「接続中」と出力しておく
-    output = document.getElementById('id_output');
+    const output = document.getElementById('id_output');
     output.value = "接続中";
 
     // パラメータからクエリを生成
@@ -44,15 +44,15 @@ function send_and_get(distribution, params) {
 // 一様分布
 function uniform() {
     // パラメータの取得
-    var trials              = document.getElementById('id_trials');
-    var integer_mode        = document.getElementById('id_integer_mode');
+    const trials              = document.getElementById('id_trials');
+    const integer_mode        = document.getElementById('id_integer_mode');
 
-    var range               = document.getElementsByName('range_uniform');
+    const range               = document.getElementsByName('range_uniform');
 
-    var input_limit_min     = document.getElementById('id_input_min_uniform');
-    var input_limit_max     = document.getElementById('id_input_max_uniform');
+    const input_limit_min     = document.getElementById('id_input_min_uniform');
+    const input_limit_max     = document.getElementById('id_input_max_uniform');
 
-    var input_digit         = document.getElementById('id_input_digit_uniform');
+    const input_digit         = document.getElementById('id_input_digit_uniform');
 
     // クエリパラメータの登録
     const params = {};
@@ -86,11 +86,11 @@ function uniform() {
 // 正規分布
 function normal() {
     // パラメータの取得
-    var trials              = document.getElementById('id_trials');
-    var integer_mode        = document.getElementById('id_integer_mode');
+    const trials              = document.getElementById('id_trials');
+    const integer_mode        = document.getElementById('id_integer_mode');
 
-    var input_mu            = document.getElementById('id_input_mu');
-    var input_sigma         = document.getElementById('id_input_sigma');
+    const input_mu            = document.getElementById('id_input_mu');
+    const input_sigma         = document.getElementById('id_input_sigma');
 
     // クエリパラメータの登録
     const params = {};
@@ -114,11 +114,11 @@ function normal() {
 // ベータ分布
 function beta() {
     // パラメータの取得
-    var trials              = document.getElementById('id_trials');
-    var integer_mode        = document.getElementById('id_integer_mode');
+    const trials              = document.getElementById('id_trials');
+    const integer_mode        = document.getElementById('id_integer_mode');
 
-    var input_alpha         = document.getElementById('id_input_alpha');
-    var input_beta          = document.getElementById('id_input_beta');
+    const input_alpha         = document.getElementById('id_input_alpha');
+    const input_beta          = document.getElementById('id_input_beta');
 
     // クエリパラメータの登録
     const params = {};
@@ -142,17 +142,17 @@ function beta() {
 // 三角分布
 function triangular() {
     // パラメータの取得
-    var trials              = document.getElementById('id_trials');
-    var integer_mode        = document.getElementById('id_integer_mode');
+    const trials              = document.getElementById('id_trials');
+    const integer_mode        = document.getElementById('id_integer_mode');
 
-    var range               = document.getElementsByName('range_triangular');
+    const range               = document.getElementsByName('range_triangular');
 
-    var input_limit_min     = document.getElementById('id_input_min_triangular');
-    var input_limit_max     = document.getElementById('id_input_max_triangular');
+    const input_limit_min     = document.getElementById('id_input_min_triangular');
+    const input_limit_max     = document.getElementById('id_input_max_triangular');
 
-    var input_digit         = document.getElementById('id_input_digit_triangular');
+    const input_digit         = document.getElementById('id_input_digit_triangular');
 
-    var input_mode          = document.getElementById('id_input_mode');
+    const input_mode          = document.getElementById('id_input_mode');
 
     // クエリパラメータの登録
     const params = {};
@@ -188,10 +188,10 @@ function triangular() {
 // ラムダ分布
 function lambda() {
     // パラメータの取得
-    var trials              = document.getElementById('id_trials');
-    var integer_mode        = document.getElementById('id_integer_mode');
+    const trials              = document.getElementById('id_trials');
+    const integer_mode        = document.getElementById('id_integer_mode');
 
-    var input_lambda        = document.getElementById('id_input_lambda');
+    const input_lambda        = document.getElementById('id_input_lambda');
 
     // クエリパラメータの登録
     const params = {};
@@ -214,11 +214,11 @@ function lambda() {
 // ガンマ分布
 function gamma() {
     // パラメータの取得
-    var trials              = document.getElementById('id_trials');
-    var integer_mode        = document.getElementById('id_integer_mode');
+    const trials              = document.getElementById('id_trials');
+    const integer_mode        = document.getElementById('id_integer_mode');
 
-    var input_alpha         = document.getElementById('id_input_gamma_alpha');
-    var input_beta          = document.getElementById('id_input_gamma_beta');
+    const input_alpha         = document.getElementById('id_input_gamma_alpha');
+    const input_beta          = document.getElementById('id_input_gamma_beta');
 
     // クエリパラメータの登録
     const params = {};
