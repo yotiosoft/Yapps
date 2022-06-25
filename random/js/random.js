@@ -28,9 +28,15 @@ function send_and_get(distribution, params) {
     const query = new URLSearchParams(params);
 
     // JSONをフェッチ
-    console.log(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`);
     fetch(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`)
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
+            return;
+        }
+
+        return response.json();
+    })
     .then(data => {
         if (data.hasOwnProperty('rand_array')) {
             update_output(data.rand_array);     // 結果を出力
@@ -38,6 +44,9 @@ function send_and_get(distribution, params) {
         else if (data.hasOwnProperty('error_message')) {
             alert(data.error_message);
         }
+    })
+    .catch(error => {
+        alert(`乱数生成APIにアクセスできません。\nしばらくお待ちいただき、後でもう一度お試しください。\n\n${error}`);
     });
 }
 
