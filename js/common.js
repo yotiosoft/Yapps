@@ -12,7 +12,7 @@ $(function() {
     else {
         $("#header").load("/header.html");
     }
-    $("#footer").load("/footer_m.html");
+    $("#footer").load("/footer.html");
     
     window.addEventListener('resize', function(){
         if (window.innerWidth <= 700 || navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
