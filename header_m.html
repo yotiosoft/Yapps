@@ -127,16 +127,17 @@
 
         /* ハンバーガーメニュー */
         .menu-btn {
-          position: fixed;
-          top: 25px;
-          right: 10px;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-right: 10px;
+          position: relative;
 
           display: flex;
           height: 45px;
           width: 45px;
           justify-content: center;
           align-items: center;
-          z-index: 90;
+          z-index: 10000;
         }
         .menu-btn span,
         .menu-btn span:before,
@@ -168,6 +169,7 @@
         }
         #menu-btn-check {
           display: none;
+          z-index: 100;
         }
         .menu-content {
           width: 100%;
