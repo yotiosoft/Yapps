@@ -27,7 +27,7 @@
         <div id="wrap">
             <div id="contents-wrap">
                 <div class="title">
-                    <img src="/img/tools_icon/math/cardinal.svg" type=”image/svg+xml” width="48" height="48" alt="英数字を反転">
+                    <img src="/img/tools_icon/others/twitter-search.svg" type=”image/svg+xml” width="48" height="48" alt="Twitter検索コマンド生成のロゴ">
                     Twitter検索コマンド生成
                 </div>
                 <p class="summary">
@@ -37,97 +37,34 @@
                 
                 <div class="app-area" id="app-area-id">
                     <table class="input-table">
-                        <!--2進数-->
+                        <!--検索キーワード-->
                         <tr>
-                            <th class="summary">2進数</th>
+                            <th class="summary">検索キーワード</th>
                             <!--入力-->
                             <th class="input">
-                                <input type="text" id="input_bin_id" name="input_bin" placeholder="2進数で入力" class="simple-inputtext">
-                            </td>
-                            <th class="between">
-                                <img src="/img/common/arrow_right.svg" width="20px">
-                            </th>
-                            <!--出力-->
-                            <td class="output">
-                                <input type="text" id="output_bin_id" name="output_bin" placeholder="2進数への変換結果" class="simple-inputtext">
+                                <input type="text" id="input_search_keyword" name="search_keyword" placeholder="検索キーワードを入力" class="simple-inputtext">
                             </td>
                         </tr>
 
-                        <!--8進数-->
+                        <!--ID-->
                         <tr>
-                            <th class="summary">8進数</th>
+                            <th class="summary">投稿者ID</th>
                             <!--入力-->
                             <th class="input">
-                                <input type="text" id="input_oct_id" name="input_oct" placeholder="8進数で入力" class="simple-inputtext">
-                            </td>
-                            <th class="between">
-                                <img src="/img/common/arrow_right.svg" width="20px">
-                            </th>
-                            <!--出力-->
-                            <td class="output">
-                                <input type="text" id="output_oct_id" name="output_oct" placeholder="8進数への変換結果" class="simple-inputtext">
-                            </td>
-                        </tr>
-
-                        <!--10進数-->
-                        <tr>
-                            <th class="summary">10進数</th>
-                            <!--入力-->
-                            <th class="input">
-                                <input type="text" id="input_dec_id" name="input_dec" placeholder="10進数で入力" class="simple-inputtext">
-                            </td>
-                            <th class="between">
-                                <img src="/img/common/arrow_right.svg" width="20px">
-                            </th>
-                            <!--出力-->
-                            <td class="output">
-                                <input type="text" id="output_dec_id" name="output_dec" placeholder="10進数への変換結果" class="simple-inputtext">
-                            </td>
-                        </tr>
-
-                        <!--16進数-->
-                        <tr>
-                            <th class="summary">16進数</th>
-                            <!--入力-->
-                            <th class="input">
-                                <input type="text" id="input_hex_id" name="input_hex" placeholder="16進数で入力" class="simple-inputtext">
-                            </td>
-                            <th class="between">
-                                <img src="/img/common/arrow_right.svg" width="20px">
-                            </th>
-                            <!--出力-->
-                            <td class="output">
-                                <input type="text" id="output_hex_id" name="output_hex" placeholder="16進数への変換結果" class="simple-inputtext">
-                            </td>
-                        </tr>
-
-                        <!--n進数-->
-                        <tr>
-                            <th class="summary">n進数</th>
-                            <!--入力-->
-                            <th class="input">
-                                <span style="display: flex;">
-                                    <p style = "width: 50px;">n =</p>
-                                    <input type="text" id="input_n_id" name="input_n" placeholder="基数n（2～36）" class="simple-inputtext">
-                                </span>
-                                
-                                <input type="text" id="input_ncard_id" name="input_ncard" placeholder="n進数で入力" class="simple-inputtext">
-                            </td>
-                            <th class="between">
-                                <img src="/img/common/arrow_right.svg" width="20px">
-                            </th>
-                            <!--出力-->
-                            <td class="output">
-                                <input type="text" id="output_ncard_id" name="output_ncard" placeholder="n進数への変換結果" class="simple-inputtext">
+                                <input type="text" id="input_author_id" name="author_id" placeholder="投稿者IDを入力" class="simple-inputtext">
                             </td>
                         </tr>
                     </table>
+
+                    <div class="output-area">
+                        <img src="/img/common/arrow_down.svg" style="width: 100%; height: 64px; margin-bottom: 20px;">
+                    </div>
                 </div>
 
             </div>
         </div>
 
-        <script src="./js/cardinal.js"></script>
+        <script src="./js/twitter-search.js"></script>
 
         <footer class="footer_class">
             <div id="footer"></div>
