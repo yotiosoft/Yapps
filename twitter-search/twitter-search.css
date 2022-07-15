@@ -11,6 +11,12 @@
     width: 50%;
     padding-top: 10px;
 }
+.input-table .input p {
+    display: flex;
+}
+.input-table .input p .simple-inputtext {
+    margin-left: 5px;
+}
 
 .output-area {
     width: 100%;
