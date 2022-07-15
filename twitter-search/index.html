@@ -39,7 +39,12 @@
                     <table class="input-table">
                         <!--検索キーワード-->
                         <tr>
-                            <th class="summary">検索キーワード</th>
+                            <th class="summary">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="id_check_search-keyword" name="check_search-keyword" checked>
+                                    検索キーワード
+                                </div>
+                            </th>
                             <!--入力-->
                             <th class="input">
                                 <input type="text" id="input_search_keyword" name="search_keyword" placeholder="検索キーワードを入力" class="simple-inputtext">
@@ -48,10 +53,15 @@
 
                         <!--ID-->
                         <tr>
-                            <th class="summary">投稿者ID</th>
+                            <th class="summary">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="id_check_author-id" name="check_author-id">
+                                    投稿者ID
+                                </div>
+                            </th>
                             <!--入力-->
                             <th class="input">
-                                <input type="text" id="input_author_id" name="author_id" placeholder="投稿者IDを入力" class="simple-inputtext">
+                                <input type="text" id="input_author-id" name="author-id" placeholder="投稿者IDを入力" class="simple-inputtext">
                             </td>
                         </tr>
                     </table>
