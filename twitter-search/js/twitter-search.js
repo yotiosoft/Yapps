@@ -26,7 +26,7 @@ input_author_id.addEventListener('input', update_author_id);
 var author_id = "";
 
 function update_author_id() {
-    if (check_author_id.checked) {
+    if (check_author_id.checked && input_author_id.value != "") {
         author_id = "from:" + input_author_id.value;
     }
     else {
