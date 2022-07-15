@@ -36,11 +36,30 @@ function update_author_id() {
     update();
 }
 
+// リプライ
+var select_reply = document.getElementById("id_select_reply");
+select_reply.addEventListener('input', update_reply);
+var reply = "";
+
+function update_reply() {
+    if (select_reply.value == "include") {
+        reply = "";
+    }
+    else if (select_reply.value == "exclude") {
+        reply = "-filter:replies";
+    }
+    else if (select_reply.value == "only") {
+        reply = "filter:replies";
+    }
+
+    update();
+}
+
 // 出力の更新
 var output = document.getElementById("id_output");
 var output_cmd = "";
 function update() {
-    output_cmd = `${search_keyword} ${author_id}`;
+    output_cmd = `${search_keyword} ${author_id} ${reply}`;
 
     output.value = output_cmd;
 }

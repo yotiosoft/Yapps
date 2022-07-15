@@ -38,3 +38,7 @@
 .random_options.is_show {
     display: block;     /*可視化*/
 }
+
+.simple-select {
+    height: 30px;
+}

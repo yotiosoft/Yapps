@@ -1,15 +1,27 @@
 .input-table {
-    width: 100%;
+    width: 70%;
     height: 30px;
     line-height: 30px;
 }
+.input-table .checkbox {
+    width: 5%;
+}
 .input-table .summary {
-    width: 8%;
+    width: 20%;
+    min-width: 150px;
     text-align: left;
 }
 .input-table .input {
-    width: 50%;
+    max-width: 75%;
+    width: fit-content;
+    height: 40px;
+    line-height: 40px;
     padding-top: 10px;
+}
+.input-table .input input {
+    height: 40px;
+    float: left;
+    width: 100%;
 }
 .input-table .input p {
     display: flex;
@@ -38,4 +50,8 @@
     font-size: small;
     margin-left: 10px;
     height: 40px;
+}
+
+.simple-select {
+    max-width: 200px;
 }

@@ -6,7 +6,7 @@
 
         <link rel="stylesheet" href="/style.css">
 		<link rel="stylesheet" href="/app-page.css">
-		<link rel="stylesheet" href="/simple-textarea.css">
+		<link rel="stylesheet" href="/simple-select.css">
         <link rel="stylesheet" href="/button.css">
         <link rel="stylesheet" href="/checkbox.css">
         <link rel="stylesheet" href="./twitter-search.css">
@@ -39,11 +39,11 @@
                     <table class="input-table">
                         <!--検索キーワード-->
                         <tr>
+                            <th class="checkbox">
+                                <input type="checkbox" id="id_check_search-keyword" name="check_search-keyword" checked>
+                            </th>
                             <th class="summary">
-                                <div class="checkbox">
-                                    <input type="checkbox" id="id_check_search-keyword" name="check_search-keyword" checked>
-                                    検索キーワード
-                                </div>
+                                検索キーワード
                             </th>
                             <!--入力-->
                             <th class="input">
@@ -53,17 +53,32 @@
 
                         <!--ID-->
                         <tr>
+                            <th class="checkbox">
+                                <input type="checkbox" id="id_check_author-id" name="check_author-id">
+                            </th>
                             <th class="summary">
-                                <div class="checkbox">
-                                    <input type="checkbox" id="id_check_author-id" name="check_author-id">
-                                    投稿者ID
-                                </div>
+                                投稿者ID
                             </th>
                             <!--入力-->
                             <th class="input">
                                 <p>
                                     @<input type="text" id="id_input_author-id" name="input_author-id" placeholder="投稿者IDを入力" class="simple-inputtext">
                                 </p>
+                            </td>
+                        </tr>
+
+                        <!--リプライ-->
+                        <tr>
+                            <th></th>
+                            <th class="summary">
+                                リプライ
+                            </th>
+                            <th class="input">
+                                <select name="select_reply" id="id_select_reply" class="simple-select">
+                                    <option value="include">含む</option>
+                                    <option value="exclude">含まない</option>
+                                    <option value="only">リプライのみ検索</option>
+                                </select>
                             </td>
                         </tr>
                     </table>
