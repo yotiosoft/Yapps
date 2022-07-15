@@ -51,6 +51,20 @@
                             </td>
                         </tr>
 
+                        <!--除外キーワード-->
+                        <tr>
+                            <th class="checkbox">
+                                <input type="checkbox" id="id_check_exclude-keyword" name="check_exclude-keyword" checked>
+                            </th>
+                            <th class="summary">
+                                除外キーワード
+                            </th>
+                            <!--入力-->
+                            <th class="input">
+                                <input type="text" id="id_input_exclude-keyword" name="input_exclude-keyword" placeholder="除外キーワードを入力" class="simple-inputtext">
+                            </td>
+                        </tr>
+
                         <!--ID-->
                         <tr>
                             <th class="checkbox">
@@ -63,6 +77,22 @@
                             <th class="input">
                                 <p>
                                     @<input type="text" id="id_input_author-id" name="input_author-id" placeholder="投稿者IDを入力" class="simple-inputtext">
+                                </p>
+                            </td>
+                        </tr>
+
+                        <!--除外ID-->
+                        <tr>
+                            <th class="checkbox">
+                                <input type="checkbox" id="id_check_exclude-author-id" name="check_exclude-author-id" checked>
+                            </th>
+                            <th class="summary">
+                                除外ID
+                            </th>
+                            <!--入力-->
+                            <th class="input">
+                                <p>
+                                    @<input type="text" id="id_input_exclude-author-id" name="input_exclude-author-id" placeholder="除外するIDを入力" class="simple-inputtext">
                                 </p>
                             </td>
                         </tr>

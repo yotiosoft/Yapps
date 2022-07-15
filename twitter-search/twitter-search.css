@@ -26,9 +26,12 @@
 }
 .input-table .input p {
     display: flex;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 .input-table .input p .simple-inputtext {
     margin-left: 5px;
+    margin-bottom: 0px;
 }
 
 .output-area {
@@ -55,4 +58,8 @@
 
 .simple-select {
     max-width: 200px;
+}
+
+tr {
+    height: 40px;
 }

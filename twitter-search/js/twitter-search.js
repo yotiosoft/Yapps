@@ -17,6 +17,25 @@ function update_search_keyword() {
     update();
 }
 
+// 除外キーワード
+var check_exclude_keyword = document.getElementById("id_check_exclude-keyword");
+check_exclude_keyword.addEventListener('input', update_exclude_keyword);
+var input_exclude_keyword = document.getElementById("id_input_exclude-keyword");
+input_exclude_keyword.addEventListener('input', update_exclude_keyword);
+
+var exclude_keyword = "";
+
+function update_exclude_keyword() {
+    if (check_exclude_keyword.checked && input_exclude_keyword.value != "") {
+        exclude_keyword = "-" + input_exclude_keyword.value;
+    }
+    else {
+        exclude_keyword = "";
+    }
+
+    update();
+}
+
 // 投稿者ID
 var check_author_id = document.getElementById("id_check_author-id");
 check_author_id.addEventListener('input', update_author_id);
@@ -31,6 +50,25 @@ function update_author_id() {
     }
     else {
         author_id = "";
+    }
+
+    update();
+}
+
+// 除外ID
+var check_exclude_author_id = document.getElementById("id_check_exclude-author-id");
+check_exclude_author_id.addEventListener('input', update_exclude_author_id);
+var input_exclude_author_id = document.getElementById("id_input_exclude-author-id");
+input_exclude_author_id.addEventListener('input', update_exclude_author_id);
+
+var exclude_author_id = "";
+
+function update_exclude_author_id() {
+    if (check_exclude_author_id.checked && input_exclude_author_id.value != "") {
+        exclude_author_id = "-from:" + input_exclude_author_id.value;
+    }
+    else {
+        exclude_author_id = "";
     }
 
     update();
@@ -103,6 +141,12 @@ function update() {
     }
     if (author_id != "") {
         output_cmd += " " + author_id;
+    }
+    if (exclude_keyword != "") {
+        output_cmd += " " + exclude_keyword;
+    }
+    if (exclude_author_id != "") {
+        output_cmd += " " + exclude_author_id;
     }
     if (reply != "") {
         output_cmd += " " + reply;
