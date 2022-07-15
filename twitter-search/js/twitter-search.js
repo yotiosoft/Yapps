@@ -36,6 +36,22 @@ function update_author_id() {
     update();
 }
 
+// キーワードのみ検索
+var check_only_keywords = document.getElementById("id_check_only-keywords");
+check_only_keywords.addEventListener('input', update_only_keywords);
+var only_keywords = "";
+
+function update_only_keywords() {
+    if (check_only_keywords.checked) {
+        only_keywords = "OR @i -@i";
+    }
+    else {
+        only_keywords = "";
+    }
+
+    update();
+}
+
 // リプライ
 var select_reply = document.getElementById("id_select_reply");
 select_reply.addEventListener('input', update_reply);
@@ -81,6 +97,9 @@ function update() {
     output_cmd = "";
     if (search_keyword != "") {
         output_cmd += search_keyword;
+    }
+    if (only_keywords != "") {
+        output_cmd += " " + only_keywords;
     }
     if (author_id != "") {
         output_cmd += " " + author_id;
