@@ -26,8 +26,10 @@
 }
 .output-area .output-line .simple-inputtext {
     width: 50%;
+    height: 40px;
 }
 .output-area .output-line .round-rect-button {
     font-size: small;
     margin-left: 10px;
+    height: 40px;
 }
