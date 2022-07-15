@@ -11,3 +11,17 @@
     width: 50%;
     padding-top: 10px;
 }
+
+.output-area {
+    width: 100%;
+    text-align: center;
+}
+.output-area .output-line {
+    width: 100%;
+    display: flex;
+}
+.output-area .output-line #id_output {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}

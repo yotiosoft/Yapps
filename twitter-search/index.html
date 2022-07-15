@@ -62,12 +62,26 @@
                             <!--入力-->
                             <th class="input">
                                 <input type="text" id="input_author-id" name="author-id" placeholder="投稿者IDを入力" class="simple-inputtext">
+
+                                <a href="javascript:OnMakeButtonClick();" id="make-button">
+                                    <div class="round-rect-button">
+                                        <div class="big-text">
+                                            乱数を生成
+                                        </div>
+                                    </div>
+                                </a>
                             </td>
                         </tr>
                     </table>
 
                     <div class="output-area">
                         <img src="/img/common/arrow_down.svg" style="width: 100%; height: 64px; margin-bottom: 20px;">
+
+                        <!--出力-->
+                        <div class="output-line">
+                            <input type="text" id="id_output" name="output" placeholder="生成されたコマンドがここに出力されます" class="simple-inputtext">
+
+                        </div>
                     </div>
                 </div>
 
