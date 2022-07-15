@@ -19,9 +19,14 @@
 .output-area .output-line {
     width: 100%;
     display: flex;
-}
-.output-area .output-line #id_output {
-    width: 50%;
+
     margin-left: auto;
     margin-right: auto;
+}
+.output-area .output-line .simple-inputtext {
+    width: 50%;
+}
+.output-area .output-line .round-rect-button {
+    font-size: small;
+    margin-left: 10px;
 }
