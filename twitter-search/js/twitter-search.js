@@ -55,11 +55,42 @@ function update_reply() {
     update();
 }
 
+// リンク付きツイート
+var select_links = document.getElementById("id_select_links");
+select_links.addEventListener('input', update_links);
+var links = "";
+
+function update_links() {
+    if (select_links.value == "include") {
+        links = "";
+    }
+    else if (select_links.value == "exclude") {
+        links = "-filter:links";
+    }
+    else if (select_reply.value == "only") {
+        links = "filter:links";
+    }
+
+    update();
+}
+
 // 出力の更新
 var output = document.getElementById("id_output");
 var output_cmd = "";
 function update() {
-    output_cmd = `${search_keyword} ${author_id} ${reply}`;
+    output_cmd = "";
+    if (search_keyword != "") {
+        output_cmd += search_keyword;
+    }
+    if (author_id != "") {
+        output_cmd += " " + author_id;
+    }
+    if (reply != "") {
+        output_cmd += " " + reply;
+    }
+    if (links != "") {
+        output_cmd += " " + links;
+    }
 
     output.value = output_cmd;
 }

@@ -13,6 +13,7 @@
 }
 .input-table .input {
     max-width: 75%;
+    min-width: 270px;
     width: fit-content;
     height: 40px;
     line-height: 40px;
