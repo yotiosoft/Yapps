@@ -37,6 +37,7 @@
 .output-area {
     width: 100%;
     text-align: center;
+    margin-bottom: 100px;
 }
 .output-area .output-line {
     width: 100%;
