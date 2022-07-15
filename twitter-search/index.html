@@ -31,33 +31,54 @@
                     Twitter検索コマンド生成
                 </div>
                 <p class="summary">
-                    2進数、8進数、10進数、16進数などを相互変換します。任意の基数（2～36進数）への変換も可能です。<br>
-                    入力すると値が更新されます。入力エラーがある場合は数値は更新されません。
+                    Twitter検索に便利なコマンドを自動生成します。<br>
+                    「検索」ボタンを押すと、Twitterの検索結果を開きます。
                 </p>
                 
                 <div class="app-area" id="app-area-id">
                     <table class="input-table">
                         <!--検索キーワード-->
                         <tr>
-                            <th class="summary">検索キーワード</th>
+                            <th class="summary">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="id_check_search-keyword" name="check_search-keyword" checked>
+                                    検索キーワード
+                                </div>
+                            </th>
                             <!--入力-->
                             <th class="input">
-                                <input type="text" id="input_search_keyword" name="search_keyword" placeholder="検索キーワードを入力" class="simple-inputtext">
+                                <input type="text" id="id_input_search-keyword" name="input_search-keyword" placeholder="検索キーワードを入力" class="simple-inputtext">
                             </td>
                         </tr>
 
                         <!--ID-->
                         <tr>
-                            <th class="summary">投稿者ID</th>
+                            <th class="summary">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="id_check_author-id" name="check_author-id">
+                                    投稿者ID
+                                </div>
+                            </th>
                             <!--入力-->
                             <th class="input">
-                                <input type="text" id="input_author_id" name="author_id" placeholder="投稿者IDを入力" class="simple-inputtext">
+                                <input type="text" id="id_input_author-id" name="input_author-id" placeholder="投稿者IDを入力" class="simple-inputtext">
                             </td>
                         </tr>
                     </table>
 
                     <div class="output-area">
                         <img src="/img/common/arrow_down.svg" style="width: 100%; height: 64px; margin-bottom: 20px;">
+
+                        <!--出力-->
+                        <div class="output-line">
+                            <input type="text" id="id_output" name="output" placeholder="生成されたコマンドがここに出力されます" class="simple-inputtext">
+
+                            <a href="javascript:search();" id="make-button">
+                                <div class="round-rect-button">
+                                    検索
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
