@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Twitter検索コマンド生成 - Yapps</title>
+        <link rel="icon" type="image/png" href="/img/logo.png">
+
+        <link rel="stylesheet" href="/style.css">
+		<link rel="stylesheet" href="/app-page.css">
+		<link rel="stylesheet" href="/simple-textarea.css">
+        <link rel="stylesheet" href="/button.css">
+        <link rel="stylesheet" href="/checkbox.css">
+        <link rel="stylesheet" href="./twitter-search.css">
+
+        <script src="/js/jquery-3.5.1.min.js"></script>
+        <script src="/js/common.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id="wrap" style="width: 100%;">
+                <div id="header"></div>
+            </div>
+        </header>
+
+        <div id="wrap">
+            <div id="contents-wrap">
+                <div class="title">
+                    <img src="/img/tools_icon/math/cardinal.svg" type=”image/svg+xml” width="48" height="48" alt="英数字を反転">
+                    Twitter検索コマンド生成
+                </div>
+                <p class="summary">
+                    2進数、8進数、10進数、16進数などを相互変換します。任意の基数（2～36進数）への変換も可能です。<br>
+                    入力すると値が更新されます。入力エラーがある場合は数値は更新されません。
+                </p>
+                
+                <div class="app-area" id="app-area-id">
+                    <table class="input-table">
+                        <!--2進数-->
+                        <tr>
+                            <th class="summary">2進数</th>
+                            <!--入力-->
+                            <th class="input">
+                                <input type="text" id="input_bin_id" name="input_bin" placeholder="2進数で入力" class="simple-inputtext">
+                            </td>
+                            <th class="between">
+                                <img src="/img/common/arrow_right.svg" width="20px">
+                            </th>
+                            <!--出力-->
+                            <td class="output">
+                                <input type="text" id="output_bin_id" name="output_bin" placeholder="2進数への変換結果" class="simple-inputtext">
+                            </td>
+                        </tr>
+
+                        <!--8進数-->
+                        <tr>
+                            <th class="summary">8進数</th>
+                            <!--入力-->
+                            <th class="input">
+                                <input type="text" id="input_oct_id" name="input_oct" placeholder="8進数で入力" class="simple-inputtext">
+                            </td>
+                            <th class="between">
+                                <img src="/img/common/arrow_right.svg" width="20px">
+                            </th>
+                            <!--出力-->
+                            <td class="output">
+                                <input type="text" id="output_oct_id" name="output_oct" placeholder="8進数への変換結果" class="simple-inputtext">
+                            </td>
+                        </tr>
+
+                        <!--10進数-->
+                        <tr>
+                            <th class="summary">10進数</th>
+                            <!--入力-->
+                            <th class="input">
+                                <input type="text" id="input_dec_id" name="input_dec" placeholder="10進数で入力" class="simple-inputtext">
+                            </td>
+                            <th class="between">
+                                <img src="/img/common/arrow_right.svg" width="20px">
+                            </th>
+                            <!--出力-->
+                            <td class="output">
+                                <input type="text" id="output_dec_id" name="output_dec" placeholder="10進数への変換結果" class="simple-inputtext">
+                            </td>
+                        </tr>
+
+                        <!--16進数-->
+                        <tr>
+                            <th class="summary">16進数</th>
+                            <!--入力-->
+                            <th class="input">
+                                <input type="text" id="input_hex_id" name="input_hex" placeholder="16進数で入力" class="simple-inputtext">
+                            </td>
+                            <th class="between">
+                                <img src="/img/common/arrow_right.svg" width="20px">
+                            </th>
+                            <!--出力-->
+                            <td class="output">
+                                <input type="text" id="output_hex_id" name="output_hex" placeholder="16進数への変換結果" class="simple-inputtext">
+                            </td>
+                        </tr>
+
+                        <!--n進数-->
+                        <tr>
+                            <th class="summary">n進数</th>
+                            <!--入力-->
+                            <th class="input">
+                                <span style="display: flex;">
+                                    <p style = "width: 50px;">n =</p>
+                                    <input type="text" id="input_n_id" name="input_n" placeholder="基数n（2～36）" class="simple-inputtext">
+                                </span>
+                                
+                                <input type="text" id="input_ncard_id" name="input_ncard" placeholder="n進数で入力" class="simple-inputtext">
+                            </td>
+                            <th class="between">
+                                <img src="/img/common/arrow_right.svg" width="20px">
+                            </th>
+                            <!--出力-->
+                            <td class="output">
+                                <input type="text" id="output_ncard_id" name="output_ncard" placeholder="n進数への変換結果" class="simple-inputtext">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="./js/cardinal.js"></script>
+
+        <footer class="footer_class">
+            <div id="footer"></div>
+        </footer>
+    </body>
+</html>
