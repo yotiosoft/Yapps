@@ -1,3 +1,16 @@
+// 言語コードの読み込み
+$(window).on('load', function() {
+    var select_language = document.getElementById("id_select_language");
+    $.getJSON("./language.json", (data) => {
+        for (var i = 0; i < data['langs'].length; i++) {
+            var option = document.createElement("option");
+            option.value = Object.keys(data['langs'][i])[0];
+            option.text = Object.values(data['langs'][i])[0];
+            select_language.appendChild(option);
+        }
+    });
+});
+
 // 検索キーワード
 var check_search_keyword = document.getElementById("id_check_search-keyword");
 check_search_keyword.addEventListener('input', update_search_keyword);
@@ -180,9 +193,29 @@ function update_until_date() {
     update();
 }
 
+// 言語指定
+var check_lang = document.getElementById("id_check_language");
+check_lang.addEventListener('input', update_lang);
+var input_lang = document.getElementById("id_select_language");
+input_lang.addEventListener('input', update_lang);
+
+var lang = "";
+
+function update_lang() {
+    if (check_lang.checked) {
+        lang = "lang:" + input_lang.value;
+    }
+    else {
+        lang = "";
+    }
+
+    update();
+}
+
 // キーワードのみ検索
 var check_only_keywords = document.getElementById("id_check_only-keywords");
 check_only_keywords.addEventListener('input', update_only_keywords);
+
 var only_keywords = "";
 
 function update_only_keywords() {
@@ -265,6 +298,9 @@ function update() {
     }
     if (until_date != "") {
         output_cmd += " " + until_date;
+    }
+    if (lang != "") {
+        output_cmd += " " + lang;
     }
 
     output.value = output_cmd;
