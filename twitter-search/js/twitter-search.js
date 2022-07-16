@@ -8,7 +8,12 @@ var search_keyword = "";
 
 function update_search_keyword() {
     if (check_search_keyword.checked) {
-        search_keyword = input_search_keyword.value;
+        var search_keywords = input_search_keyword.value.split(`, `);
+        search_keyword = "";
+
+        for (var i = 0; i < search_keywords.length; i++) {
+            search_keyword += " " + search_keywords[i];
+        }
     }
     else {
         search_keyword = "";
@@ -27,7 +32,12 @@ var exclude_keyword = "";
 
 function update_exclude_keyword() {
     if (check_exclude_keyword.checked && input_exclude_keyword.value != "") {
-        exclude_keyword = "-" + input_exclude_keyword.value;
+        var exclude_keywords = input_exclude_keyword.value.split(`, `);
+        exclude_keyword = "";
+
+        for (var i = 0; i < exclude_keywords.length; i++) {
+            exclude_keyword += " -" + exclude_keywords[i];
+        }
     }
     else {
         exclude_keyword = "";
