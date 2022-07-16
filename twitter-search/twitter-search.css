@@ -64,3 +64,11 @@
 tr {
     height: 40px;
 }
+
+.input_date {
+    max-width: 150px;
+}
+.input_date_time {
+    max-width: 150px;
+    margin-left: 10px;
+}

@@ -39,81 +39,111 @@
                     <table class="input-table">
                         <!--検索キーワード-->
                         <tr>
-                            <th class="checkbox">
+                            <td class="checkbox">
                                 <input type="checkbox" id="id_check_search-keyword" name="check_search-keyword" checked>
-                            </th>
-                            <th class="summary">
+                            </td>
+                            <td class="summary">
                                 検索キーワード
-                            </th>
+                            </td>
                             <!--入力-->
-                            <th class="input">
+                            <td class="input">
                                 <input type="text" id="id_input_search-keyword" name="input_search-keyword" placeholder="検索キーワードを入力" class="simple-inputtext">
                             </td>
                         </tr>
 
                         <!--除外キーワード-->
                         <tr>
-                            <th class="checkbox">
+                            <td class="checkbox">
                                 <input type="checkbox" id="id_check_exclude-keyword" name="check_exclude-keyword" checked>
-                            </th>
-                            <th class="summary">
+                            </td>
+                            <td class="summary">
                                 除外キーワード
-                            </th>
+                            </td>
                             <!--入力-->
-                            <th class="input">
+                            <td class="input">
                                 <input type="text" id="id_input_exclude-keyword" name="input_exclude-keyword" placeholder="除外キーワードを入力" class="simple-inputtext">
                             </td>
                         </tr>
 
                         <!--ID-->
                         <tr>
-                            <th class="checkbox">
-                                <input type="checkbox" id="id_check_author-id" name="check_author-id" checked>
-                            </th>
-                            <th class="summary">
+                            <td class="checkbox">
+                                <input type="checkbox" id="id_check_autdor-id" name="check_autdor-id" checked>
+                            </td>
+                            <td class="summary">
                                 投稿者ID
-                            </th>
+                            </td>
                             <!--入力-->
-                            <th class="input">
+                            <td class="input">
                                 <p>
-                                    @<input type="text" id="id_input_author-id" name="input_author-id" placeholder="投稿者IDを入力" class="simple-inputtext">
+                                    @<input type="text" id="id_input_autdor-id" name="input_autdor-id" placeholder="投稿者IDを入力" class="simple-inputtext">
                                 </p>
                             </td>
                         </tr>
 
                         <!--除外ID-->
                         <tr>
-                            <th class="checkbox">
-                                <input type="checkbox" id="id_check_exclude-author-id" name="check_exclude-author-id" checked>
-                            </th>
-                            <th class="summary">
+                            <td class="checkbox">
+                                <input type="checkbox" id="id_check_exclude-autdor-id" name="check_exclude-autdor-id" checked>
+                            </td>
+                            <td class="summary">
                                 除外ID
-                            </th>
+                            </td>
                             <!--入力-->
-                            <th class="input">
+                            <td class="input">
                                 <p>
-                                    @<input type="text" id="id_input_exclude-author-id" name="input_exclude-author-id" placeholder="除外するIDを入力" class="simple-inputtext">
+                                    @<input type="text" id="id_input_exclude-autdor-id" name="input_exclude-autdor-id" placeholder="除外するIDを入力" class="simple-inputtext">
                                 </p>
+                            </td>
+                        </tr>
+
+                        <!--開始日時-->
+                        <tr>
+                            <td class="checkbox">
+                                <input type="checkbox" id="id_check_since-date" name="check_since-date" checked>
+                            </td>
+                            <td class="summary">
+                                開始日時
+                            </td>
+                            <!--入力-->
+                            <td class="input">
+                                <input type="date" id="id_input_since-date" name="input_since-date" class="input_date">
+                                <input type="time" id="id_input_since-date_time" name="input_since-date_time" class="input_date_time">
+                            </td>
+                        </tr>
+
+                        <!--終了日時-->
+                        <tr>
+                            <td class="checkbox">
+                                <input type="checkbox" id="id_check_until-date" name="check_until-date" checked>
+                            </td>
+                            <td class="summary">
+                                終了日時
+                            </td>
+                            <!--入力-->
+                            <td class="input">
+                                <input type="date" id="id_input_until-date" name="input_until-date" class="input_date">
+                                <input type="time" id="id_input_until-date_time" name="input_until-date_time" class="input_date_time">
                             </td>
                         </tr>
 
                         <!--検索キーワードを含むIDを除外-->
                         <tr>
-                            <th class="checkbox">
+                            <td class="checkbox">
                                 <input type="checkbox" id="id_check_only-keywords" name="check_only-keywords">
-                            </th>
-                            <th class="summary" colspan="2">
+                            </td>
+                            <td class="summary" colspan="2">
                                 検索キーワードを含むIDを除外
-                            </th>
+                            </td>
                         </tr>
 
                         <!--リプライ-->
                         <tr>
-                            <th></th>
-                            <th class="summary">
+                            <td></td>
+                            <td class="summary">
                                 リプライ
-                            </th>
-                            <th class="input">
+                            </td>
+                            <td class="input">
                                 <select name="select_reply" id="id_select_reply" class="simple-select">
                                     <option value="include">含む</option>
                                     <option value="exclude">含まない</option>
@@ -124,11 +154,11 @@
 
                         <!--リンク付きツイート-->
                         <tr>
-                            <th></th>
-                            <th class="summary">
+                            <td></td>
+                            <td class="summary">
                                 リンク付きツイート
-                            </th>
-                            <th class="input">
+                            </td>
+                            <td class="input">
                                 <select name="select_links" id="id_select_links" class="simple-select">
                                     <option value="include">含む</option>
                                     <option value="exclude">含まない</option>

@@ -12,7 +12,10 @@ function update_search_keyword() {
         search_keyword = "";
 
         for (var i = 0; i < search_keywords.length; i++) {
-            search_keyword += " " + search_keywords[i];
+            search_keyword += search_keywords[i];
+            if (i != search_keywords.length - 1) {
+                search_keyword += " ";
+            }
         }
     }
     else {
@@ -36,7 +39,10 @@ function update_exclude_keyword() {
         exclude_keyword = "";
 
         for (var i = 0; i < exclude_keywords.length; i++) {
-            exclude_keyword += " -" + exclude_keywords[i];
+            exclude_keyword += "-" + exclude_keywords[i];
+            if (i != exclude_keywords.length - 1) {
+                exclude_keyword += " ";
+            }
         }
     }
     else {
@@ -47,38 +53,128 @@ function update_exclude_keyword() {
 }
 
 // 投稿者ID
-var check_author_id = document.getElementById("id_check_author-id");
-check_author_id.addEventListener('input', update_author_id);
-var input_author_id = document.getElementById("id_input_author-id");
-input_author_id.addEventListener('input', update_author_id);
+var check_autdor_id = document.getElementById("id_check_autdor-id");
+check_autdor_id.addEventListener('input', update_autdor_id);
+var input_autdor_id = document.getElementById("id_input_autdor-id");
+input_autdor_id.addEventListener('input', update_autdor_id);
 
-var author_id = "";
+var autdor_id = "";
 
-function update_author_id() {
-    if (check_author_id.checked && input_author_id.value != "") {
-        author_id = "from:" + input_author_id.value;
+function update_autdor_id() {
+    if (check_autdor_id.checked && input_autdor_id.value != "") {
+        var autdor_ids = input_autdor_id.value.split(`, `);
+        autdor_id = "";
+
+        for (var i = 0; i < autdor_ids.length; i++) {
+            autdor_id += " from:" + autdor_ids[i];
+        }
     }
     else {
-        author_id = "";
+        autdor_id = "";
     }
 
     update();
 }
 
 // 除外ID
-var check_exclude_author_id = document.getElementById("id_check_exclude-author-id");
-check_exclude_author_id.addEventListener('input', update_exclude_author_id);
-var input_exclude_author_id = document.getElementById("id_input_exclude-author-id");
-input_exclude_author_id.addEventListener('input', update_exclude_author_id);
+var check_exclude_autdor_id = document.getElementById("id_check_exclude-autdor-id");
+check_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
+var input_exclude_autdor_id = document.getElementById("id_input_exclude-autdor-id");
+input_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
 
-var exclude_author_id = "";
+var exclude_autdor_id = "";
 
-function update_exclude_author_id() {
-    if (check_exclude_author_id.checked && input_exclude_author_id.value != "") {
-        exclude_author_id = "-from:" + input_exclude_author_id.value;
+function update_exclude_autdor_id() {
+    if (check_exclude_autdor_id.checked && input_exclude_autdor_id.value != "") {
+        var exclude_autdor_ids = input_exclude_autdor_id.value.split(`, `);
+        exclude_autdor_id = "";
+
+        for (var i = 0; i < exclude_autdor_ids.length; i++) {
+            exclude_autdor_id += " -from:" + exclude_autdor_ids[i];
+        }
     }
     else {
-        exclude_author_id = "";
+        exclude_autdor_id = "";
+    }
+
+    update();
+}
+
+// 開始日時
+var check_since_date = document.getElementById("id_check_since-date");
+check_since_date.addEventListener('input', update_since_date);
+var input_since_date = document.getElementById("id_input_since-date");
+input_since_date.addEventListener('input', update_since_date);
+var input_since_date_time = document.getElementById("id_input_since-date_time");
+input_since_date_time.addEventListener('input', update_since_date);
+
+var since_date = "";
+
+function update_since_date() {
+    if (!check_since_date.checked) {
+        update();
+        return;
+    }
+
+    console.log(input_since_date_time.value);
+
+    since_date = "";
+    if (input_since_date.value) {
+        since_date = "since:" + input_since_date.value;
+    }
+    if (input_since_date_time.value) {
+        if (!input_since_date.value) {
+            var today = new Date();
+            today.setDate(today.getDate());
+            var year = today.getFullYear();
+            var month = ("0"+(today.getMonth()+1)).slice(-2);
+            var date = ("0"+today.getDate()).slice(-2);
+            
+            input_since_date.value = year +'-'+ month +'-'+ date;
+            since_date = "since:" + check_since_date.value;
+        }
+
+        since_date += "_" + input_since_date_time.value + ":00_JST";
+    }
+
+    update();
+}
+
+// 終了日時
+var check_until_date = document.getElementById("id_check_until-date");
+check_until_date.addEventListener('input', update_until_date);
+var input_until_date = document.getElementById("id_input_until-date");
+input_until_date.addEventListener('input', update_until_date);
+var input_until_date_time = document.getElementById("id_input_until-date_time");
+input_until_date_time.addEventListener('input', update_until_date);
+
+var until_date = "";
+
+function update_until_date() {
+    if (!check_until_date.checked) {
+        update();
+        return;
+    }
+
+    console.log(input_until_date_time.value);
+
+    until_date = "";
+    if (input_until_date.value) {
+        until_date = "until:" + input_until_date.value;
+    }
+    if (input_until_date_time.value) {
+        if (!input_until_date.value) {
+            var today = new Date();
+            today.setDate(today.getDate());
+            var year = today.getFullYear();
+            var month = ("0"+(today.getMonth()+1)).slice(-2);
+            var date = ("0"+today.getDate()).slice(-2);
+            
+            input_until_date.value = year +'-'+ month +'-'+ date;
+            until_date = "until:" + check_until_date.value;
+        }
+
+        until_date += "_" + input_until_date_time.value + ":00_JST";
     }
 
     update();
@@ -149,20 +245,26 @@ function update() {
     if (only_keywords != "") {
         output_cmd += " " + only_keywords;
     }
-    if (author_id != "") {
-        output_cmd += " " + author_id;
+    if (autdor_id != "") {
+        output_cmd += " " + autdor_id;
     }
     if (exclude_keyword != "") {
         output_cmd += " " + exclude_keyword;
     }
-    if (exclude_author_id != "") {
-        output_cmd += " " + exclude_author_id;
+    if (exclude_autdor_id != "") {
+        output_cmd += " " + exclude_autdor_id;
     }
     if (reply != "") {
         output_cmd += " " + reply;
     }
     if (links != "") {
         output_cmd += " " + links;
+    }
+    if (since_date != "") {
+        output_cmd += " " + since_date;
+    }
+    if (until_date != "") {
+        output_cmd += " " + until_date;
     }
 
     output.value = output_cmd;
