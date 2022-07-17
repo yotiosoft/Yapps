@@ -1,7 +1,7 @@
 .input-table {
     width: 50%;
     min-width: 500px;
-    height: 30px;
+    height: 40px;
     line-height: 30px;
 }
 .input-table .summary {
@@ -40,5 +40,5 @@
 }
 
 .simple-select {
-    height: 30px;
+    height: 40px;
 }
