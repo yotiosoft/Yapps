@@ -267,6 +267,44 @@ function update_links() {
     update();
 }
 
+// 画像付きツイート
+var select_images = document.getElementById("id_select_images");
+select_images.addEventListener('input', update_images);
+var images = "";
+
+function update_images() {
+    if (select_images.value == "include") {
+        images = "";
+    }
+    else if (select_images.value == "exclude") {
+        images = "-filter:images";
+    }
+    else if (select_images.value == "only") {
+        images = "filter:images";
+    }
+
+    update();
+}
+
+// 動画付きツイート
+var select_videos = document.getElementById("id_select_videos");
+select_videos.addEventListener('input', update_videos);
+var videos = "";
+
+function update_videos() {
+    if (select_videos.value == "include") {
+        videos = "";
+    }
+    else if (select_videos.value == "exclude") {
+        videos = "-filter:videos";
+    }
+    else if (select_videos.value == "only") {
+        videos = "filter:videos";
+    }
+
+    update();
+}
+
 // 出力の更新
 var output = document.getElementById("id_output");
 var output_cmd = "";
@@ -301,6 +339,12 @@ function update() {
     }
     if (lang != "") {
         output_cmd += " " + lang;
+    }
+    if (images != "") {
+        output_cmd += " " + images;
+    }
+    if (videos != "") {
+        output_cmd += " " + videos;
     }
 
     output.value = output_cmd;

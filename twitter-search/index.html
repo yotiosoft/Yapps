@@ -98,6 +98,22 @@
                             </td>
                         </tr>
 
+                        <!--返信先-->
+                        <tr>
+                            <td class="checkbox">
+                                <input type="checkbox" id="id_check_autdor-id" name="check_autdor-id" checked>
+                            </td>
+                            <td class="summary">
+                                投稿者ID
+                            </td>
+                            <!--入力-->
+                            <td class="input">
+                                <p>
+                                    @<input type="text" id="id_input_autdor-id" name="input_autdor-id" placeholder="投稿者IDを入力" class="simple-inputtext">
+                                </p>
+                            </td>
+                        </tr>
+
                         <!--開始日時-->
                         <tr>
                             <td class="checkbox">
@@ -170,13 +186,43 @@
                         <tr>
                             <td></td>
                             <td class="summary">
-                                リンク付きツイート
+                                リンク付き
                             </td>
                             <td class="input">
                                 <select name="select_links" id="id_select_links" class="simple-select">
                                     <option value="include">含む</option>
                                     <option value="exclude">含まない</option>
-                                    <option value="only">リプライのみ検索</option>
+                                    <option value="only">リンク付きのみ検索</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!--画像付きツイート-->
+                        <tr>
+                            <td></td>
+                            <td class="summary">
+                                画像
+                            </td>
+                            <td class="input">
+                                <select name="select_images" id="id_select_images" class="simple-select">
+                                    <option value="include">含む</option>
+                                    <option value="exclude">含まない</option>
+                                    <option value="only">画像のみ検索</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!--動画付きツイート-->
+                        <tr>
+                            <td></td>
+                            <td class="summary">
+                                動画
+                            </td>
+                            <td class="input">
+                                <select name="select_videos" id="id_select_videos" class="simple-select">
+                                    <option value="include">含む</option>
+                                    <option value="exclude">含まない</option>
+                                    <option value="only">動画のみ検索</option>
                                 </select>
                             </td>
                         </tr>
