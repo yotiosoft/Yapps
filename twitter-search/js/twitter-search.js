@@ -79,7 +79,10 @@ function update_autdor_id() {
         autdor_id = "";
 
         for (var i = 0; i < autdor_ids.length; i++) {
-            autdor_id += " from:" + autdor_ids[i];
+            autdor_id += "from:" + autdor_ids[i];
+            if (i != autdor_ids.length - 1) {
+                autdor_id += " ";
+            }
         }
     }
     else {
@@ -103,11 +106,42 @@ function update_exclude_autdor_id() {
         exclude_autdor_id = "";
 
         for (var i = 0; i < exclude_autdor_ids.length; i++) {
-            exclude_autdor_id += " -from:" + exclude_autdor_ids[i];
+            exclude_autdor_id += "-from:" + exclude_autdor_ids[i];
+            if (i != exclude_autdor_ids.length - 1) {
+                exclude_autdor_id += " ";
+            }
         }
     }
     else {
         exclude_autdor_id = "";
+    }
+
+    update();
+}
+
+// 次のURLを含む
+var check_included_url = document.getElementById("id_check_included-url");
+check_included_url.addEventListener('input', update_included_url);
+var input_included_url = document.getElementById("id_input_included-url");
+input_included_url.addEventListener('input', update_included_url);
+
+var included_url = "";
+
+function update_included_url() {
+    if (check_included_url.checked && input_included_url.value != "") {
+        var included_urls = input_included_url.value.split(`, `);
+        included_url = "";
+
+        for (var i = 0; i < included_urls.length; i++) {
+            included_url += "url:" + included_urls[i];
+
+            if (i != included_urls.length - 1) {
+                included_url += " ";
+            }
+        }
+    }
+    else {
+        included_url = "";
     }
 
     update();
@@ -324,6 +358,9 @@ function update() {
     }
     if (exclude_autdor_id != "") {
         output_cmd += " " + exclude_autdor_id;
+    }
+    if (included_url != "") {
+        output_cmd += " " + included_url;
     }
     if (reply != "") {
         output_cmd += " " + reply;
