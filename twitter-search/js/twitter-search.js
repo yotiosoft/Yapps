@@ -38,16 +38,20 @@ function common_get_today() {
 }
 
 // プルダウンメニューの選択肢よりオプションを取得
-function common_get_selected_option(select) {
+function common_get_selected_option(select, option_name) {
+    var ret;
+
     if (select.value == "include") {
-        links = "";
+        ret = "";
     }
     else if (select.value == "exclude") {
-        links = "-filter:links";
+        ret = "-filter:" + option_name;
     }
     else if (select.value == "only") {
-        links = "filter:links";
+        ret = "filter:" + option_name;
     }
+
+    return ret;
 }
 
 // 検索キーワード
