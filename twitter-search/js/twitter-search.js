@@ -263,16 +263,7 @@ select_reply.addEventListener('input', update_reply);
 var reply = "";
 
 function update_reply() {
-    if (select_reply.value == "include") {
-        reply = "";
-    }
-    else if (select_reply.value == "exclude") {
-        reply = "-filter:replies";
-    }
-    else if (select_reply.value == "only") {
-        reply = "filter:replies";
-    }
-
+    reply = common_get_selected_option(select_reply, "replies");
     update();
 }
 
@@ -282,16 +273,7 @@ select_links.addEventListener('input', update_links);
 var links = "";
 
 function update_links() {
-    if (select_links.value == "include") {
-        links = "";
-    }
-    else if (select_links.value == "exclude") {
-        links = "-filter:links";
-    }
-    else if (select_reply.value == "only") {
-        links = "filter:links";
-    }
-
+    links = common_get_selected_option(select_links, "links");
     update();
 }
 
@@ -301,16 +283,7 @@ select_images.addEventListener('input', update_images);
 var images = "";
 
 function update_images() {
-    if (select_images.value == "include") {
-        images = "";
-    }
-    else if (select_images.value == "exclude") {
-        images = "-filter:images";
-    }
-    else if (select_images.value == "only") {
-        images = "filter:images";
-    }
-
+    images = common_get_selected_option(select_images, "images");
     update();
 }
 
@@ -320,16 +293,7 @@ select_videos.addEventListener('input', update_videos);
 var videos = "";
 
 function update_videos() {
-    if (select_videos.value == "include") {
-        videos = "";
-    }
-    else if (select_videos.value == "exclude") {
-        videos = "-filter:videos";
-    }
-    else if (select_videos.value == "only") {
-        videos = "filter:videos";
-    }
-
+    videos = common_get_selected_option(select_videos, "videos");
     update();
 }
 
