@@ -37,6 +37,19 @@ function common_get_today() {
     return [year, month, date];
 }
 
+// プルダウンメニューの選択肢よりオプションを取得
+function common_get_selected_option(select) {
+    if (select.value == "include") {
+        links = "";
+    }
+    else if (select.value == "exclude") {
+        links = "-filter:links";
+    }
+    else if (select.value == "only") {
+        links = "filter:links";
+    }
+}
+
 // 検索キーワード
 var check_search_keyword = document.getElementById("id_check_search-keyword");
 check_search_keyword.addEventListener('input', update_search_keyword);
