@@ -30,7 +30,7 @@ function common_add_inputted_str(filter_name, inputted_str) {
 function common_get_today() {
     var today = new Date();
     today.setDate(today.getDate());
-    var year = today.getFullYear();
+    var year = String(today.getFullYear());
     var month = ("0"+(today.getMonth()+1)).slice(-2);
     var date = ("0"+today.getDate()).slice(-2);
 
@@ -157,6 +157,8 @@ function update_since_date() {
     if (input_since_date_time.value) {
         if (!input_since_date.value) {
             var today = common_get_today();
+
+            console.log(today);
             
             input_since_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
             since_date = "since:" + check_since_date.value;
