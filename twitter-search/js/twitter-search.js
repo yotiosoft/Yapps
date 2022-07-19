@@ -157,11 +157,9 @@ function update_since_date() {
     if (input_since_date_time.value) {
         if (!input_since_date.value) {
             var today = common_get_today();
-
-            console.log(today);
             
             input_since_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
-            since_date = "since:" + check_since_date.value;
+            since_date = "since:" + input_since_date.value;
         }
 
         since_date += "_" + input_since_date_time.value + ":00_JST";
@@ -196,8 +194,8 @@ function update_until_date() {
         if (!input_until_date.value) {
             var today = common_get_today();
             
-            input_since_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
-            until_date = "until:" + check_until_date.value;
+            input_until_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
+            until_date = "until:" + input_until_date.value;
         }
 
         until_date += "_" + input_until_date_time.value + ":00_JST";
