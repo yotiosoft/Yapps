@@ -26,6 +26,17 @@ function common_add_inputted_str(filter_name, inputted_str) {
     return ret;
 }
 
+// 現在の日付の文字列を取得
+function common_get_today() {
+    var today = new Date();
+    today.setDate(today.getDate());
+    var year = today.getFullYear();
+    var month = ("0"+(today.getMonth()+1)).slice(-2);
+    var date = ("0"+today.getDate()).slice(-2);
+
+    return [year, month, date];
+}
+
 // 検索キーワード
 var check_search_keyword = document.getElementById("id_check_search-keyword");
 check_search_keyword.addEventListener('input', update_search_keyword);
@@ -145,13 +156,9 @@ function update_since_date() {
     }
     if (input_since_date_time.value) {
         if (!input_since_date.value) {
-            var today = new Date();
-            today.setDate(today.getDate());
-            var year = today.getFullYear();
-            var month = ("0"+(today.getMonth()+1)).slice(-2);
-            var date = ("0"+today.getDate()).slice(-2);
+            var today = common_get_today();
             
-            input_since_date.value = year +'-'+ month +'-'+ date;
+            input_since_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
             since_date = "since:" + check_since_date.value;
         }
 
@@ -185,13 +192,9 @@ function update_until_date() {
     }
     if (input_until_date_time.value) {
         if (!input_until_date.value) {
-            var today = new Date();
-            today.setDate(today.getDate());
-            var year = today.getFullYear();
-            var month = ("0"+(today.getMonth()+1)).slice(-2);
-            var date = ("0"+today.getDate()).slice(-2);
+            var today = common_get_today();
             
-            input_until_date.value = year +'-'+ month +'-'+ date;
+            input_since_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
             until_date = "until:" + check_until_date.value;
         }
 
