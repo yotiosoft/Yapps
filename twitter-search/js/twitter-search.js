@@ -11,6 +11,21 @@ $(window).on('load', function() {
     });
 });
 
+// 入力文字列の追加
+function common_add_inputted_str(filter_name, inputted_str) {
+    var splitted_str = inputted_str.value.split(`, `);
+    var ret = "";
+
+    for (var i = 0; i < splitted_str.length; i++) {
+        ret += filter_name + splitted_str[i];
+        if (i != splitted_str.length - 1) {
+            ret += " ";
+        }
+    }
+
+    return ret;
+}
+
 // 検索キーワード
 var check_search_keyword = document.getElementById("id_check_search-keyword");
 check_search_keyword.addEventListener('input', update_search_keyword);
@@ -21,15 +36,7 @@ var search_keyword = "";
 
 function update_search_keyword() {
     if (check_search_keyword.checked) {
-        var search_keywords = input_search_keyword.value.split(`, `);
-        search_keyword = "";
-
-        for (var i = 0; i < search_keywords.length; i++) {
-            search_keyword += search_keywords[i];
-            if (i != search_keywords.length - 1) {
-                search_keyword += " ";
-            }
-        }
+        search_keyword = common_add_inputted_str("", input_search_keyword);
     }
     else {
         search_keyword = "";
@@ -48,15 +55,7 @@ var exclude_keyword = "";
 
 function update_exclude_keyword() {
     if (check_exclude_keyword.checked && input_exclude_keyword.value != "") {
-        var exclude_keywords = input_exclude_keyword.value.split(`, `);
-        exclude_keyword = "";
-
-        for (var i = 0; i < exclude_keywords.length; i++) {
-            exclude_keyword += "-" + exclude_keywords[i];
-            if (i != exclude_keywords.length - 1) {
-                exclude_keyword += " ";
-            }
-        }
+        exclude_keyword = common_add_inputted_str("-", input_exclude_keyword);
     }
     else {
         exclude_keyword = "";
@@ -75,15 +74,7 @@ var autdor_id = "";
 
 function update_autdor_id() {
     if (check_autdor_id.checked && input_autdor_id.value != "") {
-        var autdor_ids = input_autdor_id.value.split(`, `);
-        autdor_id = "";
-
-        for (var i = 0; i < autdor_ids.length; i++) {
-            autdor_id += "from:" + autdor_ids[i];
-            if (i != autdor_ids.length - 1) {
-                autdor_id += " ";
-            }
-        }
+        autdor_id = common_add_inputted_str("from:", input_autdor_id);
     }
     else {
         autdor_id = "";
@@ -102,15 +93,7 @@ var exclude_autdor_id = "";
 
 function update_exclude_autdor_id() {
     if (check_exclude_autdor_id.checked && input_exclude_autdor_id.value != "") {
-        var exclude_autdor_ids = input_exclude_autdor_id.value.split(`, `);
-        exclude_autdor_id = "";
-
-        for (var i = 0; i < exclude_autdor_ids.length; i++) {
-            exclude_autdor_id += "-from:" + exclude_autdor_ids[i];
-            if (i != exclude_autdor_ids.length - 1) {
-                exclude_autdor_id += " ";
-            }
-        }
+        exclude_autdor_id = common_add_inputted_str("-from:", input_exclude_autdor_id);
     }
     else {
         exclude_autdor_id = "";
@@ -129,16 +112,7 @@ var included_url = "";
 
 function update_included_url() {
     if (check_included_url.checked && input_included_url.value != "") {
-        var included_urls = input_included_url.value.split(`, `);
-        included_url = "";
-
-        for (var i = 0; i < included_urls.length; i++) {
-            included_url += "url:" + included_urls[i];
-
-            if (i != included_urls.length - 1) {
-                included_url += " ";
-            }
-        }
+        included_url = common_add_inputted_str("url:", input_included_url);
     }
     else {
         included_url = "";
