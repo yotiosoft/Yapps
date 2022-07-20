@@ -346,6 +346,23 @@ function update() {
     output.value = options['output_cmd'];
 }
 
+// 保存
+var save_button = document.getElementById("id_save-button");
+save_button.addEventListener('click', save);
+var save_preset_name = document.getElementById("id_input_save-preset-name");
+
+function save() {
+    var get_json = localStorage.getItem('yapps_twitter_search_preset');
+    if (get_json) {
+        presets_array = JSON.parse(get_json);
+    }
+
+    presets_array.push(options);
+    
+    // 保存
+    localStorage.setItem('yapps_twitter_search_preset', JSON.stringify(presets_array));
+}
+
 // 検索
 function search() {
     var search_cmd = output.value;
