@@ -164,6 +164,7 @@ options['since_date'] = "";
 
 function update_since_date() {
     if (!check_since_date.checked) {
+        options['since_date'] = "";
         update();
         return;
     }
@@ -198,6 +199,7 @@ options['until_date'] = "";
 
 function update_until_date() {
     if (!check_until_date.checked) {
+        options['until_date'] = "";
         update();
         return;
     }
