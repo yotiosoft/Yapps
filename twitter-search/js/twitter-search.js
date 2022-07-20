@@ -67,10 +67,10 @@ options['search_keyword'] = "";
 
 function update_search_keyword() {
     if (check_search_keyword.checked) {
-        search_keyword = common_add_inputted_str("", input_search_keyword);
+        options['search_keyword'] = common_add_inputted_str("", input_search_keyword);
     }
     else {
-        search_keyword = "";
+        options['search_keyword'] = "";
     }
 
     update();
@@ -86,10 +86,10 @@ options['exclude_keyword'] = "";
 
 function update_exclude_keyword() {
     if (check_exclude_keyword.checked && input_exclude_keyword.value != "") {
-        exclude_keyword = common_add_inputted_str("-", input_exclude_keyword);
+        options['exclude_keyword'] = common_add_inputted_str("-", input_exclude_keyword);
     }
     else {
-        exclude_keyword = "";
+        options['exclude_keyword'] = "";
     }
 
     update();
@@ -105,10 +105,10 @@ options['autdor_id'] = "";
 
 function update_autdor_id() {
     if (check_autdor_id.checked && input_autdor_id.value != "") {
-        autdor_id = common_add_inputted_str("from:", input_autdor_id);
+        options['autdor_id'] = common_add_inputted_str("from:", input_autdor_id);
     }
     else {
-        autdor_id = "";
+        options['autdor_id'] = "";
     }
 
     update();
@@ -124,10 +124,10 @@ options['exclude_autdor_id'] = "";
 
 function update_exclude_autdor_id() {
     if (check_exclude_autdor_id.checked && input_exclude_autdor_id.value != "") {
-        exclude_autdor_id = common_add_inputted_str("-from:", input_exclude_autdor_id);
+        options['exclude_autdor_id'] = common_add_inputted_str("-from:", input_exclude_autdor_id);
     }
     else {
-        exclude_autdor_id = "";
+        options['exclude_autdor_id'] = "";
     }
 
     update();
@@ -143,10 +143,10 @@ options['included_url'] = "";
 
 function update_included_url() {
     if (check_included_url.checked && input_included_url.value != "") {
-        included_url = common_add_inputted_str("url:", input_included_url);
+        options['included_url'] = common_add_inputted_str("url:", input_included_url);
     }
     else {
-        included_url = "";
+        options['included_url'] = "";
     }
 
     update();
@@ -168,21 +168,19 @@ function update_since_date() {
         return;
     }
 
-    console.log(input_since_date_time.value);
-
     since_date = "";
     if (input_since_date.value) {
-        since_date = "since:" + input_since_date.value;
+        options['since_date'] = "since:" + input_since_date.value;
     }
     if (input_since_date_time.value) {
         if (!input_since_date.value) {
             var today = common_get_today();
             
             input_since_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
-            since_date = "since:" + input_since_date.value;
+            options['since_date'] = "since:" + input_since_date.value;
         }
 
-        since_date += "_" + input_since_date_time.value + ":00_JST";
+        options['since_date'] += "_" + input_since_date_time.value + ":00_JST";
     }
 
     update();
@@ -204,21 +202,19 @@ function update_until_date() {
         return;
     }
 
-    console.log(input_until_date_time.value);
-
     until_date = "";
     if (input_until_date.value) {
-        until_date = "until:" + input_until_date.value;
+        options['until_date'] = "until:" + input_until_date.value;
     }
     if (input_until_date_time.value) {
         if (!input_until_date.value) {
             var today = common_get_today();
             
             input_until_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
-            until_date = "until:" + input_until_date.value;
+            options['until_date'] = "until:" + input_until_date.value;
         }
 
-        until_date += "_" + input_until_date_time.value + ":00_JST";
+        options['until_date'] += "_" + input_until_date_time.value + ":00_JST";
     }
 
     update();
@@ -234,10 +230,10 @@ options['lang'] = "";
 
 function update_lang() {
     if (check_lang.checked) {
-        lang = "lang:" + input_lang.value;
+        options['lang'] = "lang:" + input_lang.value;
     }
     else {
-        lang = "";
+        options['lang'] = "";
     }
 
     update();
@@ -251,10 +247,10 @@ options['only_keywords'] = "";
 
 function update_only_keywords() {
     if (check_only_keywords.checked) {
-        only_keywords = "OR @i -@i";
+        options['only_keywords'] = "OR @i -@i";
     }
     else {
-        only_keywords = "";
+        options['only_keywords'] = "";
     }
 
     update();
@@ -266,7 +262,7 @@ select_replies.addEventListener('input', update_replies);
 options['replies'] = "";
 
 function update_replies() {
-    replies = common_get_selected_option(select_replies, "replies");
+    options['replies'] = common_get_selected_option(select_replies, "replies");
     update();
 }
 
@@ -276,76 +272,76 @@ select_links.addEventListener('input', update_links);
 options['links'] = "";
 
 function update_links() {
-    links = common_get_selected_option(select_links, "links");
+    options['links'] = common_get_selected_option(select_links, "links");
     update();
 }
 
 // 画像付きツイート
 var select_images = document.getElementById("id_select_images");
 select_images.addEventListener('input', update_images);
-var images = "";
+options['images'] = "";
 
 function update_images() {
-    images = common_get_selected_option(select_images, "images");
+    options['images'] = common_get_selected_option(select_images, "images");
     update();
 }
 
 // 動画付きツイート
 var select_videos = document.getElementById("id_select_videos");
 select_videos.addEventListener('input', update_videos);
-var videos = "";
+options['videos'] = "";
 
 function update_videos() {
-    videos = common_get_selected_option(select_videos, "videos");
+    options['videos'] = common_get_selected_option(select_videos, "videos");
     update();
 }
 
 // 出力の更新
 var output = document.getElementById("id_output");
-var output_cmd = "";
+options['output_cmd'] = "";
 function update() {
-    output_cmd = "";
-    if (search_keyword != "") {
-        output_cmd += search_keyword;
+    options['output_cmd'] = "";
+    if (options['search_keyword'] != "") {
+        options['output_cmd'] += options['search_keyword'];
     }
-    if (only_keywords != "") {
-        output_cmd += " " + only_keywords;
+    if (options['only_keywords'] != "") {
+        options['output_cmd'] += " " + options['only_keywords'];
     }
-    if (autdor_id != "") {
-        output_cmd += " " + autdor_id;
+    if (options['autdor_id'] != "") {
+        options['output_cmd'] += " " + options['autdor_id'];
     }
-    if (exclude_keyword != "") {
-        output_cmd += " " + exclude_keyword;
+    if (options['exclude_keyword'] != "") {
+        options['output_cmd'] += " " + options['exclude_keyword'];
     }
-    if (exclude_autdor_id != "") {
-        output_cmd += " " + exclude_autdor_id;
+    if (options['exclude_autdor_id'] != "") {
+        options['output_cmd'] += " " + options['exclude_autdor_id'];
     }
-    if (included_url != "") {
-        output_cmd += " " + included_url;
+    if (options['included_url'] != "") {
+        options['output_cmd'] += " " + options['included_url'];
     }
-    if (replies != "") {
-        output_cmd += " " + replies;
+    if (options['replies'] != "") {
+        options['output_cmd'] += " " + options['replies'];
     }
-    if (links != "") {
-        output_cmd += " " + links;
+    if (options['links'] != "") {
+        options['output_cmd'] += " " + options['links'];
     }
-    if (since_date != "") {
-        output_cmd += " " + since_date;
+    if (options['since_date'] != "") {
+        options['output_cmd'] += " " + options['since_date'];
     }
-    if (until_date != "") {
-        output_cmd += " " + until_date;
+    if (options['until_date'] != "") {
+        options['output_cmd'] += " " + options['until_date'];
     }
-    if (lang != "") {
-        output_cmd += " " + lang;
+    if (options['lang'] != "") {
+        options['output_cmd'] += " " + options['lang'];
     }
-    if (images != "") {
-        output_cmd += " " + images;
+    if (options['images'] != "") {
+        options['output_cmd'] += " " + options['images'];
     }
-    if (videos != "") {
-        output_cmd += " " + videos;
+    if (options['videos'] != "") {
+        options['output_cmd'] += " " + options['videos'];
     }
 
-    output.value = output_cmd;
+    output.value = options['output_cmd'];
 }
 
 // 検索
