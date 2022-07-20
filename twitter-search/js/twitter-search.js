@@ -1,3 +1,6 @@
+// オプション保持用辞書
+var options = {};
+
 // 言語コードの読み込み
 $(window).on('load', function() {
     var select_language = document.getElementById("id_select_language");
@@ -60,7 +63,7 @@ check_search_keyword.addEventListener('input', update_search_keyword);
 var input_search_keyword = document.getElementById("id_input_search-keyword");
 input_search_keyword.addEventListener('input', update_search_keyword);
 
-var search_keyword = "";
+options['search_keyword'] = "";
 
 function update_search_keyword() {
     if (check_search_keyword.checked) {
@@ -79,7 +82,7 @@ check_exclude_keyword.addEventListener('input', update_exclude_keyword);
 var input_exclude_keyword = document.getElementById("id_input_exclude-keyword");
 input_exclude_keyword.addEventListener('input', update_exclude_keyword);
 
-var exclude_keyword = "";
+options['exclude_keyword'] = "";
 
 function update_exclude_keyword() {
     if (check_exclude_keyword.checked && input_exclude_keyword.value != "") {
@@ -98,7 +101,7 @@ check_autdor_id.addEventListener('input', update_autdor_id);
 var input_autdor_id = document.getElementById("id_input_autdor-id");
 input_autdor_id.addEventListener('input', update_autdor_id);
 
-var autdor_id = "";
+options['autdor_id'] = "";
 
 function update_autdor_id() {
     if (check_autdor_id.checked && input_autdor_id.value != "") {
@@ -117,7 +120,7 @@ check_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
 var input_exclude_autdor_id = document.getElementById("id_input_exclude-autdor-id");
 input_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
 
-var exclude_autdor_id = "";
+options['exclude_autdor_id'] = "";
 
 function update_exclude_autdor_id() {
     if (check_exclude_autdor_id.checked && input_exclude_autdor_id.value != "") {
@@ -136,7 +139,7 @@ check_included_url.addEventListener('input', update_included_url);
 var input_included_url = document.getElementById("id_input_included-url");
 input_included_url.addEventListener('input', update_included_url);
 
-var included_url = "";
+options['included_url'] = "";
 
 function update_included_url() {
     if (check_included_url.checked && input_included_url.value != "") {
@@ -157,7 +160,7 @@ input_since_date.addEventListener('input', update_since_date);
 var input_since_date_time = document.getElementById("id_input_since-date_time");
 input_since_date_time.addEventListener('input', update_since_date);
 
-var since_date = "";
+options['since_date'] = "";
 
 function update_since_date() {
     if (!check_since_date.checked) {
@@ -193,7 +196,7 @@ input_until_date.addEventListener('input', update_until_date);
 var input_until_date_time = document.getElementById("id_input_until-date_time");
 input_until_date_time.addEventListener('input', update_until_date);
 
-var until_date = "";
+options['until_date'] = "";
 
 function update_until_date() {
     if (!check_until_date.checked) {
@@ -227,7 +230,7 @@ check_lang.addEventListener('input', update_lang);
 var input_lang = document.getElementById("id_select_language");
 input_lang.addEventListener('input', update_lang);
 
-var lang = "";
+options['lang'] = "";
 
 function update_lang() {
     if (check_lang.checked) {
@@ -244,7 +247,7 @@ function update_lang() {
 var check_only_keywords = document.getElementById("id_check_only-keywords");
 check_only_keywords.addEventListener('input', update_only_keywords);
 
-var only_keywords = "";
+options['only_keywords'] = "";
 
 function update_only_keywords() {
     if (check_only_keywords.checked) {
@@ -258,19 +261,19 @@ function update_only_keywords() {
 }
 
 // リプライ
-var select_reply = document.getElementById("id_select_reply");
-select_reply.addEventListener('input', update_reply);
-var reply = "";
+var select_replies = document.getElementById("id_select_replies");
+select_replies.addEventListener('input', update_replies);
+options['replies'] = "";
 
-function update_reply() {
-    reply = common_get_selected_option(select_reply, "replies");
+function update_replies() {
+    replies = common_get_selected_option(select_replies, "replies");
     update();
 }
 
 // リンク付きツイート
 var select_links = document.getElementById("id_select_links");
 select_links.addEventListener('input', update_links);
-var links = "";
+options['links'] = "";
 
 function update_links() {
     links = common_get_selected_option(select_links, "links");
@@ -320,8 +323,8 @@ function update() {
     if (included_url != "") {
         output_cmd += " " + included_url;
     }
-    if (reply != "") {
-        output_cmd += " " + reply;
+    if (replies != "") {
+        output_cmd += " " + replies;
     }
     if (links != "") {
         output_cmd += " " + links;
