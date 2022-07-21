@@ -30,11 +30,23 @@
                     <img src="/img/tools_icon/others/twitter-search.svg" type=”image/svg+xml” width="48" height="48" alt="Twitter検索コマンド生成のロゴ">
                     Twitter検索コマンド生成
                 </div>
-                <p class="summary">
-                    Twitter検索に便利なコマンドを自動生成します。カンマ+空白（, ）で区切って入力することで複数の単語の入力が可能です。<br>
-                    入力欄を空白にしておくか、チェックを外しておくとそのオプションが無効になります。<br>
-                    「検索」ボタンを押すと、Twitterの検索結果を開きます。
-                </p>
+                <div class="summary-and-preset-box">
+                    <p class="summary">
+                        Twitter検索に便利なコマンドを自動生成します。カンマ+空白（, ）で区切って入力することで複数の単語の入力が可能です。<br>
+                        入力欄を空白にしておくか、チェックを外しておくとそのオプションが無効になります。<br>
+                        「検索」ボタンを押すと、Twitterの検索結果を開きます。
+                    </p>
+
+                    <div class="preset-box">
+                        <input type="text" id="id_output" name="output" placeholder="生成されたコマンドがここに出力されます" class="simple-inputtext">
+
+                        <a href="javascript:search();" id="make-button">
+                            <div class="round-rect-button">
+                                検索
+                            </div>
+                        </a>
+                    </div>
+                </div>
                 
                 <div class="app-area" id="app-area-id">
                     <table class="input-table">
