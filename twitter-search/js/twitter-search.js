@@ -390,12 +390,16 @@ function save() {
     
     // 保存
     localStorage.setItem('yapps_twitter_search_preset', JSON.stringify(presets_array));
+
+    prepare_load_select_options();
 }
 
 // 読み込みselectの準備
-var load_preset_name = document.getElementById("id_select_load-preset-name");
+var load_preset_select = document.getElementById("id_select_load-preset-name");
 
 function prepare_load_select_options() {
+    load_preset_select.innerHTML = "";
+    
     var get_json = localStorage.getItem('yapps_twitter_search_preset');
     var presets_array = [];
     if (get_json) {
@@ -406,7 +410,7 @@ function prepare_load_select_options() {
         var option = document.createElement("option");
         option.value = presets_array[i]['preset_name'];
         option.text = presets_array[i]['preset_name'];
-        load_preset_name.add(option);
+        load_preset_select.add(option);
     }
 }
 $(window).on('load', prepare_load_select_options);  // ページの読み込み完了次第実行
@@ -414,6 +418,25 @@ $(window).on('load', prepare_load_select_options);  // ページの読み込み�
 // 読み込み
 var load_button = document.getElementById("id_select_load-preset");
 
+function load() {
+    var preset_name = load_preset_select.value;
+    options["preset_name"] = preset_name;
+
+    var get_json = localStorage.getItem('yapps_twitter_search_preset');
+    var presets_array = [];
+    if (get_json) {
+        presets_array = JSON.parse(get_json);
+    }
+
+    for (var i = 0; i < presets_array.length; i++) {
+        if (presets_array[i]['preset_name'] == preset_name) {
+            options = presets_array[i];
+            break;
+        }
+    }
+
+    update();
+}
 
 // 検索
 function search() {
