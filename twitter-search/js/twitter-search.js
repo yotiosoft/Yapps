@@ -370,11 +370,18 @@ function update() {
 
 // 保存
 var save_button = document.getElementById("id_save-button");
-save_button.addEventListener('click', save);
 var save_preset_name = document.getElementById("id_input_save-preset-name");
 
 function save() {
+    var preset_name = save_preset_name.value;
+    if (preset_name == "") {
+        alert("プリセット名を入力してください");
+        return;
+    }
+    options["preset_name"] = preset_name;
+
     var get_json = localStorage.getItem('yapps_twitter_search_preset');
+    var presets_array = [];
     if (get_json) {
         presets_array = JSON.parse(get_json);
     }
