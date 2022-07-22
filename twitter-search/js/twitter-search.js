@@ -392,6 +392,28 @@ function save() {
     localStorage.setItem('yapps_twitter_search_preset', JSON.stringify(presets_array));
 }
 
+// 読み込みselectの準備
+var load_preset_name = document.getElementById("id_select_load-preset-name");
+
+function prepare_load_select_options() {
+    var get_json = localStorage.getItem('yapps_twitter_search_preset');
+    var presets_array = [];
+    if (get_json) {
+        presets_array = JSON.parse(get_json);
+    }
+
+    for (var i = 0; i < presets_array.length; i++) {
+        var option = document.createElement("option");
+        option.value = presets_array[i]['preset_name'];
+        option.text = presets_array[i]['preset_name'];
+        load_preset_name.add(option);
+    }
+}
+
+// 読み込み
+var load_button = document.getElementById("id_select_load-preset");
+
+
 // 検索
 function search() {
     var search_cmd = output.value;
