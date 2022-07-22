@@ -409,6 +409,7 @@ function prepare_load_select_options() {
         load_preset_name.add(option);
     }
 }
+$(window).on('load', prepare_load_select_options);  // ページの読み込み完了次第実行
 
 // 読み込み
 var load_button = document.getElementById("id_select_load-preset");
