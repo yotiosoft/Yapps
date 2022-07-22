@@ -37,14 +37,26 @@
                         「検索」ボタンを押すと、Twitterの検索結果を開きます。
                     </p>
 
-                    <div class="preset-box">
-                        <input type="text" id="id_input_save-preset-name" name="input_save-preset-name" placeholder="生成されたコマンドがここに出力されます" class="simple-inputtext">
+                    <div class="preset-boxes">
+                        <div class="preset-box">
+                            <!--プリセットの保存-->
+                            <input type="text" id="id_input_save-preset-name" name="input_save-preset-name" placeholder="保存プリセット名" class="simple-inputtext">
+                            <a href="javascript:save();" id="id_save-button">
+                                <div class="round-rect-button">
+                                    保存
+                                </div>
+                            </a>
+                        </div>
 
-                        <a href="javascript:save();" id="id_save-button">
-                            <div class="round-rect-button">
-                                保存
-                            </div>
-                        </a>
+                        <div class="preset-box">
+                            <!--プリセットの保存-->
+                            <select name="select_load-preset" id="id_select_load-preset" class="simple-select"></select>
+                            <a href="javascript:load();" id="id_load-button">
+                                <div class="round-rect-button">
+                                    読み込み
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
