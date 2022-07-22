@@ -244,14 +244,14 @@ function update_until_date() {
 // 言語指定
 var check_lang = document.getElementById("id_check_language");
 check_lang.addEventListener('input', update_lang);
-var input_lang = document.getElementById("id_select_language");
-input_lang.addEventListener('input', update_lang);
+var select_lang = document.getElementById("id_select_language");
+select_lang.addEventListener('input', update_lang);
 
 options['lang'] = "";
 
 function update_lang() {
     if (check_lang.checked) {
-        options['lang'] = "lang:" + input_lang.value;
+        options['lang'] = "lang:" + select_lang.value;
     }
     else {
         options['lang'] = "";
@@ -378,7 +378,6 @@ function save() {
         alert("プリセット名を入力してください");
         return;
     }
-    options["preset_name"] = preset_name;
 
     var get_json = localStorage.getItem('yapps_twitter_search_preset');
     var presets_array = [];
@@ -386,6 +385,18 @@ function save() {
         presets_array = JSON.parse(get_json);
     }
 
+    for (var i = 0; i < presets_array.length; i++) {
+        if (presets_array[i]['preset_name'] == preset_name) {
+            if (!confirm("すでに同じ名前のプリセットが存在します："+preset_name+"\n上書きしますか？")) {
+                return;
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    options["preset_name"] = preset_name;
     presets_array.push(options);
     
     // 保存
@@ -399,7 +410,7 @@ var load_preset_select = document.getElementById("id_select_load-preset-name");
 
 function prepare_load_select_options() {
     load_preset_select.innerHTML = "";
-    
+
     var get_json = localStorage.getItem('yapps_twitter_search_preset');
     var presets_array = [];
     if (get_json) {
@@ -431,11 +442,26 @@ function load() {
     for (var i = 0; i < presets_array.length; i++) {
         if (presets_array[i]['preset_name'] == preset_name) {
             options = presets_array[i];
+
+            input_search_keyword.value = options['search_keyword'];
+            check_only_keywords.value = options['only_keywords'];
+            input_autdor_id.value = options['autdor_id'];
+            input_exclude_keyword.value = options['exclude_keyword'];
+            input_exclude_autdor_id.value = options['exclude_autdor_id'];
+            input_included_url.value = options['included_url'];
+            input_replies.value = options['replies'];
+            input_replies.value = options['reply_id'];
+            select_links.value = options['links'];
+            input_since_date.value = options['since_date'];
+            input_until_date.value = options['until_date'];
+            select_lang.value = options['lang'];
+            select_images.value = options['images'];
+            select_videos.value = options['videos'];
+            output.value = options['output_cmd'];
+            
             break;
         }
     }
-
-    update();
 }
 
 // 検索
