@@ -133,6 +133,25 @@ function update_exclude_autdor_id() {
     update();
 }
 
+// 返信先
+var check_replies = document.getElementById("id_check_reply-id");
+check_replies.addEventListener('input', update_reply_id);
+var input_replies = document.getElementById("id_input_reply-id");
+input_replies.addEventListener('input', update_reply_id);
+
+options['reply_id'] = "";
+
+function update_reply_id() {
+    if (check_replies.checked && input_replies.value != "") {
+        options['reply_id'] = common_add_inputted_str("to:", input_replies);
+    }
+    else {
+        options['reply_id'] = "";
+    }
+
+    update();
+}
+
 // 次のURLを含む
 var check_included_url = document.getElementById("id_check_included-url");
 check_included_url.addEventListener('input', update_included_url);
@@ -323,6 +342,9 @@ function update() {
     }
     if (options['replies'] != "") {
         options['output_cmd'] += " " + options['replies'];
+    }
+    if (options['reply_id'] != "") {
+        options['output_cmd'] += " " + options['reply_id'];
     }
     if (options['links'] != "") {
         options['output_cmd'] += " " + options['links'];
