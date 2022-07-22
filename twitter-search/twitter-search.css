@@ -72,3 +72,33 @@ tr {
     max-width: 150px;
     margin-left: 10px;
 }
+
+.summary-and-preset-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+.summary-and-preset-box .summary {
+    width: 60%;
+    min-width: 300px;
+}
+.summary-and-preset-box .preset-box {
+    display: flex;
+
+    margin-right: 10px;
+    padding-left: 30px;
+}
+.summary-and-preset-box .preset-box input {
+    width: 200px;
+    height: 40px;
+}
+.summary-and-preset-box .preset-box a {
+    width: fit-content;
+    height: fit-content;
+}
+.summary-and-preset-box .preset-box .round-rect-button {
+    width: 80px;
+    height: 40px;
+
+    font-size: 16px;
+    line-height: 16px;
+}
