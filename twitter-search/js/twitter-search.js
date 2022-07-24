@@ -31,22 +31,22 @@ function common_add_inputted_str(filter_name, inputted_str) {
 }
 
 // option_valuesを初期化
-function common_init_option_values() {
-    option_str['search_keyword'];
-    option_str['only_keywords'];
-    option_str['autdor_id'];
-    option_str['exclude_keyword'];
-    option_str['exclude_autdor_id'];
-    option_str['included_url'];
-    option_str['replies'];
-    option_str['reply_id'];
-    option_str['links'];
-    option_str['since_date'];
-    option_str['until_date'];
-    option_str['lang'];
-    option_str['images'];
-    option_str['videos'];
-    option_str['output_cmd'];
+function init_option_values() {
+    option_values['search_keyword'] = "";
+    option_values['only_keywords'] = "";
+    option_values['autdor_id'] = "";
+    option_values['exclude_keyword'] = "";
+    option_values['exclude_autdor_id'] = "";
+    option_values['included_url'] = "";
+    option_values['replies'] = 0;
+    option_values['reply_id'] = "";
+    option_values['links'] = 0;
+    option_values['since_date'] = "";
+    option_values['until_date'] = "";
+    option_values['lang'] = "ja";
+    option_values['images'] = 0;
+    option_values['videos'] = 0;
+    option_values['output_cmd'] = "";
 }
 
 // 現在の日付の文字列を取得
