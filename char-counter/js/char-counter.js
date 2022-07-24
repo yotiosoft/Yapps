@@ -1,36 +1,12 @@
-$('#input-textarea').keyup(function() {
-    var input  = document.getElementById("input-textarea");
-    var output = document.getElementById("output-area");
+$(window).on('load', function() {
+    $('#input-textarea').keyup(function() {
+        var output_char_count = document.getElementById("output-char-count");
+        var input_textarea = document.getElementById("input-textarea");
 
-    while (output.firstChild) {
-        output.removeChild(output.firstChild);
-    }
+        // 各カウント値の取得
+        var char_count = input_textarea.value.length;
 
-    var full_char = false;
-    var bcg = document.createElement("span");
-    for (var i=0; i<input.value.length; i++) {
-        if (input.value[i].match(/^[^\x01-\x7E\xA1-\xDF]+$/)) { 
-            if (!full_char) {
-                if (bcg != null)
-                    output.appendChild(bcg);
-
-                full_char = true;
-                bcg = document.createElement("span");
-                bcg.style = "background-color: #ffcc00;";
-            }
-            bcg.textContent += input.value[i];
-        }
-        else {
-            if (full_char) {
-                if (bcg != null)
-                    output.appendChild(bcg);
-
-                full_char = false;
-                bcg = document.createElement("span");
-            }
-            bcg.textContent += input.value[i];
-        }
-        if (bcg != null)
-            output.appendChild(bcg);
-    }
+        // 出力
+        output_char_count.value = char_count;
+    });
 });

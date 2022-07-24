@@ -13,6 +13,8 @@
 
         <script src="/js/jquery-3.5.1.min.js"></script>
         <script src="/js/common.js"></script>
+        <script src="./js/char-counter.js"></script>
+
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
 
@@ -40,11 +42,17 @@
                     <!--入力テキストエリア-->
                     <textarea name="input-text" id="input-textarea" placeholder="カウントしたい文章をここに入力" class="simple-textarea" style="margin-bottom: 50px;"></textarea>
 
-                    <script src="./js/char-counter.js"></script>
-
-                    <!--出力テキストエリア-->
-                    ※全角文字は<span style="background-color: #ffcc00;">背景色付きで</span>表示されます。背景色がない文字は半角文字です。
-                    <div class="output-area" id="output-area"></div>
+                    <!--出力エリア-->
+                    <table id="output-table">
+                        <tr>
+                            <td>
+                                文字数
+                            </td>
+                            <td>
+                                <input type="text" id="output-char-count" class="output-text" readonly>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
             </div>
