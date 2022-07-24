@@ -373,7 +373,7 @@ function update() {
 function set_option_values() {
     option_values['search_keyword'] = input_search_keyword.value;
     option_values['check-search_keyword'] = check_search_keyword.checked;
-    option_values['only_keywords'] = check_only_keywords.value;
+    option_values['only_keywords'] = check_only_keywords.checked;
     option_values['autdor_id'] = input_autdor_id.value;
     option_values['check-autdor_id'] = check_autdor_id.checked;
     option_values['exclude_keyword'] = input_exclude_keyword.value;
