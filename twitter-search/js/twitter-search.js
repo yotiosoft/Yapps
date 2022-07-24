@@ -477,7 +477,7 @@ function prepare_load_select_options() {
         presets_array = JSON.parse(get_json);
     }
 
-    for (var i = 0; i < presets_array.length; i++) {
+    for (var i = presets_array.length - 1; i >= 0; i--) {
         var option = document.createElement("option");
         option.value = presets_array[i]['preset_name'];
         option.text = presets_array[i]['preset_name'];
