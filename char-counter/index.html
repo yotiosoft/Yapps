@@ -46,10 +46,19 @@
                     <table id="output-table">
                         <tr>
                             <td>
-                                文字数
+                                文字数（改行除く）
                             </td>
                             <td>
-                                <input type="text" id="output-char-count" class="output-text" readonly>
+                                <input type="text" id="output-char-count-without-br" class="simple-inputtext" readonly>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                文字数（改行含む）
+                            </td>
+                            <td>
+                                <input type="text" id="output-char-count" class="simple-inputtext" readonly>
                             </td>
                         </tr>
                     </table>
