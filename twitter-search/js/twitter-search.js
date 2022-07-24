@@ -460,6 +460,8 @@ function save() {
     // 保存
     localStorage.setItem('yapps_twitter_search_preset', JSON.stringify(presets_array));
 
+    alert("保存しました："+preset_name);
+
     prepare_load_select_options();
 }
 
