@@ -4,7 +4,8 @@ $(window).on('load', function() {
         var output_char_count_wo_br_space = document.getElementById("output-char-count-without-br-space");
         var output_char_count_br = document.getElementById("output-char-count-br");
         var output_char_count_space = document.getElementById("output-char-count-space");
-        //var output_char_count_wo_space = document.getElementById("output-char-count-without-space");
+        var output_char_count_wo_br = document.getElementById("output-char-count-without-br");
+        var output_line_count = document.getElementById("output-line-count");
 
         var input_textarea = document.getElementById("input-textarea");
 
@@ -22,6 +23,7 @@ $(window).on('load', function() {
         output_char_count_wo_br_space.value = char_count - char_count_br - char_count_space;
         output_char_count_br.value = char_count_br;
         output_char_count_space.value = char_count_space;
-        //output_char_count_wo_space.value = char_count_wo_space;
+        output_char_count_wo_br.value = char_count_wo_br;
+        output_line_count.value = char_count_br + 1;
     });
 });
