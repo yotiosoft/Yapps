@@ -369,6 +369,24 @@ function update() {
     output.value = option_str['output_cmd'];
 }
 
+// 全てのを更新
+function update_all() {
+    update_search_keyword();
+    update_exclude_keyword();
+    update_autdor_id();
+    update_exclude_autdor_id();
+    update_reply_id();
+    update_included_url();
+    update_since_date();
+    update_until_date();
+    update_lang();
+    update_only_keywords();
+    update_replies();
+    update_links();
+    update_images();
+    update_videos();
+}
+
 // option_valuesにセット
 function set_option_values() {
     option_values['search_keyword'] = input_search_keyword.value;
@@ -498,6 +516,8 @@ function load() {
             check_lang.checked = option_values['check-lang'];
             select_images.value = option_values['images'];
             select_videos.value = option_values['videos'];
+
+            update_all();
             output.value = option_values['output_cmd'];
             
             break;
