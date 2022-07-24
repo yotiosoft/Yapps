@@ -407,11 +407,12 @@ function save() {
 
     for (var i = 0; i < presets_array.length; i++) {
         if (presets_array[i]['preset_name'] == preset_name) {
-            if (!confirm("すでに同じ名前のプリセットが存在します："+preset_name+"\n上書きしますか？")) {
-                return;
+            if (confirm("すでに同じ名前のプリセットが存在します："+preset_name+"\n上書きしますか？")) {
+                presets_array.splice(i, 1);
+                break;
             }
             else {
-                break;
+                return;
             }
         }
     }
