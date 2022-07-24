@@ -1,5 +1,6 @@
 // オプション保持用辞書
-var options = {};
+var option_str = {};
+var option_values = {};
 
 // 言語コードの読み込み
 $(window).on('load', function() {
@@ -27,6 +28,25 @@ function common_add_inputted_str(filter_name, inputted_str) {
     }
 
     return ret;
+}
+
+// option_valuesを初期化
+function common_init_option_values() {
+    option_str['search_keyword'];
+    option_str['only_keywords'];
+    option_str['autdor_id'];
+    option_str['exclude_keyword'];
+    option_str['exclude_autdor_id'];
+    option_str['included_url'];
+    option_str['replies'];
+    option_str['reply_id'];
+    option_str['links'];
+    option_str['since_date'];
+    option_str['until_date'];
+    option_str['lang'];
+    option_str['images'];
+    option_str['videos'];
+    option_str['output_cmd'];
 }
 
 // 現在の日付の文字列を取得
@@ -63,14 +83,14 @@ check_search_keyword.addEventListener('input', update_search_keyword);
 var input_search_keyword = document.getElementById("id_input_search-keyword");
 input_search_keyword.addEventListener('input', update_search_keyword);
 
-options['search_keyword'] = "";
+option_str['search_keyword'] = "";
 
 function update_search_keyword() {
     if (check_search_keyword.checked) {
-        options['search_keyword'] = common_add_inputted_str("", input_search_keyword);
+        option_str['search_keyword'] = common_add_inputted_str("", input_search_keyword);
     }
     else {
-        options['search_keyword'] = "";
+        option_str['search_keyword'] = "";
     }
 
     update();
@@ -82,14 +102,14 @@ check_exclude_keyword.addEventListener('input', update_exclude_keyword);
 var input_exclude_keyword = document.getElementById("id_input_exclude-keyword");
 input_exclude_keyword.addEventListener('input', update_exclude_keyword);
 
-options['exclude_keyword'] = "";
+option_str['exclude_keyword'] = "";
 
 function update_exclude_keyword() {
     if (check_exclude_keyword.checked && input_exclude_keyword.value != "") {
-        options['exclude_keyword'] = common_add_inputted_str("-", input_exclude_keyword);
+        option_str['exclude_keyword'] = common_add_inputted_str("-", input_exclude_keyword);
     }
     else {
-        options['exclude_keyword'] = "";
+        option_str['exclude_keyword'] = "";
     }
 
     update();
@@ -101,14 +121,14 @@ check_autdor_id.addEventListener('input', update_autdor_id);
 var input_autdor_id = document.getElementById("id_input_autdor-id");
 input_autdor_id.addEventListener('input', update_autdor_id);
 
-options['autdor_id'] = "";
+option_str['autdor_id'] = "";
 
 function update_autdor_id() {
     if (check_autdor_id.checked && input_autdor_id.value != "") {
-        options['autdor_id'] = common_add_inputted_str("from:", input_autdor_id);
+        option_str['autdor_id'] = common_add_inputted_str("from:", input_autdor_id);
     }
     else {
-        options['autdor_id'] = "";
+        option_str['autdor_id'] = "";
     }
 
     update();
@@ -120,14 +140,14 @@ check_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
 var input_exclude_autdor_id = document.getElementById("id_input_exclude-autdor-id");
 input_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
 
-options['exclude_autdor_id'] = "";
+option_str['exclude_autdor_id'] = "";
 
 function update_exclude_autdor_id() {
     if (check_exclude_autdor_id.checked && input_exclude_autdor_id.value != "") {
-        options['exclude_autdor_id'] = common_add_inputted_str("-from:", input_exclude_autdor_id);
+        option_str['exclude_autdor_id'] = common_add_inputted_str("-from:", input_exclude_autdor_id);
     }
     else {
-        options['exclude_autdor_id'] = "";
+        option_str['exclude_autdor_id'] = "";
     }
 
     update();
@@ -139,14 +159,14 @@ check_replies.addEventListener('input', update_reply_id);
 var input_replies = document.getElementById("id_input_reply-id");
 input_replies.addEventListener('input', update_reply_id);
 
-options['reply_id'] = "";
+option_str['reply_id'] = "";
 
 function update_reply_id() {
     if (check_replies.checked && input_replies.value != "") {
-        options['reply_id'] = common_add_inputted_str("to:", input_replies);
+        option_str['reply_id'] = common_add_inputted_str("to:", input_replies);
     }
     else {
-        options['reply_id'] = "";
+        option_str['reply_id'] = "";
     }
 
     update();
@@ -158,14 +178,14 @@ check_included_url.addEventListener('input', update_included_url);
 var input_included_url = document.getElementById("id_input_included-url");
 input_included_url.addEventListener('input', update_included_url);
 
-options['included_url'] = "";
+option_str['included_url'] = "";
 
 function update_included_url() {
     if (check_included_url.checked && input_included_url.value != "") {
-        options['included_url'] = common_add_inputted_str("url:", input_included_url);
+        option_str['included_url'] = common_add_inputted_str("url:", input_included_url);
     }
     else {
-        options['included_url'] = "";
+        option_str['included_url'] = "";
     }
 
     update();
@@ -179,28 +199,28 @@ input_since_date.addEventListener('input', update_since_date);
 var input_since_date_time = document.getElementById("id_input_since-date_time");
 input_since_date_time.addEventListener('input', update_since_date);
 
-options['since_date'] = "";
+option_str['since_date'] = "";
 
 function update_since_date() {
     if (!check_since_date.checked) {
-        options['since_date'] = "";
+        option_str['since_date'] = "";
         update();
         return;
     }
 
     since_date = "";
     if (input_since_date.value) {
-        options['since_date'] = "since:" + input_since_date.value;
+        option_str['since_date'] = "since:" + input_since_date.value;
     }
     if (input_since_date_time.value) {
         if (!input_since_date.value) {
             var today = common_get_today();
             
             input_since_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
-            options['since_date'] = "since:" + input_since_date.value;
+            option_str['since_date'] = "since:" + input_since_date.value;
         }
 
-        options['since_date'] += "_" + input_since_date_time.value + ":00_JST";
+        option_str['since_date'] += "_" + input_since_date_time.value + ":00_JST";
     }
 
     update();
@@ -214,28 +234,28 @@ input_until_date.addEventListener('input', update_until_date);
 var input_until_date_time = document.getElementById("id_input_until-date_time");
 input_until_date_time.addEventListener('input', update_until_date);
 
-options['until_date'] = "";
+option_str['until_date'] = "";
 
 function update_until_date() {
     if (!check_until_date.checked) {
-        options['until_date'] = "";
+        option_str['until_date'] = "";
         update();
         return;
     }
 
     until_date = "";
     if (input_until_date.value) {
-        options['until_date'] = "until:" + input_until_date.value;
+        option_str['until_date'] = "until:" + input_until_date.value;
     }
     if (input_until_date_time.value) {
         if (!input_until_date.value) {
             var today = common_get_today();
             
             input_until_date.value = today[0] +'-'+ today[1] +'-'+ today[2];
-            options['until_date'] = "until:" + input_until_date.value;
+            option_str['until_date'] = "until:" + input_until_date.value;
         }
 
-        options['until_date'] += "_" + input_until_date_time.value + ":00_JST";
+        option_str['until_date'] += "_" + input_until_date_time.value + ":00_JST";
     }
 
     update();
@@ -247,14 +267,14 @@ check_lang.addEventListener('input', update_lang);
 var select_lang = document.getElementById("id_select_language");
 select_lang.addEventListener('input', update_lang);
 
-options['lang'] = "";
+option_str['lang'] = "";
 
 function update_lang() {
     if (check_lang.checked) {
-        options['lang'] = "lang:" + select_lang.value;
+        option_str['lang'] = "lang:" + select_lang.value;
     }
     else {
-        options['lang'] = "";
+        option_str['lang'] = "";
     }
 
     update();
@@ -264,14 +284,14 @@ function update_lang() {
 var check_only_keywords = document.getElementById("id_check_only-keywords");
 check_only_keywords.addEventListener('input', update_only_keywords);
 
-options['only_keywords'] = "";
+option_str['only_keywords'] = "";
 
 function update_only_keywords() {
     if (check_only_keywords.checked) {
-        options['only_keywords'] = "OR @i -@i";
+        option_str['only_keywords'] = "OR @i -@i";
     }
     else {
-        options['only_keywords'] = "";
+        option_str['only_keywords'] = "";
     }
 
     update();
@@ -280,92 +300,92 @@ function update_only_keywords() {
 // リプライ
 var select_replies = document.getElementById("id_select_replies");
 select_replies.addEventListener('input', update_replies);
-options['replies'] = "";
+option_str['replies'] = "";
 
 function update_replies() {
-    options['replies'] = common_get_selected_option(select_replies, "replies");
+    option_str['replies'] = common_get_selected_option(select_replies, "replies");
     update();
 }
 
 // リンク付きツイート
 var select_links = document.getElementById("id_select_links");
 select_links.addEventListener('input', update_links);
-options['links'] = "";
+option_str['links'] = "";
 
 function update_links() {
-    options['links'] = common_get_selected_option(select_links, "links");
+    option_str['links'] = common_get_selected_option(select_links, "links");
     update();
 }
 
 // 画像付きツイート
 var select_images = document.getElementById("id_select_images");
 select_images.addEventListener('input', update_images);
-options['images'] = "";
+option_str['images'] = "";
 
 function update_images() {
-    options['images'] = common_get_selected_option(select_images, "images");
+    option_str['images'] = common_get_selected_option(select_images, "images");
     update();
 }
 
 // 動画付きツイート
 var select_videos = document.getElementById("id_select_videos");
 select_videos.addEventListener('input', update_videos);
-options['videos'] = "";
+option_str['videos'] = "";
 
 function update_videos() {
-    options['videos'] = common_get_selected_option(select_videos, "videos");
+    option_str['videos'] = common_get_selected_option(select_videos, "videos");
     update();
 }
 
 // 出力の更新
 var output = document.getElementById("id_output");
-options['output_cmd'] = "";
+option_str['output_cmd'] = "";
 function update() {
-    options['output_cmd'] = "";
-    if (options['search_keyword'] != "") {
-        options['output_cmd'] += options['search_keyword'];
+    option_str['output_cmd'] = "";
+    if (option_str['search_keyword'] != "") {
+        option_str['output_cmd'] += option_str['search_keyword'];
     }
-    if (options['only_keywords'] != "") {
-        options['output_cmd'] += " " + options['only_keywords'];
+    if (option_str['only_keywords'] != "") {
+        option_str['output_cmd'] += " " + option_str['only_keywords'];
     }
-    if (options['autdor_id'] != "") {
-        options['output_cmd'] += " " + options['autdor_id'];
+    if (option_str['autdor_id'] != "") {
+        option_str['output_cmd'] += " " + option_str['autdor_id'];
     }
-    if (options['exclude_keyword'] != "") {
-        options['output_cmd'] += " " + options['exclude_keyword'];
+    if (option_str['exclude_keyword'] != "") {
+        option_str['output_cmd'] += " " + option_str['exclude_keyword'];
     }
-    if (options['exclude_autdor_id'] != "") {
-        options['output_cmd'] += " " + options['exclude_autdor_id'];
+    if (option_str['exclude_autdor_id'] != "") {
+        option_str['output_cmd'] += " " + option_str['exclude_autdor_id'];
     }
-    if (options['included_url'] != "") {
-        options['output_cmd'] += " " + options['included_url'];
+    if (option_str['included_url'] != "") {
+        option_str['output_cmd'] += " " + option_str['included_url'];
     }
-    if (options['replies'] != "") {
-        options['output_cmd'] += " " + options['replies'];
+    if (option_str['replies'] != "") {
+        option_str['output_cmd'] += " " + option_str['replies'];
     }
-    if (options['reply_id'] != "") {
-        options['output_cmd'] += " " + options['reply_id'];
+    if (option_str['reply_id'] != "") {
+        option_str['output_cmd'] += " " + option_str['reply_id'];
     }
-    if (options['links'] != "") {
-        options['output_cmd'] += " " + options['links'];
+    if (option_str['links'] != "") {
+        option_str['output_cmd'] += " " + option_str['links'];
     }
-    if (options['since_date'] != "") {
-        options['output_cmd'] += " " + options['since_date'];
+    if (option_str['since_date'] != "") {
+        option_str['output_cmd'] += " " + option_str['since_date'];
     }
-    if (options['until_date'] != "") {
-        options['output_cmd'] += " " + options['until_date'];
+    if (option_str['until_date'] != "") {
+        option_str['output_cmd'] += " " + option_str['until_date'];
     }
-    if (options['lang'] != "") {
-        options['output_cmd'] += " " + options['lang'];
+    if (option_str['lang'] != "") {
+        option_str['output_cmd'] += " " + option_str['lang'];
     }
-    if (options['images'] != "") {
-        options['output_cmd'] += " " + options['images'];
+    if (option_str['images'] != "") {
+        option_str['output_cmd'] += " " + option_str['images'];
     }
-    if (options['videos'] != "") {
-        options['output_cmd'] += " " + options['videos'];
+    if (option_str['videos'] != "") {
+        option_str['output_cmd'] += " " + option_str['videos'];
     }
 
-    output.value = options['output_cmd'];
+    output.value = option_str['output_cmd'];
 }
 
 // 保存
@@ -396,8 +416,8 @@ function save() {
         }
     }
 
-    options["preset_name"] = preset_name;
-    presets_array.push(options);
+    option_str["preset_name"] = preset_name;
+    presets_array.push(option_str);
     
     // 保存
     localStorage.setItem('yapps_twitter_search_preset', JSON.stringify(presets_array));
@@ -431,7 +451,7 @@ var load_button = document.getElementById("id_select_load-preset");
 
 function load() {
     var preset_name = load_preset_select.value;
-    options["preset_name"] = preset_name;
+    option_str["preset_name"] = preset_name;
 
     var get_json = localStorage.getItem('yapps_twitter_search_preset');
     var presets_array = [];
@@ -441,23 +461,23 @@ function load() {
 
     for (var i = 0; i < presets_array.length; i++) {
         if (presets_array[i]['preset_name'] == preset_name) {
-            options = presets_array[i];
+            option_str = presets_array[i];
 
-            input_search_keyword.value = options['search_keyword'];
-            check_only_keywords.value = options['only_keywords'];
-            input_autdor_id.value = options['autdor_id'];
-            input_exclude_keyword.value = options['exclude_keyword'];
-            input_exclude_autdor_id.value = options['exclude_autdor_id'];
-            input_included_url.value = options['included_url'];
-            input_replies.value = options['replies'];
-            input_replies.value = options['reply_id'];
-            select_links.value = options['links'];
-            input_since_date.value = options['since_date'];
-            input_until_date.value = options['until_date'];
-            select_lang.value = options['lang'];
-            select_images.value = options['images'];
-            select_videos.value = options['videos'];
-            output.value = options['output_cmd'];
+            input_search_keyword.value = option_str['search_keyword'];
+            check_only_keywords.value = option_str['only_keywords'];
+            input_autdor_id.value = option_str['autdor_id'];
+            input_exclude_keyword.value = option_str['exclude_keyword'];
+            input_exclude_autdor_id.value = option_str['exclude_autdor_id'];
+            input_included_url.value = option_str['included_url'];
+            input_replies.value = option_str['replies'];
+            input_replies.value = option_str['reply_id'];
+            select_links.value = option_str['links'];
+            input_since_date.value = option_str['since_date'];
+            input_until_date.value = option_str['until_date'];
+            select_lang.value = option_str['lang'];
+            select_images.value = option_str['images'];
+            select_videos.value = option_str['videos'];
+            output.value = option_str['output_cmd'];
             
             break;
         }
