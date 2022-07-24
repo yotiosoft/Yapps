@@ -1,5 +1,6 @@
 // オプション保持用辞書
 var option_str = {};
+var option_values = {};
 
 // 言語コードの読み込み
 $(window).on('load', function() {
@@ -368,6 +369,25 @@ function update() {
     output.value = option_str['output_cmd'];
 }
 
+// option_valuesにセット
+function set_option_values() {
+    option_values['search_keyword'] = input_search_keyword.value;
+    option_values['only_keywords'] = check_only_keywords.value;
+    option_values['autdor_id'] = input_autdor_id.value;
+    option_values['exclude_keyword'] = input_exclude_keyword.value;
+    option_values['exclude_autdor_id'] = input_exclude_autdor_id.value;
+    option_values['included_url'] = input_included_url.value;
+    option_values['replies'] = input_replies.value;
+    option_values['reply_id'] = select_replies.value;
+    option_values['links'] = select_links.value;
+    option_values['since_date'] = input_since_date.value;
+    option_values['until_date'] = input_until_date.value;
+    option_values['lang'] = select_lang.value;
+    option_values['images'] = select_images.value;
+    option_values['videos'] = select_videos.value;
+    option_values['output_cmd'] = output.value;
+}
+
 // 保存
 var save_button = document.getElementById("id_save-button");
 var save_preset_name = document.getElementById("id_input_save-preset-name");
@@ -396,8 +416,10 @@ function save() {
         }
     }
 
-    option_str["preset_name"] = preset_name;
-    presets_array.push(option_str);
+    set_option_values();
+
+    option_values["preset_name"] = preset_name;
+    presets_array.push(option_values);
     
     // 保存
     localStorage.setItem('yapps_twitter_search_preset', JSON.stringify(presets_array));
@@ -431,7 +453,7 @@ var load_button = document.getElementById("id_select_load-preset");
 
 function load() {
     var preset_name = load_preset_select.value;
-    option_str["preset_name"] = preset_name;
+    option_values["preset_name"] = preset_name;
 
     var get_json = localStorage.getItem('yapps_twitter_search_preset');
     var presets_array = [];
@@ -441,23 +463,23 @@ function load() {
 
     for (var i = 0; i < presets_array.length; i++) {
         if (presets_array[i]['preset_name'] == preset_name) {
-            option_str = presets_array[i];
+            option_values = presets_array[i];
 
-            input_search_keyword.value = option_str['search_keyword'];
-            check_only_keywords.value = option_str['only_keywords'];
-            input_autdor_id.value = option_str['autdor_id'];
-            input_exclude_keyword.value = option_str['exclude_keyword'];
-            input_exclude_autdor_id.value = option_str['exclude_autdor_id'];
-            input_included_url.value = option_str['included_url'];
-            input_replies.value = option_str['replies'];
-            input_replies.value = option_str['reply_id'];
-            select_links.value = option_str['links'];
-            input_since_date.value = option_str['since_date'];
-            input_until_date.value = option_str['until_date'];
-            select_lang.value = option_str['lang'];
-            select_images.value = option_str['images'];
-            select_videos.value = option_str['videos'];
-            output.value = option_str['output_cmd'];
+            input_search_keyword.value = option_values['search_keyword'];
+            check_only_keywords.value = option_values['only_keywords'];
+            input_autdor_id.value = option_values['autdor_id'];
+            input_exclude_keyword.value = option_values['exclude_keyword'];
+            input_exclude_autdor_id.value = option_values['exclude_autdor_id'];
+            input_included_url.value = option_values['included_url'];
+            input_replies.value = option_values['replies'];
+            select_replies.value = option_values['reply_id'];
+            select_links.value = option_values['links'];
+            input_since_date.value = option_values['since_date'];
+            input_until_date.value = option_values['until_date'];
+            select_lang.value = option_values['lang'];
+            select_images.value = option_values['images'];
+            select_videos.value = option_values['videos'];
+            output.value = option_values['output_cmd'];
             
             break;
         }
