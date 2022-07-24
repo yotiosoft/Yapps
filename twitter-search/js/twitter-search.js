@@ -369,7 +369,13 @@ function update() {
     output.value = option_str['output_cmd'];
 }
 
-// 全てのを更新
+// 検索
+function search() {
+    var search_cmd = output.value;
+    window.open(`https://twitter.com/search?q=${search_cmd}`);
+}
+
+// 全てのオブジェクトを更新
 function update_all() {
     update_search_keyword();
     update_exclude_keyword();
@@ -405,8 +411,10 @@ function set_option_values() {
     option_values['reply_id'] = select_replies.value;
     option_values['links'] = select_links.value;
     option_values['since_date'] = input_since_date.value;
+    option_values['since_date_time'] = input_since_date_time.value;
     option_values['check-since_date'] = check_since_date.checked;
     option_values['until_date'] = input_until_date.value;
+    option_values['until_date_time'] = input_until_date_time.value;
     option_values['check-until_date'] = check_until_date.checked;
     option_values['lang'] = select_lang.value;
     option_values['check-lang'] = check_lang.checked;
@@ -514,8 +522,10 @@ function load() {
             select_replies.value = option_values['reply_id'];
             select_links.value = option_values['links'];
             input_since_date.value = option_values['since_date'];
+            input_since_date_time.value = option_values['since_date_time'];
             check_since_date.checked = option_values['check-since_date'];
             input_until_date.value = option_values['until_date'];
+            input_until_date_time.value = option_values['until_date_time'];
             check_until_date.checked = option_values['check-until_date'];
             select_lang.value = option_values['lang'];
             check_lang.checked = option_values['check-lang'];
@@ -528,10 +538,4 @@ function load() {
             break;
         }
     }
-}
-
-// 検索
-function search() {
-    var search_cmd = output.value;
-    window.open(`https://twitter.com/search?q=${search_cmd}`);
 }
