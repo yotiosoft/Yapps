@@ -483,6 +483,11 @@ function load() {
     var preset_name = load_preset_select.value;
     option_values["preset_name"] = preset_name;
 
+    if (preset_name == "") {
+        alert("プリセットが存在しません");
+        return;
+    }
+
     var get_json = localStorage.getItem('yapps_twitter_search_preset');
     var presets_array = [];
     if (get_json) {

@@ -86,7 +86,7 @@ tr {
 
     margin-right: 10px;
     padding-left: 30px;
-
+    
     margin-bottom: 10px;
 }
 .summary-and-preset-box .preset-box input {
@@ -106,4 +106,5 @@ tr {
 }
 .preset-boxes {
     display: block;
+    margin-top: 10px;
 }
