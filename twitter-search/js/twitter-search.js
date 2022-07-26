@@ -278,6 +278,23 @@ function update_only_keywords() {
     update();
 }
 
+// Twitter公式アプリからの書き込みのみ検索
+var check_only_twitter_app = document.getElementById("id_check_only-twitter-app");
+check_only_twitter_app.addEventListener('input', update_only_twitter_app);
+
+option_str['only_twitter_app'] = "";
+
+function update_only_twitter_app() {
+    if (check_only_twitter_app.checked) {
+        option_str['only_twitter_app'] = `source:"Twitter for iPhone" OR source:"Twitter for iPad" OR source:"Twitter for Android" OR  source:"Twitter for Windows" OR source:"Twitter for Mac" OR source:"Twitter for Apple Watch" OR source:"Twitter Web App"`;
+    }
+    else {
+        option_str['only_twitter_app'] = "";
+    }
+
+    update();
+}
+
 // リプライ
 var select_replies = document.getElementById("id_select_replies");
 select_replies.addEventListener('input', update_replies);
@@ -365,6 +382,9 @@ function update() {
     if (option_str['videos'] != "") {
         option_str['output_cmd'] += " " + option_str['videos'];
     }
+    if (option_str['only_twitter_app'] != "") {
+        option_str['output_cmd'] += " " + option_str['only_twitter_app'];
+    }
 
     output.value = option_str['output_cmd'];
 }
@@ -397,6 +417,7 @@ function update_all() {
 function set_option_values() {
     option_values['search_keyword'] = input_search_keyword.value;
     option_values['check-search_keyword'] = check_search_keyword.checked;
+    option_values['only_twitter_app'] = check_only_twitter_app.checked;
     option_values['only_keywords'] = check_only_keywords.checked;
     option_values['autdor_id'] = input_autdor_id.value;
     option_values['check-autdor_id'] = check_autdor_id.checked;
@@ -510,6 +531,7 @@ function load() {
 
             input_search_keyword.value = option_values['search_keyword'];
             check_search_keyword.checked = option_values['check-search_keyword'];
+            check_only_twitter_app.checked = option_values['only_twitter_app'];
             check_only_keywords.checked = option_values['only_keywords'];
             input_autdor_id.value = option_values['autdor_id'];
             check_autdor_id.checked = option_values['check-autdor_id'];
