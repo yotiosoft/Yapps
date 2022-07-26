@@ -407,6 +407,7 @@ function update_all() {
     update_until_date();
     update_lang();
     update_only_keywords();
+    update_only_twitter_app();
     update_replies();
     update_links();
     update_images();
