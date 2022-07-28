@@ -204,8 +204,9 @@ function printTime(time) {
 }
 
 function close_information_button() {
-    var get_json = localStorage.getItem('yapps_memopad');
+    var get_json = localStorage.getItem('yapps_memopad_config');
 
+    var memo_array = [];
     if (get_json) {
         memo_array = JSON.parse(get_json);
     }
@@ -213,5 +214,19 @@ function close_information_button() {
     memo_array["information_button_flag"] = false;
 
     // 保存
-    localStorage.setItem('yapps_memopad', JSON.stringify(memo_array));
+    localStorage.setItem('yapps_memopad_config', JSON.stringify(memo_array));
 }
+
+$(window).on('load', function() {
+    var get_json = localStorage.getItem('yapps_memopad_config');
+    var memo_array = [];
+    if (get_json) {
+        memo_array = JSON.parse(get_json);
+    }
+
+    if ("information_button_flag" in memo_array) {
+        if (!memo_array["information_button_flag"]) {
+            $('#information_button').hide();
+        }
+    }
+});
