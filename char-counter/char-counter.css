@@ -1,0 +1,14 @@
+#output-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#output-table td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.simple-inputtext {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
