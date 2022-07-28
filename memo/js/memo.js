@@ -202,3 +202,7 @@ function printTime(time) {
     return time.year + '/' + zeroPadding(time.month, 2) + '/' + zeroPadding(time.date, 2) + ' '
     + zeroPadding(time.hour, 2) + ':' + zeroPadding(time.min, 2) + ':' + zeroPadding(time.sec, 2);
 }
+
+function close_information_button() {
+    
+}
