@@ -204,5 +204,14 @@ function printTime(time) {
 }
 
 function close_information_button() {
-    
+    var get_json = localStorage.getItem('yapps_memopad');
+
+    if (get_json) {
+        memo_array = JSON.parse(get_json);
+    }
+
+    memo_array["information_button_flag"] = false;
+
+    // 保存
+    localStorage.setItem('yapps_memopad', JSON.stringify(memo_array));
 }
