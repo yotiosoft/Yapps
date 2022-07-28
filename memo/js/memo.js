@@ -226,10 +226,8 @@ $(window).on('load', function() {
         memo_config = JSON.parse(get_json);
     }
 
-    if (!"information_button_flag" in memo_config) {
-        
-        if (!memo_config["information_button_flag"]) {
-            $('#information_button').hide();
-        }
+    if (!("information_button_flag" in memo_config)) {
+        var information_button = document.getElementById('information_button');
+        information_button.style.display = 'flex';
     }
 });
