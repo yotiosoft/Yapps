@@ -155,7 +155,11 @@ header {
 
 .information {
     display: flex;
+    justify-content: space-between;
+}
+.information p {
+    display: inline-block;
 }
 .information .right {
-    margin-right: 0px;
+    font-size: 20px;
 }
