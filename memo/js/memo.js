@@ -215,6 +215,8 @@ function close_information_button() {
 
     // 保存
     localStorage.setItem('yapps_memopad_config', JSON.stringify(memo_config));
+
+    $('#information_button').hide();
 }
 
 $(window).on('load', function() {
