@@ -202,3 +202,32 @@ function printTime(time) {
     return time.year + '/' + zeroPadding(time.month, 2) + '/' + zeroPadding(time.date, 2) + ' '
     + zeroPadding(time.hour, 2) + ':' + zeroPadding(time.min, 2) + ':' + zeroPadding(time.sec, 2);
 }
+
+function close_information_button() {
+    var get_json = localStorage.getItem('yapps_memopad_config');
+
+    var memo_config = {};
+    if (get_json) {
+        memo_config = JSON.parse(get_json);
+    }
+
+    memo_config["information_button_flag"] = false;
+
+    // 保存
+    localStorage.setItem('yapps_memopad_config', JSON.stringify(memo_config));
+
+    $('#information_button').hide();
+}
+
+$(window).on('load', function() {
+    var get_json = localStorage.getItem('yapps_memopad_config');
+    var memo_config = {};
+    if (get_json) {
+        memo_config = JSON.parse(get_json);
+    }
+
+    if (!("information_button_flag" in memo_config)) {
+        var information_button = document.getElementById('information_button');
+        information_button.style.display = 'flex';
+    }
+});
