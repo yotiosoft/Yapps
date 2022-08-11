@@ -75,12 +75,8 @@ tr {
 
 .summary-and-preset-box {
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
-}
-.summary-and-preset-box .summary {
-    width: 60%;
-    min-width: 300px;
+    flex-flow: row-reverse;
 }
 .summary-and-preset-box .preset-box {
     display: flex;
