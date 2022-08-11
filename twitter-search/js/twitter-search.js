@@ -67,6 +67,13 @@ input_search_keyword.addEventListener('input', update_search_keyword);
 option_str['search_keyword'] = "";
 
 function update_search_keyword() {
+    if (option_str['search_keyword'].length == 0 && input_search_keyword.value.length > 0) {
+        check_search_keyword.checked = true;
+    }
+    if (option_str['search_keyword'].length > 0 && input_search_keyword.value.length == 0) {
+        check_search_keyword.checked = false;
+    }
+
     if (check_search_keyword.checked) {
         option_str['search_keyword'] = common_add_inputted_str("", input_search_keyword);
     }
