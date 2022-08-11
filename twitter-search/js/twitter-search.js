@@ -93,6 +93,13 @@ input_exclude_keyword.addEventListener('input', update_exclude_keyword);
 option_str['exclude_keyword'] = "";
 
 function update_exclude_keyword() {
+    if (option_str['exclude_keyword'].length == 0 && input_exclude_keyword.value.length > 0) {
+        check_exclude_keyword.checked = true;
+    }
+    if (option_str['exclude_keyword'].length > 0 && input_exclude_keyword.value.length == 0) {
+        check_exclude_keyword.checked = false;
+    }
+
     if (check_exclude_keyword.checked && input_exclude_keyword.value != "") {
         option_str['exclude_keyword'] = common_add_inputted_str("-", input_exclude_keyword);
     }
@@ -112,6 +119,13 @@ input_autdor_id.addEventListener('input', update_autdor_id);
 option_str['autdor_id'] = "";
 
 function update_autdor_id() {
+    if (option_str['autdor_id'].length == 0 && input_autdor_id.value.length > 0) {
+        check_autdor_id.checked = true;
+    }
+    if (option_str['autdor_id'].length > 0 && input_autdor_id.value.length == 0) {
+        check_autdor_id.checked = false;
+    }
+
     if (check_autdor_id.checked && input_autdor_id.value != "") {
         option_str['autdor_id'] = common_add_inputted_str("from:", input_autdor_id);
     }
@@ -131,6 +145,13 @@ input_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
 option_str['exclude_autdor_id'] = "";
 
 function update_exclude_autdor_id() {
+    if (option_str['exclude_autdor_id'].length == 0 && input_exclude_autdor_id.value.length > 0) {
+        check_exclude_autdor_id.checked = true;
+    }
+    if (option_str['exclude_autdor_id'].length > 0 && input_exclude_autdor_id.value.length == 0) {
+        check_exclude_autdor_id.checked = false;
+    }
+
     if (check_exclude_autdor_id.checked && input_exclude_autdor_id.value != "") {
         option_str['exclude_autdor_id'] = common_add_inputted_str("-from:", input_exclude_autdor_id);
     }
@@ -150,6 +171,13 @@ input_replies.addEventListener('input', update_reply_id);
 option_str['reply_id'] = "";
 
 function update_reply_id() {
+    if (option_str['reply_id'].length == 0 && input_replies.value.length > 0) {
+        check_replies.checked = true;
+    }
+    if (option_str['reply_id'].length > 0 && input_replies.value.length == 0) {
+        check_replies.checked = false;
+    }
+
     if (check_replies.checked && input_replies.value != "") {
         option_str['reply_id'] = common_add_inputted_str("to:", input_replies);
     }
@@ -169,6 +197,13 @@ input_included_url.addEventListener('input', update_included_url);
 option_str['included_url'] = "";
 
 function update_included_url() {
+    if (option_str['included_url'].length == 0 && input_included_url.value.length > 0) {
+        check_included_url.checked = true;
+    }
+    if (option_str['included_url'].length > 0 && input_included_url.value.length == 0) {
+        check_included_url.checked = false;
+    }
+
     if (check_included_url.checked && input_included_url.value != "") {
         option_str['included_url'] = common_add_inputted_str("url:", input_included_url);
     }
@@ -190,6 +225,13 @@ input_since_date_time.addEventListener('input', update_since_date);
 option_str['since_date'] = "";
 
 function update_since_date() {
+    if (option_str['since_date'].length == 0 && input_since_date.value.length > 0) {
+        check_since_date.checked = true;
+    }
+    if (option_str['since_date'].length > 0 && input_since_date.value.length == 0) {
+        check_since_date.checked = false;
+    }
+
     if (!check_since_date.checked) {
         option_str['since_date'] = "";
         update();
@@ -225,6 +267,13 @@ input_until_date_time.addEventListener('input', update_until_date);
 option_str['until_date'] = "";
 
 function update_until_date() {
+    if (option_str['until_date'].length == 0 && input_until_date.value.length > 0) {
+        check_until_date.checked = true;
+    }
+    if (option_str['until_date'].length > 0 && input_until_date.value.length == 0) {
+        check_until_date.checked = false;
+    }
+    
     if (!check_until_date.checked) {
         option_str['until_date'] = "";
         update();
