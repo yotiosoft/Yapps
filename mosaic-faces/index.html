@@ -71,14 +71,13 @@
                   image.src = URL.createObjectURL(e.target.files[0]);
       
                   image.onload = ()  => {
-                    const canvas = document.getElementById('canvas');
-                    const context = canvas.getContext('2d');
+                    //const canvas = document.getElementById('canvas');
+                    //const context = canvas.getContext('2d');
       
-                    canvas.height = image.height;
-                    canvas.width = image.width;
-      
-                    context.drawImage(image, 0, 0, image.width, image.height);
-                    const imageData = context.getImageData(0, 0, image.width, image.height);
+                    //context.drawImage(image, 0, 0, image.width, image.height);
+                    //const imageData = context.getImageData(0, 0, image.width, image.height);
+
+                    drawMap(image)
       
                     const cvImage = cv.imread("canvas");
                     const mean = cv.mean(cvImage)
