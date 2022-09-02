@@ -72,8 +72,13 @@
                 let faceCascade = new cv.CascadeClassifier();
 
                 // 学習済みデータの読み込み
-                faceCascade.load('/opt/git/wasm-opencv/emsdk/opencv/data/haarcascades/haarcascade_frontalface_default.xml');
-                
+                let utils = new Utils('errorMessage'); //use utils class
+                let faceCascadeFile = 'haarcascade_frontalface_default.xml';
+                // use createFileFromUrl to "pre-build" the xml
+                utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
+                    faceCascade.load(faceCascadeFile); // in the callback, load the cascade from file 
+                });
+
                 // ファイル読み込み時の動作
                 fileInput.onchange = (e) => {
                   const image = new Image();
