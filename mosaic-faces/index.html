@@ -72,7 +72,7 @@
                 let faceCascade = new cv.CascadeClassifier();
 
                 // 学習済みデータの読み込み
-                faceCascade.load('haarcascade_frontalface_default.xml');
+                faceCascade.load('/opencv/haarcascades/haarcascade_frontalface_default.xml');
                 
                 // ファイル読み込み時の動作
                 fileInput.onchange = (e) => {
@@ -121,6 +121,6 @@
               }
             };
           </script>
-          <script src="/js/opencv.js"></script>
+          <script src="https://docs.opencv.org/3.4.1/opencv.js"></script>
     </body>
 </html>
