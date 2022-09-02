@@ -8,16 +8,16 @@ let img;
 let scroller_inner;
 
 const clearCanvas = (ctx) => {
-    ctx.clearRect(0, 0, virtualW, virtualH)
+    ctx.clearRect(0, 0, virtualW, virtualH);
 }
 
 const updateMapPos = (ctx, pos) => {
-    const { x, y } = pos
-    clearCanvas(ctx)
-    ctx.save()
-    ctx.translate(-x, -y)
-    drawMap(img)
-    ctx.restore()
+    const { x, y } = pos;
+    clearCanvas(ctx);
+    ctx.save();
+    ctx.translate(-x, -y);
+    drawMap(img);
+    ctx.restore();
 }
 
 window.addEventListener('DOMContentLoaded', function(){
