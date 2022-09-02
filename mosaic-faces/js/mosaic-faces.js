@@ -67,9 +67,9 @@ const onImageSelect = (event) => {
     const image = new Image();
     image.onload = () => {
         const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
-        canvas.width = image.width * scale;
-        canvas.height = image.height * scale;
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        //canvas.width = image.width * scale;
+        //canvas.height = image.height * scale;
+        context.drawImage(image, 0, 0, image.width, image.height);
         detectFaces();
     }
     image.src = URL.createObjectURL(event.target.files[0]);

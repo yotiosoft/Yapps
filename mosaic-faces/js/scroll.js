@@ -21,28 +21,41 @@ const updateMapPos = (ctx, pos) => {
 }
 
 window.addEventListener('DOMContentLoaded', function(){
-    canvases = [document.querySelector('#img-input'), document.querySelector('#img-output')];
+    // 入力用
+    canvas_input = document.querySelector('#img-input');
+    ctx_input = canvas_input.getContext('2d');
+    canvas_input.width = W;
+    canvas_input.height = H;
 
-    for (const canvas of canvases) {
-        canvas.width = W
-        canvas.height = H
-        ctx = canvas.getContext('2d')
+    offscreenCanvas_input = document.createElement('canvas');
+    offscreenCanvas_input.width = virtualW;
+    offscreenCanvas_input.height = virtualH;
+    offscreenCtx_input = offscreenCanvas_input.getContext('2d');
 
-        const offscreenCanvas = document.createElement('canvas')
-        offscreenCanvas.width = virtualW
-        offscreenCanvas.height = virtualH
-        const offscreenCtx = offscreenCanvas.getContext('2d')
-    }
+    scroller_input = document.querySelector('#canvas-scroller-input');
+    scroller_input.addEventListener('scroll', (e) => {
+        e.preventDefault()
+        const target = e.target
+        updateMapPos(ctx_input,{ x: target.scrollLeft, y: target.scrollTop})
+    }, { passive: false})
 
-    scrollers = [document.querySelector('#canvas-scroller-input'), document.querySelector('#canvas-scroller-output')];
+    // 出力用
+    canvas_output = document.querySelector('#img-output');
+    ctx_output = canvas_output.getContext('2d');
+    canvas_output.width = W;
+    canvas_output.height = H;
 
-    for (const scroller of scrollers) {
-        scroller.addEventListener('scroll', (e) => {
-            e.preventDefault()
-            const target = e.target
-            updateMapPos(ctx,{ x: target.scrollLeft, y: target.scrollTop})
-        }, { passive: false})
-    }
+    offscreenCanvas_output = document.createElement('canvas');
+    offscreenCanvas_output.width = virtualW;
+    offscreenCanvas_output.height = virtualH;
+    offscreenCtx_output = offscreenCanvas_output.getContext('2d');
+
+    scroller_output = document.querySelector('#canvas-scroller-output');
+    scroller_output.addEventListener('scroll', (e) => {
+        e.preventDefault()
+        const target = e.target
+        updateMapPos(ctx_output,{ x: target.scrollLeft, y: target.scrollTop})
+    }, { passive: false})
 });
 
 function drawMap(image) {
