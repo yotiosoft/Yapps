@@ -7,6 +7,19 @@ let ctx;
 let img;
 let scroller_inner;
 
+const clearCanvas = (ctx) => {
+    ctx.clearRect(0, 0, virtualW, virtualH)
+}
+
+const updateMapPos = (ctx, pos) => {
+    const { x, y } = pos
+    clearCanvas(ctx)
+    ctx.save()
+    ctx.translate(-x, -y)
+    drawMap(img)
+    ctx.restore()
+}
+
 window.addEventListener('DOMContentLoaded', function(){
     canvas = document.querySelector('#canvas')
     canvas.width = W
@@ -21,19 +34,6 @@ window.addEventListener('DOMContentLoaded', function(){
     const offscreenCtx = offscreenCanvas.getContext('2d')
 
     scroller_inner = document.querySelector('#canvas-scroller-inner')
-   
-   const clearCanvas = (ctx) => {
-       ctx.clearRect(0, 0, virtualW, virtualH)
-   }
-   
-   const updateMapPos = (ctx, pos) => {
-       const { x, y } = pos
-       clearCanvas(ctx)
-       ctx.save()
-       ctx.translate(-x, -y)
-       drawMap(img)
-       ctx.restore()
-   }
 
    scroller.addEventListener('scroll', (e) => {
         e.preventDefault()
@@ -43,6 +43,7 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 function drawMap(image) {
+    clearCanvas(ctx);
     img = image;
     ctx.drawImage(image, 0, 0, image.width, image.height);
     virtualW = image.width;
