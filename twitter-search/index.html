@@ -31,12 +31,6 @@
                     Twitter検索コマンド生成
                 </div>
                 <div class="summary-and-preset-box">
-                    <p class="summary">
-                        Twitter検索に便利なコマンドを自動生成します。カンマ+空白（, ）で区切って入力することで複数の単語の入力が可能です。<br>
-                        入力欄を空白にしておくか、チェックを外しておくとそのオプションが無効になります。<br>
-                        「検索」ボタンを押すと、Twitterの検索結果を開きます。
-                    </p>
-
                     <div class="preset-boxes">
                         <div class="preset-box">
                             <!--プリセットの保存-->
@@ -58,6 +52,13 @@
                             </a>
                         </div>
                     </div>
+                    
+                    <p class="summary">
+                        Twitter検索に便利なコマンドを自動生成します。カンマ+空白（, ）で区切って入力することで複数の単語の入力が可能です。
+                        入力欄を空白にしておくか、チェックを外しておくとそのオプションが無効になります。
+                        「検索」ボタンを押すと、Twitterの検索結果を開きます。<br>
+                        また、検索条件を名前を付けてプリセットとしてブラウザに保存し、再度利用することも可能です。
+                    </p>
                 </div>
                 
                 <div class="app-area" id="app-area-id">
@@ -65,7 +66,7 @@
                         <!--検索キーワード-->
                         <tr>
                             <td class="checkbox">
-                                <input type="checkbox" id="id_check_search-keyword" name="check_search-keyword" checked>
+                                <input type="checkbox" id="id_check_search-keyword" name="check_search-keyword">
                             </td>
                             <td class="summary">
                                 検索キーワード
@@ -79,7 +80,7 @@
                         <!--除外キーワード-->
                         <tr>
                             <td class="checkbox">
-                                <input type="checkbox" id="id_check_exclude-keyword" name="check_exclude-keyword" checked>
+                                <input type="checkbox" id="id_check_exclude-keyword" name="check_exclude-keyword">
                             </td>
                             <td class="summary">
                                 除外キーワード
@@ -93,7 +94,7 @@
                         <!--ID-->
                         <tr>
                             <td class="checkbox">
-                                <input type="checkbox" id="id_check_autdor-id" name="check_autdor-id" checked>
+                                <input type="checkbox" id="id_check_autdor-id" name="check_autdor-id">
                             </td>
                             <td class="summary">
                                 投稿者ID
@@ -109,7 +110,7 @@
                         <!--除外ID-->
                         <tr>
                             <td class="checkbox">
-                                <input type="checkbox" id="id_check_exclude-autdor-id" name="check_exclude-autdor-id" checked>
+                                <input type="checkbox" id="id_check_exclude-autdor-id" name="check_exclude-autdor-id">
                             </td>
                             <td class="summary">
                                 除外ID
@@ -125,7 +126,7 @@
                         <!--返信先-->
                         <tr>
                             <td class="checkbox">
-                                <input type="checkbox" id="id_check_reply-id" name="check_reply-id" checked>
+                                <input type="checkbox" id="id_check_reply-id" name="check_reply-id">
                             </td>
                             <td class="summary">
                                 返信先
@@ -141,7 +142,7 @@
                         <!--次のURLを含む-->
                         <tr>
                             <td class="checkbox">
-                                <input type="checkbox" id="id_check_included-url" name="check_included-url" checked>
+                                <input type="checkbox" id="id_check_included-url" name="check_included-url">
                             </td>
                             <td class="summary">
                                 次のURLを含む
@@ -155,7 +156,7 @@
                         <!--開始日時-->
                         <tr>
                             <td class="checkbox">
-                                <input type="checkbox" id="id_check_since-date" name="check_since-date" checked>
+                                <input type="checkbox" id="id_check_since-date" name="check_since-date">
                             </td>
                             <td class="summary">
                                 開始日時
@@ -170,7 +171,7 @@
                         <!--終了日時-->
                         <tr>
                             <td class="checkbox">
-                                <input type="checkbox" id="id_check_until-date" name="check_until-date" checked>
+                                <input type="checkbox" id="id_check_until-date" name="check_until-date">
                             </td>
                             <td class="summary">
                                 終了日時
