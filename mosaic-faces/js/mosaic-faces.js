@@ -1,3 +1,6 @@
+const W = 1000;
+const H = 500;
+
 const getInputImage = () => {
     const canvas = document.getElementById("img-input");
     const context = canvas.getContext("2d");
@@ -66,7 +69,10 @@ const onImageSelect = (event) => {
     const context = canvas.getContext("2d");
     const image = new Image();
     image.onload = () => {
-        drawMap(image);
+        const scale = Math.min(W / image.width, H / image.height);
+        canvas.width = image.width * scale;
+        canvas.height = image.height * scale;
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
         detectFaces();
     }
     image.src = URL.createObjectURL(event.target.files[0]);
