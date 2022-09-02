@@ -16,8 +16,6 @@
         <script src="/js/opencv.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
-
-		<script src="./js/mosaic-faces.js"></script>
     </head>
 
     <body>
@@ -43,6 +41,7 @@
                     </div>
                     <div class="canvas-wrapper">
                         <canvas id="img-input"></canvas>
+                        <canvas id="img-output"></canvas>
                         <div id="canvas-scroller">
                           <div class="inner" id="canvas-scroller-inner"></div>
                         </div>
@@ -58,13 +57,27 @@
 
 
         <script>
-            var Module = {
-              onRuntimeInitialized: function() {
-                console.log("onRuntimeInitialized");
-                init();
-              }
+            const name = "wasm/cv-wasm";
+            const Module = {
+                preRun: [],
+                postRun: [],
+                wasmBinaryFile: `${name}.wasm`,
+                print: text => console.log(text),
+                printErr: text => console.error(text),
             };
-          </script>
-          <script src="/js/opencv.js"></script>
+            fetch(`${name}.wasm`)
+            .then(res => res.arrayBuffer())
+            .then(buffer => {
+                Module.wasmBinary = buffer;
+                const script = document.createElement("script");
+                script.src = `${name}.js`;
+                script.addEventListener('load', (e) => {
+                    const main = document.createElement('script');
+                    main.src = 'js/mosaic-faces_old.js';
+                    document.body.appendChild(main);
+                });
+                document.body.appendChild(script);
+            })
+        </script>
     </body>
 </html>

@@ -6,30 +6,39 @@ const getInputImage = () => {
 }
 
 const detectFaces = () => {
-    const image = cv.matFromImageData(getInputImage());
+    const image = cv.matFromArray(getInputImage(), 24);
     const gray = new cv.Mat();
     const color = new cv.Mat();
-    cv.cvtColor(image, gray, cv.COLOR_RGBA2GRAY, 0);
-    cv.cvtColor(gray, color, cv.COLOR_GRAY2RGBA, 0);
+    cv.cvtColor(image, gray, cv.ColorConversionCodes.COLOR_RGBA2GRAY.value, 0);
+    cv.cvtColor(image, color, cv.ColorConversionCodes.COLOR_RGBA2RGB.value, 0);
 
     const classfier = new cv.CascadeClassifier();
-    classfier.load('haarcascade_frontalface_default.xml');
+    classfier.load('../../test/data/haarcascade_frontalface_default.xml');
 
     const faces = new cv.RectVector();
-    const s1 = new cv.Size(0, 0);
-    const s2 = new cv.Size(0, 0);
+    const s1 = [0, 0];
+    const s2 = [0, 0];
     classfier.detectMultiScale(gray, faces, 1.1, 3, 0, s1, s2);
 
     for (let i = 0; i < faces.size(); ++i) {
         const face = faces.get(i);
-        const point1 = new cv.Point(face.x, face.y);
-        const point2 = new cv.Point(face.x + face.width, face.y + face.height);
-        cv.rectangle(color, point1, point2, [255, 0, 0, 255]);
+        const x = face.x;
+        const y = face.y;
+        const w = face.width;
+        const h = face.height;
+        const point1 = [x, y];
+        const point2 = [x + w, y + h];
+        const rectangle_color = new cv.Scalar(255, 0, 0, 255);
+        cv.rectangle(color, point1, point2, rectangle_color, 2, 8, 0);
+        face.delete();
+        rectangle_color.delete();
     }
 
-    cv.imshow('canvas-output', color);
-    image.delete(); gray.delete(); color.delete();
-    classfier.delete(); faces.delete();
+    renderImage(color, 'img-output');
+    image.delete();
+    color.delete();
+    faces.delete();
+    gray.delete();
 }
 
 const renderImage = (mat, id) => {
@@ -42,14 +51,12 @@ const renderImage = (mat, id) => {
     canvas.width = mat.cols;
     canvas.height = mat.rows;
 
-    const imageData = context.createImageData(mat.cols, mat.rows);
-    for (let i = 0; i < data.length; i+=channels) {
-        for (let j = 0; j < data.length; j+=4) {
-            imageData.data[j] = data[i];
-            imageData.data[j+1] = data[i+1 % channels];
-            imageData.data[j+2] = data[i+2 % channels];
-            imageData.data[j+3] = 255;
-        }
+    let imageData = context.createImageData(mat.cols, mat.rows);
+    for (let i = 0, j = 0; i < data.length; i += channels, j += 4) {
+        imageData.data[j] = data[i];
+        imageData.data[j + 1] = data[i + 1 % channels];
+        imageData.data[j + 2] = data[i + 2 % channels];
+        imageData.data[j + 3] = 255;
     }
     context.putImageData(imageData, 0, 0);
 }
@@ -68,7 +75,5 @@ const onImageSelect = (event) => {
     image.src = URL.createObjectURL(event.target.files[0]);
 }
 
-function init() {
-    const input = document.querySelector('input');
-    input.addEventListener('change', onImageSelect, false);
-}
+const input = document.querySelector('input');
+input.addEventListener('change', onImageSelect, false);
