@@ -1,7 +1,7 @@
 .canvas-wrapper {
     position: relative;
-    width: 400px;
-    height: 300px;
+    width: 1024px;
+    height: 600px;
   }
   
   #canvas {
@@ -21,7 +21,4 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 10000px;
-    height: 10000px;
   }
-  

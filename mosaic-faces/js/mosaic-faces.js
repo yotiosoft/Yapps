@@ -1,10 +1,11 @@
-const W = 400
-const H = 300
-const virtualW = 10000
-const virtualH = 10000
+const W = 1024;
+const H = 600;
+let virtualW = W;
+let virtualH = H;
 let canvas;
 let ctx;
 let img;
+let scroller_inner;
 
 window.addEventListener('DOMContentLoaded', function(){
     canvas = document.querySelector('#canvas')
@@ -18,6 +19,8 @@ window.addEventListener('DOMContentLoaded', function(){
     offscreenCanvas.width = virtualW
     offscreenCanvas.height = virtualH
     const offscreenCtx = offscreenCanvas.getContext('2d')
+
+    scroller_inner = document.querySelector('#canvas-scroller-inner')
    
    const clearCanvas = (ctx) => {
        ctx.clearRect(0, 0, virtualW, virtualH)
@@ -42,5 +45,9 @@ window.addEventListener('DOMContentLoaded', function(){
 function drawMap(image) {
     img = image;
     ctx.drawImage(image, 0, 0, image.width, image.height);
+    virtualW = image.width;
+    virtualH = image.height;
     const imageData = ctx.getImageData(0, 0, image.width, image.height);
+    scroller_inner.style.width = virtualW;
+    scroller_inner.style.height = virtualH;
 }
