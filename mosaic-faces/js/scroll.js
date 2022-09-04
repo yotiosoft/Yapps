@@ -40,6 +40,7 @@ window.addEventListener('DOMContentLoaded', function(){
     }, { passive: false})
 
     // 出力用
+    /*
     canvas_output = document.querySelector('#img-output');
     ctx_output = canvas_output.getContext('2d');
     canvas_output.width = W;
@@ -55,10 +56,14 @@ window.addEventListener('DOMContentLoaded', function(){
         e.preventDefault()
         const target = e.target
         updateMapPos(ctx_output,{ x: target.scrollLeft, y: target.scrollTop})
-    }, { passive: false})
+    }, { passive: false})*/
 });
 
 function drawMap(image) {
+    canvas_input = document.querySelector('#img-input');
+    scroller_inner = document.querySelector('#canvas-scroller-input-inner');
+
+    ctx = canvas_input.getContext('2d');
     clearCanvas(ctx);
     img = image;
     ctx.drawImage(image, 0, 0, image.width, image.height);

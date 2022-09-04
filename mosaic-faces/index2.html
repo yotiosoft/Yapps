@@ -42,9 +42,9 @@
                         <input type="file" id="fileInput" name="file" />
                     </div>
                     <div class="canvas-wrapper">
-                        <canvas id="canvas"></canvas>
-                        <div id="canvas-scroller">
-                          <div class="inner" id="canvas-scroller-inner"></div>
+                        <canvas id="img-input"></canvas>
+                        <div id="canvas-scroller-input">
+                          <div class="inner" id="canvas-scroller-input-inner"></div>
                         </div>
                     </div>
                 </div>
@@ -87,8 +87,8 @@
                   image.src = URL.createObjectURL(e.target.files[0]);
       
                   image.onload = ()  => {
-                    //const canvas = document.getElementById('canvas');
-                    //const context = canvas.getContext('2d');
+                    const canvas = document.getElementById('img-input');
+                    const context = canvas.getContext('2d');
       
                     //context.drawImage(image, 0, 0, image.width, image.height);
                     //const imageData = context.getImageData(0, 0, image.width, image.height);
