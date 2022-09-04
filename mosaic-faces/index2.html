@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="./mosaic-faces.css">
 
         <script src="/js/jquery-3.5.1.min.js"></script>
-        <script src="/js/common.js"></script>
+        <script src="https://docs.opencv.org/4.6.0/utils.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
 
@@ -57,28 +57,37 @@
 
 
         <script>
-            var Module = {
-              onRuntimeInitialized: function() {
+            function onCvLoaded() {
+                console.log('on OpenCV.js Loaded', cv);
+                
+                cv.onRuntimeInitialized = onReady;
+            }
+
+            function onReady() {
                 console.log(Module.imread)
                 const cv = Module;
       
                 let fileInput = document.getElementById('fileInput');
 
                 // ここから顔検出
-                /*
-                let gray = new cv.Mat();
+                //let gray = new cv.Mat();
                 //cv.cvtColor(cvImage, gray, cv.COLOR_RGBA2GRAY, 0);
-                let faces = new cv.RectVector();
+                //let faces = new cv.RectVector();
                 let faceCascade = new cv.CascadeClassifier();
 
                 // 学習済みデータの読み込み
-                let utils = new Utils('errorMessage'); //use utils class
-                let faceCascadeFile = 'haarcascade_frontalface_default.xml';
-                // use createFileFromUrl to "pre-build" the xml
+                //let utils = new Utils('errorMessage'); //use utils class
+                faceCascadeFile = './haarcascade_frontalface_default.xml';
+                const utils = new Utils('error-message');  // Set Element ID
                 utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
-                    faceCascade.load(faceCascadeFile); // in the callback, load the cascade from file 
+                    console.log('Face Cascade File Loaded');
+                    faceCascade.load(faceCascadeFile);
                 });
-                */
+                // use createFileFromUrl to "pre-build" the xml
+                //utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
+                //    faceCascade.load(faceCascadeFile); // in the callback, load the cascade from file 
+                //});
+                
                 // ファイル読み込み時の動作
                 fileInput.onchange = (e) => {
                   const image = new Image();
@@ -123,9 +132,9 @@
                     faceCascade.delete();*/
                   }
                 };
-              }
             };
           </script>
-          <script src="/js/opencv.js"></script>
+          <script src="/js/common.js"></script>
+          <script src="/js/opencv.js" onload="onCvLoaded();"></script>
     </body>
 </html>
