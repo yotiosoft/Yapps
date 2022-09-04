@@ -96,7 +96,7 @@
                     drawMap(image)
                     
                     // opencvに読み込み
-                    const cvImage = cv.imread("canvas");
+                    const cvImage = cv.imread("img-input");
                     const mean = cv.mean(cvImage)
                     console.log(`Mean: ${mean[0]}, ${mean[1]}, ${mean[2]}`)
 
