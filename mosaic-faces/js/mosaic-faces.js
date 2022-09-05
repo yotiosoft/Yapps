@@ -165,7 +165,8 @@ function onUtilsLoaded() {
             let virtualImage = cv.imread("virtual-canvas");
             virtual_canvas = document.querySelector('#virtual-canvas');
             for (let i = 0; i < faces.size(); ++i) {
-                mosaic(virtualImage, faces.get(i).x, faces.get(i).y, faces.get(i).width, faces.get(i).height);
+                mosaic(virtualImage, faces.get(i).x * (virtual_canvas.width / img_width), faces.get(i).y * (virtual_canvas.width / img_width),
+                         faces.get(i).width * (virtual_canvas.width / img_width), faces.get(i).height * (virtual_canvas.width / img_width));
                 /*
                 let point1 = new cv.Point(faces.get(i).x * (virtual_canvas.width / img_width), faces.get(i).y * (virtual_canvas.height / img_height));
                 let point2 = new cv.Point((faces.get(i).x + faces.get(i).width) * (virtual_canvas.width / img_width), (faces.get(i).y + faces.get(i).height) * (virtual_canvas.height / img_height));
