@@ -86,7 +86,7 @@ function onUtilsLoaded() {
     faceCascadeFile = './haarcascade_frontalface_default.xml';
     const utils = new Utils('error-message');
     utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
-        console.log('Face Cascade File Loaded');        // ここで読み込む
+        faceCascade.load(faceCascadeFile);
     });
         
     // ファイル読み込み完了時の動作
