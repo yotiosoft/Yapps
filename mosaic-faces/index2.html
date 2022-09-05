@@ -67,7 +67,20 @@ function drawMapEasy(image) {
 
     ctx = canvas_input.getContext('2d');
     img = image;
-    ctx.drawImage(image, 0, 0, image.width, image.height);
+    let width, height;
+    const max_width = 1000, max_height = 1000;
+    console.log("ctx.canvas.width:" + ctx.canvas.width);
+    if (img.width > img.height) {
+        width = max_width;
+        height = Math.floor((max_width*img.height)/img.width);
+    }
+    else {
+        height = max_height;
+        width = Math.floor((max_height*img.width)/img.height);
+    }
+    ctx.canvas.width = width;
+    ctx.canvas.height = height;
+    ctx.drawImage(image, 0, 0, width, height);
 }
 
 function onCvLoaded() {
