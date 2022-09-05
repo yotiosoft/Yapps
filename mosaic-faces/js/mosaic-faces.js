@@ -92,7 +92,7 @@ function mosaic(img, x, y, w, h) {
 
     // 画像の縮小
     let dst = new cv.Mat();
-    let dsize = new cv.Size(10, 10);
+    let dsize = new cv.Size(5, 5);
     cv.resize(roi, dst, dsize, 0, 0, cv.INTER_AREA);
 
     // 画像の拡大
