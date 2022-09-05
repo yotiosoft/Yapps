@@ -73,29 +73,6 @@ function onCVReady() {
     });
 }
 
-function mosaic(img, x, y, w, h) {
-    // 画像の切り抜き
-    let roi = img.roi(new cv.Rect(x, y, w, h));
-
-    // 画像の縮小
-    let dst = new cv.Mat();
-    let dsize = new cv.Size(10, 10);
-    cv.resize(roi, dst, dsize, 0, 0, cv.INTER_AREA);
-
-    // 画像の拡大
-    let dst2 = new cv.Mat();
-    let dsize2 = new cv.Size(w, h);
-    cv.resize(dst, dst2, dsize2, 0, 0, cv.INTER_CUBIC);
-
-    // 画像の貼り付け
-    dst2.copyTo(img.roi(new cv.Rect(x, y, w, h)));
-
-    // 画像の解放
-    roi.delete();
-    dst.delete();
-    dst2.delete();
-}
-
 // utils.jsが読み込まれたときに実行
 function onUtilsLoaded() {
     // cascadeファイルの読み込み
@@ -141,13 +118,11 @@ function onUtilsLoaded() {
 
             // 検出した領域に赤枠を表示
             for (let i = 0; i < faces.size(); ++i) {
-                //mosaic_area(cvImage, faces.get(i).x, faces.get(i).y, faces.get(i).width, faces.get(i).height);
-                mosaic(cvImage, faces.get(i).x, faces.get(i).y, faces.get(i).width, faces.get(i).height);
-                /*
+                let roiGray = gray.roi(faces.get(i));
+                let roiSec = cvImage.roi(faces.get(i));
                 let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
                 let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
                 cv.rectangle(cvImage, point1, point2, [255, 0, 0, 255]);
-                */
             }
 
             // 顔検出結果をimg-outputキャンバスに表示
@@ -165,12 +140,9 @@ function onUtilsLoaded() {
             let virtualImage = cv.imread("virtual-canvas");
             virtual_canvas = document.querySelector('#virtual-canvas');
             for (let i = 0; i < faces.size(); ++i) {
-                mosaic(virtualImage, faces.get(i).x, faces.get(i).y, faces.get(i).width, faces.get(i).height);
-                /*
                 let point1 = new cv.Point(faces.get(i).x * (virtual_canvas.width / img_width), faces.get(i).y * (virtual_canvas.height / img_height));
                 let point2 = new cv.Point((faces.get(i).x + faces.get(i).width) * (virtual_canvas.width / img_width), (faces.get(i).y + faces.get(i).height) * (virtual_canvas.height / img_height));
                 cv.rectangle(virtualImage, point1, point2, [255, 0, 0, 255]);
-                */
             }
             cv.imshow("virtual-canvas", virtualImage);
 
