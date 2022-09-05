@@ -59,48 +59,52 @@ function onCvLoaded() {
     console.log('on OpenCV.js Loaded', cv);
     
     cv.onRuntimeInitialized = onCVReady();
+    //cv.onRuntimeInitialized = onUtilsLoaded();
 }
 
 function onCVReady() {
     console.log("onCVReady");
 
+    window.addEventListener('DOMContentLoaded', function(){
+        onUtilsLoaded();
+    });
+
     // utils.jsの読み込み
-    var el = document.createElement("script");
+    /*var el = document.createElement("script");
     el.src = "https://docs.opencv.org/4.6.0/utils.js";
     document.body.appendChild(el);
 
-    el.addEventListener('load', onUtilsLoaded());
+    el.addEventListener('load', onUtilsLoaded());*/
 }
 
 function onUtilsLoaded() {
     console.log("onUtilsLoaded");
-    let faceCascade;// = new cv.CascadeClassifier();
+    let faceCascade = new cv.CascadeClassifier();
 
-    window.addEventListener('DOMContentLoaded', function(){
-        let fileInput = document.getElementById('fileInput');
+    let fileInput = document.getElementById('fileInput');
 
-        // ここから顔検出
-        //let gray = new cv.Mat();
-        //cv.cvtColor(cvImage, gray, cv.COLOR_RGBA2GRAY, 0);
-        //let faces = new cv.RectVector();
+    // ここから顔検出
+    //let gray = new cv.Mat();
+    //cv.cvtColor(cvImage, gray, cv.COLOR_RGBA2GRAY, 0);
+    //let faces = new cv.RectVector();
 
-        // 学習済みデータの読み込み
-        //let utils = new Utils('errorMessage'); //use utils class
-        faceCascadeFile = './haarcascade_frontalface_default.xml';
-        const utils = new Utils('error-message');  // Set Element ID
-        utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
-            console.log('Face Cascade File Loaded');
-            //faceCascade.load(faceCascadeFile);
-            faceCascade = new cv.CascadeClassifier(faceCascadeFile);
-        });
+    // 学習済みデータの読み込み
+    //let utils = new Utils('errorMessage'); //use utils class
+    faceCascadeFile = './haarcascade_frontalface_default.xml';
+    const utils = new Utils('error-message');  // Set Element ID
+    utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
+        console.log('Face Cascade File Loaded');
+        faceCascade.load(faceCascadeFile);
+        //faceCascade = new cv.CascadeClassifier(faceCascadeFile);
+    });
 
-        // use createFileFromUrl to "pre-build" the xml
-        //utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
-        //    faceCascade.load(faceCascadeFile); // in the callback, load the cascade from file 
-        //});
+    // use createFileFromUrl to "pre-build" the xml
+    //utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
+    //    faceCascade.load(faceCascadeFile); // in the callback, load the cascade from file 
+    //});
         
-        // ファイル読み込み時の動作
-        fileInput.onchange = (e) => {
+    // ファイル読み込み時の動作
+    fileInput.onchange = (e) => {
         const image = new Image();
 
         image.src = URL.createObjectURL(e.target.files[0]);
@@ -111,10 +115,10 @@ function onUtilsLoaded() {
 
             //context.drawImage(image, 0, 0, image.width, image.height);
             //const imageData = context.getImageData(0, 0, image.width, image.height);
-            
+                
             // 画像読み込み
             drawMap(image)
-            
+                
             // opencvに読み込み
             const cvImage = cv.imread("img-input");
             const mean = cv.mean(cvImage)
@@ -142,11 +146,11 @@ function onUtilsLoaded() {
             faces.delete();
             faceCascade.delete();*/
         }
-        };
-    });
+    };
 }
         </script>
         <script src="/js/common.js"></script>
-        <script src="https://docs.opencv.org/4.6.0/opencv.js" onload="onCvLoaded();"></script>
+        <script src="https://docs.opencv.org/3.4.0/opencv.js" onload="onCvLoaded();"></script>
+        <script src="https://docs.opencv.org/3.4.0/utils.js"></script>
     </body>
 </html>
