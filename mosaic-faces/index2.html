@@ -127,12 +127,14 @@ function onUtilsLoaded() {
                 
             // opencvに読み込み
             let cvImage = cv.imread("img-input");
-            const mean = cv.mean(cvImage)
+            let dsize = new cv.Size(300, 300);
+            let src = cv.resize(cvImage, dsize, 0, 0, cv.INTER_AREA);
+            const mean = cv.mean(src)
             console.log(`Mean: ${mean[0]}, ${mean[1]}, ${mean[2]}`)
 
             // 顔検出
             let gray = new cv.Mat();
-            cv.cvtColor(cvImage, gray, cv.COLOR_RGBA2GRAY, 0);
+            cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
             let faces = new cv.RectVector();
             
             let msize = new cv.Size(0, 0);
@@ -145,7 +147,7 @@ function onUtilsLoaded() {
                 //let face = faces.get(i);
                 //mosaic(cvImage, face);
                 let roiGray = gray.roi(faces.get(i));
-                let roiSec = cvImage.roi(faces.get(i));
+                let roiSec = src.roi(faces.get(i));
                 let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
                 let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
                 cv.rectangle(cvImage, point1, point2, [255, 0, 0, 255]);
@@ -154,6 +156,7 @@ function onUtilsLoaded() {
             // 顔検出結果を表示
             cv.imshow("img-output", cvImage);
             cvImage.delete();
+            src.delete();
             gray.delete();
             faces.delete();
             faceCascade.delete();
