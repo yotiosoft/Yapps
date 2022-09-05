@@ -122,7 +122,7 @@ function onUtilsLoaded() {
                 let roiSec = cvImage.roi(faces.get(i));
                 let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
                 let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
-                cv.rectangle(cvImage, point1, point2, [255, 0, 0, 255]);
+                cv.rectangle(cvImage, point1, point2, [255, 0, 0, 255], 2);
             }
 
             // 顔検出結果をimg-outputキャンバスに表示
@@ -134,7 +134,7 @@ function onUtilsLoaded() {
             canvas_output.style.width = img_width + "px";
             canvas_output.style.height = img_height + "px";
 
-            cv.imshow("img-output", cvImage);
+            cv.imshow("img-input", cvImage);
 
             // 仮想キャンバスにも適用（ダウンロード用; サイズは元画像と同じ）
             let virtualImage = cv.imread("virtual-canvas");
