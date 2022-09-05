@@ -16,7 +16,7 @@
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
 
-		<script src="./js/scroll.js"></script>
+		<!--<script src="./js/scroll.js"></script>-->
     </head>
 
     <body>
@@ -42,15 +42,15 @@
                     </div>
                     <div class="canvas-wrapper">
                         <canvas id="img-input"></canvas>
-                        <div id="canvas-scroller-input">
+                       <!-- <div id="canvas-scroller-input">
                           <div class="inner" id="canvas-scroller-input-inner"></div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="canvas-wrapper">
                         <canvas id="img-output"></canvas>
-                        <div id="canvas-scroller-input">
+                        <!-- <div id="canvas-scroller-input">
                           <div class="inner" id="canvas-scroller-input-inner"></div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -61,6 +61,15 @@
         </footer>
 
         <script>
+function drawMapEasy(image) {
+    canvas_input = document.querySelector('#img-input');
+    scroller_inner = document.querySelector('#canvas-scroller-input-inner');
+
+    ctx = canvas_input.getContext('2d');
+    img = image;
+    ctx.drawImage(image, 0, 0, image.width, image.height);
+}
+
 function onCvLoaded() {
     console.log('on OpenCV.js Loaded', cv);
     
@@ -123,18 +132,19 @@ function onUtilsLoaded() {
             //const imageData = context.getImageData(0, 0, image.width, image.height);
                 
             // 画像読み込み
-            drawMap(image)
+            drawMapEasy(image)
                 
             // opencvに読み込み
             let cvImage = cv.imread("img-input");
             let dsize;
             let img_width = cvImage.cols;
             let img_height = cvImage.rows;
+            let max = 1000;
             if (img_width > img_height) {
-                dsize = new cv.Size(512, parseInt((512*img_height)/img_width));
+                dsize = new cv.Size(max, parseInt((max*img_height)/img_width));
             }
             else {
-                dsize = new cv.Size(parseInt((512*img_width)/img_height), 512);
+                dsize = new cv.Size(parseInt((max*img_width)/img_height), max);
             }
             let src = new cv.Mat();
             cv.resize(cvImage, src, dsize, 0, 0, cv.INTER_AREA);
