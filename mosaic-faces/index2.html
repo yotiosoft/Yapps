@@ -40,20 +40,25 @@
                     <div>
                         <input type="file" id="fileInput" name="file" />
                     </div>
+                    <canvas id="virtual-canvas" style="display: none;"></canvas>
+
+                    <canvas id="img-input"></canvas>
+                    <canvas id="img-output"></canvas>
+                    <!--
                     <div class="canvas-wrapper">
                         <canvas id="img-input"></canvas>
-                       <!-- <div id="canvas-scroller-input">
+                          <div id="canvas-scroller-input">
                           <div class="inner" id="canvas-scroller-input-inner"></div>
-                        </div>-->
+                        </div>
                     </div>
                     <div class="canvas-wrapper">
                         <canvas id="img-output"></canvas>
-                        <!-- <div id="canvas-scroller-input">
+                          <div id="canvas-scroller-input">
                           <div class="inner" id="canvas-scroller-input-inner"></div>
-                        </div>-->
+                        </div>
                     </div>
-
-                    <canvas id="virtual-canvas" style="display: none;"></canvas>
+                    -->
+                    <button id="download">download</button>
                 </div>
             </div>
         </div>
@@ -67,7 +72,9 @@ function drawMapEasy(image) {
     // 仮想キャンバスに画像を描画（画像サイズはそのまま）
     virtual_canvas = document.querySelector('#virtual-canvas');
     virtual_ctx = virtual_canvas.getContext('2d');
-    virtual_ctx.drawImage(image, 0, 0);
+    virtual_canvas.width = image.width;
+    virtual_canvas.height = image.height;
+    virtual_ctx.drawImage(image, 0, 0, image.width, image.height);
 
     // 表示用キャンバスに画像を描画（画像サイズは縮小）
     canvas_input = document.querySelector('#img-input');
@@ -102,8 +109,8 @@ function drawMapEasy(image) {
     console.log("after width:" + width + ", height:" + height);
     canvas_input.width = width;
     canvas_input.height = height;
-    canvas_input.style.width = width + "px";
-    canvas_input.style.height = height + "px";
+    canvas_input.style.width = width;
+    canvas_input.style.height = height;
     ctx.canvas.width = width;
     ctx.canvas.height = height;
     ctx.drawImage(image, 0, 0, width, height);
@@ -207,12 +214,32 @@ function onUtilsLoaded() {
             canvas_output.style.height = img_height + "px";
 
             cv.imshow("img-output", cvImage);
+
+            // 仮想キャンバスに適用
+            let virtualImage = cv.imread("virtual-canvas");
+            virtual_canvas = document.querySelector('#virtual-canvas');
+            for (let i = 0; i < faces.size(); ++i) {
+                let point1 = new cv.Point(faces.get(i).x * (virtual_canvas.width / img_width), faces.get(i).y * (virtual_canvas.height / img_height));
+                let point2 = new cv.Point((faces.get(i).x + faces.get(i).width) * (virtual_canvas.width / img_width), (faces.get(i).y + faces.get(i).height) * (virtual_canvas.height / img_height));
+                cv.rectangle(virtualImage, point1, point2, [255, 0, 0, 255]);
+            }
+            cv.imshow("virtual-canvas", virtualImage);
+
             cvImage.delete();
             gray.delete();
             faces.delete();
             faceCascade.delete();
         }
     };
+}
+
+document.getElementById("download").onclick = (event) => {
+    let canvas = document.getElementById("virtual-canvas");
+
+    let link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "test.png";
+    link.click();
 }
         </script>
         <script src="/js/common.js"></script>

@@ -1,19 +1,19 @@
 #img-input {
-    width: 1000px;
-    height: 1000px;
+    width: 100px;
+    height: 100px;
 }
 
 #img-output {
-    width: 1000px;
-    height: 1000px;
+    width: 100px;
+    height: 100px;
 }
 
 
 
 .canvas-wrapper {
     position: relative;
-    width: 1000px;
-    height: 1000px;
+    width: 100px;
+    height: 100px;
   }
   
   #canvas {
