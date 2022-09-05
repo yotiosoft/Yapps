@@ -127,8 +127,9 @@ function onUtilsLoaded() {
                 
             // opencvに読み込み
             let cvImage = cv.imread("img-input");
-            let dsize = new cv.Size(300, 300);
-            let src = cv.resize(cvImage, dsize, 0, 0, cv.INTER_AREA);
+            let dsize = new cv.Size(512, 288);
+            let src = new cv.Mat();
+            cv.resize(cvImage, src, dsize, 0, 0, cv.INTER_AREA);
             const mean = cv.mean(src)
             console.log(`Mean: ${mean[0]}, ${mean[1]}, ${mean[2]}`)
 
@@ -150,11 +151,11 @@ function onUtilsLoaded() {
                 let roiSec = src.roi(faces.get(i));
                 let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
                 let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
-                cv.rectangle(cvImage, point1, point2, [255, 0, 0, 255]);
+                cv.rectangle(src, point1, point2, [255, 0, 0, 255]);
             }
 
             // 顔検出結果を表示
-            cv.imshow("img-output", cvImage);
+            cv.imshow("img-output", src);
             cvImage.delete();
             src.delete();
             gray.delete();
