@@ -52,6 +52,8 @@
                           <div class="inner" id="canvas-scroller-input-inner"></div>
                         </div>-->
                     </div>
+
+                    <canvas id="virtual-canvas" style="display: none;"></canvas>
                 </div>
             </div>
         </div>
@@ -62,6 +64,12 @@
 
         <script>
 function drawMapEasy(image) {
+    // 仮想キャンバスに画像を描画（画像サイズはそのまま）
+    virtual_canvas = document.querySelector('#virtual-canvas');
+    virtual_ctx = virtual_canvas.getContext('2d');
+    virtual_ctx.drawImage(image, 0, 0);
+
+    // 表示用キャンバスに画像を描画（画像サイズは縮小）
     canvas_input = document.querySelector('#img-input');
     scroller_inner = document.querySelector('#canvas-scroller-input-inner');
 
@@ -141,17 +149,11 @@ function onUtilsLoaded() {
         image.src = URL.createObjectURL(e.target.files[0]);
 
         image.onload = ()  => {
-            const canvas = document.getElementById('img-input');
-            const context = canvas.getContext('2d');
-
-            //context.drawImage(image, 0, 0, image.width, image.height);
-            //const imageData = context.getImageData(0, 0, image.width, image.height);
-                
             // 画像読み込み
             drawMapEasy(image)
                 
             // opencvに読み込み
-            let cvImage = cv.imread("img-input");
+            let cvImage = cv.imread("virtual-canvas");
             let dsize;
             let img_width = cvImage.cols;
             let img_height = cvImage.rows;
