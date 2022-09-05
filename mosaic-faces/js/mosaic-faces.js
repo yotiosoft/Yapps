@@ -1,82 +1,80 @@
-const W = 1000;
-const H = 500;
-
-const getInputImage = () => {
-    const canvas = document.getElementById("img-input");
-    const context = canvas.getContext("2d");
-    const image = context.getImageData(0, 0, canvas.width, canvas.height);
-    return image;
+function onCvLoaded() {
+    console.log('on OpenCV.js Loaded', cv);
+    
+    cv.onRuntimeInitialized = onReady();
 }
 
-const detectFaces = () => {
-    const image = cv.matFromArray(getInputImage(), 24);
-    const gray = new cv.Mat();
-    const color = new cv.Mat();
-    cv.cvtColor(image, gray, cv.ColorConversionCodes.COLOR_RGBA2GRAY.value, 0);
-    cv.cvtColor(image, color, cv.ColorConversionCodes.COLOR_RGBA2RGB.value, 0);
+function onReady() {
+    console.log("onReady");
+    const cv = Module;
 
-    const classfier = new cv.CascadeClassifier();
-    classfier.load('../../test/data/haarcascade_frontalface_default.xml');
+    window.addEventListener('DOMContentLoaded', function(){
+        let fileInput = document.getElementById('fileInput');
 
-    const faces = new cv.RectVector();
-    const s1 = [0, 0];
-    const s2 = [0, 0];
-    classfier.detectMultiScale(gray, faces, 1.1, 3, 0, s1, s2);
+        // ここから顔検出
+        //let gray = new cv.Mat();
+        //cv.cvtColor(cvImage, gray, cv.COLOR_RGBA2GRAY, 0);
+        //let faces = new cv.RectVector();
+        
+        let faceCascade = new cv.CascadeClassifier();
 
-    for (let i = 0; i < faces.size(); ++i) {
-        const face = faces.get(i);
-        const x = face.x;
-        const y = face.y;
-        const w = face.width;
-        const h = face.height;
-        const point1 = [x, y];
-        const point2 = [x + w, y + h];
-        const rectangle_color = new cv.Scalar(255, 0, 0, 255);
-        cv.rectangle(color, point1, point2, rectangle_color, 2, 8, 0);
-        face.delete();
-        rectangle_color.delete();
-    }
+        // 学習済みデータの読み込み
+        //let utils = new Utils('errorMessage'); //use utils class
+        faceCascadeFile = './haarcascade_frontalface_default.xml';
+        const utils = new Utils('error-message');  // Set Element ID
+        utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
+            console.log('Face Cascade File Loaded');
+            faceCascade.load(faceCascadeFile);
+        });
 
-    renderImage(color, 'img-output');
-    image.delete();
-    color.delete();
-    faces.delete();
-    gray.delete();
+        // use createFileFromUrl to "pre-build" the xml
+        //utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
+        //    faceCascade.load(faceCascadeFile); // in the callback, load the cascade from file 
+        //});
+        
+        // ファイル読み込み時の動作
+        fileInput.onchange = (e) => {
+        const image = new Image();
+
+        image.src = URL.createObjectURL(e.target.files[0]);
+
+        image.onload = ()  => {
+            const canvas = document.getElementById('img-input');
+            const context = canvas.getContext('2d');
+
+            //context.drawImage(image, 0, 0, image.width, image.height);
+            //const imageData = context.getImageData(0, 0, image.width, image.height);
+            
+            // 画像読み込み
+            drawMap(image)
+            
+            // opencvに読み込み
+            const cvImage = cv.imread("img-input");
+            const mean = cv.mean(cvImage)
+            console.log(`Mean: ${mean[0]}, ${mean[1]}, ${mean[2]}`)
+
+            // 顔検出
+            /*let msize = new cv.Size(0, 0);
+            faceCascade.detectMultiScale(cvImage, faces, 1.1, 3, 0, msize, msize);
+
+            // 検出した顔にモザイクをかける
+            for (let i = 0; i < faces.size(); ++i) {
+                //let face = faces.get(i);
+                //mosaic(cvImage, face);
+                let roiGray = gray.roi(faces.get(i));
+                let roiSec = cvImage.roi(faces.get(i));
+                let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
+                let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
+                cv.rectangle(cvImage, point1, point2, [255, 0, 0, 255]);
+            }
+
+            // 顔検出結果を表示
+            cv.imshow("canvas", cvImage);
+            cvImage.delete();
+            gray.delete();
+            faces.delete();
+            faceCascade.delete();*/
+        }
+        };
+    });
 }
-
-const renderImage = (mat, id) => {
-    const canvas = document.getElementById(id);
-    const context = canvas.getContext("2d");
-    const data = mat.data();
-    const channels = mat.channels();
-
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    canvas.width = mat.cols;
-    canvas.height = mat.rows;
-
-    let imageData = context.createImageData(mat.cols, mat.rows);
-    for (let i = 0, j = 0; i < data.length; i += channels, j += 4) {
-        imageData.data[j] = data[i];
-        imageData.data[j + 1] = data[i + 1 % channels];
-        imageData.data[j + 2] = data[i + 2 % channels];
-        imageData.data[j + 3] = 255;
-    }
-    context.putImageData(imageData, 0, 0);
-}
-
-const onImageSelect = (event) => {
-    const canvas = document.getElementById("img-input");
-    const context = canvas.getContext("2d");
-    const image = new Image();
-    image.onload = () => {
-        const scale = Math.min(W / image.width, H / image.height);
-        canvas.width = image.width * scale;
-        canvas.height = image.height * scale;
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
-        detectFaces();
-    }
-    image.src = URL.createObjectURL(event.target.files[0]);
-}
-
-const input = document.querySelector('input');
-input.addEventListener('change', onImageSelect, false);
