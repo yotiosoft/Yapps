@@ -79,19 +79,34 @@ function drawMapEasy(image) {
     const max_width = 1000, max_height = 1000;
     console.log("img.width:" + img.width);
     console.log("img.height:" + img.height);
-    if (img.width > img.height) {
-        width = max_width;
-        height = Math.floor((max_width*img.height)/img.width);
+
+    if (width > max_width) {
+        if (img.width > img.height) {
+            height = max_width * img.height / img.width;
+            width = max_width;
+        } else {
+            width = max_height * img.width / img.height;
+            height = max_height;
+        }
     }
-    else {
-        height = max_height;
-        width = Math.floor((max_height*img.width)/img.height);
+    if (height > max_height) {
+        if (img.width > img.height) {
+            height = max_width * img.height / img.width;
+            width = max_width;
+        } else {
+            width = max_height * img.width / img.height;
+            height = max_height;
+        }
     }
+
+    console.log("after width:" + width + ", height:" + height);
     canvas_input.width = width;
     canvas_input.height = height;
     canvas_input.style.width = width + "px";
     canvas_input.style.height = height + "px";
-    ctx.drawImage(image, 0, 0);
+    ctx.canvas.width = width;
+    ctx.canvas.height = height;
+    ctx.drawImage(image, 0, 0, width, height);
 }
 
 function onCvLoaded() {
@@ -157,21 +172,13 @@ function onUtilsLoaded() {
             let dsize;
             let img_width = cvImage.cols;
             let img_height = cvImage.rows;
-            let max = 1000;
-            if (img_width > img_height) {
-                dsize = new cv.Size(max, parseInt((max*img_height)/img_width));
-            }
-            else {
-                dsize = new cv.Size(parseInt((max*img_width)/img_height), max);
-            }
-            let src = new cv.Mat();
-            cv.resize(cvImage, src, dsize, 0, 0, cv.INTER_AREA);
-            const mean = cv.mean(src)
+
+            const mean = cv.mean(cvImage)
             console.log(`Mean: ${mean[0]}, ${mean[1]}, ${mean[2]}`)
 
             // 顔検出
             let gray = new cv.Mat();
-            cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+            cv.cvtColor(cvImage, gray, cv.COLOR_RGBA2GRAY, 0);
             let faces = new cv.RectVector();
             
             let msize = new cv.Size(0, 0);
@@ -184,16 +191,23 @@ function onUtilsLoaded() {
                 //let face = faces.get(i);
                 //mosaic(cvImage, face);
                 let roiGray = gray.roi(faces.get(i));
-                let roiSec = src.roi(faces.get(i));
+                let roiSec = cvImage.roi(faces.get(i));
                 let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
                 let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
-                cv.rectangle(src, point1, point2, [255, 0, 0, 255]);
+                cv.rectangle(cvImage, point1, point2, [255, 0, 0, 255]);
             }
 
             // 顔検出結果を表示
-            cv.imshow("img-output", src);
+            // output用のキャンバスも同じサイズにする
+            canvas_output = document.querySelector('#img-output');
+            ctx_output = canvas_output.getContext('2d');
+            canvas_output.width = img_width;
+            canvas_output.height = img_height;
+            canvas_output.style.width = img_width + "px";
+            canvas_output.style.height = img_height + "px";
+
+            cv.imshow("img-output", cvImage);
             cvImage.delete();
-            src.delete();
             gray.delete();
             faces.delete();
             faceCascade.delete();
