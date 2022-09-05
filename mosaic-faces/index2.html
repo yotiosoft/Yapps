@@ -46,6 +46,12 @@
                           <div class="inner" id="canvas-scroller-input-inner"></div>
                         </div>
                     </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="img-output"></canvas>
+                        <div id="canvas-scroller-input">
+                          <div class="inner" id="canvas-scroller-input-inner"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,8 +99,8 @@ function onUtilsLoaded() {
     faceCascadeFile = './haarcascade_frontalface_default.xml';
     const utils = new Utils('error-message');  // Set Element ID
     utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
-        console.log('Face Cascade File Loaded');
         faceCascade.load(faceCascadeFile);
+        console.log('Face Cascade File Loaded');
         //faceCascade = new cv.CascadeClassifier(faceCascadeFile);
     });
 
@@ -120,13 +126,19 @@ function onUtilsLoaded() {
             drawMap(image)
                 
             // opencvに読み込み
-            const cvImage = cv.imread("img-input");
+            let cvImage = cv.imread("img-input");
             const mean = cv.mean(cvImage)
             console.log(`Mean: ${mean[0]}, ${mean[1]}, ${mean[2]}`)
 
             // 顔検出
-            /*let msize = new cv.Size(0, 0);
-            faceCascade.detectMultiScale(cvImage, faces, 1.1, 3, 0, msize, msize);
+            let gray = new cv.Mat();
+            cv.cvtColor(cvImage, gray, cv.COLOR_RGBA2GRAY, 0);
+            let faces = new cv.RectVector();
+            
+            let msize = new cv.Size(0, 0);
+            faceCascade.detectMultiScale(gray, faces, 1.1, 3, 0, msize, msize);
+
+            console.log("faces.size() = " + faces.size());
 
             // 検出した顔にモザイクをかける
             for (let i = 0; i < faces.size(); ++i) {
@@ -140,11 +152,11 @@ function onUtilsLoaded() {
             }
 
             // 顔検出結果を表示
-            cv.imshow("canvas", cvImage);
+            cv.imshow("img-output", cvImage);
             cvImage.delete();
             gray.delete();
             faces.delete();
-            faceCascade.delete();*/
+            faceCascade.delete();
         }
     };
 }
