@@ -127,7 +127,15 @@ function onUtilsLoaded() {
                 
             // opencvに読み込み
             let cvImage = cv.imread("img-input");
-            let dsize = new cv.Size(512, 288);
+            let dsize;
+            let img_width = cvImage.cols;
+            let img_height = cvImage.rows;
+            if (img_width > img_height) {
+                dsize = new cv.Size(512, parseInt((512*img_height)/img_width));
+            }
+            else {
+                dsize = new cv.Size(parseInt((512*img_width)/img_height), 512);
+            }
             let src = new cv.Mat();
             cv.resize(cvImage, src, dsize, 0, 0, cv.INTER_AREA);
             const mean = cv.mean(src)
