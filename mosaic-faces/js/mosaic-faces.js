@@ -130,6 +130,9 @@ function onUtilsLoaded() {
             // 矢印は隠す
             document.getElementById("arrow_down").style.display = "none";
 
+            // ダウンロードボタンも隠す
+            document.getElementById("download").style.display = "none";
+
             // キャンバスを非表示
             document.getElementById("img-input").style.display = "none";
             document.getElementById("img-output").style.display = "none";
@@ -145,6 +148,9 @@ function onUtilsLoaded() {
                 // キャンバスを再表示
                 document.getElementById("img-input").style.display = "block";
                 document.getElementById("img-output").style.display = "block";
+
+                // ダウンロードボタンを表示
+                document.getElementById("download").style.display = "inline";
 
                 // 学習済みデータの読み込み
                 let faceCascade = new cv.CascadeClassifier();
