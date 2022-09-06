@@ -121,6 +121,9 @@ function onUtilsLoaded() {
     utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
         // ファイル準備完了時の動作
         fileInput.onchange = (e) => {
+            // 処理中の表示
+            document.getElementById("processing").style.display = "block";
+            
             // 画像読み込み準備
             const image = new Image();
             image.src = URL.createObjectURL(e.target.files[0]);
@@ -169,6 +172,9 @@ function detect(faceCascade) {
     canvas_output.height = img_height;
     canvas_output.style.width = img_width + "px";
     canvas_output.style.height = img_height + "px";
+
+    // 処理中の表示を消す
+    document.getElementById("processing").style.display = "none";
 
     cv.imshow("img-output", cvImage);
 
