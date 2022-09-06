@@ -1,8 +1,11 @@
+#visible_canvas_area {
+    display: block;
+    text-align: center;
+}
+
 #img-input {
     width: 100px;
     height: 100px;
-
-    margin-bottom: 100px;
 }
 
 #img-output {
@@ -10,7 +13,11 @@
     height: 100px;
 }
 
-#visible_canvas_area {
-    display: block;
-    text-align: center;
+#arrow_down {
+    width: 64px;
+    height: 64px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }

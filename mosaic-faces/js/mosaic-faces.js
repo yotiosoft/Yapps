@@ -123,7 +123,10 @@ function onUtilsLoaded() {
         fileInput.onchange = (e) => {
             // 処理中の表示
             document.getElementById("processing").style.display = "block";
-            
+
+            // 矢印は隠す
+            document.getElementById("arrow_down").style.display = "none";
+
             // 画像読み込み準備
             const image = new Image();
             image.src = URL.createObjectURL(e.target.files[0]);
@@ -175,6 +178,9 @@ function detect(faceCascade) {
 
     // 処理中の表示を消す
     document.getElementById("processing").style.display = "none";
+
+    // 矢印を表示
+    document.getElementById("arrow_down").style.display = "block";
 
     cv.imshow("img-output", cvImage);
 
