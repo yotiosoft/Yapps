@@ -6,11 +6,17 @@
 #img-input {
     width: 100px;
     height: 100px;
+
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #img-output {
     width: 100px;
     height: 100px;
+
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #arrow_down {

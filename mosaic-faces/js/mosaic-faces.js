@@ -1,3 +1,6 @@
+let ctx_input;
+let ctx_output;
+
 // 入力画像の描画処理
 function drawImage(image) {
     // 仮想キャンバスに画像を描画（画像サイズはそのまま）
@@ -17,9 +20,9 @@ function drawImage(image) {
     scroller_inner = document.querySelector('#canvas-scroller-input-inner');
 
     // リサイズ処理（最大: x=1000, y=1000）
-    ctx = canvas_input.getContext('2d');
+    ctx_input = canvas_input.getContext('2d');
     // 一旦クリア
-    ctx.clearRect(0, 0, canvas_input.width, canvas_input.height);
+    ctx_input.clearRect(0, 0, canvas_input.width, canvas_input.height);
     // 画像を描画
     img = image;
     let width = img.width, height = img.height;
@@ -49,9 +52,9 @@ function drawImage(image) {
     canvas_input.height = height;
     canvas_input.style.width = width;
     canvas_input.style.height = height;
-    ctx.canvas.width = width;
-    ctx.canvas.height = height;
-    ctx.drawImage(image, 0, 0, width, height);
+    ctx_input.canvas.width = width;
+    ctx_input.canvas.height = height;
+    ctx_input.drawImage(image, 0, 0, width, height);
 
     /*--------------------------------------------------*/
 
@@ -127,6 +130,10 @@ function onUtilsLoaded() {
             // 矢印は隠す
             document.getElementById("arrow_down").style.display = "none";
 
+            // キャンバスを非表示
+            document.getElementById("img-input").style.display = "none";
+            document.getElementById("img-output").style.display = "none";
+
             // 画像読み込み準備
             const image = new Image();
             image.src = URL.createObjectURL(e.target.files[0]);
@@ -134,6 +141,10 @@ function onUtilsLoaded() {
             image.onload = ()  => {
                 // 画像をimg-inputキャンバスに読み込み
                 drawImage(image);
+
+                // キャンバスを再表示
+                document.getElementById("img-input").style.display = "block";
+                document.getElementById("img-output").style.display = "block";
 
                 // 学習済みデータの読み込み
                 let faceCascade = new cv.CascadeClassifier();
