@@ -69,6 +69,11 @@ function onCvLoaded() {
     console.log('on OpenCV.js Loaded', cv);
     
     cv.onRuntimeInitialized = onCVReady();
+
+    // detectキャンバスにクリックイベントを追加
+    canvas_input = document.querySelector('#img-input');
+    canvas_input.addEventListener('mousedown', onDetectCanvasMouseDown, false);
+    canvas_input.addEventListener('mouseup', onDetectCanvasMouseUp, false);
 }
 
 // cvがInitializeされたときに実行
@@ -238,8 +243,17 @@ function detect(faceCascade) {
 
     // メモリ解放
     cvImage_result.delete();
+    cvImage_detect.delete();
     virtualImage.delete();
     gray.delete();
     faces.delete();
     faceCascade.delete();
+}
+
+function onDetectCanvasMouseDown() {
+    console.log("clicked!");
+}
+
+function onDetectCanvasMouseUp() {
+    console.log("clicked!");
 }
