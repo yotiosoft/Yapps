@@ -124,6 +124,11 @@ function onUtilsLoaded() {
     utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
         // ファイル準備完了時の動作
         fileInput.onchange = (e) => {
+            // 選択されていない場合は何もしない
+            if (e.target.files.length == 0) {
+                return;
+            }
+
             // 処理中の表示
             document.getElementById("processing").style.display = "block";
 
@@ -164,13 +169,16 @@ function onUtilsLoaded() {
 function detect(faceCascade) {
     // 読み込み完了後：
     // img-inputキャンパスからopencvに読み込み
-    let cvImage = cv.imread("img-input");
-    let img_width = cvImage.cols;
-    let img_height = cvImage.rows;
+    let cvImage_result = cv.imread("img-input");
+    let cvImage_detect = new cv.Mat();
+    cvImage_result.copyTo(cvImage_detect);
+
+    let img_width = cvImage_result.cols;
+    let img_height = cvImage_result.rows;
 
     // グレースケール化
     let gray = new cv.Mat();
-    cv.cvtColor(cvImage, gray, cv.COLOR_RGBA2GRAY, 0);
+    cv.cvtColor(cvImage_result, gray, cv.COLOR_RGBA2GRAY, 0);
             
     // 顔検出
     let faces = new cv.RectVector();
@@ -181,7 +189,15 @@ function detect(faceCascade) {
 
     // 検出した領域に赤枠を表示
     for (let i = 0; i < faces.size(); ++i) {
-        mosaic(cvImage, faces.get(i).x, faces.get(i).y, faces.get(i).width, faces.get(i).height);
+        let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
+        let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
+        cv.rectangle(cvImage_detect, point1, point2, [255, 0, 0, 255], 2);
+    }
+    cv.imshow("img-input", cvImage_detect);
+
+    // 検出した領域にモザイクをかける
+    for (let i = 0; i < faces.size(); ++i) {
+        mosaic(cvImage_result, faces.get(i).x, faces.get(i).y, faces.get(i).width, faces.get(i).height);
     }
 
     // 顔検出結果をimg-outputキャンバスに表示
@@ -199,7 +215,7 @@ function detect(faceCascade) {
     // 矢印を表示
     document.getElementById("arrow_down").style.display = "block";
 
-    cv.imshow("img-output", cvImage);
+    cv.imshow("img-output", cvImage_result);
 
     // 仮想キャンバスにも適用（ダウンロード用; サイズは元画像と同じ）
     let virtualImage = cv.imread("virtual-canvas");
@@ -211,7 +227,7 @@ function detect(faceCascade) {
     cv.imshow("virtual-canvas", virtualImage);
 
     // メモリ解放
-    cvImage.delete();
+    cvImage_result.delete();
     virtualImage.delete();
     gray.delete();
     faces.delete();
