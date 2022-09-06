@@ -138,6 +138,11 @@ function onUtilsLoaded() {
             // ダウンロードボタンも隠す
             document.getElementById("download").style.display = "none";
 
+            // 説明書きも隠す
+            for (let element of document.getElementsByClassName("result_summary")) {
+                element.style.display = "none";
+            }
+
             // キャンバスを非表示
             document.getElementById("img-input").style.display = "none";
             document.getElementById("img-output").style.display = "none";
@@ -214,6 +219,11 @@ function detect(faceCascade) {
 
     // 矢印を表示
     document.getElementById("arrow_down").style.display = "block";
+
+    // 説明書きを表示
+    for (let element of document.getElementsByClassName("result_summary")) {
+        element.style.display = "inline";
+    }
 
     cv.imshow("img-output", cvImage_result);
 

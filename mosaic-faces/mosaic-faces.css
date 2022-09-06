@@ -1,6 +1,5 @@
 #visible_canvas_area {
     display: block;
-    text-align: center;
 }
 
 #img-input {
@@ -26,4 +25,9 @@
     margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.result_summary {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
