@@ -2,6 +2,8 @@
 var option_str = {};
 var option_values = {};
 
+var from_event = true;
+
 // 言語コードの読み込み
 $(window).on('load', function() {
     var select_language = document.getElementById("id_select_language");
@@ -66,8 +68,8 @@ input_search_keyword.addEventListener('input', update_search_keyword);
 
 option_str['search_keyword'] = "";
 
-function update_search_keyword(from_load_preset) {
-    if (!from_load_preset) {
+function update_search_keyword() {
+    if (from_event) {
         if (option_str['search_keyword'].length == 0 && input_search_keyword.value.length > 0) {
             check_search_keyword.checked = true;
         }
@@ -88,14 +90,14 @@ function update_search_keyword(from_load_preset) {
 
 // 除外キーワード
 var check_exclude_keyword = document.getElementById("id_check_exclude-keyword");
-check_exclude_keyword.addEventListener('input', update_exclude_keyword, false);
+check_exclude_keyword.addEventListener('input', update_exclude_keyword);
 var input_exclude_keyword = document.getElementById("id_input_exclude-keyword");
-input_exclude_keyword.addEventListener('input', update_exclude_keyword, false);
+input_exclude_keyword.addEventListener('input', update_exclude_keyword);
 
 option_str['exclude_keyword'] = "";
 
-function update_exclude_keyword(from_load_preset) {
-    if (!from_load_preset) {
+function update_exclude_keyword() {
+    if (from_event) {
         if (option_str['exclude_keyword'].length == 0 && input_exclude_keyword.value.length > 0) {
             check_exclude_keyword.checked = true;
         }
@@ -116,14 +118,14 @@ function update_exclude_keyword(from_load_preset) {
 
 // 投稿者ID
 var check_autdor_id = document.getElementById("id_check_autdor-id");
-check_autdor_id.addEventListener('input', update_autdor_id, false);
+check_autdor_id.addEventListener('input', update_autdor_id);
 var input_autdor_id = document.getElementById("id_input_autdor-id");
-input_autdor_id.addEventListener('input', update_autdor_id, false);
+input_autdor_id.addEventListener('input', update_autdor_id);
 
 option_str['autdor_id'] = "";
 
-function update_autdor_id(from_load_preset) {
-    if (!from_load_preset) {
+function update_autdor_id() {
+    if (from_event) {
         if (option_str['autdor_id'].length == 0 && input_autdor_id.value.length > 0) {
             check_autdor_id.checked = true;
         }
@@ -144,14 +146,14 @@ function update_autdor_id(from_load_preset) {
 
 // 除外ID
 var check_exclude_autdor_id = document.getElementById("id_check_exclude-autdor-id");
-check_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id, false);
+check_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
 var input_exclude_autdor_id = document.getElementById("id_input_exclude-autdor-id");
-input_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id, false);
+input_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
 
 option_str['exclude_autdor_id'] = "";
 
-function update_exclude_autdor_id(from_load_preset) {
-    if (!from_load_preset) {
+function update_exclude_autdor_id() {
+    if (from_event) {
         if (option_str['exclude_autdor_id'].length == 0 && input_exclude_autdor_id.value.length > 0) {
             check_exclude_autdor_id.checked = true;
         }
@@ -172,14 +174,14 @@ function update_exclude_autdor_id(from_load_preset) {
 
 // 返信先
 var check_replies = document.getElementById("id_check_reply-id");
-check_replies.addEventListener('input', update_reply_id, false);
+check_replies.addEventListener('input', update_reply_id);
 var input_replies = document.getElementById("id_input_reply-id");
-input_replies.addEventListener('input', update_reply_id, false);
+input_replies.addEventListener('input', update_reply_id);
 
 option_str['reply_id'] = "";
 
-function update_reply_id(from_load_preset) {
-    if (!from_load_preset) {
+function update_reply_id() {
+    if (from_event) {
         if (option_str['reply_id'].length == 0 && input_replies.value.length > 0) {
             check_replies.checked = true;
         }
@@ -200,14 +202,14 @@ function update_reply_id(from_load_preset) {
 
 // 次のURLを含む
 var check_included_url = document.getElementById("id_check_included-url");
-check_included_url.addEventListener('input', update_included_url(false));
+check_included_url.addEventListener('input', update_included_url);
 var input_included_url = document.getElementById("id_input_included-url");
-input_included_url.addEventListener('input', update_included_url(false));
+input_included_url.addEventListener('input', update_included_url);
 
 option_str['included_url'] = "";
 
-function update_included_url(from_load_preset) {
-    if (!from_load_preset) {
+function update_included_url() {
+    if (from_event) {
         if (option_str['included_url'].length == 0 && input_included_url.value.length > 0) {
             check_included_url.checked = true;
         }
@@ -228,16 +230,16 @@ function update_included_url(from_load_preset) {
 
 // 開始日時
 var check_since_date = document.getElementById("id_check_since-date");
-check_since_date.addEventListener('input', update_since_date(false));
+check_since_date.addEventListener('input', update_since_date);
 var input_since_date = document.getElementById("id_input_since-date");
-input_since_date.addEventListener('input', update_since_date(false));
+input_since_date.addEventListener('input', update_since_date);
 var input_since_date_time = document.getElementById("id_input_since-date_time");
-input_since_date_time.addEventListener('input', update_since_date(false));
+input_since_date_time.addEventListener('input', update_since_date);
 
 option_str['since_date'] = "";
 
-function update_since_date(from_load_preset) {
-    if (!from_load_preset) {
+function update_since_date() {
+    if (from_event) {
         if (option_str['since_date'].length == 0 && input_since_date.value.length > 0) {
             check_since_date.checked = true;
         }
@@ -272,16 +274,16 @@ function update_since_date(from_load_preset) {
 
 // 終了日時
 var check_until_date = document.getElementById("id_check_until-date");
-check_until_date.addEventListener('input', update_until_date(false));
+check_until_date.addEventListener('input', update_until_date);
 var input_until_date = document.getElementById("id_input_until-date");
-input_until_date.addEventListener('input', update_until_date(false));
+input_until_date.addEventListener('input', update_until_date);
 var input_until_date_time = document.getElementById("id_input_until-date_time");
-input_until_date_time.addEventListener('input', update_until_date(false));
+input_until_date_time.addEventListener('input', update_until_date);
 
 option_str['until_date'] = "";
 
-function update_until_date(from_load_preset) {
-    if (!from_load_preset) {
+function update_until_date() {
+    if (from_event) {
         if (option_str['until_date'].length == 0 && input_until_date.value.length > 0) {
             check_until_date.checked = true;
         }
@@ -469,14 +471,15 @@ function search() {
 
 // 全てのオブジェクトを更新
 function update_all() {
-    update_search_keyword(true);
-    update_exclude_keyword(true);
-    update_autdor_id(true);
-    update_exclude_autdor_id(true);
-    update_reply_id(true);
-    update_included_url(true);
-    update_since_date(true);
-    update_until_date(true);
+    from_event = false;
+    update_search_keyword();
+    update_exclude_keyword();
+    update_autdor_id();
+    update_exclude_autdor_id();
+    update_reply_id();
+    update_included_url();
+    update_since_date();
+    update_until_date();
     update_lang();
     update_only_keywords();
     update_only_twitter_app();
@@ -484,6 +487,7 @@ function update_all() {
     update_links();
     update_images();
     update_videos();
+    from_event = true;
 }
 
 // option_valuesにセット
