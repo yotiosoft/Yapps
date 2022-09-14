@@ -66,12 +66,14 @@ input_search_keyword.addEventListener('input', update_search_keyword);
 
 option_str['search_keyword'] = "";
 
-function update_search_keyword() {
-    if (option_str['search_keyword'].length == 0 && input_search_keyword.value.length > 0) {
-        check_search_keyword.checked = true;
-    }
-    if (option_str['search_keyword'].length > 0 && input_search_keyword.value.length == 0) {
-        check_search_keyword.checked = false;
+function update_search_keyword(from_load_preset) {
+    if (!from_load_preset) {
+        if (option_str['search_keyword'].length == 0 && input_search_keyword.value.length > 0) {
+            check_search_keyword.checked = true;
+        }
+        if (option_str['search_keyword'].length > 0 && input_search_keyword.value.length == 0) {
+            check_search_keyword.checked = false;
+        }
     }
 
     if (check_search_keyword.checked) {
@@ -86,18 +88,20 @@ function update_search_keyword() {
 
 // 除外キーワード
 var check_exclude_keyword = document.getElementById("id_check_exclude-keyword");
-check_exclude_keyword.addEventListener('input', update_exclude_keyword);
+check_exclude_keyword.addEventListener('input', update_exclude_keyword, false);
 var input_exclude_keyword = document.getElementById("id_input_exclude-keyword");
-input_exclude_keyword.addEventListener('input', update_exclude_keyword);
+input_exclude_keyword.addEventListener('input', update_exclude_keyword, false);
 
 option_str['exclude_keyword'] = "";
 
-function update_exclude_keyword() {
-    if (option_str['exclude_keyword'].length == 0 && input_exclude_keyword.value.length > 0) {
-        check_exclude_keyword.checked = true;
-    }
-    if (option_str['exclude_keyword'].length > 0 && input_exclude_keyword.value.length == 0) {
-        check_exclude_keyword.checked = false;
+function update_exclude_keyword(from_load_preset) {
+    if (!from_load_preset) {
+        if (option_str['exclude_keyword'].length == 0 && input_exclude_keyword.value.length > 0) {
+            check_exclude_keyword.checked = true;
+        }
+        if (option_str['exclude_keyword'].length > 0 && input_exclude_keyword.value.length == 0) {
+            check_exclude_keyword.checked = false;
+        }
     }
 
     if (check_exclude_keyword.checked && input_exclude_keyword.value != "") {
@@ -112,18 +116,20 @@ function update_exclude_keyword() {
 
 // 投稿者ID
 var check_autdor_id = document.getElementById("id_check_autdor-id");
-check_autdor_id.addEventListener('input', update_autdor_id);
+check_autdor_id.addEventListener('input', update_autdor_id, false);
 var input_autdor_id = document.getElementById("id_input_autdor-id");
-input_autdor_id.addEventListener('input', update_autdor_id);
+input_autdor_id.addEventListener('input', update_autdor_id, false);
 
 option_str['autdor_id'] = "";
 
-function update_autdor_id() {
-    if (option_str['autdor_id'].length == 0 && input_autdor_id.value.length > 0) {
-        check_autdor_id.checked = true;
-    }
-    if (option_str['autdor_id'].length > 0 && input_autdor_id.value.length == 0) {
-        check_autdor_id.checked = false;
+function update_autdor_id(from_load_preset) {
+    if (!from_load_preset) {
+        if (option_str['autdor_id'].length == 0 && input_autdor_id.value.length > 0) {
+            check_autdor_id.checked = true;
+        }
+        if (option_str['autdor_id'].length > 0 && input_autdor_id.value.length == 0) {
+            check_autdor_id.checked = false;
+        }
     }
 
     if (check_autdor_id.checked && input_autdor_id.value != "") {
@@ -138,18 +144,20 @@ function update_autdor_id() {
 
 // 除外ID
 var check_exclude_autdor_id = document.getElementById("id_check_exclude-autdor-id");
-check_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
+check_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id, false);
 var input_exclude_autdor_id = document.getElementById("id_input_exclude-autdor-id");
-input_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id);
+input_exclude_autdor_id.addEventListener('input', update_exclude_autdor_id, false);
 
 option_str['exclude_autdor_id'] = "";
 
-function update_exclude_autdor_id() {
-    if (option_str['exclude_autdor_id'].length == 0 && input_exclude_autdor_id.value.length > 0) {
-        check_exclude_autdor_id.checked = true;
-    }
-    if (option_str['exclude_autdor_id'].length > 0 && input_exclude_autdor_id.value.length == 0) {
-        check_exclude_autdor_id.checked = false;
+function update_exclude_autdor_id(from_load_preset) {
+    if (!from_load_preset) {
+        if (option_str['exclude_autdor_id'].length == 0 && input_exclude_autdor_id.value.length > 0) {
+            check_exclude_autdor_id.checked = true;
+        }
+        if (option_str['exclude_autdor_id'].length > 0 && input_exclude_autdor_id.value.length == 0) {
+            check_exclude_autdor_id.checked = false;
+        }
     }
 
     if (check_exclude_autdor_id.checked && input_exclude_autdor_id.value != "") {
@@ -164,18 +172,20 @@ function update_exclude_autdor_id() {
 
 // 返信先
 var check_replies = document.getElementById("id_check_reply-id");
-check_replies.addEventListener('input', update_reply_id);
+check_replies.addEventListener('input', update_reply_id, false);
 var input_replies = document.getElementById("id_input_reply-id");
-input_replies.addEventListener('input', update_reply_id);
+input_replies.addEventListener('input', update_reply_id, false);
 
 option_str['reply_id'] = "";
 
-function update_reply_id() {
-    if (option_str['reply_id'].length == 0 && input_replies.value.length > 0) {
-        check_replies.checked = true;
-    }
-    if (option_str['reply_id'].length > 0 && input_replies.value.length == 0) {
-        check_replies.checked = false;
+function update_reply_id(from_load_preset) {
+    if (!from_load_preset) {
+        if (option_str['reply_id'].length == 0 && input_replies.value.length > 0) {
+            check_replies.checked = true;
+        }
+        if (option_str['reply_id'].length > 0 && input_replies.value.length == 0) {
+            check_replies.checked = false;
+        }
     }
 
     if (check_replies.checked && input_replies.value != "") {
@@ -190,18 +200,20 @@ function update_reply_id() {
 
 // 次のURLを含む
 var check_included_url = document.getElementById("id_check_included-url");
-check_included_url.addEventListener('input', update_included_url);
+check_included_url.addEventListener('input', update_included_url(false));
 var input_included_url = document.getElementById("id_input_included-url");
-input_included_url.addEventListener('input', update_included_url);
+input_included_url.addEventListener('input', update_included_url(false));
 
 option_str['included_url'] = "";
 
-function update_included_url() {
-    if (option_str['included_url'].length == 0 && input_included_url.value.length > 0) {
-        check_included_url.checked = true;
-    }
-    if (option_str['included_url'].length > 0 && input_included_url.value.length == 0) {
-        check_included_url.checked = false;
+function update_included_url(from_load_preset) {
+    if (!from_load_preset) {
+        if (option_str['included_url'].length == 0 && input_included_url.value.length > 0) {
+            check_included_url.checked = true;
+        }
+        if (option_str['included_url'].length > 0 && input_included_url.value.length == 0) {
+            check_included_url.checked = false;
+        }
     }
 
     if (check_included_url.checked && input_included_url.value != "") {
@@ -216,20 +228,22 @@ function update_included_url() {
 
 // 開始日時
 var check_since_date = document.getElementById("id_check_since-date");
-check_since_date.addEventListener('input', update_since_date);
+check_since_date.addEventListener('input', update_since_date(false));
 var input_since_date = document.getElementById("id_input_since-date");
-input_since_date.addEventListener('input', update_since_date);
+input_since_date.addEventListener('input', update_since_date(false));
 var input_since_date_time = document.getElementById("id_input_since-date_time");
-input_since_date_time.addEventListener('input', update_since_date);
+input_since_date_time.addEventListener('input', update_since_date(false));
 
 option_str['since_date'] = "";
 
-function update_since_date() {
-    if (option_str['since_date'].length == 0 && input_since_date.value.length > 0) {
-        check_since_date.checked = true;
-    }
-    if (option_str['since_date'].length > 0 && input_since_date.value.length == 0) {
-        check_since_date.checked = false;
+function update_since_date(from_load_preset) {
+    if (!from_load_preset) {
+        if (option_str['since_date'].length == 0 && input_since_date.value.length > 0) {
+            check_since_date.checked = true;
+        }
+        if (option_str['since_date'].length > 0 && input_since_date.value.length == 0) {
+            check_since_date.checked = false;
+        }
     }
 
     if (!check_since_date.checked) {
@@ -258,20 +272,22 @@ function update_since_date() {
 
 // 終了日時
 var check_until_date = document.getElementById("id_check_until-date");
-check_until_date.addEventListener('input', update_until_date);
+check_until_date.addEventListener('input', update_until_date(false));
 var input_until_date = document.getElementById("id_input_until-date");
-input_until_date.addEventListener('input', update_until_date);
+input_until_date.addEventListener('input', update_until_date(false));
 var input_until_date_time = document.getElementById("id_input_until-date_time");
-input_until_date_time.addEventListener('input', update_until_date);
+input_until_date_time.addEventListener('input', update_until_date(false));
 
 option_str['until_date'] = "";
 
-function update_until_date() {
-    if (option_str['until_date'].length == 0 && input_until_date.value.length > 0) {
-        check_until_date.checked = true;
-    }
-    if (option_str['until_date'].length > 0 && input_until_date.value.length == 0) {
-        check_until_date.checked = false;
+function update_until_date(from_load_preset) {
+    if (!from_load_preset) {
+        if (option_str['until_date'].length == 0 && input_until_date.value.length > 0) {
+            check_until_date.checked = true;
+        }
+        if (option_str['until_date'].length > 0 && input_until_date.value.length == 0) {
+            check_until_date.checked = false;
+        }
     }
     
     if (!check_until_date.checked) {
@@ -453,14 +469,14 @@ function search() {
 
 // 全てのオブジェクトを更新
 function update_all() {
-    update_search_keyword();
-    update_exclude_keyword();
-    update_autdor_id();
-    update_exclude_autdor_id();
-    update_reply_id();
-    update_included_url();
-    update_since_date();
-    update_until_date();
+    update_search_keyword(true);
+    update_exclude_keyword(true);
+    update_autdor_id(true);
+    update_exclude_autdor_id(true);
+    update_reply_id(true);
+    update_included_url(true);
+    update_since_date(true);
+    update_until_date(true);
     update_lang();
     update_only_keywords();
     update_only_twitter_app();
