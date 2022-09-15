@@ -114,12 +114,8 @@ function onUtilsLoaded() {
             let msize = new cv.Size(0, 0);
             faceCascade.detectMultiScale(gray, faces, 1.1, 3, 0, msize, msize);
 
-            console.log("faces.size() = " + faces.size());
-
             // 検出した領域に赤枠を表示
             for (let i = 0; i < faces.size(); ++i) {
-                let roiGray = gray.roi(faces.get(i));
-                let roiSec = cvImage.roi(faces.get(i));
                 let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
                 let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
                 cv.rectangle(cvImage, point1, point2, [255, 0, 0, 255], 2);
