@@ -6,9 +6,9 @@ function wakeup() {
             alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
         }
     })
-    .catch(error => {
+    /*.catch(error => {
         alert(`乱数生成APIにアクセスできません。\nしばらくお待ちいただき、後でもう一度お試しください。\n\n${error}`);
-    });
+    });*/
 }
 
 function update_output(rand_array) {
