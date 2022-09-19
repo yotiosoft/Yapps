@@ -251,9 +251,9 @@ function detect(faceCascade) {
 }
 
 function onDetectCanvasMouseDown() {
-    console.log("clicked!");
+    console.log("clicked! 1");
 }
 
 function onDetectCanvasMouseUp() {
-    console.log("clicked!");
+    console.log("clicked! 2");
 }
