@@ -85,18 +85,17 @@ function onCVReady() {
     console.log("onCVReady");
 
     // 画像を元のサイズでダウンロード
-    window.addEventListener('DOMContentLoaded', function(){
-        document.getElementById("download").onclick = (event) => {
-            let canvas = document.getElementById("virtual-canvas");
-        
-            let link = document.createElement("a");
-            link.href = canvas.toDataURL("image/png");
-            link.download = "test.png";
-            link.click();
-        }
+    window.addEventListener('DOMContentLoaded', onUtilsLoaded);
+}
 
-        onUtilsLoaded();
-    });
+// ダウンロードボタンが押されたときに実行
+function OnDownloadButtonClicked() {
+    let canvas = document.getElementById("virtual-canvas");
+
+    let link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "test.png";
+    link.click();
 }
 
 function mosaic(img, x, y, w, h) {
