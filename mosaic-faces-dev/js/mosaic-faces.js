@@ -72,8 +72,12 @@ function onCvLoaded() {
 
     // detectキャンバスにクリックイベントを追加
     canvas_input = document.querySelector('#img-input');
-    canvas_input.addEventListener('mousedown', onDetectCanvasMouseDown, false);
-    canvas_input.addEventListener('mouseup', onDetectCanvasMouseUp, false);
+    canvas_input.addEventListener('mousedown', function(e) {
+        console.log("mousedown at " + e.offsetX + ", " + e.offsetY);
+    });
+    canvas_input.addEventListener('mouseup', function(e) {
+        console.log("mouseup at " + e.offsetX + ", " + e.offsetY);
+    });
 }
 
 // cvがInitializeされたときに実行
@@ -248,12 +252,4 @@ function detect(faceCascade) {
     gray.delete();
     faces.delete();
     faceCascade.delete();
-}
-
-function onDetectCanvasMouseDown() {
-    console.log("clicked! 1");
-}
-
-function onDetectCanvasMouseUp() {
-    console.log("clicked! 2");
 }
