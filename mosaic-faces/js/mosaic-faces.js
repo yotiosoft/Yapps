@@ -47,7 +47,6 @@ function drawImage(image) {
         }
     }
 
-    console.log("after width:" + width + ", height:" + height);
     canvas_input.width = width;
     canvas_input.height = height;
     canvas_input.style.width = width;
@@ -82,8 +81,6 @@ function onCvLoaded() {
 
 // cvがInitializeされたときに実行
 function onCVReady() {
-    console.log("onCVReady");
-
     // 画像を元のサイズでダウンロード
     window.addEventListener('DOMContentLoaded', onUtilsLoaded);
 }
@@ -198,8 +195,6 @@ function detect(faceCascade) {
     let faces = new cv.RectVector();
     let msize = new cv.Size(0, 0);
     faceCascade.detectMultiScale(gray, faces, 1.1, 3, 0, msize, msize);
-
-    console.log("faces.size() = " + faces.size());
 
     // 検出した領域に赤枠を表示
     for (let i = 0; i < faces.size(); ++i) {
