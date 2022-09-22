@@ -84,6 +84,7 @@ function onCvLoaded() {
 function onCVReady() {
     console.log("onCVReady");
 
+    // 画像を元のサイズでダウンロード
     window.addEventListener('DOMContentLoaded', function(){
         document.getElementById("download").onclick = (event) => {
             let canvas = document.getElementById("virtual-canvas");

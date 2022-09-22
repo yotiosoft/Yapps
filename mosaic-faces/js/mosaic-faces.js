@@ -66,8 +66,6 @@ function drawImage(image) {
 
 // cvが読み込まれたときに実行
 function onCvLoaded() {
-    console.log('on OpenCV.js Loaded', cv);
-    
     cv.onRuntimeInitialized = onCVReady();
 
     // detectキャンバスにクリックイベントを追加
@@ -86,6 +84,7 @@ function onCvLoaded() {
 function onCVReady() {
     console.log("onCVReady");
 
+    // 画像を元のサイズでダウンロード
     window.addEventListener('DOMContentLoaded', function(){
         document.getElementById("download").onclick = (event) => {
             let canvas = document.getElementById("virtual-canvas");
