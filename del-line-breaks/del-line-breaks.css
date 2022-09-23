@@ -8,8 +8,7 @@
 }
 
 .center-objs {
-    width: 20%;
-    min-width: 100px;
+    min-width: 50px;
     height: 450px;
     float: left;
 
