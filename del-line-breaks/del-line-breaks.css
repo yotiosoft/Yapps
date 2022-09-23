@@ -12,12 +12,9 @@ body {
 }
 
 .center-objs {
-    min-width: 50px;
+    width: 20%;
     height: 450px;
     float: left;
-
-    display: table;
-    text-align: center;
 }
 .inner {
     display:table-cell;
