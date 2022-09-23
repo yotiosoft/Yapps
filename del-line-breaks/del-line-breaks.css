@@ -1,11 +1,9 @@
 #textareas {
     width: 100%;
-    min-width: 500px;
 }
 
 .left-objs {
     width: 40%;
-    min-width: 200px;
     float: left;
 }
 
@@ -25,7 +23,6 @@
 
 .right-objs {
     width: 40%;
-    min-width: 200px;
     float: right;
 }
 
