@@ -1,6 +1,6 @@
 // 接続確認用
 function wakeup() {
-    fetch('https://murmuring-taiga-39514.herokuapp.com/')
+    fetch('https://yapps-random-api.onrender.com/')
     .then(response => {
         if (!response.ok) {
             alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
@@ -28,7 +28,7 @@ function send_and_get(distribution, params) {
     const query = new URLSearchParams(params);
 
     // JSONをフェッチ
-    fetch(`https://murmuring-taiga-39514.herokuapp.com/random/${distribution}?${query}`)
+    fetch(`https://yapps-random-api.onrender.com/random/${distribution}?${query}`)
     .then(response => {
         if (!response.ok) {
             alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
