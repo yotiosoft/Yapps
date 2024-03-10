@@ -56,11 +56,33 @@ function fileInputHandler(event) {
     reader.readAsText(file);
 }
 
+function toBinary(string) {
+    // JSの文字列はUTF-16からなるので、16bitの箱を用意する
+    const codeUnits = new Uint16Array(string.length);
+    for (let i = 0; i < codeUnits.length; i++) {
+      // １文字ずつコードポイントを出力して、入れていく
+      codeUnits[i] = string.charCodeAt(i);
+    }
+    console.log(codeUnits);
+    // （...） 内がわかりにくいが、16bit 毎だったバイナリを 8bit 毎にわけて、それぞれを文字列に変換している
+    // Uint8Array の　要素の範囲は 0..255 であるため変換後の文字が`バイナリ文字`であることが保証できる
+    const uint8_array = new Uint8Array(codeUnits.buffer);
+    
+    let binaryString = "";
+    const len = uint8_array.byteLength;
+    for (let i = 0; i < len; i++) {
+        binaryString += String.fromCharCode(uint8_array[i]);
+    }
+    return binaryString
+  }
+
 function base64_encode(str) {
-    return window.btoa(unescape(encodeURIComponent(str)));
+    binary_str = toBinary(str);
+    console.log(binary_str);
+    return btoa(binary_str);
 }
 
 function base64_decode(str) {
-    base64_data = decodeURIComponent(escape(window.atob(str)));
+    base64_data = atob(str);
     return base64_data;
 }
