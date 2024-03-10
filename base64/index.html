@@ -44,8 +44,8 @@
 
                         <p id="p_or">または</p>
 
-                        <div class="file-drop-area">
-                            <div class="drop-area-wrap" ondrop="dropHandler(event);">
+                        <div id="file-drop" class="file-drop-area" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                            <div class="drop-area-wrap">
                                 <div class="file-drop-message">
                                     <div class="file-drop-message-icon">
                                         <img src="/img/file_icon/file.svg" type=”image/svg+xml” width="48" height="48" alt="ファイル">
@@ -54,7 +54,7 @@
                                         ファイルをドロップ
                                     </div>
                                 </div>
-                                <input type="file" id="file-drop-area" class="file-drop-input" multiple>
+                                <input type="file" id="file-drop-area" class="file-drop-input" multiple onchange="fileInputHandler(event);">
                             </div>
                         </div> 
                     </div>
@@ -79,6 +79,17 @@
 
                     <!--出力テキストエリア-->
                     <textarea name="output-text" id="output-textarea" placeholder="変換結果" class="simple-textarea" style="margin-bottom: 50px;"></textarea>
+
+                    <!--ダウンロードボタン-->
+                    <div class="button-area-center">
+                        <a href="javascript:OnDownloadButtonClick();" id="rotate-button">
+                            <div class="round-rect-button">
+                                <div class="big-text">
+                                    ダウンロード
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
             </div>
