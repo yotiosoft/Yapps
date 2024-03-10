@@ -56,10 +56,45 @@ function fileInputHandler(event) {
     reader.readAsText(file);
 }
 
+function toBinary(string) {
+    const codeUnits = Uint16Array.from(
+      { length: string.length },
+      (element, index) => string.charCodeAt(index),
+    );
+    const charCodes = new Uint8Array(codeUnits.buffer);
+  
+    let result = "";
+    charCodes.forEach((char) => {
+      result += String.fromCharCode(char);
+    });
+    return result;
+}
+
 function base64_encode(data){
-    return btoa([...data].map(n => String.fromCharCode(n)).join(""));
+    // 1 バイトを超える文字を含んだ文字列
+    const converted = toBinary(data);
+    const encoded = btoa(converted);
+    console.log(encoded); // OCY5JjomOyY8Jj4mPyY=
+    base64_data = encoded;
+    return encoded;
+}
+
+function fromBinary(binary) {
+    const bytes = Uint8Array.from({ length: binary.length }, (element, index) =>
+      binary.charCodeAt(index),
+    );
+    console.log(bytes.buffer);
+    const charCodes = new Uint16Array(bytes.buffer);
+  
+    let result = "";
+    charCodes.forEach((char) => {
+      result += String.fromCharCode(char);
+    });
+    return result;
 }
 
 function base64_decode(data){
-    return new Uint8Array([...atob(data)].map(s => s.charCodeAt(0)));
+    const decoded = atob(data);
+    const original = fromBinary(decoded);
+    return original;
 }
