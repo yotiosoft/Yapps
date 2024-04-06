@@ -20,6 +20,7 @@ $(window).on('load', function() {
         if (!use_segmenter) {
             return [...input_value];
         }
+        return [...segmenter.segment(input_value)];
     }
 
     $('#input-textarea').keyup(function() {
