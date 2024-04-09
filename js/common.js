@@ -4,7 +4,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-43EGG0HL47');
 
-//共通パーツ読み込み
+//共通パー�?読み込み
 $(function() {
     if (window.innerWidth <= 700 || navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
         $("#header").load("/header_m.html");
