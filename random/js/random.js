@@ -87,8 +87,8 @@ function uniform() {
         let base_num = Math.pow(10, digits-1);
         let max_num = Math.pow(10, digits) - 1;
         
-        params["max"] = base_num;
-        params["min"] = max_num;
+        params["max"] = max_num;
+        params["min"] = base_num;
     }
 
     // 乱数APIと送受信
@@ -187,8 +187,8 @@ function triangular() {
         let base_num = Math.pow(10, digits-1);
         let max_num = Math.pow(10, digits) - 1;
         
-        params["max"] = base_num;
-        params["min"] = max_num;
+        params["max"] = max_num;
+        params["min"] = base_num;
     }
 
     params["mode"] = input_mode.value;
