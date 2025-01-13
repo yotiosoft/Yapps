@@ -273,3 +273,7 @@ function OnMakeButtonClick() {
         gamma();
     }
 }
+
+$(window).on('load', function() {
+    information_show_if_needed('yapps_info_random_250113', 'information_button');
+});

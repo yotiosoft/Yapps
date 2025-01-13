@@ -1,4 +1,7 @@
 $(window).on('load', function() {
+    // 情報の表示
+    information_show_if_needed('yapps_info_random_240406', 'information_button');
+
     var segmenter;
     var use_segmenter = true;
     // Intl.Segmenterが使えるかどうかの判定
