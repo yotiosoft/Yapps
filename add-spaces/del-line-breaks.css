@@ -1,0 +1,52 @@
+body {
+    min-width: 500px;
+}
+
+#textareas {
+    width: 100%;
+}
+
+.left-objs {
+    width: 40%;
+    float: left;
+}
+
+.center-objs {
+    width: 20%;
+    height: 450px;
+    float: left;
+
+    display: table;
+    text-align: center;
+}
+.inner {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.right-objs {
+    width: 40%;
+    float: right;
+}
+
+#input-textarea {
+    background-color: #fff;
+    white-space: pre-wrap;
+
+    height: 450px;
+
+    padding: 10px;
+    border: solid 1px #000000;
+    border-radius: 5px;
+}
+
+#output-textarea {
+    background-color: #fff;
+    white-space: pre-wrap;
+
+    height: 450px;
+
+    padding: 10px;
+    border: solid 1px #000000;
+    border-radius: 5px;
+}
