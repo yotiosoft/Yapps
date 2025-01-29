@@ -7,15 +7,7 @@ var from_event = true;
 // ウィンドウ読み込み完了時の動作
 $(window).on('load', function() {
     // 注意書きのconfig
-    var get_json = localStorage.getItem('yapps_twitter_search_config');
-    var memo_config = {};
-    if (get_json) {
-        memo_config = JSON.parse(get_json);
-    }
-    if (!("information_button_flag" in memo_config)) {
-        var information_button = document.getElementById('information_button');
-        information_button.style.display = 'flex';
-    }
+    information_show_if_needed('yapps_twitter_search_config', 'information_button');
 
     // 言語コード表の読み込み
     var select_language = document.getElementById("id_select_language");
@@ -28,22 +20,6 @@ $(window).on('load', function() {
         }
     });
 });
-
-function close_information_button() {
-    var get_json = localStorage.getItem('yapps_twitter_search_config');
-
-    var memo_config = {};
-    if (get_json) {
-        memo_config = JSON.parse(get_json);
-    }
-
-    memo_config["information_button_flag"] = false;
-
-    // 保存
-    localStorage.setItem('yapps_twitter_search_config', JSON.stringify(memo_config));
-
-    $('#information_button').hide();
-}
 
 // 入力文字列の追加
 function common_add_inputted_str(filter_name, inputted_str) {

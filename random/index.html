@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/button.css">
         <link rel="stylesheet" href="/checkbox.css">
         <link rel="stylesheet" href="/badges.css">
+        <link rel="stylesheet" href="/information.css">
         <link rel="stylesheet" href="./random.css">
 
         <script src="/js/jquery-3.5.1.min.js"></script>
@@ -48,6 +49,17 @@
                     一様分布、正規分布、ベータ分布、三角分布、ラムダ分布、ガンマ分布から選択可能です。<br>
                     <!--<b>注: Pythonプログラムで乱数を生成しています。プログラムの起動に多少時間がかかる場合があります。</b>-->
                 </p>
+                <div id="update_information">
+                    <div class="information" id="information_button" style="background-color: #338800; color: white; display: none;">
+                        <p>
+                            更新情報<br>
+                            2025/01/13：乱数サーバを復旧しました。<br>
+                            2024/10/23：乱数サーバを移行しました。起動待ち時間が不要になりました。
+                        </p>
+                        <a href="JavaScript:close_information_button('yapps_info_random_250113', 'information_button')"><p class="right">×</p></a>
+                    </div>
+                </div>
+                <div id="intl_caution"></div>
                 
                 <div class="app-area" id="app-area-id" style="display: flex; flex-wrap: wrap;">
                     <table class="input-table">

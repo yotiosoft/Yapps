@@ -1,5 +1,5 @@
 //const api_url = "https://yapps-random-api.onrender.com";
-const api_url = "https://public.yotiosoft.com/yapps-random";
+const api_url = "https://r.yotio.jp/yapps-random";
 
 // 接続確認用
 function wakeup() {
@@ -273,3 +273,7 @@ function OnMakeButtonClick() {
         gamma();
     }
 }
+
+$(window).on('load', function() {
+    information_show_if_needed('yapps_info_random_250113', 'information_button');
+});

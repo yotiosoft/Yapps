@@ -43,11 +43,15 @@
                 </div>
                 <p class="summary">
                     文章中の文字数・行数をカウントします。<br>
+                    このツールはお使いのブラウザ内で実行されますので、入力文章がサーバに送信されることは一切ありません。
                 </p>
                 <div id="update_information">
-                    <div class="information-white-font" style="background-color: #338800;">
-                        更新情報<br>
-                        2024/04/06：絵文字のカウントに対応しました。
+                    <div class="information" id="information_button" style="background-color: #338800; color: white; display: none;">
+                        <p>
+                            更新情報<br>
+                            2024/04/06：絵文字のカウントに対応しました。
+                        </p>
+                        <a href="JavaScript:close_information_button('yapps_info_random_240406', 'information_button')"><p class="right">×</p></a>
                     </div>
                 </div>
                 <div id="intl_caution"></div>
