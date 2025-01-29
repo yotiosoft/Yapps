@@ -9,7 +9,7 @@ $('#input-textarea').keyup(function() {
     var full_char = false;
     var bcg = document.createElement("span");
     for (var i=0; i<input.value.length; i++) {
-        if (input.value[i].match(/^[^\x01-\x7E\xA1-\xDF]+$/)) { 
+        if (input.value[i].match(/^\s$/)) {
             if (!full_char) {
                 if (bcg != null)
                     output.appendChild(bcg);
