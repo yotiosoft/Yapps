@@ -1,0 +1,11 @@
+.output-area {
+    width: 100%;
+    min-height: 300px;
+    height: fit-content;
+    background-color: #fff;
+    white-space: pre-wrap;
+
+    padding: 10px;
+    border: solid 1px #000000;
+    border-radius: 5px;
+}
