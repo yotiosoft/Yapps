@@ -2,13 +2,15 @@ $('#input-textarea').keyup(convert);
 $('#without-marks').change(convert);
 
 function insertSpacesWithoutMarks(text) {
-    return text.replace(/(?![、。（）「」『』])([\u3000-\u9FFF])([\u0020-\u007D]+)/gu, '$1 $2')
-               .replace(/([\u0020-\u007D]+)(?![、。（）「」『』])([\u3000-\u9FFF])/gu, '$1 $2');
+    return text.replace(/(?![、。（）「」『』])([\u3000-\u9FFF])([\u0021-\u007D]+)/gu, '$1 $2')
+               .replace(/([\u0021-\u007D]+)(?![、。（）「」『』])([\u3000-\u9FFF])/gu, '$1 $2');
+    // 上記を半角スペース半角文字の間にある場合にもスペース追加を除くようにする
+    // return text.replace(/(?![、。（）「」『』])([\u3000-\u9FFF])([\u0020-\u007D]+)/gu, '$1 $2')
 }
 
 function insertSpaces(text) {
-    return text.replace(/([\u3000-\u9FFF])([\u0020-\u007D]+)/gu, '$1 $2')
-               .replace(/([\u0020-\u007D]+)([\u3000-\u9FFF])/gu, '$1 $2');
+    return text.replace(/([\u3000-\u9FFF])([\u0021-\u007D]+)/gu, '$1 $2')
+               .replace(/([\u0021-\u007D]+)([\u3000-\u9FFF])/gu, '$1 $2');
 }
 
 function convert() {
