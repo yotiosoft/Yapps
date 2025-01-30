@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <p class="summary">
-                    文章中の英単語および半角記号 (.,-/:-@-~[]) の前後に空白を追加します。<br>
+                    文章中の英単語および半角記号『.,-/:-@-~[]()』の前後に空白を追加します。<br>
                     このツールはお使いのブラウザ内で実行されますので、入力文章がサーバに送信されることは一切ありません。
                 </p>
                 
@@ -53,6 +53,11 @@
                         <div class="center-objs">
                             <div class="inner">
                                 <img src="/img/common/arrow_right2.svg" style="width: 64px; height: 64px;">
+
+                                <div class="checkbox" style="margin-top: 30px;">
+                                    <input type="checkbox" id="without-marks" name="without-marks" checked>
+                                    <label for="without-marks">全角句読点・括弧は除く</label>
+                                </div>
                             </div>
                         </div>
 
