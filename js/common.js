@@ -54,7 +54,7 @@ function close_information_button(config_name, config_id) {
 }
 
 // /apps.json からアプリ情報を取得
-function get_apps_json(id) {
+function apps2box(id, target) {
     $.getJSON("apps.json", function(data) {
         /* テンプレート:
         <div class="box-wrap">
@@ -68,8 +68,11 @@ function get_apps_json(id) {
         </div>
         */
        let apps_list = data.apps;
-       console.log(apps_list.length);
         for (var i = 0; i < apps_list.length; i++) {
+            if (apps_list[i].target.indexOf(target) == -1) {
+                continue;
+            }
+
             var app = apps_list[i];
             var box_wrap = document.createElement("div");
             box_wrap.className = "box-wrap";
@@ -94,7 +97,6 @@ function get_apps_json(id) {
             box.appendChild(p2);
             a.appendChild(box);
             box_wrap.appendChild(a);
-            console.log(box_wrap);
             document.getElementById(id).appendChild(box_wrap);
         }
     }

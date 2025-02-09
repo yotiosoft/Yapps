@@ -5,6 +5,13 @@
             "name": "英単語前後に空白追加",
             "summary": "文章中の半角文字と全角文字の間に空白を追加します。",
             "category": "テキスト",
+            "target": [
+                "top-text",
+                "space-checker",
+                "del-line-breaks",
+                "width-converter",
+                "memo"
+            ],
             "image": "/img/tools_icon/text/add-spaces.svg",
             "path": "/add-spaces/"
         },
@@ -13,6 +20,12 @@
             "name": "空白文字チェッカー",
             "summary": "文章中の空白文字を検出します。",
             "category": "テキスト",
+            "target": [
+                "top-text",
+                "add-spaces",
+                "char-checker",
+                "char-counter"
+            ],
             "image": "/img/tools_icon/text/space-checker.svg",
             "path": "/space-checker/"
         },
@@ -21,6 +34,12 @@
             "name": "文字数・行数カウント",
             "summary": "文章中の文字数・行数をカウントします。",
             "category": "テキスト",
+            "target": [
+                "top-text",
+                "space-checker",
+                "char-checker",
+                "memo"
+            ],
             "image": "/img/tools_icon/text/char-counter.svg",
             "path": "/char-counter/"
         },
@@ -29,6 +48,13 @@
             "name": "改行を削除",
             "summary": "文章中の改行コードを削除します。改行をスペースに置き換えることも可能です。",
             "category": "テキスト",
+            "target": [
+                "top-text",
+                "add-spaces",
+                "space-checker",
+                "char-counter",
+                "memo"
+            ],
             "image": "/img/tools_icon/text/del-line-breaks.svg",
             "path": "/del-line-breaks/"
         },
@@ -37,6 +63,13 @@
             "name": "全角半角判定",
             "summary": "文章中の半角文字と全角文字を判定します。",
             "category": "テキスト",
+            "target": [
+                "top-text",
+                "width-converter",
+                "char-counter",
+                "space-checker",
+                "add-spaces"
+            ],
             "image": "/img/tools_icon/text/char-checker.svg",
             "path": "/char-checker/"
         },
@@ -45,6 +78,13 @@
             "name": "全角半角変換",
             "summary": "全角文字と半角文字を変換します。",
             "category": "テキスト",
+            "target": [
+                "top-text",
+                "char-checker",
+                "char-counter",
+                "space-checker",
+                "add-spaces"
+            ],
             "image": "/img/tools_icon/text/width-converter.svg",
             "path": "/width-converter/"
         },
@@ -53,6 +93,12 @@
             "name": "英数字を反転",
             "summary": "文章から英数字を180°反転した文字に変換します。",
             "category": "テキスト",
+            "target": [
+                "top-text",
+                "add-spaces",
+                "del-line-breaks",
+                "width-converter"
+            ],
             "image": "/img/tools_icon/text/rotate.svg",
             "path": "/rotate/"
         },
@@ -61,6 +107,14 @@
             "name": "ブラウザ メモ帳",
             "summary": "文章を読み書きできます。内容はブラウザに保存されます。",
             "category": "ドキュメント",
+            "target": [
+                "top-document",
+                "add-spaces",
+                "del-line-breaks",
+                "char-counter",
+                "char-checker",
+                "read-speaker"
+            ],
             "image": "/img/tools_icon/document/memo.svg",
             "path": "/memo/"
         },
@@ -69,6 +123,10 @@
             "name": "文章読み上げ",
             "summary": "入力された文章を読み上げます。",
             "category": "ドキュメント",
+            "target": [
+                "top-document",
+                "memo"
+            ],
             "image": "/img/tools_icon/document/read-speaker.svg",
             "path": "/read-speaker/"
         },
@@ -77,6 +135,10 @@
             "name": "乱数生成",
             "summary": "乱数を生成します。一様分布や正規分布など多数の確率分布関数から生成できます。",
             "category": "数学",
+            "target": [
+                "top-math",
+                "cardinal"
+            ],
             "image": "/img/tools_icon/math/random.svg",
             "path": "/random/"
         },
@@ -85,6 +147,11 @@
             "name": "基数変換",
             "summary": "2進数、8進数、10進数、16進数などを相互変換します。",
             "category": "数学",
+            "target": [
+                "top-math",
+                "random",
+                "char-counter"
+            ],
             "image": "/img/tools_icon/math/cardinal.svg",
             "path": "/cardinal/"
         },
@@ -93,6 +160,9 @@
             "name": "顔モザイク加工（beta）",
             "summary": "入力画像から顔認識を行い、該当箇所をモザイク加工します。",
             "category": "画像処理",
+            "target": [
+                "top-image"
+            ],
             "image": "/img/tools_icon/img/face_detect.svg",
             "path": "/mosaic-faces/"
         }

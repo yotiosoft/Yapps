@@ -25,7 +25,10 @@
         </script>
         <script>
             window.onload = function(){
-                get_apps_json("box-area-of-text");
+                apps2box("box-area-of-text", "top-text");
+                apps2box("box-area-of-document", "top-document");
+                apps2box("box-area-of-math", "top-math");
+                apps2box("box-area-of-image", "top-image");
             }
         </script>
     </head>
@@ -45,77 +48,7 @@
                         テキスト
                     </div>
 
-                    <div class="box-area" id="box-area-of-text">
-                        <div class="box-wrap">
-                            <a href="./add-spaces/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/text/add-spaces.svg" type=”image/svg+xml” width="128" height="128" alt="英単語の前後に空白を追加">
-                                    <p class="tool-title">英単語前後に空白追加</p>
-                                    <p class="summary">文章中の半角文字と全角文字の間に空白を追加します。</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="box-wrap">
-                            <a href="./space-checker/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/text/space-checker.svg" type=”image/svg+xml” width="128" height="128" alt="空白文字チェッカー">
-                                    <p class="tool-title">空白文字チェッカー</p>
-                                    <p class="summary">文章中の空白文字を検出します。</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="box-wrap">
-                            <a href="./char-counter/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/text/char-counter.svg" type=”image/svg+xml” width="128" height="128" alt="改行を削除">
-                                    <p class="tool-title">文字数・行数カウント</p>
-                                    <p class="summary">文章中の文字数・行数をカウントします。</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="box-wrap">
-                            <a href="./del-line-breaks/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/text/del-line-breaks.svg" type=”image/svg+xml” width="128" height="128" alt="改行を削除">
-                                    <p class="tool-title">改行を削除</p>
-                                    <p class="summary">文章中の改行コードを削除します。改行をスペースに置き換えることも可能です。</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="box-wrap">
-                            <a href="./char-checker/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/text/char-checker.svg" type=”image/svg+xml” width="128" height="128" alt="全角半角判定">
-                                    <p class="tool-title">全角半角判定</p>
-                                    <p class="summary">文章中の半角文字と全角文字を判定します。</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="box-wrap">
-                            <a href="./width-converter/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/text/width-converter.svg" type=”image/svg+xml” width="128" height="128" alt="全角半角変換">
-                                    <p class="tool-title">全角半角変換</p>
-                                    <p class="summary">全角文字と半角文字を変換します。</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="box-wrap">
-                            <a href="./rotate/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/text/rotate.svg" type=”image/svg+xml” width="128" height="128" alt="英数字を反転">
-                                    <p class="tool-title">英数字を反転</p>
-                                    <p class="summary">文章から英数字を180°反転した文字に変換します。</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    <div class="box-area" id="box-area-of-text"></div>
                 </div>
 
                 <div class="column">
@@ -124,27 +57,7 @@
                         ドキュメント
                     </div>
 
-                    <div class="box-area">
-                        <div class="box-wrap">
-                            <a href="./memo/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/document/memo.svg" type=”image/svg+xml” width="128" height="128" alt="メモ帳">
-                                    <p class="tool-title">ブラウザ メモ帳</p>
-                                    <p class="summary">文章を読み書きできます。内容はブラウザに保存されます。</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="box-wrap">
-                            <a href="./read-speaker/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/document/read-speaker.svg" type=”image/svg+xml” width="128" height="128" alt="文章読み上げ">
-                                    <p class="tool-title">文章読み上げ</p>
-                                    <p class="summary">入力された文章を読み上げます。</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    <div class="box-area" id="box-area-of-document"></div>
                 </div>
 
                 <div class="column">
@@ -153,27 +66,7 @@
                         数学
                     </div>
 
-                    <div class="box-area">
-                        <div class="box-wrap">
-                            <a href="./random/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/math/random.svg" type=”image/svg+xml” width="128" height="128" alt="乱数生成">
-                                    <p class="tool-title">乱数生成</p>
-                                    <p class="summary">乱数を生成します。一様分布や正規分布など多数の確率分布関数から生成できます。</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-wrap">
-                            <a href="./cardinal/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/math/cardinal.svg" type=”image/svg+xml” width="128" height="128" alt="基数変換">
-                                    <p class="tool-title">基数変換</p>
-                                    <p class="summary">2進数、8進数、10進数、16進数などを相互変換します。</p>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
+                    <div class="box-area" id="box-area-of-math"></div>
                 </div>
 
                 <div class="column">
@@ -182,41 +75,8 @@
                         画像処理
                     </div>
 
-                    <div class="box-area">
-                        <div class="box-wrap">
-                            <a href="./mosaic-faces/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/img/face_detect.svg" type=”image/svg+xml” width="128" height="128" alt="乱数生成">
-                                    <p class="tool-title">顔モザイク加工<br>（beta）</p>
-                                    <p class="summary">入力画像から顔認識を行い、該当箇所をモザイク加工します。</p>
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
+                    <div class="box-area" id="box-area-of-image"></div>
                 </div>
-
-                <!--
-                <div class="column">
-                    <div class="title">
-                        <img src="/img/math.svg" type=”image/svg+xml” width="48" height="48" alt="document-logo"> 
-                        その他
-                    </div>
-
-                    <div class="box-area">
-                        <div class="box-wrap">
-                            <a href="./twitter-search/">
-                                <div class="box">
-                                    <img src="/img/tools_icon/others/twitter-search.svg" type=”image/svg+xml” width="128" height="128" alt="Twitter検索コマンド生成">
-                                    <p class="tool-title">Twitter検索コマンド生成</p>
-                                    <p class="summary">Twitter検索に便利なコマンドを自動生成します。</p>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-                -->
             </div>
         </div>
 
