@@ -10,6 +10,11 @@
     height: 260px;
     padding: 0px;
 }
+.box-horizon-wrap {
+    width: 400px;
+    height: 160px;
+    padding: 0px;
+}
 .box {
     width: 90%;
     height: 90%;
@@ -119,4 +124,25 @@
     padding: 5px;
 
     text-align: center;
+}
+
+.box-horizon {
+    display: flex;
+    max-width: 400px;
+    > div {
+        height: 100%;
+        text-align: left;
+    }
+    img {
+        width: 25%;
+        margin-left: 10px;
+    }
+    .tool-title {
+        text-align: left;
+        margin-left: 5px;
+    }
+    .box-horizon-text {
+        width: 70%;
+        margin-left: 5px;
+    }
 }
