@@ -23,6 +23,11 @@
               "url" : "https://yapps.yotiosoft.com"
             }
         </script>
+        <script>
+            window.onload = function(){
+                get_apps_json("box-area-of-text");
+            }
+        </script>
     </head>
 
     <body>
@@ -40,7 +45,7 @@
                         テキスト
                     </div>
 
-                    <div class="box-area">
+                    <div class="box-area" id="box-area-of-text">
                         <div class="box-wrap">
                             <a href="./add-spaces/">
                                 <div class="box">
