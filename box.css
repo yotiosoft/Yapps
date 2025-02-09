@@ -5,6 +5,10 @@
     margin-top: 10px;
 }
 
+.app-list {
+    height: fit-content;
+}
+
 .box-wrap {
     width: 240px;
     height: 260px;
@@ -12,8 +16,9 @@
 }
 .box-horizon-wrap {
     width: 380px;
-    height: 120px;
+    height: 150px;
     padding: 0px;
+    margin-bottom: 10px;
 }
 .box {
     width: 90%;
@@ -134,7 +139,7 @@
         text-align: left;
     }
     img {
-        width: 25%;
+        width: 20%;
         height: 75%;
     }
     .tool-title {
@@ -143,6 +148,6 @@
     }
     .box-horizon-text {
         width: 70%;
-        margin-left: 5px;
+        margin-left: 10px;
     }
 }

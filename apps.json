@@ -38,7 +38,9 @@
                 "top-text",
                 "space-checker",
                 "char-checker",
-                "memo"
+                "memo",
+                "rotate",
+                "cardinal"
             ],
             "image": "/img/tools_icon/text/char-counter.svg",
             "path": "/char-counter/"
@@ -68,7 +70,8 @@
                 "width-converter",
                 "char-counter",
                 "space-checker",
-                "add-spaces"
+                "add-spaces",
+                "rotate"
             ],
             "image": "/img/tools_icon/text/char-checker.svg",
             "path": "/char-checker/"
@@ -83,7 +86,8 @@
                 "char-checker",
                 "char-counter",
                 "space-checker",
-                "add-spaces"
+                "add-spaces",
+                "rotate"
             ],
             "image": "/img/tools_icon/text/width-converter.svg",
             "path": "/width-converter/"
