@@ -23,14 +23,6 @@
               "url" : "https://yapps.yotiosoft.com"
             }
         </script>
-        <script>
-            window.onload = function(){
-                apps2box("box-area-of-text", "top-text");
-                apps2box("box-area-of-document", "top-document");
-                apps2box("box-area-of-math", "top-math");
-                apps2box("box-area-of-image", "top-image");
-            }
-        </script>
     </head>
 
     <body>
@@ -49,6 +41,7 @@
                     </div>
 
                     <div class="box-area" id="box-area-of-text"></div>
+                    <script>apps2box("box-area-of-text", "top-text");</script>
                 </div>
 
                 <div class="column">
@@ -58,6 +51,7 @@
                     </div>
 
                     <div class="box-area" id="box-area-of-document"></div>
+                    <script>apps2box("box-area-of-document", "top-document");</script>
                 </div>
 
                 <div class="column">
@@ -67,6 +61,7 @@
                     </div>
 
                     <div class="box-area" id="box-area-of-math"></div>
+                    <script>apps2box("box-area-of-math", "top-math");</script>
                 </div>
 
                 <div class="column">
@@ -76,6 +71,7 @@
                     </div>
 
                     <div class="box-area" id="box-area-of-image"></div>
+                    <script>apps2box("box-area-of-image", "top-image");</script>
                 </div>
             </div>
         </div>
