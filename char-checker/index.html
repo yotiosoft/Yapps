@@ -58,20 +58,9 @@
                 <div class="related-apps">
                     <div class="title">関連アプリ</div>
                     <div class="app-list">
-                        <div class="box-area">
-                            <div class="box box-horizon">
-                                <a href="./memo/">
-                                    <div class="box-horizon">
-                                        <img src="/img/tools_icon/document/memo.svg" type=”image/svg+xml” width="128" height="128" alt="メモ帳">
-                                        <div class="box-horizon-text">
-                                            <p class="tool-title">ブラウザ メモ帳</p>
-                                            <p class="summary">文章を読み書きできます。内容はブラウザに保存されます。</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        <div class="box-area" id="related-apps"></div>
                     </div>
+                    <script>apps2box("related-apps", "char-checker", "box-horizontal");</script>
                 </div>
             </div>
         </div>

@@ -54,9 +54,9 @@ function close_information_button(config_name, config_id) {
 }
 
 // /apps.json からアプリ情報を取得
-function apps2box(id, target) {
-    $.getJSON("apps.json", function(data) {
-        /* テンプレート:
+function apps2box(id, target, visual_mode) {
+    $.getJSON("/apps.json", function(data) {
+        /* テンプレート (box):
         <div class="box-wrap">
             <a href="./space-checker/">
                 <div class="box">
@@ -67,6 +67,20 @@ function apps2box(id, target) {
             </a>
         </div>
         */
+       /* テンプレート (box-horizontal):
+       <div class="box box-horizon">
+            <a href="./memo/">
+                <div class="box-horizon">
+                    <img src="/img/tools_icon/document/memo.svg" type=”image/svg+xml” width="128" height="128" alt="メモ帳">
+                    <div class="box-horizon-text">
+                        <p class="tool-title">ブラウザ メモ帳</p>
+                        <p class="summary">文章を読み書きできます。内容はブラウザに保存されます。</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        */
+
        let apps_list = data.apps;
         for (var i = 0; i < apps_list.length; i++) {
             if (apps_list[i].target.indexOf(target) == -1) {
@@ -75,28 +89,57 @@ function apps2box(id, target) {
 
             var app = apps_list[i];
             var box_wrap = document.createElement("div");
-            box_wrap.className = "box-wrap";
-            var a = document.createElement("a");
-            a.href = app.path;
-            var box = document.createElement("div");
-            box.className = "box";
-            var img = document.createElement("img");
-            img.src = app.image;
-            img.width = 128;
-            img.height = 128;
-            img.alt = app.name;
-            var p1 = document.createElement("p");
-            p1.className = "tool-title";
-            p1.textContent = app.name;
-            var p2 = document.createElement("p");
-            p2.className = "summary";
-            p2.textContent = app.summary;
+            if (visual_mode == "box") {
+                box_wrap.className = "box-wrap";
+                var a = document.createElement("a");
+                a.href = app.path;
+                var box = document.createElement("div");
+                box.className = "box";
+                var img = document.createElement("img");
+                img.src = app.image;
+                img.width = 128;
+                img.height = 128;
+                img.alt = app.name;
+                var p1 = document.createElement("p");
+                p1.className = "tool-title";
+                p1.textContent = app.name;
+                var p2 = document.createElement("p");
+                p2.className = "summary";
+                p2.textContent = app.summary;
 
-            box.appendChild(img);
-            box.appendChild(p1);
-            box.appendChild(p2);
-            a.appendChild(box);
-            box_wrap.appendChild(a);
+                box.appendChild(img);
+                box.appendChild(p1);
+                box.appendChild(p2);
+                a.appendChild(box);
+                box_wrap.appendChild(a);
+            }
+            else if (visual_mode == "box-horizontal") {
+                box_wrap.className = "box-horizon-wrap";
+                var a = document.createElement("a");
+                a.href = app.path;
+                var box_horizon = document.createElement("div");
+                box_horizon.className = "box box-horizon";
+                var img = document.createElement("img");
+                img.src = app.image;
+                img.width = 128;
+                img.height = 128;
+                img.alt = app.name;
+                var box_horizon_text = document.createElement("div");
+                box_horizon_text.className = "box-horizon-text";
+                var p1 = document.createElement("p");
+                p1.className = "tool-title";
+                p1.textContent = app.name;
+                var p2 = document.createElement("p");
+                p2.className = "summary";
+                p2.textContent = app.summary;
+
+                box_horizon_text.appendChild(p1);
+                box_horizon_text.appendChild(p2);
+                box_horizon.appendChild(img);
+                box_horizon.appendChild(box_horizon_text);
+                a.appendChild(box_horizon);
+                box_wrap.appendChild(a);
+            }
             document.getElementById(id).appendChild(box_wrap);
         }
     }
