@@ -1,12 +1,24 @@
-.box-area {
+.app-list {
     width: 100%;
+    height: fit-content;
     display: flex;
-    flex-wrap: wrap;
-    margin-top: 10px;
+    justify-content: center;
 }
 
-.app-list {
-    height: fit-content;
+.box-area {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 260px);
+    grid-template-columns: repeat(auto-fill, 240px);
+    margin-top: 10px;
+}
+.box-horizon-area {
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 150px);
+    grid-template-columns: repeat(auto-fill, 380px);
+    margin-top: 10px;
+    margin-bottom: 50px;
+    place-content: center;
 }
 
 .box-wrap {
