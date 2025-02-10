@@ -32,6 +32,23 @@
     padding: 0px;
     margin-bottom: 10px;
 }
+@media screen and (max-width: 1068px) {
+    .box-area {
+        grid-template-rows: repeat(auto-fill, 300px);
+    }
+
+    .box-horizon-area {
+        grid-template-rows: repeat(auto-fill, 200px);
+    }
+
+    .box-wrap {
+        height: 300px;
+    }
+
+    .box-horizon-wrap {
+        height: 200px;
+    }
+}
 .box {
     width: 90%;
     height: 90%;
@@ -75,10 +92,20 @@
     font-size: 19px;
     text-align: center;
 }
+@media screen and (max-width: 1068px) {
+    .box .tool-title {
+        font-size: 24px;
+    }
+}
 .box .summary {
     font-size: 14px;
     margin: 0px;
     padding: 5px;
+}
+@media screen and (max-width: 1068px) {
+    .box .summary {
+        font-size: 18px;
+    }
 }
 .box .summary-center {
     font-size: 14px;
@@ -86,6 +113,11 @@
     padding: 5px;
 
     text-align: center;
+}
+@media screen and (max-width: 1068px) {
+    .box .summary-center {
+        font-size: 18px;
+    }
 }
 
 .box-nobreak {

@@ -10,6 +10,13 @@
   display: inline-flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 1068px) {
+  .badge-group {
+    font-size: 22px;
+  }
 }
 
 .badge-skyblue {
@@ -20,7 +27,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -32,7 +38,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -44,7 +49,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -56,7 +60,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -68,7 +71,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -80,7 +82,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -92,7 +93,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -104,7 +104,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #000;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -116,7 +115,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -128,7 +126,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -140,7 +137,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -152,7 +148,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -164,7 +159,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -176,7 +170,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -188,7 +181,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -200,7 +192,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -212,7 +203,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
@@ -224,7 +214,6 @@
   padding: 4px 8px;
   overflow: hidden;
   color: #fff;
-  font-size: 12px;
   font-weight: bold;
 }
 
