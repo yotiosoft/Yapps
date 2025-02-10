@@ -1,32 +1,16 @@
-body {
-    min-width: 500px;
-}
-
 #textareas {
     width: 100%;
 }
 
-.left-objs {
-    width: 40%;
-    float: left;
-}
-
 .center-objs {
-    width: 20%;
-    height: 450px;
-    float: left;
-
     display: table;
     text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .inner {
     display:table-cell;
     vertical-align:middle;
-}
-
-.right-objs {
-    width: 40%;
-    float: right;
 }
 
 #input-textarea {
@@ -49,4 +33,27 @@ body {
     padding: 10px;
     border: solid 1px #000000;
     border-radius: 5px;
+}
+
+.grid-view {
+    display: grid;
+    width: 100%;
+    grid-auto-rows: auto;
+    grid-template-columns: 40% 20% 40%;
+}
+@media screen and (max-width: 768px) {
+    .grid-view {
+        grid-auto-columns: auto;
+        grid-template-columns: 100%;
+    }
+    .inner {
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .center-objs .inner img {
+        rotate: 90deg;
+        margin-top: 10px;
+    }
 }
