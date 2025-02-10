@@ -27,7 +27,7 @@
 	-webkit-transition: all .3s;
 	transition: all .3s;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .round-rect-button {
         font-size: 30px;
     }
@@ -44,7 +44,7 @@
 .round-rect-button .big-text {
     font-size: 22px;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .round-rect-button .big-text {
         font-size: 26px;
     }
@@ -53,7 +53,7 @@
     font-size: 22px;
     color: #fff;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .round-rect-button .big-text-white {
         font-size: 26px;
     }
@@ -62,7 +62,7 @@
     font-size: 16px;
     line-height: 20px;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .round-rect-button .middle-text {
         font-size: 18px;
     }
@@ -72,7 +72,7 @@
     color: #fff;
     line-height: 20px;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .round-rect-button .middle-text-white {
         font-size: 18px;
     }

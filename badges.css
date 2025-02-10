@@ -13,7 +13,7 @@
   font-size: 12px;
 }
 
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
   .badge-group {
     font-size: 22px;
   }

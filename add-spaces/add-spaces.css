@@ -45,7 +45,7 @@ body {
     grid-auto-rows: auto;
     grid-template-columns: 40% 20% 40%;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .grid-view {
         grid-auto-columns: auto;
         grid-template-columns: 100%;

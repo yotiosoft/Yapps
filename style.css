@@ -28,7 +28,7 @@ body {
     box-sizing: border-box;
 }
 
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     body {
         font-size: 28px;
     }
@@ -99,7 +99,7 @@ header {
     flex-wrap: wrap;
     font-size: 26px;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .column .title {
         font-size: 32px;
     }
@@ -117,7 +117,7 @@ header {
     flex-wrap: wrap;
     font-size: 26px;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .title {
         font-size: 32px;
     }
@@ -181,7 +181,7 @@ header {
     padding-left: 5px;
     padding-right: 5px;
 }
-@media screen and (max-width: 1068px) {
+@media screen and (max-width: 768px) {
     .information .right {
         font-size: 24px;
     }
