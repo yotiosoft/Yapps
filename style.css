@@ -28,12 +28,6 @@ body {
     box-sizing: border-box;
 }
 
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 28px;
-    }
-}
-
 p {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -99,11 +93,6 @@ header {
     flex-wrap: wrap;
     font-size: 26px;
 }
-@media screen and (max-width: 768px) {
-    .column .title {
-        font-size: 32px;
-    }
-}
 .column .title img {
     height: 48px;
     margin-right: 20px;
@@ -116,11 +105,6 @@ header {
     display: flex;
     flex-wrap: wrap;
     font-size: 26px;
-}
-@media screen and (max-width: 768px) {
-    .title {
-        font-size: 32px;
-    }
 }
 .title img {
     height: 48px;
@@ -180,11 +164,6 @@ header {
     font-size: 20px;
     padding-left: 5px;
     padding-right: 5px;
-}
-@media screen and (max-width: 768px) {
-    .information .right {
-        font-size: 24px;
-    }
 }
 .information .right:hover {
     background-color: rgba(255, 255, 255, 50);
