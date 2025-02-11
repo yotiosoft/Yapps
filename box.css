@@ -21,6 +21,26 @@
     margin-bottom: 50px;
     place-content: center;
 }
+.box-area-responsive {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 260px);
+    grid-template-columns: repeat(auto-fill, 240px);
+    margin-top: 10px;
+    place-content: center;
+    --name: box-area;
+}
+@media screen and (max-width: 768px) {
+    .box-area-responsive {
+        width: 100%;
+        display: grid;
+        grid-template-rows: repeat(auto-fill, 150px);
+        grid-template-columns: repeat(auto-fill, 380px);
+        margin-top: 10px;
+        margin-bottom: 50px;
+        place-content: center;
+        --name: box-horizon-area;
+    }
+}
 
 .box-wrap {
     width: 240px;
