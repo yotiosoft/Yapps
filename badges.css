@@ -13,12 +13,6 @@
   font-size: 12px;
 }
 
-@media screen and (max-width: 768px) {
-  .badge-group {
-    font-size: 22px;
-  }
-}
-
 .badge-skyblue {
   margin-right: 3px;
   border-radius: 4px;
