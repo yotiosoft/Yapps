@@ -2,10 +2,8 @@
 const CACHE_NAME = 'pwa-sample-caches-v1';
 // Cache targets
 const urlsToCache = [
-    './',
     './index.html',
     './about/index.html',
-    './add-spaces/js',
     './add-spaces/js/add-spaces.js',
     './add-spaces/index.html',
     './add-spaces/add-spaces.css',
