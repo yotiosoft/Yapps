@@ -1,6 +1,6 @@
 .output-area {
-    width: 100%;
-    min-height: 300px;
+    width: calc(100% - 22px);
+    height: 300px;
     height: fit-content;
     background-color: #fff;
     white-space: pre-wrap;
@@ -8,4 +8,10 @@
     padding: 10px;
     border: solid 1px #000000;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .output-area {
+        height: 100px;
+    }
 }
