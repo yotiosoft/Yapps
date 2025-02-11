@@ -47,10 +47,10 @@
 }
 @media screen and (max-width: 768px) {
     #input-textarea {
-        height: 100px;
+        height: 150px;
     }
     #output-textarea {
-        height: 100px;
+        height: 150px;
     }
     .checkbox {
         margin-top: 0px;
