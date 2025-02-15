@@ -1,7 +1,6 @@
 .output-area {
     width: calc(100% - 22px);
     height: 300px;
-    height: fit-content;
     background-color: #fff;
     white-space: pre-wrap;
 
@@ -12,6 +11,6 @@
 
 @media screen and (max-width: 768px) {
     .output-area {
-        height: 100px;
+        height: 150px;
     }
 }

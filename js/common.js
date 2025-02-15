@@ -89,6 +89,17 @@ function apps2box(id, target, visual_mode) {
 
             var app = apps_list[i];
             var box_wrap = document.createElement("div");
+            if (visual_mode == "responsive") {
+                var box = document.getElementById(id);
+                var box_name = getComputedStyle(box).getPropertyValue("--name");
+                if (box_name == "box-area") {
+                    visual_mode = "box";
+                }
+                else if (box_name == "box-horizon-area") {
+                    visual_mode = "box-horizontal";
+                }
+            }
+
             if (visual_mode == "box") {
                 box_wrap.className = "box-wrap";
                 var a = document.createElement("a");

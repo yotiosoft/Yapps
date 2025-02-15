@@ -107,7 +107,7 @@ header {
 }
 
 .summary {
-    margin: 20px 0px 0px 10px;
+    padding: 0px 10px 0px 10px;
 }
 .summary a {
     color: #0088dd;
@@ -162,4 +162,16 @@ header {
 }
 .information .right:hover {
     background-color: rgba(255, 255, 255, 50);
+}
+
+.update_element {
+    display: grid;
+    padding: 0px 10px 0px 10px;
+    grid-template-columns: 200px calc(100% - 200px);
+    grid-gap: 0px 20px 0px 0px;
+}
+@media screen and (max-width: 768px) {
+    .update_element {
+        grid-template-columns: 100%;
+    }
 }

@@ -43,18 +43,8 @@
                         テキスト
                     </div>
 
-                    <div id="box-horizon-area-of-text"></div>
-                    <script>
-                        if (window.innerWidth <= 768 || navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-                            var box_area = document.getElementById("box-horizon-area-of-text");
-                            box_area.classList.add("box-horizon-area");
-                            apps2box("box-horizon-area-of-text", "top-text", "box-horizontal");
-                        } else {
-                            var box_area = document.getElementById("box-horizon-area-of-text");
-                            box_area.classList.add("box-area");
-                            apps2box("box-horizon-area-of-text", "top-text", "box");
-                        }
-                    </script>
+                    <div class="box-area-responsive" id="box-horizon-area-of-text"></div>
+                    <script>apps2box("box-horizon-area-of-text", "top-text", "responsive");</script>
                 </div>
 
                 <div class="column">
@@ -63,18 +53,8 @@
                         ドキュメント
                     </div>
 
-                    <div id="box-horizon-area-of-document"></div>
-                    <script>
-                        if (window.innerWidth <= 768 || navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-                            var box_area = document.getElementById("box-horizon-area-of-document");
-                            box_area.classList.add("box-horizon-area");
-                            apps2box("box-horizon-area-of-document", "top-document", "box-horizontal");
-                        } else {
-                            var box_area = document.getElementById("box-horizon-area-of-document");
-                            box_area.classList.add("box-area");
-                            apps2box("box-horizon-area-of-document", "top-document", "box");
-                        }
-                    </script>
+                    <div class="box-area-responsive" id="box-horizon-area-of-document"></div>
+                    <script>apps2box("box-horizon-area-of-document", "top-document", "responsive");</script>
                 </div>
 
                 <div class="column">
@@ -83,18 +63,8 @@
                         数学
                     </div>
 
-                    <div id="box-horizon-area-of-math"></div>
-                    <script>
-                        if (window.innerWidth <= 768 || navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-                            var box_area = document.getElementById("box-horizon-area-of-math");
-                            box_area.classList.add("box-horizon-area");
-                            apps2box("box-horizon-area-of-math", "top-math", "box-horizontal");
-                        } else {
-                            var box_area = document.getElementById("box-horizon-area-of-math");
-                            box_area.classList.add("box-area");
-                            apps2box("box-horizon-area-of-math", "top-math", "box");
-                        }
-                    </script>
+                    <div class="box-area-responsive" id="box-horizon-area-of-math"></div>
+                    <script>apps2box("box-horizon-area-of-math", "top-math", "responsive");</script>
                 </div>
 
                 <div class="column">
@@ -103,21 +73,29 @@
                         画像処理
                     </div>
 
-                    <div id="box-horizon-area-of-image"></div>
-                    <script>
-                        if (window.innerWidth <= 768 || navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-                            var box_area = document.getElementById("box-horizon-area-of-image");
-                            box_area.classList.add("box-horizon-area");
-                            apps2box("box-horizon-area-of-image", "top-image", "box-horizontal");
-                        } else {
-                            var box_area = document.getElementById("box-horizon-area-of-image");
-                            box_area.classList.add("box-area");
-                            apps2box("box-horizon-area-of-image", "top-image", "box");
-                        }
-                    </script>
+                    <div class="box-area-responsive" id="box-horizon-area-of-image"></div>
+                    <script>apps2box("box-horizon-area-of-image", "top-image", "responsive");</script>
                 </div>
             </div>
         </div>
+
+        <script>
+            var beforeWidth = window.innerWidth;
+            window.addEventListener('resize', function() {
+                if (beforeWidth >= 768 && window.innerWidth >= 768 || beforeWidth < 768 && window.innerWidth < 768) {
+                    return;
+                }
+                beforeWidth = window.innerWidth;
+                document.getElementById("box-horizon-area-of-text").innerHTML = "";
+                apps2box("box-horizon-area-of-text", "top-text", "responsive");
+                document.getElementById("box-horizon-area-of-document").innerHTML = "";
+                apps2box("box-horizon-area-of-document", "top-document", "responsive");
+                document.getElementById("box-horizon-area-of-math").innerHTML = "";
+                apps2box("box-horizon-area-of-math", "top-math", "responsive");
+                document.getElementById("box-horizon-area-of-image").innerHTML = "";
+                apps2box("box-horizon-area-of-image", "top-image", "responsive");
+            });
+        </script>
 
         <script>
             // PWA Service Worker
