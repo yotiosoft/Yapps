@@ -1,3 +1,8 @@
+$(window).on('load', function() {
+    // 情報の表示
+    information_show_if_needed('yapps_info_char-checker_250217', 'information_button');
+});
+
 $('#input-textarea').keyup(function() {
     var input  = document.getElementById("input-textarea");
     var output = document.getElementById("output-area");
