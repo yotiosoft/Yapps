@@ -14,7 +14,7 @@ $('#input-textarea').keyup(function() {
     var full_char = false;
     var bcg = document.createElement("span");
     for (var i=0; i<input.value.length; i++) {
-        if (input.value[i].match(/^[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}\u00A7-\u00A8\u00B0-\u00B1\u00B4\u00B6\u00D7\u00F7\u0390-\u03FF\u0410-\u044F\u0451\u2010-\u2BFF\u3000-\u33FF\uFF01-\uFF60\uFFE0-\uFFE6]+$/u)) { 
+        if (input.value[i].match(/^[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}\u00A7-\u00A8\u00B0-\u00B1\u00B4\u00B6\u00D7\u00F7\u0390-\u03FF\u0401\u0410-\u044F\u0451\u2010-\u2BFF\u3000-\u33FF\uFF01-\uFF60\uFFE0-\uFFE6]+$/u)) { 
             if (!full_char) {
                 if (bcg != null)
                     output.appendChild(bcg);
