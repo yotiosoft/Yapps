@@ -39,6 +39,11 @@ a {
     color: #4b4b4b;
 }
 
+.normal-link {
+    text-decoration: none;
+    color: #0077ff;
+}
+
 li {
     margin: 5px 0px 5px 0px;
 }
