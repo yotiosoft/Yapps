@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>画像RGB値取得ツール</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        img {
+            border: 2px solid #ccc;
+            margin-bottom: 20px;
+            cursor: crosshair;
+        }
+
+        .rgb-display {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="targetImg" src="" alt="画像ファイル">
+        <div class="rgb-display">
+            <h3>クリックした位置のRGB値:</h3>
+            <p id="rgbValue">-</p>
+        </div>
+    </div>
+
+    <script>
+        const img = document.getElementById('targetImg');
+        let imgSrc = '';
+
+        function selectImage() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        img.src = event.target.result;
+                        imgSrc = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            input.click();
+        }
+
+        function getRGBValue(x, y) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            ctx.drawImage(img, 0, 0);
+
+            const data = ctx.getImageData(x, y, 1, 1).data;
+            return `RGB: ${data[0]}, ${data[1]}, ${data[2]}`;
+        }
+
+        img.addEventListener('click', (e) => {
+            const rect = img.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const rgbValue = getRGBValue(x, y);
+            document.getElementById('rgbValue').textContent = rgbValue;
+        });
+
+        img.addEventListener('load', () => {
+            img.width = Math.min(img.width * 0.8, 800);
+        });
+    </script>
+</body>
+</html>
