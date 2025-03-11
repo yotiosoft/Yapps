@@ -165,10 +165,23 @@
             "summary": "入力画像から顔認識を行い、該当箇所をモザイク加工します。",
             "category": "画像処理",
             "target": [
-                "top-image"
+                "top-image",
+                "img2color"
             ],
             "image": "/img/tools_icon/img/face_detect.svg",
             "path": "/mosaic-faces/"
+        },
+        {
+            "id": "img2color",
+            "name": "画像RGB値取得",
+            "summary": "画像ファイルをアップロードし、マウスクリックした位置のRGB値を取得します。",
+            "category": "画像処理",
+            "target": [
+                "top-image",
+                "mosaic-faces"
+            ],
+            "image": "/img/tools_icon/img/img2color.svg",
+            "path": "/img2color/"
         }
     ]
 }

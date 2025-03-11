@@ -5,10 +5,13 @@ let rgbValue = null;
 let colorPreview = null;
 let hexValue = null;
 let positionValue = null;
+let copyRgbButton = null;
+let copyHexButton = null;
 
 // 画像関連の変数
 let image = null;
 let ctx = null;
+let ratio = 1;
 
 // ページ読み込み完了時の処理
 $(document).ready(function() {
@@ -19,6 +22,8 @@ $(document).ready(function() {
     colorPreview = document.getElementById('color-preview');
     hexValue = document.getElementById('hex-value');
     positionValue = document.getElementById('position-value');
+    copyRgbButton = document.getElementById('copy-rgb');
+    copyHexButton = document.getElementById('copy-hex');
     
     // キャンバスのコンテキスト取得
     ctx = imageCanvas.getContext('2d');
@@ -28,6 +33,14 @@ $(document).ready(function() {
     
     // キャンバスクリック時のイベントリスナー
     imageCanvas.addEventListener('click', handleCanvasClick);
+    
+    // コピーボタンのイベントリスナー
+    copyRgbButton.addEventListener('click', copyRgbToClipboard);
+    copyHexButton.addEventListener('click', copyHexToClipboard);
+    
+    // 初期状態ではコピーボタンを非表示
+    copyRgbButton.style.display = 'none';
+    copyHexButton.style.display = 'none';
 });
 
 /**
@@ -52,7 +65,7 @@ function handleImageUpload(e) {
                 
                 // 画像が大きすぎる場合はリサイズ
                 if (width > maxWidth || height > maxHeight) {
-                    const ratio = Math.min(maxWidth / width, maxHeight / height);
+                    ratio = Math.min(maxWidth / width, maxHeight / height);
                     width *= ratio;
                     height *= ratio;
                 }
@@ -92,7 +105,7 @@ function handleCanvasClick(e) {
     const b = pixelData[2];
     
     // RGB値の表示
-    rgbValue.textContent = `R: ${r}, G: ${g}, B: ${b}`;
+    rgbValue.textContent = `${r}, ${g}, ${b}`;
     
     // 色のプレビュー
     colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
@@ -104,7 +117,11 @@ function handleCanvasClick(e) {
     hexValue.textContent = `#${hexR}${hexG}${hexB}`;
     
     // 位置の表示
-    positionValue.textContent = `X: ${x}, Y: ${y}`;
+    positionValue.textContent = `X: ${parseInt(x / ratio)}, Y: ${parseInt(y / ratio)}`;
+    
+    // コピーボタンを表示
+    copyRgbButton.style.display = 'flex';
+    copyHexButton.style.display = 'flex';
 }
 
 /**
@@ -115,4 +132,49 @@ function resetInfoArea() {
     colorPreview.style.backgroundColor = 'transparent';
     hexValue.textContent = 'クリックして値を取得';
     positionValue.textContent = 'クリックして値を取得';
+    
+    // コピーボタンを非表示
+    copyRgbButton.style.display = 'none';
+    copyHexButton.style.display = 'none';
+}
+
+/**
+ * RGB値をクリップボードにコピー
+ */
+function copyRgbToClipboard() {
+    if (rgbValue.textContent === 'クリックして値を取得') return;
+    
+    navigator.clipboard.writeText(rgbValue.textContent)
+        .then(() => {
+            showCopiedFeedback(copyRgbButton);
+        })
+        .catch(err => {
+            console.error('クリップボードへのコピーに失敗しました:', err);
+        });
+}
+
+/**
+ * HEX値をクリップボードにコピー
+ */
+function copyHexToClipboard() {
+    if (hexValue.textContent === 'クリックして値を取得') return;
+    
+    navigator.clipboard.writeText(hexValue.textContent)
+        .then(() => {
+            showCopiedFeedback(copyHexButton);
+        })
+        .catch(err => {
+            console.error('クリップボードへのコピーに失敗しました:', err);
+        });
+}
+
+/**
+ * コピー成功時のフィードバックを表示
+ */
+function showCopiedFeedback(button) {
+    button.classList.add('copied');
+    
+    setTimeout(() => {
+        button.classList.remove('copied');
+    }, 1500);
 }
