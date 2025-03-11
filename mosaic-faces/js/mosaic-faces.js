@@ -1,6 +1,15 @@
 let ctx_input;
 let ctx_output;
 
+// 検出された顔の情報を保持する配列
+let detectedFaces = [];
+// 手動で選択された領域を保持する配列
+let manualSelections = [];
+// ドラッグ選択用の変数
+let isDrawing = false;
+let startX, startY;
+let currentRect = null;
+
 // 入力画像の描画処理
 function drawImage(image) {
     // 仮想キャンバスに画像を描画（画像サイズはそのまま）
@@ -67,16 +76,88 @@ function drawImage(image) {
 function onCvLoaded() {
     cv.onRuntimeInitialized = onCVReady();
 
-    // detectキャンバスにクリックイベントを追加
-    /*
+    // 検出結果キャンバスにイベントリスナーを追加
     canvas_input = document.querySelector('#img-input');
+    
+    // クリックイベント（検出された顔の選択/非選択）
+    canvas_input.addEventListener('click', function(e) {
+        const rect = canvas_input.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // クリックされた位置に顔があるか確認
+        for (let i = 0; i < detectedFaces.length; i++) {
+            const face = detectedFaces[i];
+            if (x >= face.x && x <= face.x + face.width &&
+                y >= face.y && y <= face.y + face.height) {
+                // 顔のモザイク適用/非適用を切り替え
+                face.applyMosaic = !face.applyMosaic;
+                // 顔検出結果を再描画
+                redrawDetectionResults();
+                // モザイク処理を再適用
+                applyMosaicToImage();
+                break;
+            }
+        }
+    });
+    
+    // 手動選択用のイベントリスナー
     canvas_input.addEventListener('mousedown', function(e) {
-        console.log("mousedown at " + e.offsetX + ", " + e.offsetY);
+        const rect = canvas_input.getBoundingClientRect();
+        startX = e.clientX - rect.left;
+        startY = e.clientY - rect.top;
+        isDrawing = true;
     });
+    
+    canvas_input.addEventListener('mousemove', function(e) {
+        if (!isDrawing) return;
+        
+        const rect = canvas_input.getBoundingClientRect();
+        const currentX = e.clientX - rect.left;
+        const currentY = e.clientY - rect.top;
+        
+        // 前回の選択範囲を消去
+        redrawDetectionResults();
+        
+        // 新しい選択範囲を描画
+        const ctx = canvas_input.getContext('2d');
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.rect(startX, startY, currentX - startX, currentY - startY);
+        ctx.stroke();
+        
+        // 現在の選択範囲を保存
+        currentRect = {
+            x: Math.min(startX, currentX),
+            y: Math.min(startY, currentY),
+            width: Math.abs(currentX - startX),
+            height: Math.abs(currentY - startY)
+        };
+    });
+    
     canvas_input.addEventListener('mouseup', function(e) {
-        console.log("mouseup at " + e.offsetX + ", " + e.offsetY);
+        if (!isDrawing) return;
+        isDrawing = false;
+        
+        if (currentRect && currentRect.width > 5 && currentRect.height > 5) {
+            // 選択範囲が十分な大きさの場合、手動選択として追加
+            manualSelections.push({
+                x: currentRect.x,
+                y: currentRect.y,
+                width: currentRect.width,
+                height: currentRect.height,
+                applyMosaic: true
+            });
+            
+            // 顔検出結果を再描画
+            redrawDetectionResults();
+            // モザイク処理を再適用
+            applyMosaicToImage();
+        }
+        
+        currentRect = null;
     });
-    */
 }
 
 // cvがInitializeされたときに実行
@@ -177,6 +258,97 @@ function onUtilsLoaded() {
     });
 }
 
+// 顔検出結果を再描画する関数
+function redrawDetectionResults() {
+    // 元の画像を読み込み
+    let cvImage_detect = cv.imread("img-input");
+    
+    // 検出した顔に枠を表示
+    for (let i = 0; i < detectedFaces.length; i++) {
+        const face = detectedFaces[i];
+        let point1 = new cv.Point(face.x, face.y);
+        let point2 = new cv.Point(face.x + face.width, face.y + face.height);
+        
+        // モザイク適用/非適用で色を変える
+        let color = face.applyMosaic ? [255, 0, 0, 255] : [0, 255, 0, 255]; // 赤:適用、緑:非適用
+        cv.rectangle(cvImage_detect, point1, point2, color, 2);
+    }
+    
+    // 手動選択領域に青枠を表示
+    for (let i = 0; i < manualSelections.length; i++) {
+        const selection = manualSelections[i];
+        let point1 = new cv.Point(selection.x, selection.y);
+        let point2 = new cv.Point(selection.x + selection.width, selection.y + selection.height);
+        cv.rectangle(cvImage_detect, point1, point2, [0, 0, 255, 255], 2); // 青色
+    }
+    
+    cv.imshow("img-input", cvImage_detect);
+    cvImage_detect.delete();
+}
+
+// モザイク処理を適用する関数
+function applyMosaicToImage() {
+    // 元の画像を読み込み
+    let cvImage_result = cv.imread("img-input");
+    let img_width = cvImage_result.cols;
+    let img_height = cvImage_result.rows;
+    
+    // 検出した顔にモザイクをかける（フラグがtrueの場合のみ）
+    for (let i = 0; i < detectedFaces.length; i++) {
+        const face = detectedFaces[i];
+        if (face.applyMosaic) {
+            mosaic(cvImage_result, face.x, face.y, face.width, face.height);
+        }
+    }
+    
+    // 手動選択領域にモザイクをかける
+    for (let i = 0; i < manualSelections.length; i++) {
+        const selection = manualSelections[i];
+        if (selection.applyMosaic) {
+            mosaic(cvImage_result, selection.x, selection.y, selection.width, selection.height);
+        }
+    }
+    
+    // 結果をimg-outputキャンバスに表示
+    cv.imshow("img-output", cvImage_result);
+    
+    // 仮想キャンバスにも適用（ダウンロード用; サイズは元画像と同じ）
+    let virtualImage = cv.imread("virtual-canvas");
+    virtual_canvas = document.querySelector('#virtual-canvas');
+    
+    // 検出した顔にモザイクをかける（フラグがtrueの場合のみ）
+    for (let i = 0; i < detectedFaces.length; i++) {
+        const face = detectedFaces[i];
+        if (face.applyMosaic) {
+            const scale = virtual_canvas.width / img_width;
+            mosaic(virtualImage, 
+                   face.x * scale, 
+                   face.y * scale,
+                   face.width * scale, 
+                   face.height * scale);
+        }
+    }
+    
+    // 手動選択領域にモザイクをかける
+    for (let i = 0; i < manualSelections.length; i++) {
+        const selection = manualSelections[i];
+        if (selection.applyMosaic) {
+            const scale = virtual_canvas.width / img_width;
+            mosaic(virtualImage, 
+                   selection.x * scale, 
+                   selection.y * scale,
+                   selection.width * scale, 
+                   selection.height * scale);
+        }
+    }
+    
+    cv.imshow("virtual-canvas", virtualImage);
+    
+    // メモリ解放
+    cvImage_result.delete();
+    virtualImage.delete();
+}
+
 function detect(faceCascade) {
     // 読み込み完了後：
     // img-inputキャンパスからopencvに読み込み
@@ -196,20 +368,25 @@ function detect(faceCascade) {
     let msize = new cv.Size(0, 0);
     faceCascade.detectMultiScale(gray, faces, 1.1, 3, 0, msize, msize);
 
-    // 検出した領域に赤枠を表示
+    // 検出した顔情報を配列に保存
+    detectedFaces = [];
+    manualSelections = [];
     for (let i = 0; i < faces.size(); ++i) {
-        let point1 = new cv.Point(faces.get(i).x, faces.get(i).y);
-        let point2 = new cv.Point(faces.get(i).x + faces.get(i).width, faces.get(i).y + faces.get(i).height);
-        cv.rectangle(cvImage_detect, point1, point2, [255, 0, 0, 255], 2);
-    }
-    cv.imshow("img-input", cvImage_detect);
-
-    // 検出した領域にモザイクをかける
-    for (let i = 0; i < faces.size(); ++i) {
-        mosaic(cvImage_result, faces.get(i).x, faces.get(i).y, faces.get(i).width, faces.get(i).height);
+        detectedFaces.push({
+            x: faces.get(i).x,
+            y: faces.get(i).y,
+            width: faces.get(i).width,
+            height: faces.get(i).height,
+            applyMosaic: true // デフォルトでモザイク適用
+        });
     }
 
-    // 顔検出結果をimg-outputキャンバスに表示
+    // 検出した顔に赤枠を表示
+    redrawDetectionResults();
+
+    // モザイク処理を適用
+    applyMosaicToImage();
+
     // output用のキャンバスも同じサイズにする
     canvas_output = document.querySelector('#img-output');
     ctx_output = canvas_output.getContext('2d');
@@ -229,21 +406,9 @@ function detect(faceCascade) {
         element.style.display = "inline";
     }
 
-    cv.imshow("img-output", cvImage_result);
-
-    // 仮想キャンバスにも適用（ダウンロード用; サイズは元画像と同じ）
-    let virtualImage = cv.imread("virtual-canvas");
-    virtual_canvas = document.querySelector('#virtual-canvas');
-    for (let i = 0; i < faces.size(); ++i) {
-        mosaic(virtualImage, faces.get(i).x * (virtual_canvas.width / img_width), faces.get(i).y * (virtual_canvas.width / img_width),
-                    faces.get(i).width * (virtual_canvas.width / img_width), faces.get(i).height * (virtual_canvas.width / img_width));
-    }
-    cv.imshow("virtual-canvas", virtualImage);
-
     // メモリ解放
     cvImage_result.delete();
     cvImage_detect.delete();
-    virtualImage.delete();
     gray.delete();
     faces.delete();
     faceCascade.delete();
