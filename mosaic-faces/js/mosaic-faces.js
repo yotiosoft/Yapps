@@ -9,8 +9,18 @@ let manualSelections = [];
 let isSelecting = false;
 let startX, startY;
 let currentRect = null;
-// マウス移動中の枠
-let beforeRectX, beforeRectY;
+let selectionInfo = document.createElement('div');
+selectionInfo.style.position = 'absolute';
+selectionInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+selectionInfo.style.color = 'white';
+selectionInfo.style.padding = '5px';
+selectionInfo.style.borderRadius = '3px';
+selectionInfo.style.fontSize = '12px';
+selectionInfo.style.zIndex = '1000';
+selectionInfo.style.pointerEvents = 'none'; // マウスイベントを無視
+// 元画像
+let image = null;
+let imageFilename = null;
 
 // 入力画像の描画処理
 function drawImage(image) {
@@ -81,6 +91,10 @@ function onCvLoaded() {
     // 検出結果キャンバスにイベントリスナーを追加
     canvas_input = document.querySelector('#img-input');
     
+    // 情報表示用のdivをbodyに追加
+    document.body.appendChild(selectionInfo);
+    selectionInfo.style.display = 'none';
+    
     // クリックイベント（顔の選択/非選択と手動選択の両方を処理）
     canvas_input.addEventListener('click', function(e) {
         const rect = canvas_input.getBoundingClientRect();
@@ -132,8 +146,13 @@ function onCvLoaded() {
             startY = currentY;
             isSelecting = true;
             
-            // 選択開始
-            redrawDetectionResults();
+            // 選択開始メッセージを表示
+            const canvasContainer = canvas_input.parentElement;
+            canvasContainer.style.position = 'relative';
+            selectionInfo.style.display = 'block';
+            selectionInfo.style.left = (e.clientX + 10 + window.pageXOffset) + 'px';
+            selectionInfo.style.top = (e.clientY + 10 + window.pageYOffset) + 'px';
+            selectionInfo.textContent = `開始点: (${Math.round(startX)}, ${Math.round(startY)})`;
             
             // 現在の選択範囲を初期化
             currentRect = null;
@@ -166,6 +185,7 @@ function onCvLoaded() {
             }
             
             currentRect = null;
+            selectionInfo.style.display = 'none';
         }
     });
     
@@ -176,22 +196,27 @@ function onCvLoaded() {
         const currentX = e.clientX - rect.left;
         const currentY = e.clientY - rect.top;
         
-        // 検出結果を再描画（これにより前回の選択枠も消える）
-        redrawDetectionResults();
-        
-        // 選択枠を描画
-        const ctx = canvas_input.getContext('2d');
-        if (beforeRectX != null && beforeRectY != null) {
-            ctx.clearRect(startX, startY, beforeRectX - startX, beforeRectY - startY);
+        // 選択情報のみを更新（青枠は描画しない）
+        console.log(window.pageYOffset);
+        selectionInfo.style.left = (e.clientX + 10 + window.pageXOffset) + 'px';
+        selectionInfo.style.top = (e.clientY + 10 + window.pageYOffset) + 'px';
+        selectionInfo.textContent = `開始点: (${Math.round(startX)}, ${Math.round(startY)})
+現在点: (${Math.round(currentX)}, ${Math.round(currentY)})
+サイズ: ${Math.round(Math.abs(currentX - startX))} x ${Math.round(Math.abs(currentY - startY))}`;
+    });
+    
+    // マウスがキャンバスから出た時の処理
+    canvas_input.addEventListener('mouseleave', function(e) {
+        if (isSelecting) {
+            selectionInfo.style.display = 'none';
         }
-        ctx.strokeStyle = 'blue';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.rect(startX, startY, currentX - startX, currentY - startY);
-        ctx.stroke();
-
-        beforeRectX = currentX;
-        beforeRectY = currentY;
+    });
+    
+    // マウスがキャンバスに入った時の処理
+    canvas_input.addEventListener('mouseenter', function(e) {
+        if (isSelecting) {
+            selectionInfo.style.display = 'block';
+        }
     });
 }
 
@@ -207,7 +232,7 @@ function OnDownloadButtonClicked() {
 
     let link = document.createElement("a");
     link.href = canvas.toDataURL("image/png");
-    link.download = "test.png";
+    link.download = imageFilename + "_mosaic.png";
     link.click();
 }
 
@@ -270,8 +295,9 @@ function onUtilsLoaded() {
             document.getElementById("img-output").style.display = "none";
 
             // 画像読み込み準備
-            const image = new Image();
+            image = new Image();
             image.src = URL.createObjectURL(e.target.files[0]);
+            imageFilename = e.target.files[0].name.replace(/\.[^/.]+$/, "");
 
             image.onload = ()  => {
                 // 画像をimg-inputキャンバスに読み込み
@@ -350,8 +376,15 @@ function applyMosaicToImage() {
     cv.imshow("img-output", cvImage_result);
     
     // 仮想キャンバスにも適用（ダウンロード用; サイズは元画像と同じ）
-    let virtualImage = cv.imread("virtual-canvas");
     virtual_canvas = document.querySelector('#virtual-canvas');
+    virtual_ctx = virtual_canvas.getContext('2d');
+    // 一旦クリア
+    virtual_ctx.clearRect(0, 0, virtual_canvas.width, virtual_canvas.height);
+    // 画像を描画
+    virtual_canvas.width = image.width;
+    virtual_canvas.height = image.height;
+    virtual_ctx.drawImage(image, 0, 0, image.width, image.height);
+    virtualImage = cv.imread("virtual-canvas");
     
     // 検出した顔にモザイクをかける（フラグがtrueの場合のみ）
     for (let i = 0; i < detectedFaces.length; i++) {

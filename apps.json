@@ -161,7 +161,7 @@
         },
         {
             "id": "mosaic-faces",
-            "name": "顔モザイク加工（beta）",
+            "name": "顔モザイク加工",
             "summary": "入力画像から顔認識を行い、該当箇所をモザイク加工します。",
             "category": "画像処理",
             "target": [
