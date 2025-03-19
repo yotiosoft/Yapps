@@ -9,6 +9,8 @@ let manualSelections = [];
 let isSelecting = false;
 let startX, startY;
 let currentRect = null;
+// マウス移動中の枠
+let beforeRectX, beforeRectY;
 
 // 入力画像の描画処理
 function drawImage(image) {
@@ -79,7 +81,6 @@ function onCvLoaded() {
     // 検出結果キャンバスにイベントリスナーを追加
     canvas_input = document.querySelector('#img-input');
     
-    
     // クリックイベント（顔の選択/非選択と手動選択の両方を処理）
     canvas_input.addEventListener('click', function(e) {
         const rect = canvas_input.getBoundingClientRect();
@@ -131,13 +132,8 @@ function onCvLoaded() {
             startY = currentY;
             isSelecting = true;
             
-            // 開始点を描画
+            // 選択開始
             redrawDetectionResults();
-            const ctx = canvas_input.getContext('2d');
-            ctx.fillStyle = 'red';
-            ctx.beginPath();
-            ctx.arc(startX, startY, 4, 0, 2 * Math.PI);
-            ctx.fill();
             
             // 現在の選択範囲を初期化
             currentRect = null;
@@ -183,19 +179,19 @@ function onCvLoaded() {
         // 検出結果を再描画（これにより前回の選択枠も消える）
         redrawDetectionResults();
         
-        // 開始点を描画
-        const ctx = canvas_input.getContext('2d');
-        ctx.fillStyle = 'red';
-        ctx.beginPath();
-        ctx.arc(startX, startY, 4, 0, 2 * Math.PI);
-        ctx.fill();
-        
         // 選択枠を描画
+        const ctx = canvas_input.getContext('2d');
+        if (beforeRectX != null && beforeRectY != null) {
+            ctx.clearRect(startX, startY, beforeRectX - startX, beforeRectY - startY);
+        }
         ctx.strokeStyle = 'blue';
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.rect(startX, startY, currentX - startX, currentY - startY);
         ctx.stroke();
+
+        beforeRectX = currentX;
+        beforeRectY = currentY;
     });
 }
 
