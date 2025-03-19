@@ -381,12 +381,6 @@ function detect(faceCascade) {
         });
     }
 
-    // 検出した顔に赤枠を表示
-    redrawDetectionResults();
-
-    // モザイク処理を適用
-    applyMosaicToImage();
-
     // output用のキャンバスも同じサイズにする
     canvas_output = document.querySelector('#img-output');
     ctx_output = canvas_output.getContext('2d');
@@ -394,6 +388,12 @@ function detect(faceCascade) {
     canvas_output.height = img_height;
     canvas_output.style.width = img_width + "px";
     canvas_output.style.height = img_height + "px";
+
+    // 検出した顔に赤枠を表示
+    redrawDetectionResults();
+
+    // モザイク処理を適用
+    applyMosaicToImage();
 
     // 処理中の表示を消す
     document.getElementById("processing").style.display = "none";
