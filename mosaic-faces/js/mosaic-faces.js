@@ -18,6 +18,9 @@ selectionInfo.style.borderRadius = '3px';
 selectionInfo.style.fontSize = '12px';
 selectionInfo.style.zIndex = '1000';
 selectionInfo.style.pointerEvents = 'none'; // マウスイベントを無視
+// 元画像
+let image = null;
+let imageFilename = null;
 
 // 入力画像の描画処理
 function drawImage(image) {
@@ -147,8 +150,8 @@ function onCvLoaded() {
             const canvasContainer = canvas_input.parentElement;
             canvasContainer.style.position = 'relative';
             selectionInfo.style.display = 'block';
-            selectionInfo.style.left = (e.clientX + 10) + 'px';
-            selectionInfo.style.top = (e.clientY + 10) + 'px';
+            selectionInfo.style.left = (e.clientX + 10 + window.pageXOffset) + 'px';
+            selectionInfo.style.top = (e.clientY + 10 + window.pageYOffset) + 'px';
             selectionInfo.textContent = `開始点: (${Math.round(startX)}, ${Math.round(startY)})`;
             
             // 現在の選択範囲を初期化
@@ -194,8 +197,9 @@ function onCvLoaded() {
         const currentY = e.clientY - rect.top;
         
         // 選択情報のみを更新（青枠は描画しない）
-        selectionInfo.style.left = (e.clientX + 10) + 'px';
-        selectionInfo.style.top = (e.clientY + 10) + 'px';
+        console.log(window.pageYOffset);
+        selectionInfo.style.left = (e.clientX + 10 + window.pageXOffset) + 'px';
+        selectionInfo.style.top = (e.clientY + 10 + window.pageYOffset) + 'px';
         selectionInfo.textContent = `開始点: (${Math.round(startX)}, ${Math.round(startY)})
 現在点: (${Math.round(currentX)}, ${Math.round(currentY)})
 サイズ: ${Math.round(Math.abs(currentX - startX))} x ${Math.round(Math.abs(currentY - startY))}`;
@@ -228,7 +232,7 @@ function OnDownloadButtonClicked() {
 
     let link = document.createElement("a");
     link.href = canvas.toDataURL("image/png");
-    link.download = "test.png";
+    link.download = imageFilename + "_mosaic.png";
     link.click();
 }
 
@@ -291,8 +295,9 @@ function onUtilsLoaded() {
             document.getElementById("img-output").style.display = "none";
 
             // 画像読み込み準備
-            const image = new Image();
+            image = new Image();
             image.src = URL.createObjectURL(e.target.files[0]);
+            imageFilename = e.target.files[0].name.replace(/\.[^/.]+$/, "");
 
             image.onload = ()  => {
                 // 画像をimg-inputキャンバスに読み込み
@@ -371,8 +376,15 @@ function applyMosaicToImage() {
     cv.imshow("img-output", cvImage_result);
     
     // 仮想キャンバスにも適用（ダウンロード用; サイズは元画像と同じ）
-    let virtualImage = cv.imread("virtual-canvas");
     virtual_canvas = document.querySelector('#virtual-canvas');
+    virtual_ctx = virtual_canvas.getContext('2d');
+    // 一旦クリア
+    virtual_ctx.clearRect(0, 0, virtual_canvas.width, virtual_canvas.height);
+    // 画像を描画
+    virtual_canvas.width = image.width;
+    virtual_canvas.height = image.height;
+    virtual_ctx.drawImage(image, 0, 0, image.width, image.height);
+    virtualImage = cv.imread("virtual-canvas");
     
     // 検出した顔にモザイクをかける（フラグがtrueの場合のみ）
     for (let i = 0; i < detectedFaces.length; i++) {
