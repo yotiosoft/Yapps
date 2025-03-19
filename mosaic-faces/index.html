@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>顔モザイク加工（beta） - Yapps</title>
+        <title>顔モザイク加工 - Yapps</title>
         <link rel="icon" type="image/png" href="/img/logo.png">
 
         <link rel="stylesheet" href="/style.css">
@@ -42,7 +42,7 @@
             <div id="contents-wrap">
                 <div class="title">
                     <img src="/img/tools_icon/img/face_detect.svg" type=”image/svg+xml” width="48" height="48" alt="全角半角変換">
-                    顔モザイク加工（beta）
+                    顔モザイク加工
                     <div class="badge-group">
                         <div class="badge-ver">ver.0.1</div>
                         <div class="badge-clientside">Client Side</div>
@@ -54,7 +54,8 @@
                     入力画像から顔認識を行い、該当箇所をモザイク加工します。<br>
                     顔認識はWebAssembly技術を使用してお使いのブラウザ内で実行されますので、入力画像がサーバに送信されることは一切ありません。<br>
                     検出された顔をクリックすると、モザイク適用/非適用を切り替えることができます（赤枠：モザイク適用、緑枠：モザイク非適用）。<br>
-                    また、マウスドラッグで任意の領域を選択してモザイク加工することもできます（青枠で表示）。
+                    また、2点をマウスクリックして任意の領域を選択してモザイク加工することもできます（青枠：モザイク適用、緑枠：モザイク非適用）。<br>
+                    選択中はマウス付近に座標とサイズ情報が表示されます。
                 </p>
                 
                 <div class="app-area" id="app-area-id">
@@ -68,7 +69,7 @@
                     <p id="processing" style="display: none;">処理中...</p>
                     <div id="visible_canvas_area">
                         <br>
-                        <p class="result_summary" style="display: none;">顔検出結果（赤枠：モザイク適用、緑枠：モザイク非適用、青枠：手動選択）：</p><br>
+                        <p class="result_summary" style="display: none;">顔検出結果（赤枠：モザイク適用、緑枠：モザイク非適用）と手動選択（青枠：モザイク適用、緑枠：モザイク非適用）：</p><br>
                         <br>
                         <!--顔検出結果表示用キャンパス-->
                         <canvas id="img-input" style="display: none;"></canvas><br>

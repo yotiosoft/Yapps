@@ -5,10 +5,19 @@ let ctx_output;
 let detectedFaces = [];
 // 手動で選択された領域を保持する配列
 let manualSelections = [];
-// ドラッグ選択用の変数
-let isDrawing = false;
+// 2点クリック選択用の変数
+let isSelecting = false;
 let startX, startY;
 let currentRect = null;
+let selectionInfo = document.createElement('div');
+selectionInfo.style.position = 'absolute';
+selectionInfo.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+selectionInfo.style.color = 'white';
+selectionInfo.style.padding = '5px';
+selectionInfo.style.borderRadius = '3px';
+selectionInfo.style.fontSize = '12px';
+selectionInfo.style.zIndex = '1000';
+selectionInfo.style.pointerEvents = 'none'; // マウスイベントを無視
 
 // 入力画像の描画処理
 function drawImage(image) {
@@ -79,84 +88,131 @@ function onCvLoaded() {
     // 検出結果キャンバスにイベントリスナーを追加
     canvas_input = document.querySelector('#img-input');
     
-    // クリックイベント（検出された顔の選択/非選択）
+    // 情報表示用のdivをbodyに追加
+    document.body.appendChild(selectionInfo);
+    selectionInfo.style.display = 'none';
+    
+    // クリックイベント（顔の選択/非選択と手動選択の両方を処理）
     canvas_input.addEventListener('click', function(e) {
         const rect = canvas_input.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const currentX = e.clientX - rect.left;
+        const currentY = e.clientY - rect.top;
         
         // クリックされた位置に顔があるか確認
+        let clickedOnFace = false;
         for (let i = 0; i < detectedFaces.length; i++) {
             const face = detectedFaces[i];
-            if (x >= face.x && x <= face.x + face.width &&
-                y >= face.y && y <= face.y + face.height) {
+            if (currentX >= face.x && currentX <= face.x + face.width &&
+                currentY >= face.y && currentY <= face.y + face.height) {
                 // 顔のモザイク適用/非適用を切り替え
                 face.applyMosaic = !face.applyMosaic;
                 // 顔検出結果を再描画
                 redrawDetectionResults();
                 // モザイク処理を再適用
                 applyMosaicToImage();
+                clickedOnFace = true;
                 break;
             }
         }
-    });
-    
-    // 手動選択用のイベントリスナー
-    canvas_input.addEventListener('mousedown', function(e) {
-        const rect = canvas_input.getBoundingClientRect();
-        startX = e.clientX - rect.left;
-        startY = e.clientY - rect.top;
-        isDrawing = true;
+        
+        // クリックされた位置に手動選択領域があるか確認
+        let clickedOnManualSelection = false;
+        if (!clickedOnFace) {
+            for (let i = 0; i < manualSelections.length; i++) {
+                const selection = manualSelections[i];
+                if (currentX >= selection.x && currentX <= selection.x + selection.width &&
+                    currentY >= selection.y && currentY <= selection.y + selection.height) {
+                    // 手動選択領域のモザイク適用/非適用を切り替え
+                    selection.applyMosaic = !selection.applyMosaic;
+                    // 顔検出結果を再描画
+                    redrawDetectionResults();
+                    // モザイク処理を再適用
+                    applyMosaicToImage();
+                    clickedOnManualSelection = true;
+                    break;
+                }
+            }
+        }
+        
+        // 顔または手動選択領域をクリックした場合は選択処理をスキップ
+        if (clickedOnFace || clickedOnManualSelection) return;
+        
+        if (!isSelecting) {
+            // 1点目のクリック
+            startX = currentX;
+            startY = currentY;
+            isSelecting = true;
+            
+            // 選択開始メッセージを表示
+            const canvasContainer = canvas_input.parentElement;
+            canvasContainer.style.position = 'relative';
+            selectionInfo.style.display = 'block';
+            selectionInfo.style.left = (e.clientX + 10) + 'px';
+            selectionInfo.style.top = (e.clientY + 10) + 'px';
+            selectionInfo.textContent = `開始点: (${Math.round(startX)}, ${Math.round(startY)})`;
+            
+            // 現在の選択範囲を初期化
+            currentRect = null;
+        } else {
+            // 2点目のクリック
+            isSelecting = false;
+            
+            // 現在の選択範囲を計算
+            currentRect = {
+                x: Math.min(startX, currentX),
+                y: Math.min(startY, currentY),
+                width: Math.abs(currentX - startX),
+                height: Math.abs(currentY - startY)
+            };
+            
+            if (currentRect && currentRect.width > 5 && currentRect.height > 5) {
+                // 選択範囲が十分な大きさの場合、手動選択として追加
+                manualSelections.push({
+                    x: currentRect.x,
+                    y: currentRect.y,
+                    width: currentRect.width,
+                    height: currentRect.height,
+                    applyMosaic: true
+                });
+                
+                // 顔検出結果を再描画
+                redrawDetectionResults();
+                // モザイク処理を再適用
+                applyMosaicToImage();
+            }
+            
+            currentRect = null;
+            selectionInfo.style.display = 'none';
+        }
     });
     
     canvas_input.addEventListener('mousemove', function(e) {
-        if (!isDrawing) return;
+        if (!isSelecting) return;
         
         const rect = canvas_input.getBoundingClientRect();
         const currentX = e.clientX - rect.left;
         const currentY = e.clientY - rect.top;
         
-        // 前回の選択範囲を消去
-        redrawDetectionResults();
-        
-        // 新しい選択範囲を描画
-        const ctx = canvas_input.getContext('2d');
-        ctx.strokeStyle = 'blue';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.rect(startX, startY, currentX - startX, currentY - startY);
-        ctx.stroke();
-        
-        // 現在の選択範囲を保存
-        currentRect = {
-            x: Math.min(startX, currentX),
-            y: Math.min(startY, currentY),
-            width: Math.abs(currentX - startX),
-            height: Math.abs(currentY - startY)
-        };
+        // 選択情報のみを更新（青枠は描画しない）
+        selectionInfo.style.left = (e.clientX + 10) + 'px';
+        selectionInfo.style.top = (e.clientY + 10) + 'px';
+        selectionInfo.textContent = `開始点: (${Math.round(startX)}, ${Math.round(startY)})
+現在点: (${Math.round(currentX)}, ${Math.round(currentY)})
+サイズ: ${Math.round(Math.abs(currentX - startX))} x ${Math.round(Math.abs(currentY - startY))}`;
     });
     
-    canvas_input.addEventListener('mouseup', function(e) {
-        if (!isDrawing) return;
-        isDrawing = false;
-        
-        if (currentRect && currentRect.width > 5 && currentRect.height > 5) {
-            // 選択範囲が十分な大きさの場合、手動選択として追加
-            manualSelections.push({
-                x: currentRect.x,
-                y: currentRect.y,
-                width: currentRect.width,
-                height: currentRect.height,
-                applyMosaic: true
-            });
-            
-            // 顔検出結果を再描画
-            redrawDetectionResults();
-            // モザイク処理を再適用
-            applyMosaicToImage();
+    // マウスがキャンバスから出た時の処理
+    canvas_input.addEventListener('mouseleave', function(e) {
+        if (isSelecting) {
+            selectionInfo.style.display = 'none';
         }
-        
-        currentRect = null;
+    });
+    
+    // マウスがキャンバスに入った時の処理
+    canvas_input.addEventListener('mouseenter', function(e) {
+        if (isSelecting) {
+            selectionInfo.style.display = 'block';
+        }
     });
 }
 
@@ -274,12 +330,14 @@ function redrawDetectionResults() {
         cv.rectangle(cvImage_detect, point1, point2, color, 2);
     }
     
-    // 手動選択領域に青枠を表示
+    // 手動選択領域に枠を表示（モザイク適用/非適用で色を変える）
     for (let i = 0; i < manualSelections.length; i++) {
         const selection = manualSelections[i];
         let point1 = new cv.Point(selection.x, selection.y);
         let point2 = new cv.Point(selection.x + selection.width, selection.y + selection.height);
-        cv.rectangle(cvImage_detect, point1, point2, [0, 0, 255, 255], 2); // 青色
+        // モザイク適用時は青枠、非適用時は緑枠
+        let color = selection.applyMosaic ? [0, 0, 255, 255] : [0, 255, 0, 255]; // 青:適用、緑:非適用
+        cv.rectangle(cvImage_detect, point1, point2, color, 2);
     }
     
     cv.imshow("img-input", cvImage_detect);
@@ -381,12 +439,6 @@ function detect(faceCascade) {
         });
     }
 
-    // 検出した顔に赤枠を表示
-    redrawDetectionResults();
-
-    // モザイク処理を適用
-    applyMosaicToImage();
-
     // output用のキャンバスも同じサイズにする
     canvas_output = document.querySelector('#img-output');
     ctx_output = canvas_output.getContext('2d');
@@ -394,6 +446,12 @@ function detect(faceCascade) {
     canvas_output.height = img_height;
     canvas_output.style.width = img_width + "px";
     canvas_output.style.height = img_height + "px";
+
+    // 検出した顔に赤枠を表示
+    redrawDetectionResults();
+
+    // モザイク処理を適用
+    applyMosaicToImage();
 
     // 処理中の表示を消す
     document.getElementById("processing").style.display = "none";
