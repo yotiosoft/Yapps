@@ -2,6 +2,7 @@
     display: block;
     max-width: 100%;
     padding: 10px;
+    overflow-x: scroll;
 }
 
 #img-input {

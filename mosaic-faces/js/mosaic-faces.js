@@ -40,24 +40,32 @@ function drawImage(image) {
     canvas_input = document.querySelector('#img-input');
     scroller_inner = document.querySelector('#canvas-scroller-input-inner');
 
-    // リサイズ処理
+    // リサイズ処理（最大: x=1000, y=1000）
     ctx_input = canvas_input.getContext('2d');
     // 一旦クリア
     ctx_input.clearRect(0, 0, canvas_input.width, canvas_input.height);
     // 画像を描画
     img = image;
     let width = img.width, height = img.height;
-    const max_width = window.innerWidth - 20;
-    const max_height = 1000;
-    console.log(max_width, max_height);
+    const max_width = 1000, max_height = 1000;
 
     if (width > max_width) {
-        height *= max_width / width;
-        width = max_width;
+        if (img.width > img.height) {
+            height = max_width * img.height / img.width;
+            width = max_width;
+        } else {
+            width = max_height * img.width / img.height;
+            height = max_height;
+        }
     }
     if (height > max_height) {
-        width *= max_height / height;
-        height = max
+        if (img.width > img.height) {
+            height = max_width * img.height / img.width;
+            width = max_width;
+        } else {
+            width = max_height * img.width / img.height;
+            height = max_height;
+        }
     }
 
     canvas_input.width = width;
