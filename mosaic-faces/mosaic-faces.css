@@ -1,6 +1,7 @@
 #visible_canvas_area {
     display: block;
     max-width: 100%;
+    padding: 10px;
 }
 
 #img-input {
