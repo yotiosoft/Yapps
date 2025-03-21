@@ -120,6 +120,13 @@ function apps2box(id, target, visual_mode) {
 
                 box.appendChild(img);
                 box.appendChild(p1);
+                if (app.new) {
+                    var p_new = document.createElement("p");
+                    p_new.className = "new";
+                    p_new.textContent = "New!";
+                    p_new.style = "color: red; font-weight: bold; font-size: 12px; height: 14px; margin: 0;";
+                    box.appendChild(p_new);
+                }
                 box.appendChild(p2);
                 a.appendChild(box);
                 box_wrap.appendChild(a);

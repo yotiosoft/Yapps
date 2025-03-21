@@ -176,6 +176,7 @@
             "name": "画像RGB値取得",
             "summary": "画像ファイルをアップロードし、マウスクリックした位置のRGB値を取得します。",
             "category": "画像処理",
+            "new": true,
             "target": [
                 "top-image",
                 "mosaic-faces"
