@@ -275,5 +275,5 @@ function OnMakeButtonClick() {
 }
 
 $(window).on('load', function() {
-    information_show_if_needed('yapps_info_random_250113', 'information_button');
+    information_show_if_needed('yapps_info_random_250420', 'information_button');
 });
