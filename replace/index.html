@@ -1,0 +1,118 @@
+<html lang="ja">
+    <head>
+        <meta charset="utf8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>文字列置き換え - Yapps</title>
+        <link rel="icon" type="image/png" href="/img/logo.png">
+
+        <link rel="stylesheet" href="/style.css">
+		<link rel="stylesheet" href="/app-page.css">
+		<link rel="stylesheet" href="/simple-textarea.css">
+        <link rel="stylesheet" href="/button.css">
+        <link rel="stylesheet" href="/checkbox.css">
+        <link rel="stylesheet" href="/badges.css">
+        <link rel="stylesheet" href="/box.css">
+        <link rel="stylesheet" href="./replace.css">
+
+        <script src="/js/jquery-3.5.1.min.js"></script>
+        <script src="/js/common.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
+
+		<script src="./js/replace.js"></script>
+
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Yapps",
+              "url": "https://yapps.yotiosoft.com/"
+            }
+        </script>
+    </head>
+
+    <body>
+        <header>
+            <div id="wrap" style="width: 100%;">
+                <div id="header"></div>
+            </div>
+        </header>
+
+        <div id="wrap">
+            <div id="contents-wrap">
+                <div class="title">
+                    <img src="/img/tools_icon/text/add-spaces.svg" type=”image/svg+xml�? width="48" height="48" alt="英単語の前後に空白を追加">
+                    文字列置き換え
+                    <div class="badge-group">
+                        <div class="badge-ver">ver.1.0</div>
+                        <div class="badge-clientside">Client Side</div>
+                        <div class="badge-offline">Offline OK</div>
+                    </div>
+                </div>
+                <p class="summary">
+                    入力した文章内の特定の文字を別の文字に置き換えます。<br>
+                    このツールはお使いのブラウザ内で実行されますので、入力文章がサーバに送信されることは一切ありません。
+                </p>
+                
+                <div class="app-area" id="app-area-id">
+                    <div class="grid-view" id="textareas">
+                        <!--入力テキストエリア-->
+                        <div class="left-objs">
+                            <textarea name="input-text" id="input-textarea" placeholder="文字列を置き換えたい文章をここに入力" class="simple-textarea"></textarea>
+                        </div>
+                        
+                        <div class="center-objs">
+                            <div class="inner">
+                                <img src="/img/common/arrow_right2.svg" style="width: 64px; height: 64px;">
+
+                                <div style="margin: 10px 0;">
+                                    <div style="margin-bottom: 10px;">
+                                        <label for="search-text" style="display: block; margin-bottom: 5px; font-weight: bold;">置き換え前:</label>
+                                        <input type="text" id="search-text" placeholder="置き換えたい文字" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <label for="replace-text" style="display: block; margin-bottom: 5px; font-weight: bold;">置き換え後:</label>
+                                        <input type="text" id="replace-text" placeholder="置き換える文字" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="highlight-mode" name="highlight-mode" checked>
+                                        <label for="highlight-mode">置き換え対象をハイライト</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="right-objs">
+                            <!--出力テキストエリア-->
+                            <textarea name="output-text" id="output-textarea" placeholder="処理後の文章がここに出力されます" class="simple-textarea"></textarea>
+                            <br>
+                            <!--コピーボタン-->
+                            <span style="float: right;">
+                                <a href="javascript:OnCopyButtonClick();" id="copy-button">
+                                    <div class="round-rect-button">
+                                        <div class="middle-text">
+                                            クリップボードにコピー
+                                        </div>
+                                    </div>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="related-apps">
+                    <div class="title">関連アプリ</div>
+                    <div class="app-list">
+                        <div class="box-horizon-area" id="related-apps"></div>
+                    </div>
+                    <script>apps2box("related-apps", "add-spaces", "box-horizontal");</script>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer_class">
+            <div id="footer"></div>
+        </footer>
+    </body>
+</html>
