@@ -141,7 +141,8 @@
             "category": "数学",
             "target": [
                 "top-math",
-                "cardinal"
+                "cardinal",
+                "schedule_speed"
             ],
             "image": "/img/tools_icon/math/random.svg",
             "path": "/random/"
@@ -154,6 +155,7 @@
             "target": [
                 "top-math",
                 "random",
+                "schedule_speed",
                 "char-counter"
             ],
             "image": "/img/tools_icon/math/cardinal.svg",
@@ -176,13 +178,26 @@
             "name": "画像RGB値取得",
             "summary": "画像ファイルをアップロードし、マウスクリックした位置のRGB値を取得します。",
             "category": "画像処理",
-            "new": true,
             "target": [
                 "top-image",
                 "mosaic-faces"
             ],
             "image": "/img/tools_icon/img/img2color.svg",
             "path": "/img2color/"
+        },
+        {
+            "id": "schedule_speed",
+            "name": "表定速度計算",
+            "summary": "2点間の距離と所要時間から表定速度を計算します。",
+            "category": "数学",
+            "new": true,
+            "target": [
+                "top-math",
+                "cardinal",
+                "random"
+            ],
+            "image": "/img/tools_icon/math/schedule_speed.svg",
+            "path": "/schedule_speed/"
         }
     ]
 }
