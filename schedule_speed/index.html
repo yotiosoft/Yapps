@@ -62,40 +62,40 @@
                 </div>
                 <div id="intl_caution"></div>
 
-                <div class="app-area" id="app-area-id" style="max-width: 100%; overflow: scroll;">
+                <div class="app-area" id="app-area-id" style="overflow: auto;"
                     <!-- 入力フォーム -->
                     <div class="input-section">
                         <table class="input-table">
                             <tr>
                                 <td class="summary">
                                     <div class="checkbox">
-                                        駅名（任意）
+                                        駅名(任意)
                                     </div>
                                 </td>
                                 <td class="input" style="display: flex;">
-                                    <input type="text" id="start-station" placeholder="始点駅名" class="simple-inputtext" style="width: 180px; margin-right: 10px;">
+                                    <input type="text" id="start-station" placeholder="始点駅名" class="simple-inputtext" style="width: 140px; margin-right: 10px;">
                                     <span style="margin: 5px 15px 5px 5px; line-height: 30px;">〜</span>
-                                    <input type="text" id="end-station" placeholder="終点駅名" class="simple-inputtext" style="width: 180px;">
+                                    <input type="text" id="end-station" placeholder="終点駅名" class="simple-inputtext" style="width: 140px;">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="summary">
                                     <div class="checkbox">
-                                        備考（任意）
+                                        備考(任意)
                                     </div>
                                 </td>
                                 <td class="input" style="display: flex;">
-                                    <input type="text" id="remarks" placeholder="備考を入力" class="simple-inputtext" style="width: 380px;">
+                                    <input type="text" id="remarks" placeholder="備考を入力" class="simple-inputtext" style="width: 330px;">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="summary">
                                     <div class="checkbox">
-                                        距離（km）<span style="color: red;">*</span>
+                                        距離(km)<span style="color: red;">*</span>
                                     </div>
                                 </td>
                                 <td class="input">
-                                    <input type="number" id="distance" placeholder="距離を入力" class="simple-inputtext" step="0.1" min="0" required>
+                                    <input type="number" id="distance" placeholder="距離を入力" class="simple-inputtext" style="width: 330px;" step="0.1" min="0" required>
                                 </td>
                             </tr>
                             <tr>
@@ -105,10 +105,10 @@
                                     </div>
                                 </td>
                                 <td class="input" style="display: flex;">
-                                    <input type="number" id="time-hours" placeholder="時間" class="simple-inputtext" style="width: 140px; margin-right: 10px;" step="1" min="0" value="0">
-                                    <span style="margin: 5px 15px 5px 5px; line-height: 30px;">時間</span>
-                                    <input type="number" id="time-minutes" placeholder="分" class="simple-inputtext" style="width: 140px; margin-left: 10px; margin-right: 10px;" step="1" min="0" value="0">
-                                    <span style="margin: 5px 15px 5px 5px; line-height: 30px;">分</span>
+                                    <input type="number" id="time-hours" placeholder="時間" class="simple-inputtext" style="width: 120px;" step="1" min="0" value="0">
+                                    <span style="margin: 5px 5px 5px 5px; line-height: 30px;">時間</span>
+                                    <input type="number" id="time-minutes" placeholder="分" class="simple-inputtext" style="width: 120px; margin-left: 10px;" step="1" min="0" value="0">
+                                    <span style="margin: 5px 5px 5px 5px; line-height: 30px;">分</span>
                                 </td>
                             </tr>
                         </table>
