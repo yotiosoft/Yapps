@@ -1,4 +1,5 @@
 function OnConvertButtonClick(halfToFull) {
+    const start = performance.now();
     input_area  = document.getElementById("input-textarea");
     output_area = document.getElementById("output-textarea");
     
@@ -11,7 +12,6 @@ function OnConvertButtonClick(halfToFull) {
     var converted_str = "";
 
     $.getJSON("./kana-codes.json", (kana) => {
-        const start = performance.now();
         $.getJSON("./others-codes.json", (other_codes) => {
             for (var i = 0; i < input_area.value.length; i++) {
                 var ascii = input_area.value.charCodeAt(i);
