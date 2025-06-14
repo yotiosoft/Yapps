@@ -25,6 +25,6 @@ jobs:
       - name: Minify all .js files in-place
         run: |
           find . -type f -name "*.js" ! -path "./.git/*" | while read -r file; do
-            tmpfile="${file}.min.tmp"
-            python -m jsmin "$file" > "$tmpfile" && mv "$tmpfile" "$file"
+            outfile="${file}.min.js"
+            python -m jsmin "$file" > "$outfile"
           done
