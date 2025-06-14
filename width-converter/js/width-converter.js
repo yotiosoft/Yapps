@@ -11,6 +11,7 @@ function OnConvertButtonClick(halfToFull) {
     var converted_str = "";
 
     $.getJSON("./kana-codes.json", (kana) => {
+        const start = performance.now();
         $.getJSON("./others-codes.json", (other_codes) => {
             for (var i = 0; i < input_area.value.length; i++) {
                 var ascii = input_area.value.charCodeAt(i);
@@ -104,6 +105,8 @@ function OnConvertButtonClick(halfToFull) {
             output_area.value = converted_str;
         });
     });
+    const end = performance.now();
+    console.log(`変換時間: ${end - start}ミリ秒`);
 }
 
 function OnCopyButtonClick() {

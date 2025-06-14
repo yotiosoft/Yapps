@@ -4,7 +4,6 @@ $(window).on('load', function() {
 });
 
 $('#input-textarea').keyup(function() {
-    const start = performance.now();
     var input  = document.getElementById("input-textarea");
     var output = document.getElementById("output-area");
 
@@ -39,7 +38,4 @@ $('#input-textarea').keyup(function() {
         if (bcg != null)
             output.appendChild(bcg);
     }
-    const end = performance.now();
-    var time = end - start;
-    console.log("処理時間: " + time.toFixed(2) + " ms");
 });
