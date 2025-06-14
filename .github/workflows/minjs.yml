@@ -28,6 +28,9 @@ jobs:
       - name: Minify all .js files in-place
         run: |
           find . -type f -name "*.js" ! -path "./.git/*" | while read -r file; do
+            if echo "$file" | grep -q "min.js"; then
+              continue
+            fi  
             outfile="${file}.min.js"
             python -m jsmin "$file" > "$outfile"
           done
