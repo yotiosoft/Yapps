@@ -27,12 +27,10 @@ jobs:
 
       - name: Minify all .js files in-place
         run: |
-          find . -type f -name "*.js" ! -path "./.git/*" | while read -r file; do
-            if echo "$file" | grep -q "min.js"; then
-              continue
-            fi  
-            outfile="${file}.min.js"
-            python -m jsmin "$file" > "$outfile"
+          find . -type f -name "*.js" ! -name "*.min.js" ! -path "./.git/*" | while read -r file; do
+            minified_file="${file%.js}.min.js"
+            echo "Minifying $file -> $minified_file"
+            python -m jsmin "$file" > "$minified_file"
           done
 
       - name: Commit and push changes
