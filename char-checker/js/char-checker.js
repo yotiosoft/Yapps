@@ -41,5 +41,5 @@ $('#input-textarea').keyup(function() {
     }
     const end = performance.now();
     var time = end - start;
-    document.getElementById("time").textContent = "処理時間: " + time.toFixed(2) + " ms";
+    console.log("処理時間: " + time.toFixed(2) + " ms");
 });
