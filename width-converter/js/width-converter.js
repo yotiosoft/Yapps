@@ -1,5 +1,4 @@
 function OnConvertButtonClick(halfToFull) {
-    const start = performance.now();
     input_area  = document.getElementById("input-textarea");
     output_area = document.getElementById("output-textarea");
     
@@ -105,8 +104,6 @@ function OnConvertButtonClick(halfToFull) {
             output_area.value = converted_str;
         });
     });
-    const end = performance.now();
-    console.log(`変換時間: ${end - start}ミリ秒`);
 }
 
 function OnCopyButtonClick() {
