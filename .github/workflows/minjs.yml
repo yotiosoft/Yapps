@@ -1,0 +1,30 @@
+name: Minify JavaScript Files
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  minify-js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install jsmin
+        run: pip install jsmin
+
+      - name: Minify all .js files in-place
+        run: |
+          find . -type f -name "*.js" ! -path "./.git/*" | while read -r file; do
+            tmpfile="${file}.min.tmp"
+            python -m jsmin "$file" > "$tmpfile" && mv "$tmpfile" "$file"
+          done
