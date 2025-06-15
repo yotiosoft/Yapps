@@ -1,0 +1,43 @@
+name: Minify JavaScript Files
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  minify-js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Safe dirctory
+        run: git config --global --add safe.directory $(pwd)
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install jsmin
+        run: pip install jsmin
+
+      - name: Minify all .js files in-place
+        run: |
+          find . -type f -name "*.js" ! -name "*.min.js" ! -path "./.git/*" | while read -r file; do
+            minified_file="${file%.js}.min.js"
+            echo "Minifying $file -> $minified_file"
+            python -m jsmin "$file" > "$minified_file"
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email ""
+          git add .
+          git commit -am "Minified JavaScript files" || echo "No changes to commit"
+          git push origin main || echo "No changes to commit"
+
