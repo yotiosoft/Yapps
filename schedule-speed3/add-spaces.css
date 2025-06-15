@@ -1,0 +1,76 @@
+#textareas {
+    width: 100%;
+}
+
+.center-objs {
+    display: table;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.inner {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+#input-textarea {
+    background-color: #fff;
+    white-space: pre-wrap;
+
+    height: 450px;
+
+    padding: 10px;
+    border: solid 1px #000000;
+    border-radius: 5px;
+}
+
+#output-textarea {
+    background-color: #fff;
+    white-space: pre-wrap;
+
+    height: 450px;
+
+    padding: 10px;
+    border: solid 1px #000000;
+    border-radius: 5px;
+}
+
+.checkbox {
+    margin-top: 30px;
+}
+
+.grid-view {
+    display: grid;
+    width: 100%;
+    grid-auto-rows: auto;
+    grid-template-columns: 40% 20% 40%;
+}
+@media screen and (max-width: 768px) {
+    #input-textarea {
+        height: 150px;
+    }
+    #output-textarea {
+        height: 150px;
+    }
+    .checkbox {
+        margin-top: 0px;
+    }    
+    .center-objs {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .grid-view {
+        grid-auto-columns: auto;
+        grid-template-columns: 100%;
+    }
+    .inner {
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .center-objs .inner img {
+        rotate: 90deg;
+        margin-top: 10px;
+    }
+}
