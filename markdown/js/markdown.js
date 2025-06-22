@@ -7,10 +7,11 @@ function updatePreview() {
 }
 
 function fitPreviewHeight() {
+    console.log('fitPreviewHeight called');
     preview.style.height = 'auto'; // 高さをリセット
-    preview.style.height = input.scrollHeight + 'px'; // 入力エリアの高さに合わせる
+    preview.style.height = input.style.height; // 入力エリアの高さに合わせる
 }
 
 input.addEventListener('input', updatePreview);
-input.onresize = fitPreviewHeight;
+new ResizeObserver(fitPreviewHeight).observe(input);
 updatePreview(); // 初期表示
