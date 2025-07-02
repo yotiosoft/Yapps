@@ -56,7 +56,56 @@
                 
                 <div class="app-area" id="app-area-id">
                     <div class="md-area">
-                        <textarea id="markdown-input" placeholder="ここにMarkdownを入力..."># 見出し\n\nこれは**太字**です。</textarea>
+                        <textarea id="markdown-input" placeholder="ここにMarkdownを入力..."># Markdownプレビューのテスト
+
+## 概要
+このアプリケーションは**Markdown**記法で書かれた文章をリアルタイムでプレビュー表示します。
+
+## 機能
+- リアルタイムプレビュー
+- **同期スクロール機能**
+- レスポンシブデザイン
+
+## 使い方
+1. 左側のテキストエリアにMarkdownを入力
+2. 右側に自動的にプレビューが表示されます
+3. スクロールすると両側が同期します
+
+## コードブロック
+```javascript
+function hello() {
+    console.log("Hello, World!");
+}
+```
+
+## リスト
+- 項目1
+- 項目2
+  - サブ項目1
+  - サブ項目2
+- 項目3
+
+## 表
+| 列1 | 列2 | 列3 |
+|-----|-----|-----|
+| A   | B   | C   |
+| 1   | 2   | 3   |
+
+## 引用
+> これは引用文です。
+> 複数行にわたって書くことができます。
+
+## 強調
+- **太字**
+- *斜体*
+- ~~取り消し線~~
+
+## リンク
+[Yapps](https://yapps.yotiosoft.com/)
+
+---
+
+このテキストは長いので、スクロール同期機能をテストするのに適しています。</textarea>
                         <div id="preview"></div>
                     </div>
 
