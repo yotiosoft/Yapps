@@ -17,3 +17,8 @@
     line-height: 40px;
     color: white;
 }
+
+.caution {
+    background-color: #ff8400;
+    color: white;
+}
