@@ -9,6 +9,58 @@
     border-radius: 5px;
 }
 
+.output-area span {
+  display: inline-block;
+  white-space: pre;
+  font-family: monospace;
+  line-height: 1.4;
+}
+
+/* 半角スペース（幅 = n文字 × 1ch） */
+.output-area span.half-space {
+  background-color: #20f582;
+  font-family: monospace;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent 1ch,
+    red 1ch,
+    red 1.05ch
+  );
+  background-size: auto 100%;
+  background-repeat: repeat-y;
+}
+
+/* 全角スペース（幅 = n文字 × 2ch） */
+.output-area span.full-space {
+  background-color: #20c8f5;
+  font-family: monospace;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent 2ch,
+    blue 2ch,
+    blue 2.05ch
+  );
+  background-size: auto 100%;
+  background-repeat: repeat-y;
+}
+
+/* タブ（仮に4文字 = 4ch） */
+.output-area span.tab {
+  background-color: #ef454a;
+  font-family: monospace;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent 4ch,
+    orange 4ch,
+    orange 4.05ch
+  );
+  background-size: auto 100%;
+  background-repeat: repeat-y;
+}
+
 @media screen and (max-width: 768px) {
     .output-area {
         min-height: 100px;
