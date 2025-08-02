@@ -1,70 +1,50 @@
 $('#input-textarea').keyup(function() {
-    var input  = document.getElementById("input-textarea");
+    var input = document.getElementById("input-textarea");
     var output = document.getElementById("output-area");
 
+    // Clear previous output
     while (output.firstChild) {
         output.removeChild(output.firstChild);
     }
 
-    var tab_char = false, half_space_char = false, full_space_char = false;
-    var bcg = document.createElement("span");
-    for (var i=0; i<input.value.length; i++) {
-        // タブ文字
-        if (input.value[i].match(/^\t$/)) {
-            if (!tab_char) {
-                if (bcg != null)
-                    output.appendChild(bcg);
+    // Process each character
+    for (var i = 0; i < input.value.length; i++) {
+        var char = input.value[i];
+        var charBox = document.createElement("span");
 
-                tab_char = true;
-                half_space_char = false;
-                full_space_char = false;
-                bcg = document.createElement("span");
-                bcg.style = "background-color: #ef454a;";
-            }
-            bcg.textContent += "\t";
-        }
-        // 半角スペース
-        else if (input.value[i].match(/^ $/)) {
-            if (!half_space_char) {
-                if (bcg != null)
-                    output.appendChild(bcg);
+        // Common styles for all character boxes
+        charBox.style.display = "inline-block";
+        charBox.style.textAlign = "center";
+        charBox.style.fontFamily = "monospace";
 
-                half_space_char = true;
-                full_space_char = false;
-                tab_char = false;
-                bcg = document.createElement("span");
-                bcg.style = "background-color: #20f582;";
-            }
-            bcg.textContent += input.value[i];
+        // Handle newlines separately
+        if (char === '\n') {
+            output.appendChild(document.createElement("br"));
+            continue;
         }
-        // 全角スペース
-        else if (input.value[i].match(/^　$/)) {
-            if (!full_space_char) {
-                if (bcg != null)
-                    output.appendChild(bcg);
 
-                full_space_char = true;
-                half_space_char = false;
-                tab_char = false;
-                bcg = document.createElement("span");
-                bcg.style = "background-color: #20c8f5;";
-            }
-            bcg.textContent += input.value[i];
+        // Apply color and content based on character type
+        if (char.match(/^\t$/)) { // Tab
+            charBox.textContent = '\t';
+            charBox.title = 'Tab';
+            charBox.style.backgroundColor = "#ef454a";
+            charBox.style.border = "2px solid #ccc";
+        } else if (char.match(/^ $/)) { // Half-width space
+            charBox.textContent = ' ';
+            charBox.title = 'Half-width space';
+            charBox.style.backgroundColor = "#20f582";
+            charBox.style.border = "2px solid #ccc";
+        } else if (char.match(/^　$/)) { // Full-width space
+            charBox.textContent = '　';
+            charBox.title = 'Full-width space';
+            charBox.style.backgroundColor = "#20c8f5";
+            charBox.style.border = "2px solid #ccc";
+        } else {
+            // Normal character
+            charBox.textContent = char;
+            charBox.style.border = "1px solid transparent"; // Keep alignment
         }
-        // 通常文字
-        else {
-            if (tab_char || half_space_char || full_space_char) {
-                if (bcg != null)
-                    output.appendChild(bcg);
 
-                tab_char = false;
-                half_space_char = false;
-                full_space_char = false;
-                bcg = document.createElement("span");
-            }
-            bcg.textContent += input.value[i];
-        }
-        if (bcg != null)
-            output.appendChild(bcg);
+        output.appendChild(charBox);
     }
 });
