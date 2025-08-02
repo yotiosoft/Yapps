@@ -9,6 +9,37 @@
     border-radius: 5px;
 }
 
+.tab {
+    background-color: #ef454a;
+    color: #ffffff;
+}
+
+.half_space {
+    background-color: #20f582;
+    color: #ffffff;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    letter-spacing: 0.2em;
+    line-height: 1.8;
+    background-image:
+        linear-gradient(currentColor, currentColor),
+        linear-gradient(currentColor, currentColor),
+        linear-gradient(to right, currentColor 1px, transparent 1px);
+    background-repeat: repeat-x;
+    background-size:
+        1ch 1px,
+        1ch 1px,
+        1ch 1.5em;
+    background-position:
+        0 bottom,
+        0 top,
+        0 0;
+}
+
+.full_space {
+    background-color: #20c8f5;
+    color: #ffffff;
+}
+
 @media screen and (max-width: 768px) {
     .output-area {
         min-height: 100px;

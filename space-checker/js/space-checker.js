@@ -18,7 +18,7 @@ $('#input-textarea').keyup(function() {     var input  = document.getElementById
                 half_space_char = false;
                 full_space_char = false;
                 bcg = document.createElement("span");
-                bcg.style = "background-color: #ef454a;";
+                bcg.className = "tab";
             }
             bcg.textContent += "\t";
         }
@@ -32,7 +32,7 @@ $('#input-textarea').keyup(function() {     var input  = document.getElementById
                 full_space_char = false;
                 tab_char = false;
                 bcg = document.createElement("span");
-                bcg.style = "background-color: #20f582;";
+                bcg.className = "half_space";
             }
             bcg.textContent += input.value[i];
         }
@@ -46,7 +46,7 @@ $('#input-textarea').keyup(function() {     var input  = document.getElementById
                 half_space_char = false;
                 tab_char = false;
                 bcg = document.createElement("span");
-                bcg.style = "background-color: #20c8f5;";
+                bcg.className = "full_space";
             }
             bcg.textContent += input.value[i];
         }
