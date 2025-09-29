@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>表定速度計算 - Yapps</title>
+        <title>ポイント計算 - Yapps</title>
         <link rel="icon" type="image/png" href="/img/logo.png">
 
         <link rel="stylesheet" href="/style.css">
@@ -20,7 +20,7 @@
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
 
-        <script src="./js/schedule_speed.min.js"></script>
+        <script src="./js/point-calculator.js"></script>
 
         <script type="application/ld+json">
             {
@@ -46,8 +46,8 @@
         <div id="wrap">
             <div id="contents-wrap">
                 <div class="title">
-                    <img src="/img/tools_icon/math/schedule_speed.svg" type="image/svg+xml" width="48" height="48" alt="表定速度計算">
-                    表定速度計算
+                    <img src="/img/tools_icon/math/schedule_speed.svg" type="image/svg+xml" width="48" height="48" alt="ポイント計算">
+                    ポイント計算
                     <div class="badge-group">
                         <div class="badge-ver">ver.1.0</div>
                         <div class="badge-clientside">Client Side</div>
@@ -55,8 +55,8 @@
                     </div>
                 </div>
                 <p class="summary">
-                    2点間の距離と所要時間から表定速度、すなわち電車やバス等の停車時間を含めた平均速度を計算します。<br>
-                    距離（km）と所要時間を入力すると、時速（km/h）で表定速度を算出します。
+                    決済手段やサービスごとのポイント還元を計算します。<br>
+                    サービス名、還元率、利用金額を入力することで、獲得ポイントを算出できます。複数のサービスを登録し、履歴として管理することが可能です。
                 </p>
                 <div id="update_information">
                 </div>
@@ -69,56 +69,82 @@
                             <tr>
                                 <td class="summary">
                                     <div class="checkbox">
-                                        駅名(任意)
-                                    </div>
-                                </td>
-                                <td class="input" style="display: flex;">
-                                    <input type="text" id="start-station" placeholder="始点駅名" class="simple-inputtext" style="width: 140px; margin-right: 10px;">
-                                    <span style="margin: 5px 15px 5px 5px; line-height: 30px;">〜</span>
-                                    <input type="text" id="end-station" placeholder="終点駅名" class="simple-inputtext" style="width: 140px;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="summary">
-                                    <div class="checkbox">
-                                        備考(任意)
-                                    </div>
-                                </td>
-                                <td class="input" style="display: flex;">
-                                    <input type="text" id="remarks" placeholder="備考を入力" class="simple-inputtext" style="width: 330px;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="summary">
-                                    <div class="checkbox">
-                                        距離(km)<span style="color: red;">*</span>
+                                        サービス名<span style="color: red;">*</span>
                                     </div>
                                 </td>
                                 <td class="input">
-                                    <input type="number" id="distance" placeholder="距離を入力" class="simple-inputtext" style="width: 330px;" step="0.1" min="0" required>
+                                    <input type="text" id="service-name" placeholder="サービス名を入力（例：楽天カード）" class="simple-inputtext" style="width: 330px;" required>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="summary">
                                     <div class="checkbox">
-                                        所要時間<span style="color: red;">*</span>
+                                        利用金額（円）<span style="color: red;">*</span>
+                                    </div>
+                                </td>
+                                <td class="input">
+                                    <input type="number" id="usage-amount" placeholder="利用金額を入力" class="simple-inputtext" style="width: 330px;" step="1" min="0" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summary">
+                                    <div class="checkbox">
+                                        利用回数<span style="color: red;">*</span>
                                     </div>
                                 </td>
                                 <td class="input" style="display: flex;">
-                                    <input type="number" id="time-hours" placeholder="時間" class="simple-inputtext" style="width: 120px;" step="1" min="0" value="0">
-                                    <span style="margin: 5px 5px 5px 5px; line-height: 30px;">時間</span>
-                                    <input type="number" id="time-minutes" placeholder="分" class="simple-inputtext" style="width: 120px; margin-left: 10px;" step="1" min="0" value="0">
-                                    <span style="margin: 5px 5px 5px 5px; line-height: 30px;">分</span>
+                                    <input type="number" id="usage-count" placeholder="利用回数" class="simple-inputtext" style="width: 120px;" step="1" min="1" value="1" required>
+                                    <span style="margin: 5px 5px 5px 5px; line-height: 30px;">回</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summary">
+                                    <div class="checkbox">
+                                        基本還元率（%）<span style="color: red;">*</span>
+                                    </div>
+                                </td>
+                                <td class="input">
+                                    <input type="number" id="base-rate" placeholder="基本還元率を入力（例：1.0）" class="simple-inputtext" style="width: 330px;" step="0.1" min="0" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summary">
+                                    <div class="checkbox">
+                                        段階的還元率設定
+                                    </div>
+                                </td>
+                                <td class="input">
+                                    <div class="checkbox" style="margin-bottom: 10px;">
+                                        <input type="checkbox" id="enable-tier" onchange="toggleTierSettings()">
+                                        <label for="enable-tier">利用回数・金額に応じた段階的還元率を設定</label>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
+
+                        <!-- 段階的還元率設定エリア -->
+                        <div id="tier-settings" style="display: none; margin: 20px 0; padding: 20px; background-color: #f9f9f9; border-radius: 8px; border: 1px solid #ddd;">
+                            <h4 style="margin-top: 0;">段階的還元率設定</h4>
+                            <div id="tier-list">
+                                <!-- 段階的設定が追加される -->
+                            </div>
+                            <div class="button-area-center" style="margin: 15px 0;">
+                                <a href="javascript:addTierRule();" id="add-tier-button">
+                                    <div class="round-rect-button" style="padding: 8px 16px;">
+                                        <div class="big-text" style="font-size: 14px;">
+                                            段階を追加
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                         
                         <!-- 計算ボタン -->
                         <div class="button-area-center" style="margin: 30px 0;">
-                            <a href="javascript:calculateSpeed();" id="calculate-button">
+                            <a href="javascript:calculatePoints();" id="calculate-button">
                                 <div class="round-rect-button">
                                     <div class="big-text">
-                                        表定速度を計算
+                                        ポイントを計算
                                     </div>
                                 </div>
                             </a>
@@ -154,7 +180,7 @@
                     <div class="app-list">
                         <div class="box-horizon-area" id="related-apps"></div>
                     </div>
-                    <script>apps2box("related-apps", "schedule_speed", "box-horizontal");</script>
+                    <script>apps2box("related-apps", "point-calculator", "box-horizontal");</script>
                 </div>
             </div>
         </div>
