@@ -5,28 +5,48 @@ const api_urls = [
 
 // 接続確認用
 function wakeup() {
-    fetch_with_fallback("")
+    fetch_with_fallback("", 3000)
         .catch(() => {
             alert("サーバに接続できません。時間をおいて再度お試しください。");
         });
 }
 
-async function fetch_with_fallback(path) {
+function fetch_with_timeout(url, options = {}, timeout = 3000) {
+    return new Promise((resolve, reject) => {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
+
+        fetch(url, { ...options, signal: controller.signal })
+            .then(response => {
+                clearTimeout(id);
+                resolve(response);
+            })
+            .catch(err => {
+                clearTimeout(id);
+                reject(err);
+            });
+    });
+}
+
+async function fetch_with_fallback(path, timeout = 3000) {
     let lastError;
     for (const base of api_urls) {
+        const fullUrl = base + path;
+
         try {
-            const response = await fetch(base + path);
+            const response = await fetch_with_timeout(fullUrl, {}, timeout);
+
             if (response.ok) {
-                return response; // 成功
+                return response;
+            } else {
+                lastError = new Error(`HTTP ${response.status}`);
             }
-            // HTTP 5xx, 4xx は例外にしないので自分で判断
-            lastError = new Error(`HTTP ${response.status}`);
         } catch (e) {
-            lastError = e; // ネットワークエラー
+            lastError = e;  // タイムアウト or ネットワークエラー
         }
     }
-    // 全部失敗
-    throw lastError;
+
+    throw lastError; // すべての URL が失敗した
 }
 
 function update_output(rand_array) {
@@ -44,7 +64,7 @@ function send_and_get(distribution, params) {
     const query = new URLSearchParams(params).toString();
     const path = `/random/${distribution}?${query}`;
 
-    fetch_with_fallback(path)
+    fetch_with_fallback(path, 3000)  // ← ここで 3秒指定
         .then(response => response.json())
         .then(data => {
             if (data.rand_array) {
