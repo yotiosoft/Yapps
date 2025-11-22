@@ -1,17 +1,32 @@
-//const api_url = "https://yapps-random-api.onrender.com";
-const api_url = "https://r.yotio.jp/yapps-random";
+const api_urls = [
+    "https://r.yotio.jp/yapps-random",                 // main
+    "https://yapps-random-api.onrender.com"            // fallback
+];
 
 // 接続確認用
 function wakeup() {
-    fetch(api_url)
-    .then(response => {
-        if (!response.ok) {
-            alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
+    fetch_with_fallback("")
+        .catch(() => {
+            alert("サーバに接続できません。時間をおいて再度お試しください。");
+        });
+}
+
+async function fetch_with_fallback(path) {
+    let lastError;
+    for (const base of api_urls) {
+        try {
+            const response = await fetch(base + path);
+            if (response.ok) {
+                return response; // 成功
+            }
+            // HTTP 5xx, 4xx は例外にしないので自分で判断
+            lastError = new Error(`HTTP ${response.status}`);
+        } catch (e) {
+            lastError = e; // ネットワークエラー
         }
-    })
-    /*.catch(error => {
-        alert(`乱数生成APIにアクセスできません。\nしばらくお待ちいただき、後でもう一度お試しください。\n\n${error}`);
-    });*/
+    }
+    // 全部失敗
+    throw lastError;
 }
 
 function update_output(rand_array) {
@@ -23,34 +38,24 @@ function update_output(rand_array) {
 }
 
 function send_and_get(distribution, params) {
-    // 「乱数を生成中..」と出力しておく
     const output = document.getElementById('id_output');
     output.value = "乱数を生成中..";
 
-    // パラメータからクエリを生成
-    const query = new URLSearchParams(params);
+    const query = new URLSearchParams(params).toString();
+    const path = `/random/${distribution}?${query}`;
 
-    // JSONをフェッチ
-    fetch(`${api_url}/random/${distribution}?${query}`)
-    .then(response => {
-        if (!response.ok) {
-            alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
-            return;
-        }
-
-        return response.json();
-    })
-    .then(data => {
-        if (data.hasOwnProperty('rand_array')) {
-            update_output(data.rand_array);     // 結果を出力
-        }
-        else if (data.hasOwnProperty('error_message')) {
-            alert(data.error_message);
-        }
-    })
-    .catch(error => {
-        alert(`乱数生成APIにアクセスできません。\nしばらくお待ちいただき、後でもう一度お試しください。\n\n${error}`);
-    });
+    fetch_with_fallback(path)
+        .then(response => response.json())
+        .then(data => {
+            if (data.rand_array) {
+                update_output(data.rand_array);
+            } else if (data.error_message) {
+                alert(data.error_message);
+            }
+        })
+        .catch(error => {
+            alert(`乱数生成APIにアクセスできません。\nしばらく待ってから再度お試しください。\n\n${error}`);
+        });
 }
 
 // 一様分布
