@@ -1,17 +1,52 @@
-//const api_url = "https://yapps-random-api.onrender.com";
-const api_url = "https://r.yotio.jp/yapps-random";
+const api_urls = [
+    "https://r.yotio.jp/yapps-random",                 // main
+    "https://yapps-random-api.onrender.com"            // fallback
+];
 
 // 接続確認用
 function wakeup() {
-    fetch(api_url)
-    .then(response => {
-        if (!response.ok) {
-            alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
+    fetch_with_fallback("", 3000)
+        .catch(() => {
+            alert("サーバに接続できません。時間をおいて再度お試しください。");
+        });
+}
+
+function fetch_with_timeout(url, options = {}, timeout = 3000) {
+    return new Promise((resolve, reject) => {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
+
+        fetch(url, { ...options, signal: controller.signal })
+            .then(response => {
+                clearTimeout(id);
+                resolve(response);
+            })
+            .catch(err => {
+                clearTimeout(id);
+                reject(err);
+            });
+    });
+}
+
+async function fetch_with_fallback(path, timeout = 3000) {
+    let lastError;
+    for (const base of api_urls) {
+        const fullUrl = base + path;
+
+        try {
+            const response = await fetch_with_timeout(fullUrl, {}, timeout);
+
+            if (response.ok) {
+                return response;
+            } else {
+                lastError = new Error(`HTTP ${response.status}`);
+            }
+        } catch (e) {
+            lastError = e;  // タイムアウト or ネットワークエラー
         }
-    })
-    /*.catch(error => {
-        alert(`乱数生成APIにアクセスできません。\nしばらくお待ちいただき、後でもう一度お試しください。\n\n${error}`);
-    });*/
+    }
+
+    throw lastError; // すべての URL が失敗した
 }
 
 function update_output(rand_array) {
@@ -23,34 +58,24 @@ function update_output(rand_array) {
 }
 
 function send_and_get(distribution, params) {
-    // 「乱数を生成中..」と出力しておく
     const output = document.getElementById('id_output');
     output.value = "乱数を生成中..";
 
-    // パラメータからクエリを生成
-    const query = new URLSearchParams(params);
+    const query = new URLSearchParams(params).toString();
+    const path = `/random/${distribution}?${query}`;
 
-    // JSONをフェッチ
-    fetch(`${api_url}/random/${distribution}?${query}`)
-    .then(response => {
-        if (!response.ok) {
-            alert("サーバエラーが発生しました。しばらくお待ちいただき、後でもう一度お試しください。");
-            return;
-        }
-
-        return response.json();
-    })
-    .then(data => {
-        if (data.hasOwnProperty('rand_array')) {
-            update_output(data.rand_array);     // 結果を出力
-        }
-        else if (data.hasOwnProperty('error_message')) {
-            alert(data.error_message);
-        }
-    })
-    .catch(error => {
-        alert(`乱数生成APIにアクセスできません。\nしばらくお待ちいただき、後でもう一度お試しください。\n\n${error}`);
-    });
+    fetch_with_fallback(path, 3000)  // ← ここで 3秒指定
+        .then(response => response.json())
+        .then(data => {
+            if (data.rand_array) {
+                update_output(data.rand_array);
+            } else if (data.error_message) {
+                alert(data.error_message);
+            }
+        })
+        .catch(error => {
+            alert(`乱数生成APIにアクセスできません。\nしばらく待ってから再度お試しください。\n\n${error}`);
+        });
 }
 
 // 一様分布
