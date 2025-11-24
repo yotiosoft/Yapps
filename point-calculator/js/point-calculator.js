@@ -42,7 +42,15 @@ function addTierRule() {
     tierDiv.style.cssText = 'margin: 10px 0; padding: 15px; background-color: #fff; border: 1px solid #ccc; border-radius: 5px;';
     
     tierDiv.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <div style="margin-bottom: 10px;">
+            <label style="margin-right: 10px;">
+                <input type="radio" name="${tierId}-type" value="amount" checked onchange="updateTierRuleUI('${tierId}')"> 金額ベース
+            </label>
+            <label>
+                <input type="radio" name="${tierId}-type" value="count" onchange="updateTierRuleUI('${tierId}')"> 回数ベース
+            </label>
+        </div>
+        <div id="${tierId}-ui" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
             <span>利用金額が</span>
             <input type="number" id="${tierId}-min" placeholder="最小金額" class="simple-inputtext" style="width: 100px;" step="1" min="0">
             <span>円以上</span>
@@ -55,6 +63,41 @@ function addTierRule() {
     `;
     
     tierList.appendChild(tierDiv);
+}
+
+/**
+ * 段階的還元率ルールのUIを更新
+ */
+function updateTierRuleUI(tierId) {
+    const amountRadio = document.querySelector(`input[name="${tierId}-type"][value="amount"]`);
+    const countRadio = document.querySelector(`input[name="${tierId}-type"][value="count"]`);
+    const uiDiv = document.getElementById(`${tierId}-ui`);
+    
+    if (countRadio.checked) {
+        // 回数ベース
+        uiDiv.innerHTML = `
+            <span>利用回数が</span>
+            <input type="number" id="${tierId}-min" placeholder="最小回数" class="simple-inputtext" style="width: 100px;" step="1" min="0">
+            <span>回以上</span>
+            <input type="number" id="${tierId}-max" placeholder="最大回数" class="simple-inputtext" style="width: 100px;" step="1" min="0">
+            <span>回以下の場合：還元率</span>
+            <input type="number" id="${tierId}-rate" placeholder="還元率" class="simple-inputtext" style="width: 80px;" step="0.1" min="0">
+            <span>%</span>
+            <button onclick="removeTierRule('${tierId}')" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">削除</button>
+        `;
+    } else {
+        // 金額ベース
+        uiDiv.innerHTML = `
+            <span>利用金額が</span>
+            <input type="number" id="${tierId}-min" placeholder="最小金額" class="simple-inputtext" style="width: 100px;" step="1" min="0">
+            <span>円以上</span>
+            <input type="number" id="${tierId}-max" placeholder="最大金額" class="simple-inputtext" style="width: 100px;" step="1" min="0">
+            <span>円以下の場合：還元率</span>
+            <input type="number" id="${tierId}-rate" placeholder="還元率" class="simple-inputtext" style="width: 80px;" step="0.1" min="0">
+            <span>%</span>
+            <button onclick="removeTierRule('${tierId}')" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">削除</button>
+        `;
+    }
 }
 
 /**
@@ -96,50 +139,91 @@ function calculatePoints() {
         const tierRules = getTierRules();
         
         if (tierRules.length > 0) {
-            // 段階的ルールを適用（総利用金額に対して計算）
-            let remainingAmount = totalAmount;
-            let currentAmount = 0;
+            // 金額ベースと回数ベースのルールを分離
+            const amountRules = tierRules.filter(r => r.type === 'amount');
+            const countRules = tierRules.filter(r => r.type === 'count');
             
-            // ルールを最小金額でソート
-            tierRules.sort((a, b) => a.min - b.min);
-            
-            for (let rule of tierRules) {
-                if (remainingAmount <= 0) break;
-                
-                const ruleMin = (rule.min || 0) * usageCount;
-                const ruleMax = (rule.max === Infinity || !rule.max) ? Infinity : rule.max * usageCount;
-                
-                if (currentAmount < ruleMax && totalAmount > ruleMin) {
-                    const applicableMin = Math.max(currentAmount, ruleMin);
-                    const applicableMax = Math.min(totalAmount, ruleMax);
-                    const applicableAmount = applicableMax - applicableMin;
-                    
-                    if (applicableAmount > 0) {
-                        const totalPoints = Math.floor(applicableAmount * rule.rate / 100);
-                        calculatedPoints += totalPoints;
-                        calculationDetails.push({
-                            range: `${applicableMin.toLocaleString()}円 ～ ${applicableMax.toLocaleString()}円`,
-                            amount: applicableAmount,
-                            rate: rule.rate,
-                            points: totalPoints,
-                            count: usageCount
-                        });
-                        currentAmount = applicableMax;
-                    }
+            // 回数ベースのルールから適用する還元率を決定
+            let effectiveRate = baseRate;
+            for (let rule of countRules) {
+                const ruleMin = rule.min || 0;
+                const ruleMax = rule.max || Infinity;
+                if (usageCount >= ruleMin && usageCount <= ruleMax) {
+                    effectiveRate = rule.rate;
+                    calculationDetails.push({
+                        range: `${ruleMin}回以上${ruleMax === Infinity ? '' : ruleMax + '回以下'}`,
+                        amount: totalAmount,
+                        rate: effectiveRate,
+                        points: 0,  // 後で計算
+                        count: usageCount,
+                        type: 'count'
+                    });
+                    break;
                 }
             }
             
-            // 残りの金額は基本還元率を適用
-            if (currentAmount < totalAmount) {
-                const remainingAmount = totalAmount - currentAmount;
-                const totalPoints = Math.floor(remainingAmount * baseRate / 100);
-                if (totalPoints > 0) {
-                    calculatedPoints += totalPoints;
+            // 金額ベースのルールを適用
+            if (amountRules.length > 0) {
+                let remainingAmount = totalAmount;
+                let currentAmount = 0;
+                
+                // ルールを最小金額でソート
+                amountRules.sort((a, b) => a.min - b.min);
+                
+                for (let rule of amountRules) {
+                    if (remainingAmount <= 0) break;
+                    
+                    const ruleMin = (rule.min || 0) * usageCount;
+                    const ruleMax = (rule.max === Infinity || !rule.max) ? Infinity : rule.max * usageCount;
+                    
+                    if (currentAmount < ruleMax && totalAmount > ruleMin) {
+                        const applicableMin = Math.max(currentAmount, ruleMin);
+                        const applicableMax = Math.min(totalAmount, ruleMax);
+                        const applicableAmount = applicableMax - applicableMin;
+                        
+                        if (applicableAmount > 0) {
+                            const totalPoints = Math.floor(applicableAmount * rule.rate / 100);
+                            calculatedPoints += totalPoints;
+                            calculationDetails.push({
+                                range: `${applicableMin.toLocaleString()}円 ～ ${applicableMax.toLocaleString()}円`,
+                                amount: applicableAmount,
+                                rate: rule.rate,
+                                points: totalPoints,
+                                count: usageCount,
+                                type: 'amount'
+                            });
+                            currentAmount = applicableMax;
+                        }
+                    }
+                }
+                
+                // 残りの金額は回数ベースの還元率または基本還元率を適用
+                if (currentAmount < totalAmount) {
+                    const remainingAmount = totalAmount - currentAmount;
+                    const totalPoints = Math.floor(remainingAmount * effectiveRate / 100);
+                    if (totalPoints > 0) {
+                        calculatedPoints += totalPoints;
+                        calculationDetails.push({
+                            range: `${currentAmount.toLocaleString()}円 ～ ${totalAmount.toLocaleString()}円`,
+                            amount: remainingAmount,
+                            rate: effectiveRate,
+                            points: totalPoints,
+                            count: usageCount,
+                            type: 'amount'
+                        });
+                    }
+                }
+            } else {
+                // 金額ベースのルールがない場合は、回数ベースの還元率を全額に適用
+                calculatedPoints = Math.floor(totalAmount * effectiveRate / 100);
+                if (calculationDetails.length > 0 && calculationDetails[0].type === 'count') {
+                    calculationDetails[0].points = calculatedPoints;
+                } else {
                     calculationDetails.push({
-                        range: `${currentAmount.toLocaleString()}円 ～ ${totalAmount.toLocaleString()}円`,
-                        amount: remainingAmount,
-                        rate: baseRate,
-                        points: totalPoints,
+                        range: `全額`,
+                        amount: totalAmount,
+                        rate: effectiveRate,
+                        points: calculatedPoints,
                         count: usageCount
                     });
                 }
@@ -194,12 +278,15 @@ function getTierRules() {
     
     for (let div of tierDivs) {
         const tierId = div.id;
+        const typeRadio = document.querySelector(`input[name="${tierId}-type"]:checked`);
+        const type = typeRadio ? typeRadio.value : 'amount';
         const min = parseFloat(document.getElementById(`${tierId}-min`).value) || 0;
         const max = parseFloat(document.getElementById(`${tierId}-max`).value) || Infinity;
         const rate = parseFloat(document.getElementById(`${tierId}-rate`).value) || 0;
         
         if (rate > 0 && min <= max) {
             rules.push({
+                type: type,  // 'amount' or 'count'
                 min: min,
                 max: max,
                 rate: rate
