@@ -170,10 +170,6 @@
             "category": "数学",
             "new": true,
             "target": [
-                "top-math",
-                "random",
-                "cardinal",
-                "schedule_speed"
             ],
             "image": "/img/tools_icon/math/point-calculator.svg",
             "path": "/point-calculator/"
@@ -207,7 +203,7 @@
             "name": "表定速度計算",
             "summary": "2点間の距離と所要時間から表定速度を計算します。",
             "category": "数学",
-            "new": true,
+            "new": false,
             "target": [
                 "top-math",
                 "cardinal",
