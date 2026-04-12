@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>ポイント計算</title>
+  <rect x="12" y="16" width="104" height="96" rx="20" fill="#eff7ff"/>
+  <rect x="24" y="28" width="80" height="72" rx="14" fill="#2f6fb3"/>
+  <rect x="32" y="38" width="36" height="10" rx="5" fill="#d9ecff"/>
+  <rect x="32" y="56" width="24" height="10" rx="5" fill="#d9ecff"/>
+  <rect x="72" y="38" width="24" height="28" rx="12" fill="#ffd95a"/>
+  <path d="M84 44v16" stroke="#9a6a00" stroke-width="4" stroke-linecap="round"/>
+  <path d="M78 50h12" stroke="#9a6a00" stroke-width="4" stroke-linecap="round"/>
+  <path d="M32 78h64" stroke="#d9ecff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M32 90h44" stroke="#d9ecff" stroke-width="8" stroke-linecap="round"/>
+</svg>

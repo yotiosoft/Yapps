@@ -142,7 +142,8 @@
             "target": [
                 "top-math",
                 "cardinal",
-                "schedule_speed"
+                "schedule_speed",
+                "point-calculator"
             ],
             "image": "/img/tools_icon/math/random.svg",
             "path": "/random/"
@@ -156,10 +157,26 @@
                 "top-math",
                 "random",
                 "schedule_speed",
-                "char-counter"
+                "char-counter",
+                "point-calculator"
             ],
             "image": "/img/tools_icon/math/cardinal.svg",
             "path": "/cardinal/"
+        },
+        {
+            "id": "point-calculator",
+            "name": "ポイント計算",
+            "summary": "複数の利用金額と回数別の還元率ルールから獲得ポイントを計算します。",
+            "category": "数学",
+            "new": true,
+            "target": [
+                "top-math",
+                "random",
+                "cardinal",
+                "schedule_speed"
+            ],
+            "image": "/img/tools_icon/math/point-calculator.svg",
+            "path": "/point-calculator/"
         },
         {
             "id": "mosaic-faces",
@@ -194,7 +211,8 @@
             "target": [
                 "top-math",
                 "cardinal",
-                "random"
+                "random",
+                "point-calculator"
             ],
             "image": "/img/tools_icon/math/schedule_speed.svg",
             "path": "/schedule_speed/"

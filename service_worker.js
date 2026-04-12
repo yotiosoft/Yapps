@@ -1,5 +1,5 @@
 // Cache name
-const CACHE_NAME = 'pwa-sample-caches-v1';
+const CACHE_NAME = 'pwa-sample-caches-v2';
 // Cache targets
 const urlsToCache = [
     './index.html',
@@ -64,6 +64,7 @@ const urlsToCache = [
     './img/tools_icon/text/add-spaces.svg',
     './img/tools_icon/math/random.svg',
     './img/tools_icon/math/cardinal.svg',
+    './img/tools_icon/math/point-calculator.svg',
     './img/tools_icon/img/face_detect.svg',
     './information.css',
     './js/common.js',
@@ -86,6 +87,8 @@ const urlsToCache = [
     './opencv/haarcascades/haarcascade_frontalface_default.xml',
     './package-lock.json',
     './package.json',
+    './point-calculator/index.html',
+    './point-calculator/js/point-calculator.js',
     './random/js/random.js',
     './random/random.css',
     './random/index.html',

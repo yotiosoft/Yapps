@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ja">
     <head>
         <meta charset="utf8">
@@ -6,8 +7,8 @@
         <link rel="icon" type="image/png" href="/img/logo.png">
 
         <link rel="stylesheet" href="/style.css">
-		<link rel="stylesheet" href="/app-page.css">
-		<link rel="stylesheet" href="/simple-textarea.css">
+        <link rel="stylesheet" href="/app-page.css">
+        <link rel="stylesheet" href="/simple-textarea.css">
         <link rel="stylesheet" href="/simple-select.css">
         <link rel="stylesheet" href="/button.css">
         <link rel="stylesheet" href="/checkbox.css">
@@ -17,9 +18,7 @@
 
         <script src="/js/jquery-3.5.1.min.js"></script>
         <script src="/js/common.min.js"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
-
         <script src="./js/point-calculator.js"></script>
 
         <script type="application/ld+json">
@@ -36,7 +35,187 @@
         </script>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5605897321593790"
      crossorigin="anonymous"></script>
-</head>
+
+        <style>
+            .point-section {
+                margin-bottom: 24px;
+                padding: 18px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+            }
+
+            .point-section h3 {
+                margin-top: 0;
+                margin-bottom: 14px;
+            }
+
+            .point-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 10px;
+            }
+
+            .point-table th,
+            .point-table td {
+                padding: 8px 6px;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+                vertical-align: middle;
+            }
+
+            .point-table th {
+                font-weight: normal;
+            }
+
+            .point-table .simple-inputtext,
+            .point-table .simple-select {
+                margin-bottom: 0;
+            }
+
+            .input-table {
+                width: 100%;
+            }
+
+            .input-table .summary {
+                width: 180px;
+                vertical-align: top;
+                text-align: left;
+            }
+
+            .input-table .input {
+                padding: 6px 0;
+            }
+
+            .inline-fields {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                align-items: center;
+            }
+
+            .inline-fields.no-wrap {
+                flex-wrap: nowrap;
+            }
+
+            .amount-target-editor,
+            .amount-target-line,
+            .amount-price-line,
+            .rule-range-line {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 8px;
+                align-items: center;
+                white-space: nowrap;
+            }
+
+            .amount-target-editor .simple-select,
+            .amount-target-line .simple-inputtext,
+            .amount-price-line .simple-inputtext,
+            .rule-range-line .simple-inputtext {
+                flex: 0 0 auto;
+            }
+
+            .optional-label {
+                font-size: 12px;
+            }
+
+            .control-line {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                align-items: center;
+                margin-top: 12px;
+            }
+
+            .small-button {
+                font-size: 16px;
+                padding: 6px 10px;
+                margin: 0;
+                background-color: #fff;
+                color: inherit;
+                cursor: pointer;
+            }
+
+            .small-button .middle-text {
+                line-height: 1.2;
+            }
+
+            .summary-box,
+            .result-box,
+            .history-item {
+                padding: 14px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+            }
+
+            .history-item {
+                margin: 10px 0;
+            }
+
+            .note-text {
+                margin-top: 10px;
+                font-size: 14px;
+            }
+
+            .result-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 12px;
+            }
+
+            .result-table th,
+            .result-table td {
+                border-bottom: 1px solid #ddd;
+                padding: 10px 8px;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            @media screen and (max-width: 768px) {
+                .point-table,
+                .point-table tbody,
+                .point-table tr,
+                .point-table th,
+                .point-table td {
+                    display: block;
+                    width: 100%;
+                }
+
+                .point-table tr {
+                    margin-bottom: 14px;
+                }
+
+                .point-table th {
+                    padding-bottom: 4px;
+                    border-bottom: none;
+                }
+
+                .point-table td {
+                    padding-top: 4px;
+                }
+
+                .input-table .summary,
+                .input-table .input {
+                    display: block;
+                    width: 100%;
+                }
+
+                .inline-fields.no-wrap {
+                    flex-wrap: wrap;
+                }
+
+                .amount-target-editor,
+                .amount-target-line,
+                .amount-price-line,
+                .rule-range-line {
+                    flex-wrap: wrap;
+                    white-space: normal;
+                }
+            }
+        </style>
+    </head>
 
     <body>
         <header>
@@ -48,129 +227,119 @@
         <div id="wrap">
             <div id="contents-wrap">
                 <div class="title">
-                    <img src="/img/tools_icon/math/schedule_speed.svg" type="image/svg+xml" width="48" height="48" alt="ポイント計算">
+                    <img src="/img/tools_icon/math/point-calculator.svg" type="image/svg+xml" width="48" height="48" alt="ポイント計算">
                     ポイント計算
                     <div class="badge-group">
-                        <div class="badge-ver">ver.1.0</div>
+                        <div class="badge-ver">ver.2.1</div>
                         <div class="badge-clientside">Client Side</div>
                         <div class="badge-offline">Offline OK</div>
                     </div>
                 </div>
                 <p class="summary">
-                    決済手段やサービスごとのポイント還元を計算します。<br>
-                    サービス名、還元率、利用金額を入力することで、獲得ポイントを算出できます。複数のサービスを登録し、履歴として管理することが可能です。
+                    利用回数の範囲ごとに金額を入力し、獲得ポイントを計算します。<br>
+                    基本還元率に加え、「◯回目から◯回目までは◯%」「◯回以上使うと一律◯%」「最初の◯回分は0%」のような回数ベースの変動と、切り上げ・切り捨て・四捨五入に対応しています。
                 </p>
-                <div id="update_information">
-                </div>
+                <div id="update_information"></div>
                 <div id="intl_caution"></div>
 
                 <div class="app-area" id="app-area-id" style="overflow: auto;">
-                    <!-- 入力フォーム -->
-                    <div class="input-section">
+                    <div class="point-section">
+                        <h3>1. 利用金額を入力</h3>
+                        <table class="point-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 460px;">対象回数</th>
+                                    <th style="width: 220px;">利用金額</th>
+                                    <th style="width: 140px;">件数</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="amount-list"></tbody>
+                        </table>
+                        <div class="control-line">
+                            <button type="button" class="round-rect-button small-button" onclick="addAmountRow()">
+                                <div class="middle-text">金額を追加</div>
+                            </button>
+                        </div>
+                        <div class="summary-box" id="amount-summary" style="margin-top: 14px;"></div>
+                    </div>
+
+                    <div class="point-section">
+                        <h3>2. 基本設定</h3>
                         <table class="input-table">
                             <tr>
                                 <td class="summary">
-                                    <div class="checkbox">
-                                        サービス名<span style="color: red;">*</span>
-                                    </div>
+                                    <div class="checkbox">基本還元率</div>
                                 </td>
                                 <td class="input">
-                                    <input type="text" id="service-name" placeholder="サービス名を入力（例：楽天カード）" class="simple-inputtext" style="width: 330px;" required>
+                                    <div class="inline-fields">
+                                        <input type="number" id="base-rate" class="simple-inputtext" style="width: 180px;" step="0.1" min="0" value="0.5">
+                                        <span>%</span>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="summary">
-                                    <div class="checkbox">
-                                        利用金額（円）<span style="color: red;">*</span>
-                                    </div>
+                                    <div class="checkbox">端数処理</div>
                                 </td>
                                 <td class="input">
-                                    <input type="number" id="usage-amount" placeholder="利用金額を入力" class="simple-inputtext" style="width: 330px;" step="1" min="0" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="summary">
-                                    <div class="checkbox">
-                                        利用回数<span style="color: red;">*</span>
-                                    </div>
-                                </td>
-                                <td class="input" style="display: flex;">
-                                    <input type="number" id="usage-count" placeholder="利用回数" class="simple-inputtext" style="width: 120px;" step="1" min="1" value="1" required>
-                                    <span style="margin: 5px 5px 5px 5px; line-height: 30px;">回</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="summary">
-                                    <div class="checkbox">
-                                        基本還元率（%）<span style="color: red;">*</span>
-                                    </div>
-                                </td>
-                                <td class="input">
-                                    <input type="number" id="base-rate" placeholder="基本還元率を入力（例：1.0）" class="simple-inputtext" style="width: 330px;" step="0.1" min="0" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="summary">
-                                    <div class="checkbox">
-                                        段階的還元率設定
-                                    </div>
-                                </td>
-                                <td class="input">
-                                    <div class="checkbox" style="margin-bottom: 10px;">
-                                        <input type="checkbox" id="enable-tier" onchange="toggleTierSettings()">
-                                        <label for="enable-tier">利用回数・金額に応じた段階的還元率を設定</label>
+                                    <div class="inline-fields">
+                                        <select id="rounding-mode" class="simple-select" style="width: 220px;">
+                                            <option value="floor">切り捨て</option>
+                                            <option value="ceil">切り上げ</option>
+                                            <option value="round">四捨五入</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
                         </table>
-
-                        <!-- 段階的還元率設定エリア -->
-                        <div id="tier-settings" style="display: none; margin: 20px 0; padding: 20px; background-color: #f9f9f9; border-radius: 8px; border: 1px solid #ddd;">
-                            <h4 style="margin-top: 0;">段階的還元率設定</h4>
-                            <div id="tier-list">
-                                <!-- 段階的設定が追加される -->
-                            </div>
-                            <div class="button-area-center" style="margin: 15px 0;">
-                                <a href="javascript:addTierRule();" id="add-tier-button">
-                                    <div class="round-rect-button" style="padding: 8px 16px;">
-                                        <div class="big-text" style="font-size: 14px;">
-                                            段階を追加
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <!-- 計算ボタン -->
-                        <div class="button-area-center" style="margin: 30px 0;">
-                            <a href="javascript:calculatePoints();" id="calculate-button">
-                                <div class="round-rect-button">
-                                    <div class="big-text">
-                                        ポイントを計算
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <!-- 計算結果表示 -->
-                        <div id="result-display" style="display: none; margin: 20px 0; padding: 20px; background-color: #f0f8ff; border-radius: 8px; border: 1px solid #ddd;">
-                            <h3 style="margin-top: 0; color: #333;">計算結果</h3>
-                            <div id="result-content"></div>
-                        </div>
                     </div>
 
-                    <!-- 計算履歴 -->
-                    <div class="history-section" style="margin-top: 40px;">
-                        <h3>計算履歴</h3>
-                        <div id="history-list" style="max-height: 400px; overflow-y: auto;">
-                            <p style="color: #666; text-align: center; padding: 20px;">まだ計算履歴がありません</p>
+                    <div class="point-section">
+                        <h3>3. 動的パターンを設定</h3>
+                        <table class="point-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 260px;">パターン</th>
+                                    <th>内容</th>
+                                    <th style="width: 120px;">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rule-list"></tbody>
+                        </table>
+                        <div class="control-line">
+                            <button type="button" class="round-rect-button small-button" onclick="addRuleRow()">
+                                <div class="middle-text">パターンを追加</div>
+                            </button>
                         </div>
-                        <div class="button-area-center" style="margin: 20px 0;">
+                        <p class="note-text">
+                            回数範囲のパターンは追加した順に後勝ちで適用されます。<br>
+                            「◯回以上使うと一律◯%」は条件を満たした場合、すべての利用回に対して同じ還元率を適用します。
+                        </p>
+                    </div>
+
+                    <div class="button-area-center">
+                        <a href="javascript:calculatePoints();" id="calculate-button">
+                            <div class="round-rect-button">
+                                <div class="big-text">ポイントを計算</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="result-display" class="result-box" style="display: none;">
+                        <h3 style="margin-top: 0;">計算結果</h3>
+                        <div id="result-content"></div>
+                    </div>
+
+                    <div class="point-section" style="margin-top: 24px;">
+                        <h3>計算履歴</h3>
+                        <div id="history-list">
+                            <p style="text-align: center; padding: 20px;">まだ計算履歴がありません</p>
+                        </div>
+                        <div class="button-area-center" style="margin-bottom: 0;">
                             <a href="javascript:clearHistory();" id="clear-button">
                                 <div class="round-rect-button">
-                                    <div class="big-text">
-                                        履歴をクリア
-                                    </div>
+                                    <div class="big-text">履歴をクリア</div>
                                 </div>
                             </a>
                         </div>
