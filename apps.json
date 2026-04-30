@@ -143,7 +143,8 @@
                 "top-math",
                 "cardinal",
                 "schedule_speed",
-                "point-calculator"
+                "point-calculator",
+                "days-calculator"
             ],
             "image": "/img/tools_icon/math/random.svg",
             "path": "/random/"
@@ -158,10 +159,27 @@
                 "random",
                 "schedule_speed",
                 "char-counter",
-                "point-calculator"
+                "point-calculator",
+                "days-calculator"
             ],
             "image": "/img/tools_icon/math/cardinal.svg",
             "path": "/cardinal/"
+        },
+        {
+            "id": "days-calculator",
+            "name": "日数計算",
+            "summary": "開始日と終了日から日数を計算します。初日を含む設定や時刻を含めた計算にも対応します。",
+            "category": "数学",
+            "new": true,
+            "target": [
+                "top-math",
+                "random",
+                "cardinal",
+                "point-calculator",
+                "schedule_speed"
+            ],
+            "image": "/img/tools_icon/math/days-calculator.svg",
+            "path": "/days-calculator/"
         },
         {
             "id": "point-calculator",
@@ -208,7 +226,8 @@
                 "top-math",
                 "cardinal",
                 "random",
-                "point-calculator"
+                "point-calculator",
+                "days-calculator"
             ],
             "image": "/img/tools_icon/math/schedule_speed.svg",
             "path": "/schedule_speed/"

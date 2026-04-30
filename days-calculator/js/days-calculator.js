@@ -1,0 +1,374 @@
+const DAYS_CALCULATOR_HISTORY_KEY = 'daysCalculatorHistoryV1';
+const DAYS_CALCULATOR_HISTORY_LIMIT = 30;
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeForm();
+    toggleTimeInputs();
+    bindEnterToCalculate();
+    loadHistory();
+});
+
+function initializeForm() {
+    const now = new Date();
+    document.getElementById('start-date').value = formatDateInput(now);
+    document.getElementById('end-date').value = formatDateInput(now);
+    document.getElementById('start-time').value = '00:00';
+    document.getElementById('end-time').value = '00:00';
+    document.getElementById('use-time').checked = false;
+    document.getElementById('include-start').checked = false;
+}
+
+function bindEnterToCalculate() {
+    const inputs = document.querySelectorAll('#start-date, #start-time, #end-date, #end-time');
+    inputs.forEach(function(input) {
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                calculateDays();
+            }
+        });
+    });
+}
+
+function toggleTimeInputs() {
+    const useTime = document.getElementById('use-time').checked;
+    const timeFields = document.querySelectorAll('.time-field');
+    timeFields.forEach(function(field) {
+        field.disabled = !useTime;
+        field.classList.toggle('hidden', !useTime);
+    });
+}
+
+function setCurrentValue(prefix) {
+    const now = new Date();
+    document.getElementById(prefix + '-date').value = formatDateInput(now);
+    document.getElementById(prefix + '-time').value = formatTimeInput(now);
+}
+
+function swapDates() {
+    swapInputValue('start-date', 'end-date');
+    swapInputValue('start-time', 'end-time');
+
+    if (document.getElementById('result-display').style.display !== 'none') {
+        calculateDays();
+    }
+}
+
+function swapInputValue(firstId, secondId) {
+    const first = document.getElementById(firstId);
+    const second = document.getElementById(secondId);
+    const value = first.value;
+    first.value = second.value;
+    second.value = value;
+}
+
+function calculateDays() {
+    let input;
+    try {
+        input = collectInput();
+    } catch (error) {
+        alert(error.message);
+        return;
+    }
+
+    const result = buildResult(input);
+    displayResult(result);
+    saveHistory(result);
+}
+
+function collectInput() {
+    const useTime = document.getElementById('use-time').checked;
+    const includeStart = document.getElementById('include-start').checked;
+    const startDateText = document.getElementById('start-date').value;
+    const endDateText = document.getElementById('end-date').value;
+    const startTimeText = document.getElementById('start-time').value || '00:00';
+    const endTimeText = document.getElementById('end-time').value || '00:00';
+
+    const startDate = parseDateText(startDateText, '開始日');
+    const endDate = parseDateText(endDateText, '終了日');
+    const baseCalendarDays = calculateCalendarDays(startDate, endDate);
+
+    if (baseCalendarDays < 0) {
+        throw new Error('終了日は開始日以降を指定してください。');
+    }
+
+    let startDateTime = null;
+    let endDateTime = null;
+    if (useTime) {
+        startDateTime = buildLocalDateTime(startDate, startTimeText, '開始時刻');
+        endDateTime = buildLocalDateTime(endDate, endTimeText, '終了時刻');
+
+        if (endDateTime.getTime() < startDateTime.getTime()) {
+            throw new Error('終了日時は開始日時以降を指定してください。');
+        }
+    }
+
+    return {
+        useTime: useTime,
+        includeStart: includeStart,
+        startDate: startDate,
+        endDate: endDate,
+        startDateText: startDateText,
+        endDateText: endDateText,
+        startTimeText: startTimeText,
+        endTimeText: endTimeText,
+        baseCalendarDays: baseCalendarDays,
+        startDateTime: startDateTime,
+        endDateTime: endDateTime
+    };
+}
+
+function buildResult(input) {
+    const displayedDays = input.includeStart ? input.baseCalendarDays + 1 : input.baseCalendarDays;
+    const alternateDays = input.includeStart ? input.baseCalendarDays : input.baseCalendarDays + 1;
+    const startLabel = formatDateLabel(input.startDateText, input.startTimeText, input.useTime);
+    const endLabel = formatDateLabel(input.endDateText, input.endTimeText, input.useTime);
+    let duration = null;
+
+    if (input.useTime) {
+        const diffMs = input.endDateTime.getTime() - input.startDateTime.getTime();
+        duration = formatDuration(diffMs);
+    }
+
+    return {
+        timestamp: new Date().toLocaleString('ja-JP'),
+        useTime: input.useTime,
+        includeStart: input.includeStart,
+        startDateText: input.startDateText,
+        endDateText: input.endDateText,
+        startTimeText: input.startTimeText,
+        endTimeText: input.endTimeText,
+        startLabel: startLabel,
+        endLabel: endLabel,
+        baseCalendarDays: input.baseCalendarDays,
+        displayedDays: displayedDays,
+        alternateDays: alternateDays,
+        duration: duration
+    };
+}
+
+function displayResult(result) {
+    const resultDisplay = document.getElementById('result-display');
+    const resultContent = document.getElementById('result-content');
+    const dayLabel = result.includeStart ? '初日を含む日数' : '日数';
+    const altLabel = result.includeStart ? '初日を含まない場合' : '初日を含む場合';
+
+    let timeHtml = '';
+    if (result.useTime && result.duration) {
+        timeHtml = `
+            <h3 style="margin-bottom: 0;">時刻を含む計算</h3>
+            <table class="result-table">
+                <tr>
+                    <th style="width: 180px;">経過時間</th>
+                    <td>${result.duration.text}</td>
+                </tr>
+                <tr>
+                    <th>日数換算</th>
+                    <td>${result.duration.totalDaysText} 日</td>
+                </tr>
+                <tr>
+                    <th>総時間</th>
+                    <td>${result.duration.totalHoursText} 時間</td>
+                </tr>
+                <tr>
+                    <th>総分</th>
+                    <td>${result.duration.totalMinutesText} 分</td>
+                </tr>
+            </table>
+        `;
+    }
+
+    resultContent.innerHTML = `
+        <p><strong>開始:</strong> ${result.startLabel}</p>
+        <p><strong>終了:</strong> ${result.endLabel}</p>
+        <div class="result-grid">
+            <div class="result-card">
+                <div class="result-label">${dayLabel}</div>
+                <div class="result-value">${formatNumber(result.displayedDays)}日</div>
+            </div>
+            <div class="result-card">
+                <div class="result-label">${altLabel}</div>
+                <div class="result-value">${formatNumber(result.alternateDays)}日</div>
+            </div>
+        </div>
+        <p class="result-note">カレンダー日数は日付同士を基準に計算しています。</p>
+        ${timeHtml}
+    `;
+
+    resultDisplay.style.display = 'block';
+    resultDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function saveHistory(result) {
+    let history = JSON.parse(localStorage.getItem(DAYS_CALCULATOR_HISTORY_KEY) || '[]');
+    history.unshift(result);
+    if (history.length > DAYS_CALCULATOR_HISTORY_LIMIT) {
+        history = history.slice(0, DAYS_CALCULATOR_HISTORY_LIMIT);
+    }
+    localStorage.setItem(DAYS_CALCULATOR_HISTORY_KEY, JSON.stringify(history));
+    loadHistory();
+}
+
+function loadHistory() {
+    const historyList = document.getElementById('history-list');
+    const history = JSON.parse(localStorage.getItem(DAYS_CALCULATOR_HISTORY_KEY) || '[]');
+
+    if (history.length === 0) {
+        historyList.innerHTML = '<p style="text-align: center; padding: 20px;">まだ計算履歴がありません</p>';
+        return;
+    }
+
+    historyList.innerHTML = history.map(function(item, index) {
+        const optionText = item.includeStart ? '初日を含む' : '初日を含まない';
+        const timeText = item.useTime && item.duration ? ' / ' + item.duration.text : '';
+
+        return `
+            <div class="history-item">
+                <div class="history-header" style="justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <div class="history-meta">${item.timestamp}</div>
+                        <div style="font-weight: bold; margin-top: 4px;">${formatNumber(item.displayedDays)}日${timeText}</div>
+                        <div class="history-meta" style="margin-top: 6px;">${item.startLabel} 〜 ${item.endLabel}</div>
+                        <div class="history-meta" style="margin-top: 4px;">${optionText}${item.useTime ? ' / 時刻あり' : ' / 日付のみ'}</div>
+                    </div>
+                    <button type="button" class="round-rect-button small-button" onclick="deleteHistoryItem(${index})">
+                        <div class="middle-text">削除</div>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function deleteHistoryItem(index) {
+    const history = JSON.parse(localStorage.getItem(DAYS_CALCULATOR_HISTORY_KEY) || '[]');
+    history.splice(index, 1);
+    localStorage.setItem(DAYS_CALCULATOR_HISTORY_KEY, JSON.stringify(history));
+    loadHistory();
+}
+
+function clearHistory() {
+    const history = JSON.parse(localStorage.getItem(DAYS_CALCULATOR_HISTORY_KEY) || '[]');
+    if (history.length === 0) {
+        alert('クリアする履歴がありません。');
+        return;
+    }
+
+    if (confirm('本当に履歴をすべて削除しますか？')) {
+        localStorage.removeItem(DAYS_CALCULATOR_HISTORY_KEY);
+        loadHistory();
+    }
+}
+
+function parseDateText(text, label) {
+    if (!text) {
+        throw new Error(label + 'を入力してください。');
+    }
+
+    const parts = text.split('-').map(function(value) {
+        return parseInt(value, 10);
+    });
+
+    if (parts.length !== 3 || parts.some(function(value) { return isNaN(value); })) {
+        throw new Error(label + 'を正しく入力してください。');
+    }
+
+    return {
+        year: parts[0],
+        month: parts[1],
+        day: parts[2]
+    };
+}
+
+function calculateCalendarDays(startDate, endDate) {
+    const startUtc = Date.UTC(startDate.year, startDate.month - 1, startDate.day);
+    const endUtc = Date.UTC(endDate.year, endDate.month - 1, endDate.day);
+    return Math.round((endUtc - startUtc) / 86400000);
+}
+
+function buildLocalDateTime(dateObject, timeText, label) {
+    const time = parseTimeText(timeText, label);
+    return new Date(dateObject.year, dateObject.month - 1, dateObject.day, time.hours, time.minutes, 0, 0);
+}
+
+function parseTimeText(text, label) {
+    if (!text) {
+        throw new Error(label + 'を入力してください。');
+    }
+
+    const parts = text.split(':').map(function(value) {
+        return parseInt(value, 10);
+    });
+
+    if (parts.length !== 2 || parts.some(function(value) { return isNaN(value); })) {
+        throw new Error(label + 'を正しく入力してください。');
+    }
+
+    if (parts[0] < 0 || parts[0] > 23 || parts[1] < 0 || parts[1] > 59) {
+        throw new Error(label + 'を正しく入力してください。');
+    }
+
+    return {
+        hours: parts[0],
+        minutes: parts[1]
+    };
+}
+
+function formatDuration(diffMs) {
+    const totalMinutes = Math.floor(diffMs / 60000);
+    const days = Math.floor(totalMinutes / 1440);
+    const hours = Math.floor((totalMinutes % 1440) / 60);
+    const minutes = totalMinutes % 60;
+    const parts = [];
+
+    if (days > 0) {
+        parts.push(days + '日');
+    }
+    if (hours > 0 || days > 0) {
+        parts.push(hours + '時間');
+    }
+    parts.push(minutes + '分');
+
+    return {
+        text: parts.join(' '),
+        totalDaysText: formatDecimal(diffMs / 86400000, 6),
+        totalHoursText: formatDecimal(diffMs / 3600000, 4),
+        totalMinutesText: formatDecimal(diffMs / 60000, 2)
+    };
+}
+
+function formatDateLabel(dateText, timeText, useTime) {
+    const parts = dateText.split('-').map(function(value) {
+        return parseInt(value, 10);
+    });
+    const dateLabel = parts[0] + '年' + parts[1] + '月' + parts[2] + '日';
+    if (!useTime) {
+        return dateLabel;
+    }
+    return dateLabel + ' ' + timeText;
+}
+
+function formatDateInput(date) {
+    return [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, '0'),
+        String(date.getDate()).padStart(2, '0')
+    ].join('-');
+}
+
+function formatTimeInput(date) {
+    return [
+        String(date.getHours()).padStart(2, '0'),
+        String(date.getMinutes()).padStart(2, '0')
+    ].join(':');
+}
+
+function formatDecimal(value, maximumFractionDigits) {
+    return value.toLocaleString('ja-JP', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: maximumFractionDigits
+    });
+}
+
+function formatNumber(value) {
+    return value.toLocaleString('ja-JP');
+}
