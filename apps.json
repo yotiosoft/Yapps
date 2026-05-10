@@ -178,11 +178,15 @@
         },
         {
             "id": "point-calculator",
-            "name": "ポイント計算",
+            "name": "ポイント還元額計算",
             "summary": "複数の利用金額と回数別の還元率ルールから獲得ポイントを計算します。",
             "category": "数学",
             "new": true,
             "target": [
+                "top-math", 
+                "random",
+                "cardinal",
+                "schedule_speed"
             ],
             "image": "/img/tools_icon/math/point-calculator.svg",
             "path": "/point-calculator/"

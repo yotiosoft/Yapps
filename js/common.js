@@ -113,12 +113,10 @@ function apps2box(id, target, visual_mode) {
                 img.alt = app.name;
                 var p1 = document.createElement("div");
                 p1.className = "tool-title";
-                p1.style = "display: flex; align-items: center; justify-content: center;";
+                p1.style = "display: flex; flex-direction: column; align-items: center; justify-content: center;";
                 var p1_text = document.createElement("p");
                 p1_text.className = "tool-title-text";
                 p1_text.style = "width: fit-content;";
-                p1_text.textContent = app.name;
-                p1.appendChild(p1_text);
                 var p2 = document.createElement("p");
                 p2.className = "summary";
                 p2.textContent = app.summary;
@@ -128,9 +126,11 @@ function apps2box(id, target, visual_mode) {
                     var p_new = document.createElement("p");
                     p_new.className = "new";
                     p_new.textContent = "New!";
-                    p_new.style = "color: red; font-weight: bold; font-size: 12px; height: 14px; margin: 0; margin-left: 10px; text-align: left; padding: 0;";
+                    p_new.style = "color: red; font-weight: bold; font-size: 12px; line-height: 14px; margin: 0 0 4px 0; text-align: center; padding: 0; white-space: nowrap;";
                     p1.appendChild(p_new);
                 }
+                p1_text.textContent = app.name;
+                p1.appendChild(p1_text);
                 box.appendChild(p1);
                 box.appendChild(p2);
                 a.appendChild(box);
