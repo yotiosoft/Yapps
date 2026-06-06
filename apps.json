@@ -172,6 +172,11 @@
             "category": "数学",
             "new": true,
             "target": [
+                "top-math", 
+                "random",
+                "cardinal",
+                "schedule_speed",
+                "point-calculator"
             ],
             "image": "/img/tools_icon/math/days-calculator.svg",
             "path": "/days-calculator/"
@@ -186,7 +191,8 @@
                 "top-math", 
                 "random",
                 "cardinal",
-                "schedule_speed"
+                "schedule_speed",
+                "days-calculator"
             ],
             "image": "/img/tools_icon/math/point-calculator.svg",
             "path": "/point-calculator/"
