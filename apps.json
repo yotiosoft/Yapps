@@ -166,38 +166,6 @@
             "path": "/cardinal/"
         },
         {
-            "id": "days-calculator",
-            "name": "日数計算",
-            "summary": "開始日と終了日から日数を計算します。初日を含む設定や時刻を含めた計算にも対応します。",
-            "category": "数学",
-            "new": true,
-            "target": [
-                "top-math", 
-                "random",
-                "cardinal",
-                "schedule_speed",
-                "point-calculator"
-            ],
-            "image": "/img/tools_icon/math/days-calculator.svg",
-            "path": "/days-calculator/"
-        },
-        {
-            "id": "point-calculator",
-            "name": "ポイント還元額計算",
-            "summary": "複数の利用金額と回数別の還元率ルールから獲得ポイントを計算します。",
-            "category": "数学",
-            "new": true,
-            "target": [
-                "top-math", 
-                "random",
-                "cardinal",
-                "schedule_speed",
-                "days-calculator"
-            ],
-            "image": "/img/tools_icon/math/point-calculator.svg",
-            "path": "/point-calculator/"
-        },
-        {
             "id": "mosaic-faces",
             "name": "顔モザイク加工",
             "summary": "入力画像から顔認識を行い、該当箇所をモザイク加工します。",
@@ -236,6 +204,38 @@
             ],
             "image": "/img/tools_icon/math/schedule_speed.svg",
             "path": "/schedule_speed/"
+        },
+        {
+            "id": "days-calculator",
+            "name": "日数計算",
+            "summary": "開始日と終了日から日数を計算します。初日を含む設定や時刻を含めた計算にも対応します。",
+            "category": "数学",
+            "new": true,
+            "target": [
+                "top-math", 
+                "random",
+                "cardinal",
+                "schedule_speed",
+                "point-calculator"
+            ],
+            "image": "/img/tools_icon/math/days-calculator.svg",
+            "path": "/days-calculator/"
+        },
+        {
+            "id": "point-calculator",
+            "name": "ポイント還元額計算",
+            "summary": "複数の利用金額と回数別の還元率ルールから獲得ポイントを計算します。",
+            "category": "数学",
+            "new": true,
+            "target": [
+                "top-math", 
+                "random",
+                "cardinal",
+                "schedule_speed",
+                "days-calculator"
+            ],
+            "image": "/img/tools_icon/math/point-calculator.svg",
+            "path": "/point-calculator/"
         }
     ]
 }
