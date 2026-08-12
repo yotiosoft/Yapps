@@ -114,7 +114,7 @@
         },
         {
             "id": "zero-width-checker",
-            "name": "見えない文字チェッカー",
+            "name": "見えない文字を検出",
             "summary": "文章中の見えないゼロ幅文字、Unicode 不可視文字を検出・除去します。",
             "category": "テキスト",
             "new": true,
