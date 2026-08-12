@@ -124,7 +124,7 @@
                 "char-checker",
                 "char-counter"
             ],
-            "image": "/img/tools_icon/text/space-checker.svg",
+            "image": "/img/tools_icon/text/zero-width-checker.svg",
             "path": "/zero-width-checker/"
         },
         {
