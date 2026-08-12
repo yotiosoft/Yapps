@@ -115,7 +115,10 @@ const urlsToCache = [
     './width-converter/js/width-converter.js',
     './width-converter/others-codes.json',
     './width-converter/kana-codes.json',
-    './width-converter/index.html'
+    './width-converter/index.html',
+    './zero-width-checker/js/zero-width-checker.js',
+    './zero-width-checker/zero-width-checker.css',
+    './zero-width-checker/index.html'
   ];
   
 

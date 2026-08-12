@@ -10,7 +10,8 @@
                 "space-checker",
                 "del-line-breaks",
                 "width-converter",
-                "memo"
+                "memo",
+                "zero-width-checker"
             ],
             "image": "/img/tools_icon/text/add-spaces.svg",
             "path": "/add-spaces/"
@@ -24,7 +25,8 @@
                 "top-text",
                 "add-spaces",
                 "char-checker",
-                "char-counter"
+                "char-counter",
+                "zero-width-checker"
             ],
             "image": "/img/tools_icon/text/space-checker.svg",
             "path": "/space-checker/"
@@ -40,7 +42,8 @@
                 "char-checker",
                 "memo",
                 "rotate",
-                "cardinal"
+                "cardinal",
+                "zero-width-checker"
             ],
             "image": "/img/tools_icon/text/char-counter.svg",
             "path": "/char-counter/"
@@ -55,7 +58,8 @@
                 "add-spaces",
                 "space-checker",
                 "char-counter",
-                "memo"
+                "memo",
+                "zero-width-checker"
             ],
             "image": "/img/tools_icon/text/del-line-breaks.svg",
             "path": "/del-line-breaks/"
@@ -71,7 +75,8 @@
                 "char-counter",
                 "space-checker",
                 "add-spaces",
-                "rotate"
+                "rotate",
+                "zero-width-checker"
             ],
             "image": "/img/tools_icon/text/char-checker.svg",
             "path": "/char-checker/"
@@ -87,7 +92,8 @@
                 "char-counter",
                 "space-checker",
                 "add-spaces",
-                "rotate"
+                "rotate",
+                "zero-width-checker"
             ],
             "image": "/img/tools_icon/text/width-converter.svg",
             "path": "/width-converter/"
@@ -105,6 +111,21 @@
             ],
             "image": "/img/tools_icon/text/rotate.svg",
             "path": "/rotate/"
+        },
+        {
+            "id": "zero-width-checker",
+            "name": "ゼロ幅文字・不可視文字チェッカー",
+            "summary": "文章中の見えないゼロ幅文字、Unicode 不可視文字を検出・除去します。",
+            "category": "テキスト",
+            "new": true,
+            "target": [
+                "top-text",
+                "space-checker",
+                "char-checker",
+                "char-counter"
+            ],
+            "image": "/img/tools_icon/text/space-checker.svg",
+            "path": "/zero-width-checker/"
         },
         {
             "id": "memo",
