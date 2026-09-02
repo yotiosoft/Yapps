@@ -1,3 +1,16 @@
+function hide_unfilled_ad_container(container, ad) {
+    const update_visibility = function() {
+        container.hidden = ad.dataset.adStatus === "unfilled";
+    };
+
+    const observer = new MutationObserver(update_visibility);
+    observer.observe(ad, {
+        attributes: true,
+        attributeFilter: ["data-ad-status"]
+    });
+    update_visibility();
+}
+
 function ads_wide(id) {
     const html = `
 <!-- 横長ディスプレイ広告 -->
@@ -17,6 +30,7 @@ function ads_wide(id) {
     }
 
     target.innerHTML = html;
+    hide_unfilled_ad_container(target, target.querySelector(".adsbygoogle"));
     (adsbygoogle = window.adsbygoogle || []).push({});
 }
 
@@ -39,6 +53,6 @@ function ads_infeed(id) {
     }
 
     target.innerHTML = html;
+    hide_unfilled_ad_container(target, target.querySelector(".adsbygoogle"));
     (adsbygoogle = window.adsbygoogle || []).push({});
 }
-

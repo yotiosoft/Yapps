@@ -180,3 +180,7 @@ header {
         grid-template-columns: 100%;
     }
 }
+/* AdSense marks ad units as unfilled after an ad request completes. */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+    display: none !important;
+}
