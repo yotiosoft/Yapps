@@ -23,14 +23,33 @@
 
         <script src="./js/random.min.js"></script>
 
-        <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Yapps",
-              "url": "https://yapps.yotiosoft.com/"
-            }
-        </script>
+                <!-- WEB_APPLICATION_STRUCTURED_DATA_START -->
+                <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "WebApplication",
+                  "name": "乱数生成",
+                  "url": "https://yapps.yotiosoft.com/random/",
+                  "description": "乱数を生成します。一様分布や正規分布など多数の確率分布関数から生成できます。",
+                  "image": "https://yapps.yotiosoft.com/img/logo.png",
+                  "applicationCategory": "UtilitiesApplication",
+                  "operatingSystem": "Any",
+                  "browserRequirements": "Requires JavaScript and a modern web browser.",
+                  "inLanguage": "ja",
+                  "isAccessibleForFree": true,
+                  "offers": {
+                    "@type": "Offer",
+                    "price": 0,
+                    "priceCurrency": "JPY"
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "YotioSoft",
+                    "url": "https://yotiosoft.com/"
+                  }
+                }
+                </script>
+                <!-- WEB_APPLICATION_STRUCTURED_DATA_END -->
 
         <script>
             wakeup();

@@ -21,14 +21,33 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
         <script src="./js/point-calculator.js"></script>
 
-        <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Yapps",
-              "url": "https://yapps.yotiosoft.com/"
-            }
-        </script>
+                <!-- WEB_APPLICATION_STRUCTURED_DATA_START -->
+                <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "WebApplication",
+                  "name": "ポイント還元額計算",
+                  "url": "https://yapps.yotiosoft.com/point-calculator/",
+                  "description": "複数の利用金額と回数別の還元率ルールから獲得ポイントを計算します。",
+                  "image": "https://yapps.yotiosoft.com/img/logo.png",
+                  "applicationCategory": "UtilitiesApplication",
+                  "operatingSystem": "Any",
+                  "browserRequirements": "Requires JavaScript and a modern web browser.",
+                  "inLanguage": "ja",
+                  "isAccessibleForFree": true,
+                  "offers": {
+                    "@type": "Offer",
+                    "price": 0,
+                    "priceCurrency": "JPY"
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "YotioSoft",
+                    "url": "https://yotiosoft.com/"
+                  }
+                }
+                </script>
+                <!-- WEB_APPLICATION_STRUCTURED_DATA_END -->
 
         <script>
             wakeup();

@@ -21,14 +21,33 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
         <script src="./js/days-calculator.js"></script>
 
-        <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Yapps",
-              "url": "https://yapps.yotiosoft.com/"
-            }
-        </script>
+                <!-- WEB_APPLICATION_STRUCTURED_DATA_START -->
+                <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "WebApplication",
+                  "name": "日数計算",
+                  "url": "https://yapps.yotiosoft.com/days-calculator/",
+                  "description": "開始日と終了日から日数を計算します。初日を含む設定や時刻を含めた計算にも対応します。",
+                  "image": "https://yapps.yotiosoft.com/img/logo.png",
+                  "applicationCategory": "UtilitiesApplication",
+                  "operatingSystem": "Any",
+                  "browserRequirements": "Requires JavaScript and a modern web browser.",
+                  "inLanguage": "ja",
+                  "isAccessibleForFree": true,
+                  "offers": {
+                    "@type": "Offer",
+                    "price": 0,
+                    "priceCurrency": "JPY"
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "YotioSoft",
+                    "url": "https://yotiosoft.com/"
+                  }
+                }
+                </script>
+                <!-- WEB_APPLICATION_STRUCTURED_DATA_END -->
 
         <script>
             wakeup();

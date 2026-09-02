@@ -39,6 +39,9 @@ jobs:
       - name: Generate static app links
         run: npm run generate:app-links
 
+      - name: Generate structured data
+        run: npm run generate:structured-data
+
       - name: Minify JavaScript files
         run: |
           find . -type f -name "*.js" \

@@ -22,14 +22,33 @@
 
         <script src="./js/schedule_speed.min.js"></script>
 
-        <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Yapps",
-              "url": "https://yapps.yotiosoft.com/"
-            }
-        </script>
+                <!-- WEB_APPLICATION_STRUCTURED_DATA_START -->
+                <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "WebApplication",
+                  "name": "表定速度計算",
+                  "url": "https://yapps.yotiosoft.com/schedule_speed/",
+                  "description": "2点間の距離と所要時間から表定速度を計算します。",
+                  "image": "https://yapps.yotiosoft.com/img/logo.png",
+                  "applicationCategory": "UtilitiesApplication",
+                  "operatingSystem": "Any",
+                  "browserRequirements": "Requires JavaScript and a modern web browser.",
+                  "inLanguage": "ja",
+                  "isAccessibleForFree": true,
+                  "offers": {
+                    "@type": "Offer",
+                    "price": 0,
+                    "priceCurrency": "JPY"
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "YotioSoft",
+                    "url": "https://yotiosoft.com/"
+                  }
+                }
+                </script>
+                <!-- WEB_APPLICATION_STRUCTURED_DATA_END -->
 
         <script>
             wakeup();
