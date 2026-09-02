@@ -53,12 +53,36 @@
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5605897321593790"
      crossorigin="anonymous"></script>
         <script src="/js/adsense.min.js"></script>
+        <link rel="stylesheet" href="/header.css">
+        <link rel="stylesheet" href="/footer.css">
 </head>
 
     <body>
         <header>
             <div id="wrap" style="width: 100%;">
-                <div id="header"></div>
+                <!-- SITE_HEADER_START -->
+                <a class="site-header-logo" href="/" aria-label="Yapps トップページ">
+                    <img src="/img/logo-yapps.svg" width="250" height="100" alt="Yapps">
+                </a>
+
+                <nav class="site-header-desktop-nav" aria-label="メインナビゲーション">
+                    <a href="/about/">About</a>
+                    <a href="/update/">Change Log</a>
+                    <a href="https://github.com/YotioSoft/Yapps">GitHub</a>
+                </nav>
+
+                <div class="site-header-mobile-nav">
+                    <input type="checkbox" id="site-menu-toggle">
+                    <label for="site-menu-toggle" class="site-menu-button" aria-label="メニューを開く"><span></span></label>
+                    <nav class="site-menu-content" aria-label="モバイルナビゲーション">
+                        <ul>
+                            <li><a href="/about/">About</a></li>
+                            <li><a href="/update/">Update</a></li>
+                            <li><a href="https://github.com/YotioSoft/Yapps">GitHub</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- SITE_HEADER_END -->
             </div>
         </header>
 
@@ -229,7 +253,12 @@
         </div>
 
         <footer class="footer_class">
-            <div id="footer"></div>
+            <!-- SITE_FOOTER_START -->
+            <div id="footer-wrap">
+                <p><a href="/privacy/">プライバシーポリシー</a></p>
+                <p>© 2021-2026&nbsp;<a href="https://yotiosoft.com/">YotioSoft</a><br></p>
+            </div>
+            <!-- SITE_FOOTER_END -->
         </footer>
     </body>
 </html>

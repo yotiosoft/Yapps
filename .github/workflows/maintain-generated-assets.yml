@@ -39,6 +39,9 @@ jobs:
       - name: Generate static app links
         run: npm run generate:app-links
 
+      - name: Generate shared header and footer
+        run: npm run generate:shared-layout
+
       - name: Generate structured data
         run: npm run generate:structured-data
 
