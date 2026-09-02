@@ -1,11 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-<!--  created with free sitemap generation system www.sitemapxml.jp  --> 
-<url>
-  <loc>https://yapps.yotiosoft.com/</loc>
-  <priority>1.0</priority>
-  <lastmod>2026-06-07T11:27:16+09:00</lastmod>
-</url>
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://yapps.yotiosoft.com/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/about/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/add-spaces/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/base64/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/cardinal/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/char-checker/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/char-counter/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/days-calculator/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/del-line-breaks/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/img2color/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/install/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/markdown/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/memo/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/mosaic-faces/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/point-calculator/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/privacy/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/random/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/read-speaker/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/replace/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/rotate/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/schedule_speed/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/space-checker/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/twitter-search/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/update/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/width-converter/</loc>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/zero-width-checker/</loc>
+  </url>
 </urlset>

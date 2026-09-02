@@ -1,0 +1,65 @@
+name: Maintain generated site assets
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generated-site-assets-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate-assets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install jsmin
+        run: pip install jsmin
+
+      - name: Minify JavaScript files
+        run: |
+          find . -type f -name "*.js" \
+            ! -name "*.min.js" \
+            ! -path "./.git/*" \
+            ! -path "./node_modules/*" \
+            -print0 | while IFS= read -r -d '' file; do
+            minified_file="${file%.js}.min.js"
+            echo "Minifying $file -> $minified_file"
+            python -m jsmin "$file" > "$minified_file"
+          done
+
+      - name: Generate sitemap
+        run: npm run generate:sitemap
+
+      - name: Commit generated files
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          if git diff --cached --quiet; then
+            echo "No generated files changed."
+            exit 0
+          fi
+          git commit -m "chore: update generated site assets"
+          git push
+

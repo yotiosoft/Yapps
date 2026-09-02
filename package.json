@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "generate:sitemap": "node scripts/generate-sitemap.mjs"
+  },
   "dependencies": {
     "whois-parsed": "^1.0.14"
   }
