@@ -66,7 +66,72 @@ function renderRelatedApps(target, indentation) {
   };
 }
 
-let updatedPages = 0;
+function renderTopApps(target, indentation) {
+  const topApps = apps.filter((app) => app.target.includes(target));
+  const childIndent = `${indentation}    `;
+
+  const cards = topApps.map((app) => [
+    `${childIndent}<div class="box-wrap">`,
+    `${childIndent}    <a href="${escapeHtml(app.path)}">`,
+    `${childIndent}        <div class="box box-responsive">`,
+    `${childIndent}            <img src="${escapeHtml(app.image)}" width="128" height="128" alt="${escapeHtml(app.name)}">`,
+    `${childIndent}            <div class="box-responsive-text">`,
+    ...(app.new ? [`${childIndent}                <p class="new">New!</p>`] : []),
+    `${childIndent}                <p class="tool-title">${escapeHtml(app.name)}</p>`,
+    `${childIndent}                <p class="summary">${escapeHtml(app.summary)}</p>`,
+    `${childIndent}            </div>`,
+    `${childIndent}        </div>`,
+    `${childIndent}    </a>`,
+    `${childIndent}</div>`,
+  ].join("\n"));
+
+  return {
+    count: topApps.length,
+    html: [
+      `${indentation}<!-- TOP_APPS_START target="${escapeHtml(target)}" -->`,
+      ...cards,
+      `${indentation}<!-- TOP_APPS_END -->`,
+    ].join("\n"),
+  };
+}
+
+function updateTopPage() {
+  const pagePath = resolve(projectRoot, "index.html");
+  let html = readFileSync(pagePath, "utf8");
+  let changed = false;
+
+  const generatedPattern = /^([ \t]*)<!-- TOP_APPS_START target="([^"]+)" -->[\s\S]*?^[ \t]*<!-- TOP_APPS_END -->/gm;
+  html = html.replace(generatedPattern, (block, indentation, target) => {
+    const rendered = renderTopApps(target, indentation);
+    console.log(`index.html (${target}): generated ${rendered.count} links.`);
+    if (rendered.html !== block) changed = true;
+    return rendered.html;
+  });
+
+  const initialPattern = /^([ \t]*)<div class="box-area-responsive" id="([^"]+)"><\/div>[ \t]*\r?\n[ \t]*<script>apps2box\("\2",\s*"([^"]+)",\s*"responsive"\);<\/script>/gm;
+  html = html.replace(initialPattern, (block, indentation, id, target) => {
+    const rendered = renderTopApps(target, `${indentation}    `);
+    changed = true;
+    console.log(`index.html (${target}): generated ${rendered.count} links.`);
+    return [
+      `${indentation}<div class="box-area-responsive" id="${id}">`,
+      rendered.html,
+      `${indentation}</div>`,
+    ].join("\n");
+  });
+
+  // Static cards respond through CSS, so rebuilding them on resize is no longer needed.
+  const resizeScriptPattern = /[ \t]*<script>\s*var beforeWidth = window\.innerWidth;[\s\S]*?<\/script>[ \t]*\r?\n/;
+  if (resizeScriptPattern.test(html)) {
+    html = html.replace(resizeScriptPattern, "");
+    changed = true;
+  }
+
+  if (changed) writeFileSync(pagePath, html, "utf8");
+  return changed;
+}
+
+let updatedPages = updateTopPage() ? 1 : 0;
 
 for (const pagePath of findIndexPages(projectRoot)) {
   let html = readFileSync(pagePath, "utf8");
@@ -114,4 +179,4 @@ for (const pagePath of findIndexPages(projectRoot)) {
   console.log(`${relative(projectRoot, pagePath)}: generated ${rendered.count} links.`);
 }
 
-console.log(`Related app links are up to date (${updatedPages} pages changed).`);
+console.log(`App links are up to date (${updatedPages} pages changed).`);

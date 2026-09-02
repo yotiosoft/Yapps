@@ -117,6 +117,59 @@
     text-align: center;
 }
 
+.box-responsive-text {
+    display: contents;
+}
+
+.box-responsive-text .new {
+    width: 100%;
+    color: red;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    margin: 0 0 4px 0;
+    text-align: center;
+    padding: 0;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+    .box-area-responsive .box-wrap {
+        width: 380px;
+        height: 150px;
+        margin-bottom: 10px;
+    }
+
+    .box-area-responsive .box-wrap > a {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+    }
+
+    .box-area-responsive .box-responsive {
+        max-width: 400px;
+        flex-wrap: nowrap;
+    }
+
+    .box-area-responsive .box-responsive > img {
+        width: 20%;
+        height: 75%;
+    }
+
+    .box-area-responsive .box-responsive-text {
+        display: block;
+        width: 70%;
+        height: 100%;
+        margin-left: 10px;
+        text-align: left;
+    }
+
+    .box-area-responsive .box-responsive-text .tool-title {
+        text-align: left;
+        margin-left: 5px;
+    }
+}
+
 .box-nobreak {
     width: 90%;
     height: 90%;

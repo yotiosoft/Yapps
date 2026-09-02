@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "generate:related-apps": "node scripts/generate-related-apps.mjs",
+    "generate:app-links": "node scripts/generate-app-links.mjs",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
-    "generate": "npm run generate:related-apps && npm run generate:sitemap"
+    "generate": "npm run generate:app-links && npm run generate:sitemap"
   },
   "dependencies": {
     "whois-parsed": "^1.0.14"
