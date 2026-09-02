@@ -36,6 +36,9 @@ jobs:
       - name: Install jsmin
         run: pip install jsmin
 
+      - name: Generate static related app links
+        run: npm run generate:related-apps
+
       - name: Minify JavaScript files
         run: |
           find . -type f -name "*.js" \
