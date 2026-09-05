@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>正規表現ジェネレーター - Yapps</title>
+    <title>正規表現ジェネレータ - Yapps</title>
     <meta name="description" content="入力例から正規表現を自動生成。JavaScript・Python・Java・.NET・PCRE2・Goに対応し、一致範囲や文字数、部分ごとの粒度を調整できます。">
     <link rel="icon" href="/img/logo.png">
     <link rel="canonical" href="https://yapps.yotiosoft.com/regex-generator/">
@@ -79,7 +79,7 @@
     <main id="contents-wrap">
         <div class="title">
             <img src="/img/tools_icon/text/regex-generator.svg" width="48" height="48" alt="">
-            正規表現ジェネレーター
+            正規表現ジェネレータ
             <div class="badge-group">
                 <div class="badge-ver">ver.1.0</div>
                 <div class="badge-clientside">Client Side</div>
@@ -100,7 +100,7 @@
                 </details>
                 <h2 class="settings-heading">生成の設定</h2>
                 <label for="method">生成方法</label>
-                <select class="simple-select" id="method"><option value="smart">共通部分を残して推測（おすすめ）</option><option value="literal">入力した文字列だけを許可</option><option value="classes">文字種で一般化</option></select>
+                <select class="simple-select" id="method"><option value="smart">共通部分を残して推測</option><option value="literal">入力した文字列だけを許可</option><option value="classes">文字種で一般化</option></select>
                 <p class="hint" id="method-help"></p>
                 <div class="setting-grid">
                     <div><label for="scope">一致する範囲</label><select class="simple-select" id="scope"><option value="full">文字列全体</option><option value="contains">部分一致</option><option value="prefix">先頭に一致</option><option value="suffix">末尾に一致</option></select></div>
@@ -110,7 +110,7 @@
             </section>
             <section class="output" aria-labelledby="output-heading">
                 <h2 id="output-heading">生成した正規表現</h2>
-                <label for="flavor">利用先（正規表現の方言）</label>
+                <label for="flavor">出力フォーマット</label>
                 <select class="simple-select" id="flavor"></select>
                 <div class="pattern-area"><label for="pattern">パターン本体</label><textarea class="simple-textarea" id="pattern" rows="3" readonly spellcheck="false" aria-describedby="flavor-help"></textarea><button type="button" id="copy" class="button" disabled>正規表現をコピー</button></div>
                 <p id="copy-status" class="hint" role="status"></p>
