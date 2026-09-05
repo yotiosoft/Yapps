@@ -93,9 +93,11 @@
                 
                 <label for="positive">一致させたい文字列</label>
                 <textarea id="positive" rows="5" maxlength="50100" spellcheck="false" placeholder="一致させたい文字列を1行ずつ入力" class="simple-textarea"></textarea>
-                <label for="negative">一致させたくない文字列 <small>任意</small></label>
-                <textarea id="negative" rows="3" maxlength="50100" spellcheck="false" placeholder="一致させたくない文字列を1行ずつ入力" class="simple-textarea"></textarea>
-                <p class="hint">1行ずつ入力してください。空行は無視し、前後の空白は保持します。各欄100行、1行500文字まで。除外指定を優先して候補を絞り込みます。</p>
+                <details class="optional-negative">
+                    <summary>一致させたくない文字列 <small>任意</small></summary>
+                    <textarea id="negative" rows="3" maxlength="50100" spellcheck="false" placeholder="一致させたくない文字列を1行ずつ入力" class="simple-textarea"></textarea>
+                    <p class="hint">1行ずつ入力してください。空行は無視し、前後の空白は保持します。各欄100行、1行500文字まで。除外指定を優先して候補を絞り込みます。</p>
+                </details>
                 <h2 class="settings-heading">生成の設定</h2>
                 <label for="method">生成方法</label>
                 <select class="simple-select" id="method"><option value="smart">共通部分を残して推測（おすすめ）</option><option value="literal">入力した文字列だけを許可</option><option value="classes">文字種で一般化</option></select>

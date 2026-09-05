@@ -52,6 +52,16 @@
 #generator details {
     margin: 20px 0;
 }
+#generator .optional-negative {
+    border-top: 1px solid #ddd;
+    padding-top: 16px;
+}
+#generator .optional-negative summary {
+    font-weight: bold;
+}
+#generator .optional-negative textarea {
+    margin-top: 12px;
+}
 #generator summary {
     cursor: pointer;
 }
