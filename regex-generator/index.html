@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>正規表現ジェネレーター - Yapps</title>
+    <meta name="description" content="入力例から正規表現を自動生成。JavaScript・Python・Java・.NET・PCRE2・Goに対応し、一致範囲や文字数、部分ごとの粒度を調整できます。">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="canonical" href="https://yapps.yotiosoft.com/regex-generator/">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/box.css">
+    <link rel="stylesheet" href="/app-page.css">
+    <link rel="stylesheet" href="/simple-textarea.css">
+    <link rel="stylesheet" href="/simple-select.css">
+    <link rel="stylesheet" href="/button.css">
+    <link rel="stylesheet" href="/badges.css">
+    <link rel="stylesheet" href="./style.css">
+    <!-- WEB_APPLICATION_STRUCTURED_DATA_START -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "正規表現ジェネレーター",
+      "url": "https://yapps.yotiosoft.com/regex-generator/",
+      "description": "入力例から正規表現を自動生成します。利用先の方言や一致範囲、文字数、部分ごとの粒度を指定できます。",
+      "image": "https://yapps.yotiosoft.com/img/logo.png",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser.",
+      "inLanguage": "ja",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "JPY"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "YotioSoft",
+        "url": "https://yotiosoft.com/"
+      }
+    }
+    </script>
+    <!-- WEB_APPLICATION_STRUCTURED_DATA_END -->
+</head>
+<body>
+    <header>
+        <div id="wrap" style="width: 100%;">
+        <!-- SITE_HEADER_START -->
+        <div id="header">
+            <a class="site-header-logo" href="/" aria-label="Yapps トップページ">
+                <img src="/img/logo-yapps.svg" width="250" height="100" alt="Yapps">
+            </a>
+
+            <nav class="site-header-desktop-nav" aria-label="メインナビゲーション">
+                <a href="/about/">About</a>
+                <a href="/update/">Change Log</a>
+                <a href="https://github.com/YotioSoft/Yapps">GitHub</a>
+            </nav>
+
+            <div class="site-header-mobile-nav">
+                <input type="checkbox" id="site-menu-toggle">
+                <label for="site-menu-toggle" class="site-menu-button" aria-label="メニューを開く"><span></span></label>
+                <nav class="site-menu-content" aria-label="モバイルナビゲーション">
+                    <ul>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/update/">Update</a></li>
+                        <li><a href="https://github.com/YotioSoft/Yapps">GitHub</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- SITE_HEADER_END -->
+        </div>
+    </header>
+    <div id="wrap">
+    <main id="contents-wrap">
+        <div class="title">
+            <img src="/img/tools_icon/text/regex-generator.svg" width="48" height="48" alt="">
+            正規表現ジェネレーター
+            <div class="badge-group">
+                <div class="badge-ver">ver.1.0</div>
+                <div class="badge-clientside">Client Side</div>
+            </div>
+        </div>
+        <p class="summary">入力した文字列から正規表現を生成します。利用先の方言や一致範囲、文字数、部分ごとの粒度を指定できます。<br>
+            このツールはブラウザ内で実行され、入力内容はサーバに送信されません。</p>
+        <noscript>このアプリを使用するには JavaScript を有効にしてください。</noscript>
+        <div class="app-area" id="generator">
+            <section class="inputs" aria-label="入力">
+                
+                <label for="positive">一致させたい文字列</label>
+                <textarea id="positive" rows="5" maxlength="50100" spellcheck="false" placeholder="一致させたい文字列を1行ずつ入力" class="simple-textarea"></textarea>
+                <label for="negative">一致させたくない文字列 <small>任意</small></label>
+                <textarea id="negative" rows="3" maxlength="50100" spellcheck="false" placeholder="一致させたくない文字列を1行ずつ入力" class="simple-textarea"></textarea>
+                <p class="hint">1行ずつ入力してください。空行は無視し、前後の空白は保持します。各欄100行、1行500文字まで。除外指定を優先して候補を絞り込みます。</p>
+                <h2 class="settings-heading">生成の設定</h2>
+                <label for="method">生成方法</label>
+                <select class="simple-select" id="method"><option value="smart">共通部分を残して推測（おすすめ）</option><option value="literal">入力した文字列だけを許可</option><option value="classes">文字種で一般化</option></select>
+                <p class="hint" id="method-help"></p>
+                <div class="setting-grid">
+                    <div><label for="scope">一致する範囲</label><select class="simple-select" id="scope"><option value="full">文字列全体</option><option value="contains">部分一致</option><option value="prefix">先頭に一致</option><option value="suffix">末尾に一致</option></select></div>
+                    <div><label for="length">一般化部分の文字数</label><select class="simple-select" id="length"><option value="observed">例の最小〜最大（同じなら固定）</option><option value="any">1文字以上なら自由</option></select></div>
+                </div>
+                <details id="parts-details"><summary>部分ごとに粒度を指定</summary><p class="hint" id="parts-help"></p><div id="parts"></div></details>
+            </section>
+            <section class="output" aria-labelledby="output-heading">
+                <h2 id="output-heading">生成した正規表現</h2>
+                <label for="flavor">利用先（正規表現の方言）</label>
+                <select class="simple-select" id="flavor"></select>
+                <div class="pattern-area"><label for="pattern">パターン本体</label><textarea class="simple-textarea" id="pattern" rows="3" readonly spellcheck="false" aria-describedby="flavor-help"></textarea><button type="button" id="copy" class="button" disabled>正規表現をコピー</button></div>
+                <p id="copy-status" class="hint" role="status"></p>
+                <p id="error" role="alert"></p>
+                <p id="adjustment" class="hint" role="status"></p>
+                <p id="flavor-help" class="hint"></p>
+                <p class="hint">区切り文字・言語の文字列リテラルは含みません。フラグなしを前提にしています。</p>
+                <div class="verification"><h3>入力例で検証</h3><p id="status" role="status" aria-live="polite"></p><div id="results"></div></div>
+                <label for="test">別の文字列で試す <small>任意・1行ずつ判定</small></label>
+                <textarea class="simple-textarea" id="test" rows="3" maxlength="50100" spellcheck="false" placeholder="確認する文字列を1行ずつ入力"></textarea>
+                <div id="test-results" aria-live="polite"></div>
+                <p class="hint" id="preview-note"></p>
+            </section>
+        </div>
+        <section class="related-apps"><div class="title">関連アプリ</div><div class="box-horizon-area">
+            <!-- RELATED_APPS_START target="regex-generator" -->
+                <div class="box-horizon-wrap">
+                    <a href="/char-counter/">
+                        <div class="box box-horizon">
+                            <img src="/img/tools_icon/text/char-counter.svg" width="128" height="128" alt="文字数・行数カウント">
+                            <div class="box-horizon-text">
+                                <p class="tool-title">文字数・行数カウント</p>
+                                <p class="summary">文章中の文字数・行数をカウントします。</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="box-horizon-wrap">
+                    <a href="/char-checker/">
+                        <div class="box box-horizon">
+                            <img src="/img/tools_icon/text/char-checker.svg" width="128" height="128" alt="全角半角判定">
+                            <div class="box-horizon-text">
+                                <p class="tool-title">全角半角判定</p>
+                                <p class="summary">文章中の半角文字と全角文字を判定します。</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="box-horizon-wrap">
+                    <a href="/zero-width-checker/">
+                        <div class="box box-horizon">
+                            <img src="/img/tools_icon/text/zero-width-checker.svg" width="128" height="128" alt="見えない文字を検出">
+                            <div class="box-horizon-text">
+                                <p class="tool-title">見えない文字を検出</p>
+                                <p class="summary">文章中の見えないゼロ幅文字、Unicode 不可視文字を検出・除去します。</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <!-- RELATED_APPS_END -->
+        </div></section>
+    </main>
+    </div>
+    <footer class="footer_class">
+        <!-- SITE_FOOTER_START -->
+        <div id="footer">
+            <div id="footer-wrap">
+                <p><a href="/privacy/">プライバシーポリシー</a></p>
+                <p>© 2021-2026&nbsp;<a href="https://yotiosoft.com/">YotioSoft</a><br></p>
+            </div>
+        </div>
+        <!-- SITE_FOOTER_END -->
+    </footer>
+    <script type="module" src="./app.mjs"></script>
+</body>
+</html>

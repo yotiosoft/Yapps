@@ -1,0 +1,118 @@
+#generator {
+    padding: 0 10px;
+}
+#generator * {
+    box-sizing: border-box;
+}
+#generator label {
+    display: block;
+    margin: 16px 0 8px;
+    font-weight: bold;
+}
+#generator small {
+    font-weight: normal;
+    color: #666;
+}
+#generator textarea {
+    font: 14px monospace;
+    height: 130px;
+    min-height: 70px;
+}
+#generator #positive {
+    height: 200px;
+}
+#generator select {
+    font: inherit;
+    color: inherit;
+    background: #fff;
+}
+#generator h2 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 30px 0 16px;
+}
+#generator h3 {
+    font-size: 16px;
+    margin: 24px 0 12px;
+}
+.hint {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 8px 0 12px;
+}
+.hint:empty, #error:empty {
+    display: none;
+}
+.setting-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+#generator details {
+    margin: 20px 0;
+}
+#generator summary {
+    cursor: pointer;
+}
+.part {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+}
+.part code, .result code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.part select {
+    max-width: 100%;
+    padding: 8px;
+}
+#copy {
+    margin: 12px 0;
+    padding: 10px 16px;
+    border: solid 1px #087fd1;
+    border-radius: 5px;
+    background: #087fd1;
+    color: #fff;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+#copy:hover:not(:disabled), #copy:focus-visible {
+    background: #006ab2;
+}
+#copy:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+#status {
+    margin: 12px 0;
+}
+.result {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr);
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    gap: 12px;
+}
+.pass {
+    color: #08783e;
+}
+.fail, #error {
+    color: #c62828;
+}
+#generator mark {
+    background: #d9ece5;
+    color: #204f3e;
+}
+#contents-wrap > .related-apps .box-horizon-area {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+}
+@media screen and (max-width: 768px) {
+    .setting-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}

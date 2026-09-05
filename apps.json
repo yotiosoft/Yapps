@@ -37,6 +37,7 @@
             "summary": "文章中の文字数・行数をカウントします。",
             "category": "テキスト",
             "target": [
+                "regex-generator",
                 "top-text",
                 "space-checker",
                 "char-checker",
@@ -70,6 +71,7 @@
             "summary": "文章中の半角文字と全角文字を判定します。",
             "category": "テキスト",
             "target": [
+                "regex-generator",
                 "top-text",
                 "width-converter",
                 "char-counter",
@@ -119,6 +121,7 @@
             "category": "テキスト",
             "new": true,
             "target": [
+                "regex-generator",
                 "top-text",
                 "space-checker",
                 "char-checker",
@@ -274,6 +277,16 @@
             ],
             "image": "/img/tools_icon/math/investment-simulator.svg",
             "path": "/investment-simulator/"
+        },
+        {
+            "id": "regex-generator",
+            "name": "正規表現ジェネレータ",
+            "summary": "入力例から正規表現を自動生成します。",
+            "category": "テキスト",
+            "new": true,
+            "target": ["top-text", "char-checker", "char-counter", "zero-width-checker"],
+            "image": "/img/tools_icon/text/regex-generator.svg",
+            "path": "/regex-generator/"
         }
     ]
 }

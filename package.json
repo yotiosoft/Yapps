@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "test:regex-generator": "node --test regex-generator/engine.test.mjs",
     "generate:app-links": "node scripts/generate-app-links.mjs",
     "generate:shared-layout": "node scripts/generate-shared-layout.mjs",
     "generate:structured-data": "node scripts/generate-structured-data.mjs",
