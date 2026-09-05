@@ -165,7 +165,8 @@
                 "cardinal",
                 "schedule_speed",
                 "point-calculator",
-                "days-calculator"
+                "days-calculator",
+                "investment-simulator"
             ],
             "image": "/img/tools_icon/math/random.svg",
             "path": "/random/"
@@ -181,7 +182,8 @@
                 "schedule_speed",
                 "char-counter",
                 "point-calculator",
-                "days-calculator"
+                "days-calculator",
+                "investment-simulator"
             ],
             "image": "/img/tools_icon/math/cardinal.svg",
             "path": "/cardinal/"
@@ -233,11 +235,12 @@
             "category": "数学",
             "new": true,
             "target": [
-                "top-math", 
+                "top-math",
                 "random",
                 "cardinal",
                 "schedule_speed",
-                "point-calculator"
+                "point-calculator",
+                "investment-simulator"
             ],
             "image": "/img/tools_icon/math/days-calculator.svg",
             "path": "/days-calculator/"
@@ -249,14 +252,28 @@
             "category": "数学",
             "new": true,
             "target": [
-                "top-math", 
+                "top-math",
                 "random",
                 "cardinal",
                 "schedule_speed",
-                "days-calculator"
+                "days-calculator",
+                "investment-simulator"
             ],
             "image": "/img/tools_icon/math/point-calculator.svg",
             "path": "/point-calculator/"
+        },
+        {
+            "id": "investment-simulator",
+            "name": "積立シミュレーター",
+            "summary": "複数商品の積立をシミュレーション。資産の推移や購入比率をグラフで確認できます。",
+            "category": "数学",
+            "new": true,
+            "target": [
+                "top-math",
+                "point-calculator"
+            ],
+            "image": "/img/tools_icon/math/investment-simulator.svg",
+            "path": "/investment-simulator/"
         }
     ]
 }

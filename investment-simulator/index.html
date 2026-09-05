@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>積立シミュレーター - Yapps</title>
+    <meta name="description" content="複数商品の積立をシミュレーション。年利やカテゴリを設定し、資産推移と購入比率をグラフで確認できます。">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/app-page.css">
+    <link rel="stylesheet" href="/information.css">
+    <link rel="stylesheet" href="/badges.css">
+    <link rel="stylesheet" href="/box.css">
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="./simulator.css">
+    <script type="module" src="./simulator.js"></script>
+    <!-- WEB_APPLICATION_STRUCTURED_DATA_START -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "積立シミュレーター",
+      "url": "https://yapps.yotiosoft.com/investment-simulator/",
+      "description": "複数商品の積立をシミュレーション。資産の推移や購入比率をグラフで確認できます。",
+      "image": "https://yapps.yotiosoft.com/img/logo.png",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser.",
+      "inLanguage": "ja",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "JPY"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "YotioSoft",
+        "url": "https://yotiosoft.com/"
+      }
+    }
+    </script>
+    <!-- WEB_APPLICATION_STRUCTURED_DATA_END -->
+</head>
+<body>
+    <header>
+        <div id="wrap" style="width: 100%;">
+        <!-- SITE_HEADER_START -->
+        <div id="header">
+            <a class="site-header-logo" href="/" aria-label="Yapps トップページ">
+                <img src="/img/logo-yapps.svg" width="250" height="100" alt="Yapps">
+            </a>
+
+            <nav class="site-header-desktop-nav" aria-label="メインナビゲーション">
+                <a href="/about/">About</a>
+                <a href="/update/">Change Log</a>
+                <a href="https://github.com/YotioSoft/Yapps">GitHub</a>
+            </nav>
+
+            <div class="site-header-mobile-nav">
+                <input type="checkbox" id="site-menu-toggle">
+                <label for="site-menu-toggle" class="site-menu-button" aria-label="メニューを開く"><span></span></label>
+                <nav class="site-menu-content" aria-label="モバイルナビゲーション">
+                    <ul>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/update/">Update</a></li>
+                        <li><a href="https://github.com/YotioSoft/Yapps">GitHub</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- SITE_HEADER_END -->
+        </div>
+    </header>
+    <div id="wrap">
+    <main id="contents-wrap">
+        <div class="title">
+            <img src="/img/tools_icon/math/investment-simulator.svg" width="48" height="48" alt="積立シミュレーター">
+            積立シミュレーター
+            <div class="badge-group">
+                <div class="badge-ver">ver.1.0</div>
+                <div class="badge-clientside">Client Side</div>
+            </div>
+        </div>
+        <p class="summary">
+            複数商品の積立額と年利から、将来の資産額をシミュレーションします。<br>
+            商品別の資産推移を積み上げグラフで、購入額や評価額の構成比を円グラフで確認できます。
+        </p>
+        <div class="information" id="storage-notice" hidden style="background-color: #EED100; color: #000;">
+            <p>ご利用のブラウザでサイトデータを削除した場合、保存された積立プランも削除されます。ご注意ください。</p>
+            <button type="button" id="dismiss-storage-notice" aria-label="注意書きを閉じる">×</button>
+        </div>
+        <div class="app-area simulator" id="app-area-id">
+        <p id="save-status" role="status"></p>
+        <noscript>このツールを利用するにはJavaScriptを有効にしてください。</noscript>
+        <form id="plan" class="panel" novalidate>
+            <div class="section-heading"><h2>積立プラン</h2><label class="period">運用期間 <input id="years" type="number" min="1" max="60" step="1" required value="20"> 年</label></div>
+            <p class="hint">金額は円単位。年利は商品ごとに設定できます。</p>
+            <div id="products"></div>
+            <button type="button" id="add-product" class="primary">＋ 商品を追加</button>
+            <p id="error" role="alert"></p>
+        </form>
+        <section id="results" aria-label="シミュレーション結果">
+            <div class="metrics"><div class="metric featured"><span id="final-label">20年後の評価額</span><strong id="total"></strong></div><div class="metric"><span>投資元本</span><strong id="principal"></strong></div><div class="metric"><span>運用損益</span><strong id="gain"></strong></div><div class="metric"><span>毎月の積立額</span><strong id="monthly"></strong></div></div>
+            <div class="charts">
+                <section class="panel growth-panel"><h2>資産の推移</h2><p class="hint">商品別の積み上げ面グラフ・破線は投資元本</p><div id="growth-chart"></div><div id="growth-legend" class="legend"></div></section>
+                <section class="panel"><h2>ポートフォリオの構成比</h2><div class="chart-controls"><label>金額の基準<select id="allocation-basis"><option value="monthly">毎月の購入額</option><option value="final">最終評価額</option></select></label><label>集計単位<select id="allocation-group"><option value="product">商品別</option><option value="category">カテゴリ別</option></select></label></div><div id="pie-chart"></div><div id="pie-legend" class="legend"></div></section>
+            </div>
+            <details class="panel"><summary>年ごとの数値を見る</summary><div class="table-scroll"><table><thead><tr><th>経過年数</th><th>投資元本</th><th>評価額</th><th>運用損益</th></tr></thead><tbody id="annual-data"></tbody></table></div></details>
+        </section>
+        </div>
+        <section>
+            <h3>計算について</h3>
+            <p class="summary">年利を実効月利（(1 + 年利) の12乗根 − 1）に換算し、毎月末に積み立てます。<br>
+                初期投資は開始時に行い、利益は再投資する想定です。税金・手数料・インフレは考慮しません。表示金額は円単位に四捨五入しています。</p>
+            <h3>ご利用にあたって</h3>
+            <p class="summary">入力した一定の年利に基づく参考用の概算であり、投資の勧誘を目的とするものではありません。初期値は操作例です。<br>
+                実際の運用実績や価格変動を再現するものではなく、将来の成果を保証しません。税金・手数料などを含まないため、実際の結果とは異なります。<br>
+                結果の正確性・完全性は保証しません。上記の計算条件を確認し、投資判断は自身の責任で行ってください。</p>
+            <h3>入力内容の保存について</h3>
+            <p class="summary">入力内容はこのブラウザのLocalStorageに自動保存されます。<br>
+                別の端末とは共有されず、ブラウザのデータを消去すると失われます。</p>
+        </section>
+        <div class="related-apps">
+            <div class="title">関連アプリ</div>
+            <div class="app-list">
+                <div class="box-horizon-area" id="related-apps">
+                    <!-- RELATED_APPS_START target="investment-simulator" -->
+                        <div class="box-horizon-wrap">
+                            <a href="/random/">
+                                <div class="box box-horizon">
+                                    <img src="/img/tools_icon/math/random.svg" width="128" height="128" alt="乱数生成">
+                                    <div class="box-horizon-text">
+                                        <p class="tool-title">乱数生成</p>
+                                        <p class="summary">乱数を生成します。一様分布や正規分布など多数の確率分布関数から生成できます。</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="box-horizon-wrap">
+                            <a href="/cardinal/">
+                                <div class="box box-horizon">
+                                    <img src="/img/tools_icon/math/cardinal.svg" width="128" height="128" alt="基数変換">
+                                    <div class="box-horizon-text">
+                                        <p class="tool-title">基数変換</p>
+                                        <p class="summary">2進数、8進数、10進数、16進数などを相互変換します。</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="box-horizon-wrap">
+                            <a href="/days-calculator/">
+                                <div class="box box-horizon">
+                                    <img src="/img/tools_icon/math/days-calculator.svg" width="128" height="128" alt="日数計算">
+                                    <div class="box-horizon-text">
+                                        <p class="tool-title">日数計算</p>
+                                        <p class="summary">開始日と終了日から日数を計算します。初日を含む設定や時刻を含めた計算にも対応します。</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="box-horizon-wrap">
+                            <a href="/point-calculator/">
+                                <div class="box box-horizon">
+                                    <img src="/img/tools_icon/math/point-calculator.svg" width="128" height="128" alt="ポイント還元額計算">
+                                    <div class="box-horizon-text">
+                                        <p class="tool-title">ポイント還元額計算</p>
+                                        <p class="summary">複数の利用金額と回数別の還元率ルールから獲得ポイントを計算します。</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <!-- RELATED_APPS_END -->
+                </div>
+            </div>
+        </div>
+    </main>
+    </div>
+    <footer class="footer_class">
+    <!-- SITE_FOOTER_START -->
+    <div id="footer">
+        <div id="footer-wrap">
+            <p><a href="/privacy/">プライバシーポリシー</a></p>
+            <p>© 2021-2026&nbsp;<a href="https://yotiosoft.com/">YotioSoft</a><br></p>
+        </div>
+    </div>
+    <!-- SITE_FOOTER_END -->
+    </footer>
+</body>
+</html>
