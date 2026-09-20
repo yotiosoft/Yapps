@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>アプリ名 - Yapps</title>
+    <meta name="description" content="アプリの概要を入力">
+    <link rel="icon" type="image/png" href="/img/logo.png">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/app-page.css">
+    <link rel="stylesheet" href="/badges.css">
+    <link rel="stylesheet" href="/box.css">
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/footer.css">
+    <!-- 必要な共通 CSS とアプリ固有の CSS をここに追加 -->
+    <link rel="stylesheet" href="./app.css">
+
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/common.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5605897321593790" crossorigin="anonymous"></script>
+    <script src="/js/adsense.min.js"></script>
+    <!-- WEB_APPLICATION_STRUCTURED_DATA_START -->
+    <script type="application/ld+json">{}</script>
+    <!-- WEB_APPLICATION_STRUCTURED_DATA_END -->
+    <script defer src="./app.js"></script>
+</head>
+<body>
+    <header>
+        <div id="wrap" style="width: 100%;">
+            <div id="header"></div>
+        </div>
+    </header>
+
+    <main id="wrap">
+        <div id="contents-wrap">
+            <div class="title">
+                <img src="/img/tools_icon/text/app-slug.svg" width="48" height="48" alt="">
+                アプリ名
+                <!-- 実際の機能に合う場合だけバッジを追加 -->
+                <div class="badge-group"></div>
+            </div>
+            <p class="summary">アプリの概要を入力</p>
+
+            <div class="app-area" id="app-area-id">
+                <!-- アプリの操作画面をここに実装 -->
+            </div>
+
+            <div class="related-apps">
+                <div class="title">関連アプリ</div>
+                <div class="app-list">
+                    <div class="box-horizon-area" id="related-apps">
+                        <!-- RELATED_APPS_START target="app-slug" -->
+                        <!-- RELATED_APPS_END -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer_class">
+        <div id="footer"></div>
+    </footer>
+</body>
+</html>
