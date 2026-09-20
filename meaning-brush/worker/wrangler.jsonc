@@ -1,0 +1,16 @@
+{
+  "name": "yapps-meaning-brush-api",
+  "main": "./index.mjs",
+  "compatibility_date": "2026-09-20",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGIN": "https://yapps.yotiosoft.com"
+  },
+  "ratelimits": [
+    {
+      "name": "API_RATE_LIMITER",
+      "namespace_id": "31701",
+      "simple": { "limit": 30, "period": 60 }
+    }
+  ]
+}
