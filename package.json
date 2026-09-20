@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev:meaning-brush": "node meaning-brush/server.mjs",
-    "test:meaning-brush": "node --test --experimental-test-isolation=none meaning-brush/segment.test.mjs",
+    "test:meaning-brush": "node --test --experimental-test-isolation=none workers/meaning-brush/index.test.mjs",
     "test:regex-generator": "node --test regex-generator/engine.test.mjs",
     "generate:app-links": "node scripts/generate-app-links.mjs",
     "generate:shared-layout": "node scripts/generate-shared-layout.mjs",
@@ -11,5 +11,8 @@
   },
   "dependencies": {
     "whois-parsed": "^1.0.14"
+  },
+  "devDependencies": {
+    "wrangler": "^4.135.0"
   }
 }

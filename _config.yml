@@ -1,0 +1,3 @@
+# Keep Worker source in the repository without publishing it on GitHub Pages.
+exclude:
+  - workers/
