@@ -1,58 +1,24 @@
-const api_urls = [
-    "https://r.yotio.jp/yapps-random",                 // main
-    "https://yapps-random-api.onrender.com"            // fallback
-];
+// 接続先とフォールバックは Worker 側で管理する。
+const api_url = document.querySelector('meta[name="random-api-url"]').content;
 
-// 接続確認用
-function wakeup() {
-    fetch_with_fallback("", 3000)
-        .catch(() => {
-            alert("サーバに接続できません。時間をおいて再度お試しください。");
-        });
-}
-
-function fetch_with_timeout(url, options = {}, timeout = 3000) {
-    return new Promise((resolve, reject) => {
-        const controller = new AbortController();
-        const id = setTimeout(() => controller.abort(), timeout);
-
-        fetch(url, { ...options, signal: controller.signal })
-            .then(response => {
-                clearTimeout(id);
-                resolve(response);
-            })
-            .catch(err => {
-                clearTimeout(id);
-                reject(err);
-            });
-    });
-}
-
-async function fetch_with_fallback(path, timeout = 3000) {
-    let lastError;
-    for (const base of api_urls) {
-        const fullUrl = base + path;
-
-        try {
-            const response = await fetch_with_timeout(fullUrl, {}, timeout);
-
-            if (response.ok) {
-                return response;
-            } else {
-                lastError = new Error(`HTTP ${response.status}`);
-            }
-        } catch (e) {
-            lastError = e;  // タイムアウト or ネットワークエラー
-        }
+async function fetch_random(path) {
+    const controller = new AbortController();
+    // Worker の主系3秒 + 代替系30秒に通信の余裕を加える。
+    const timer = setTimeout(() => controller.abort(), 40000);
+    try {
+        const response = await fetch(api_url + path, {signal: controller.signal});
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error_message || '乱数生成に失敗しました。');
+        return data;
+    } finally {
+        clearTimeout(timer);
     }
-
-    throw lastError; // すべての URL が失敗した
 }
 
 function update_output(rand_array) {
     const output = document.getElementById('id_output');
     output.value = "";
-    for (i=0; i<rand_array.length; i++) {
+    for (let i=0; i<rand_array.length; i++) {
         output.value += rand_array[i] + '\n';
     }
 }
@@ -62,10 +28,9 @@ function send_and_get(distribution, params) {
     output.value = "乱数を生成中..";
 
     const query = new URLSearchParams(params).toString();
-    const path = `/random/${distribution}?${query}`;
+    const path = `/${distribution}?${query}`;
 
-    fetch_with_fallback(path, 3000)  // ← ここで 3秒指定
-        .then(response => response.json())
+    fetch_random(path)
         .then(data => {
             if (data.rand_array) {
                 update_output(data.rand_array);
@@ -74,6 +39,7 @@ function send_and_get(distribution, params) {
             }
         })
         .catch(error => {
+            output.value = "";
             alert(`乱数生成APIにアクセスできません。\nしばらく待ってから再度お試しください。\n\n${error}`);
         });
 }

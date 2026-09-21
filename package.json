@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "test:random": "node --test workers/random/index.test.mjs random/js/random.test.mjs",
     "dev:context-analysis": "node context-analysis/server.mjs",
     "test:context-analysis": "node --test --experimental-test-isolation=none context-analysis/segment.test.mjs workers/meaning-brush/index.test.mjs",
     "test:regex-generator": "node --test regex-generator/engine.test.mjs",
