@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yapps.yotiosoft.com/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-21</lastmod>
   </url>
   <url>
     <loc>https://yapps.yotiosoft.com/about/</loc>
@@ -26,7 +26,11 @@
   </url>
   <url>
     <loc>https://yapps.yotiosoft.com/char-counter/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://yapps.yotiosoft.com/context-analysis/</loc>
+    <lastmod>2026-09-21</lastmod>
   </url>
   <url>
     <loc>https://yapps.yotiosoft.com/days-calculator/</loc>
@@ -51,10 +55,6 @@
   <url>
     <loc>https://yapps.yotiosoft.com/markdown/</loc>
     <lastmod>2026-09-02</lastmod>
-  </url>
-  <url>
-    <loc>https://yapps.yotiosoft.com/meaning-brush/</loc>
-    <lastmod>2026-09-20</lastmod>
   </url>
   <url>
     <loc>https://yapps.yotiosoft.com/memo/</loc>
@@ -82,7 +82,7 @@
   </url>
   <url>
     <loc>https://yapps.yotiosoft.com/regex-generator/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-21</lastmod>
   </url>
   <url>
     <loc>https://yapps.yotiosoft.com/replace/</loc>
