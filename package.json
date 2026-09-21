@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev:meaning-brush": "node meaning-brush/server.mjs",
-    "test:meaning-brush": "node --test --experimental-test-isolation=none workers/meaning-brush/index.test.mjs",
+    "dev:context-analysis": "node context-analysis/server.mjs",
+    "test:context-analysis": "node --test --experimental-test-isolation=none workers/context-analysis/index.test.mjs",
     "test:regex-generator": "node --test regex-generator/engine.test.mjs",
     "generate:app-links": "node scripts/generate-app-links.mjs",
     "generate:shared-layout": "node scripts/generate-shared-layout.mjs",

@@ -1,4 +1,4 @@
-# 意味ブラシの Jev API（Cloudflare Workers）
+# 文脈解析の Jev API（Cloudflare Workers）
 
 GitHub Pages に API キーは置けません。この Worker は `TYPESAFE_API_KEY` を Cloudflare Secret として読み、Jev に問い合わせ、選択範囲だけを返します。画面から送った文章と意味の指定は TypeSafe AI に渡ります。
 
@@ -12,7 +12,7 @@ GitHub Pages に API キーは置けません。この Worker は `TYPESAFE_API_
 2. `npx wrangler login`
 3. `npx wrangler secret put TYPESAFE_API_KEY --config workers/meaning-brush/wrangler.jsonc`。対話入力でキーを登録します。ソースやコマンド引数にキーを書かないでください。
 4. `npx wrangler deploy --config workers/meaning-brush/wrangler.jsonc`
-5. デプロイ結果の `https://...workers.dev` に `/api/meaning-brush` を付け、意味ブラシ画面の `<meta name="meaning-brush-api-url" content="...">` に設定します。
+5. デプロイ結果の `https://...workers.dev` に `/api/meaning-brush` を付け、文脈解析画面の `<meta name="meaning-brush-api-url" content="...">` に設定します。
 
 公開サイトの Origin が `https://yapps.yotiosoft.com` 以外なら、`wrangler.jsonc` の `ALLOWED_ORIGIN` をその Origin に変更します。ブラウザーからは Worker に JSON `{"text":"...","meaning":"..."}` を POST します。
 

@@ -38,6 +38,7 @@
             "category": "テキスト",
             "target": [
                 "regex-generator",
+                "context-analysis",
                 "top-text",
                 "space-checker",
                 "char-checker",
@@ -284,9 +285,19 @@
             "summary": "入力例から正規表現を自動生成します。",
             "category": "テキスト",
             "new": true,
-            "target": ["top-text", "char-checker", "char-counter", "zero-width-checker"],
+            "target": ["top-text", "char-checker", "char-counter", "zero-width-checker", "context-analysis"],
             "image": "/img/tools_icon/text/regex-generator.svg",
             "path": "/regex-generator/"
+        },
+        {
+            "id": "context-analysis",
+            "name": "文脈解析",
+            "summary": "AIで文脈を解析し、依頼・推測・断りなどの文を選択できるテキストマイニングツール。",
+            "category": "テキスト",
+            "new": true,
+            "target": ["top-text", "regex-generator", "char-counter"],
+            "image": "/img/tools_icon/text/context-analysis.svg",
+            "path": "/context-analysis/"
         }
     ]
 }

@@ -52,7 +52,9 @@ function normalizeRanges(raw, text) {
   return merged;
 }
 async function infer(text, meaning) {
-  const endpoint = document.querySelector('meta[name="meaning-brush-api-url"]')?.content || '/api/meaning-brush';
+  const endpoint = ['localhost', '127.0.0.1'].includes(location.hostname)
+    ? '/api/meaning-brush'
+    : document.querySelector('meta[name="meaning-brush-api-url"]')?.content || '/api/meaning-brush';
   const response = await fetch(endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({text, meaning})});
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || '判定に失敗しました。');
