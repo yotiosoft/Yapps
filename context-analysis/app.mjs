@@ -54,8 +54,11 @@ function normalizeRanges(raw, text) {
 async function infer(text, meaning) {
   const endpoint = ['localhost', '127.0.0.1'].includes(location.hostname)
     ? '/api/meaning-brush'
-    : document.querySelector('meta[name="meaning-brush-api-url"]')?.content || '/api/meaning-brush';
+    : document.querySelector('meta[name="context-analysis-api-url"]')?.content || '/api/meaning-brush';
   const response = await fetch(endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({text, meaning})});
+  if (!response.headers.get('Content-Type')?.toLowerCase().includes('application/json')) {
+    throw new Error('APIからJSONが返されませんでした。接続先のURLを確認してください。');
+  }
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || '判定に失敗しました。');
   return normalizeRanges(data.ranges, text);
@@ -78,7 +81,7 @@ run.addEventListener('click', async () => {
 });
 document.querySelector('#sample').addEventListener('click', () => { source.value = sample; analyzedText = ''; ranges = []; render(); setStatus('例文を入れました。選びたい意味を指定してください。'); });
 document.querySelectorAll('[data-query]').forEach(button => button.addEventListener('click', () => { query.value = button.dataset.query; query.focus(); }));
-source.addEventListener('input', () => { analyzedText = ''; ranges = []; render(); setStatus('文章を変更しました。意味で選び直してください。'); });
+source.addEventListener('input', () => { analyzedText = ''; ranges = []; render(); setStatus('文章が変更されました。解析する文脈を選び直してください。'); });
 query.addEventListener('keydown', event => { if (event.key === 'Enter') run.click(); });
 copy.addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(selected().map(range => analyzedText.slice(range.start, range.end)).join('\n')); setStatus('選択部分をコピーしました。'); }
@@ -92,7 +95,7 @@ remove.addEventListener('click', () => {
   analyzedText = '';
   ranges = [];
   render();
-  setStatus('選択部分を削除しました。続ける場合は意味で選び直してください。');
+  setStatus('選択部分を削除しました。');
 });
 clear.addEventListener('click', () => { ranges.forEach(range => { range.active = false; }); render(); setStatus('選択を解除しました。'); });
 render();

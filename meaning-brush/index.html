@@ -7,7 +7,7 @@
     <meta name="description" content="AIによるテキストマイニングで文章の文脈を解析。依頼・推測・断りなど指定した意味の文をハイライトし、選択した部分だけをコピー・削除できます。">
     <link rel="icon" type="image/png" href="/img/logo.png">
     <link rel="canonical" href="https://yapps.yotiosoft.com/context-analysis/">
-    <meta name="context-analysis-api-url" content="https://yapps-meaning-brush-api.ytani0323.workers.dev/api/meaning-brush">
+    <meta name="meaning-brush-api-url" content="https://yapps-meaning-brush-api.ytani0323.workers.dev/api/meaning-brush">
 
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/app-page.css">
@@ -24,7 +24,7 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "文脈解析",
-      "url": "https://yapps.yotiosoft.com/context-analysis/",
+      "url": "https://yapps.yotiosoft.com/meaning-brush/",
       "description": "AIで文脈を解析し、依頼・推測・断りなどの文を選択できるテキストマイニングツール。",
       "image": "https://yapps.yotiosoft.com/img/logo.png",
       "applicationCategory": "UtilitiesApplication",
@@ -80,7 +80,7 @@
     <main id="wrap">
         <div id="contents-wrap">
             <div class="title">
-                <img src="/img/tools_icon/text/context-analysis.svg" width="48" height="48" alt="">
+                <img src="/img/tools_icon/text/meaning-brush.svg" width="48" height="48" alt="">
                 文脈解析 by Jev (beta)
                 <div class="badge-group">
                     <div class="badge-ver">ver.0.1</div>
@@ -92,7 +92,7 @@
             <p class="summary">文章を貼り付け、依頼・推測・断りなど選びたい意味を入力すると、AIが文脈を解析して該当する文をハイライトします。テキストマイニングの結果をクリックして選択を調整し、選択した部分だけをコピー・削除できます。<br>文章と選択した文脈は判定のため TypeSafe AI に送信されますので、機密情報の扱いにご注意ください。</p>
             <noscript>このアプリを使用するには JavaScript を有効にしてください。</noscript>
 
-            <div class="app-area" id="context-analysis">
+            <div class="app-area" id="meaning-brush">
                 <div class="brush-layout">
                     <section class="panel">
                         <label for="source">文章</label>
@@ -126,7 +126,7 @@
                 <div class="title">関連アプリ</div>
                 <div class="app-list">
                     <div class="box-horizon-area" id="related-apps">
-                        <!-- RELATED_APPS_START target="context-analysis" -->
+                        <!-- RELATED_APPS_START target="meaning-brush" -->
                             <div class="box-horizon-wrap">
                                 <a href="/char-counter/">
                                     <div class="box box-horizon">
