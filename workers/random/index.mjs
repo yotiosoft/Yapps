@@ -57,17 +57,25 @@ export default {
       const timer = setTimeout(() => controller.abort(), timeout);
       try {
         const response = await fetch(`${base}/random/${match[1]}?${url.searchParams}`, {
-          signal: controller.signal, redirect: 'error', headers: {Accept: 'application/json'}
+          // Workers は redirect: 'error' 非対応。3xx は下の !ok で拒否する。
+          signal: controller.signal, redirect: 'manual', headers: {Accept: 'application/json'}
         });
         if (!response.ok) {
+          console.warn('Random upstream HTTP error', {upstream: base, status: response.status});
           await response.body?.cancel();
           continue;
         }
         const data = await response.json();
         if (!Array.isArray(data?.rand_array) || data.rand_array.length !== Number(url.searchParams.get('trials')) ||
-            !data.rand_array.every(value => typeof value === 'number' && Number.isFinite(value))) continue;
+            !data.rand_array.every(value => typeof value === 'number' && Number.isFinite(value))) {
+          console.warn('Random upstream invalid result', {upstream: base});
+          continue;
+        }
         return json({rand_array: data.rand_array}, 200, allowed);
-      } catch {
+      } catch (error) {
+        console.warn('Random upstream request failed', {
+          upstream: base, reason: controller.signal.aborted ? 'timeout' : error.message
+        });
         // 接続失敗・タイムアウト・不正な応答では次のサーバーへ切り替える。
       } finally {
         clearTimeout(timer);

@@ -56,7 +56,7 @@ test('all six distributions preserve the API contract and hide upstream metadata
     assert.equal(response.headers.get('Access-Control-Allow-Origin'), origin);
     const call = fetch.mock.calls.at(-1).arguments;
     assert.equal(call[0], `https://r.yotio.jp/yapps-random/random/${distribution}?${search}`);
-    assert.equal(call[1].redirect, 'error');
+    assert.equal(call[1].redirect, 'manual');
     assert.deepEqual(call[1].headers, {Accept: 'application/json'});
   }
 });
@@ -64,6 +64,7 @@ test('all six distributions preserve the API contract and hide upstream metadata
 for (const [name, fail] of Object.entries({
   network: () => {throw new Error('private server address');},
   http: () => new Response('private server address', {status: 503}),
+  redirect: () => new Response(null, {status: 302, headers: {Location: 'https://private.example'}}),
   json: () => new Response('<html>private server address</html>'),
   schema: () => Response.json({rand_array: ['private server address']}),
   apiError: () => Response.json({error_message: 'private server address'})
