@@ -15,9 +15,12 @@
     <link rel="stylesheet" href="/box.css">
     <link rel="stylesheet" href="/header.css">
     <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/button.css">
     <link rel="stylesheet" href="./style.css">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-43EGG0HL47"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5605897321593790" crossorigin="anonymous"></script>
+    <script src="/js/adsense.min.js"></script>
     <!-- WEB_APPLICATION_STRUCTURED_DATA_START -->
     <script type="application/ld+json">
     {
@@ -97,11 +100,11 @@
                     <section class="panel">
                         <label for="source">文章</label>
                         <textarea id="source" spellcheck="false" maxlength="10000" placeholder="ここに文章を貼り付けてください"></textarea>
-                        <button type="button" id="sample" class="text-button">例文を入れる</button>
+                        <button type="button" id="sample" class="round-rect-button">例文を入れる</button>
                     </section>
                     <section class="panel">
                         <label for="query">解析したい文脈</label>
-                        <div class="query-row"><input id="query" type="text" maxlength="200" placeholder="例：相手に行動を求めている部分"><button id="run" type="button">解析</button></div>
+                        <div class="query-row"><input id="query" type="text" maxlength="200" placeholder="例：相手に行動を求めている部分"><button id="run" type="button" class="round-rect-button">解析</button></div>
                         <div class="suggestions">
                           <button type="button" data-query="相手に行動を求めている部分">依頼</button>
                           <button type="button" data-query="相手に回答を求めている部分">質問</button>
@@ -117,7 +120,7 @@
                     <div class="result-heading"><h2>分析結果</h2><span id="count"></span></div>
                     <p class="hint">ハイライトをクリックすると選択・解除できます。</p>
                     <div id="result" class="result" aria-label="選択結果"></div>
-                    <div class="actions"><button id="copy" type="button" disabled>選択部分をコピー</button><button id="delete" type="button" disabled>選択部分を削除</button><button id="clear" type="button" disabled>選択を解除</button></div>
+                    <div class="actions"><button id="copy" type="button" class="round-rect-button" disabled>選択部分をコピー</button><button id="delete" type="button" class="round-rect-button" disabled>選択部分を削除</button><button id="clear" type="button" class="round-rect-button" disabled>選択を解除</button></div>
                 </section>
                 <p class="note">解析は文章単位です。AIによる解析ですので、必ず解析結果の正確性をご判断ください。</p>
             </div>
@@ -155,6 +158,9 @@
             </div>
         </div>
     </main>
+
+    <div id="ads-wide"></div>
+    <script>ads_wide("ads-wide");</script>
 
     <footer class="footer_class">
         <!-- SITE_FOOTER_START -->
