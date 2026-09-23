@@ -133,6 +133,35 @@
     white-space: nowrap;
 }
 
+@media screen and (min-width: 769px) {
+    .box-area-responsive .box-responsive {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 68px 18px auto 1fr;
+        align-items: start;
+        justify-items: center;
+    }
+
+    .box-area-responsive .box-responsive > img {
+        grid-row: 1;
+        height: 100%;
+    }
+
+    /* Reserve the badge row even for apps without a New! label. */
+    .box-area-responsive .box-responsive-text .new {
+        grid-row: 2;
+    }
+
+    .box-area-responsive .box-responsive-text .tool-title {
+        grid-row: 3;
+    }
+
+    .box-area-responsive .box-responsive-text .summary {
+        grid-row: 4;
+        justify-self: stretch;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .box-area-responsive .box-wrap {
         width: 380px;
@@ -165,6 +194,12 @@
     }
 
     .box-area-responsive .box-responsive-text .tool-title {
+        text-align: left;
+        margin-left: 5px;
+    }
+
+    .box-area-responsive .box-responsive-text .new {
+        width: auto;
         text-align: left;
         margin-left: 5px;
     }
