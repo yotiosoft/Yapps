@@ -1,0 +1,6 @@
+.share-actions { margin: 36px 0 28px; }
+.share-actions h2 { font-size: 20px; margin: 0 0 10px; }
+.share-actions-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.share-actions-links .round-rect-button { font-family: inherit; font-size: 16px; line-height: 1.4; margin: 0; padding: 8px 14px; background: #fff; color: #0077cc; cursor: pointer; }
+.share-actions-links .round-rect-button:focus-visible { outline: 3px solid #005fcc; outline-offset: 2px; }
+.share-copy-status { min-height: 1.5em; margin-top: 8px; }
