@@ -1,5 +1,5 @@
 .share-actions { position: relative; margin-left: auto; flex: 0 0 auto; font-size: 16px; }
-.share-trigger { display: inline-flex; align-items: center; gap: 7px; margin: 0; padding: 8px 12px; background: #fff; color: #0077cc; cursor: pointer; list-style: none; line-height: 1.4; font-size: 16px; }
+.share-trigger { display: inline-flex; align-items: center; gap: 7px; margin: 0; padding: 8px 12px; background: transparent; color: #0077cc; cursor: pointer; list-style: none; line-height: 1.4; font-size: 16px; }
 .share-trigger::-webkit-details-marker { display: none; }
 .title .share-trigger img { display: block; width: 20px; height: 20px; margin: 0; }
 .share-menu { position: absolute; top: calc(100% + 8px); right: 0; z-index: 20; width: min(340px, calc(100vw - 32px)); box-sizing: border-box; padding: 16px; border: 1px solid #cbd8e2; border-radius: 8px; background: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, .16); color: #4b4b4b; text-align: left; }
