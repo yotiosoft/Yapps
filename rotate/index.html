@@ -113,6 +113,27 @@
                         <div class="badge-clientside">Client Side</div>
                         <div class="badge-offline">Offline OK</div>
                     </div>
+                    <!-- SHARE_ACTIONS_START -->
+                    <details class="share-actions">
+                        <summary class="round-rect-button share-trigger" aria-label="このアプリを共有">
+                            <img src="/img/share.svg" width="20" height="20" alt="">
+                            <span>共有</span>
+                        </summary>
+                        <div class="share-menu">
+                            <div class="share-actions-links">
+                                <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E8%8B%B1%E6%95%B0%E5%AD%97%E3%82%92%E5%8F%8D%E8%BB%A2+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Frotate%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
+                                <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Frotate%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
+                                <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Frotate%2F" target="_blank" rel="noopener noreferrer">LINE</a>
+                            </div>
+                            <label class="share-url-label" for="share-url-rotate">URL</label>
+                            <div class="share-url-row">
+                                <input id="share-url-rotate" type="url" value="https://yapps.yotiosoft.com/rotate/" readonly>
+                                <button class="round-rect-button" type="button" data-share-copy>コピー</button>
+                            </div>
+                            <p class="share-copy-status" role="status" aria-live="polite"></p>
+                        </div>
+                    </details>
+                    <!-- SHARE_ACTIONS_END -->
                 </div>
                 <p class="summary">
                     文章から英数字を（擬似的に）180°反転した文字に変換します。逆変換も可能です。<br>
@@ -165,18 +186,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- SHARE_ACTIONS_START -->
-                <section class="share-actions" aria-label="このアプリを共有">
-                    <h2>このアプリを共有</h2>
-                    <div class="share-actions-links">
-                        <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E8%8B%B1%E6%95%B0%E5%AD%97%E3%82%92%E5%8F%8D%E8%BB%A2+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Frotate%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
-                        <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Frotate%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
-                        <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Frotate%2F" target="_blank" rel="noopener noreferrer">LINE</a>
-                        <button class="round-rect-button" type="button" data-share-copy>URLをコピー</button>
-                    </div>
-                    <p class="share-copy-status" role="status" aria-live="polite"></p>
-                </section>
-                <!-- SHARE_ACTIONS_END -->
                 <div class="related-apps">
                     <div class="title">関連アプリ</div>
                     <div class="app-list">

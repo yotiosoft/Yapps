@@ -109,6 +109,27 @@
                     <div class="badge-online">Online</div>
                     <div class="badge-ai">LLM (Jev)</div>
                 </div>
+                <!-- SHARE_ACTIONS_START -->
+                <details class="share-actions">
+                    <summary class="round-rect-button share-trigger" aria-label="このアプリを共有">
+                        <img src="/img/share.svg" width="20" height="20" alt="">
+                        <span>共有</span>
+                    </summary>
+                    <div class="share-menu">
+                        <div class="share-actions-links">
+                            <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E6%96%87%E8%84%88%E8%A7%A3%E6%9E%90+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Fcontext-analysis%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
+                            <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Fcontext-analysis%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
+                            <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Fcontext-analysis%2F" target="_blank" rel="noopener noreferrer">LINE</a>
+                        </div>
+                        <label class="share-url-label" for="share-url-context-analysis">URL</label>
+                        <div class="share-url-row">
+                            <input id="share-url-context-analysis" type="url" value="https://yapps.yotiosoft.com/context-analysis/" readonly>
+                            <button class="round-rect-button" type="button" data-share-copy>コピー</button>
+                        </div>
+                        <p class="share-copy-status" role="status" aria-live="polite"></p>
+                    </div>
+                </details>
+                <!-- SHARE_ACTIONS_END -->
             </div>
             <p class="summary">文章を貼り付け、依頼・推測・断りなど選びたい意味を入力すると、AIが文脈を解析して該当する文をハイライトします。テキストマイニングの結果をクリックして選択を調整し、選択した部分だけをコピー・削除できます。<br>文章と選択した文脈は判定のため TypeSafe AI に送信されますので、機密情報の扱いにご注意ください。</p>
             <noscript>このアプリを使用するには JavaScript を有効にしてください。</noscript>
@@ -143,18 +164,6 @@
                 <p class="note">解析は文章単位です。AIによる解析ですので、必ず解析結果の正確性をご判断ください。</p>
             </div>
 
-            <!-- SHARE_ACTIONS_START -->
-            <section class="share-actions" aria-label="このアプリを共有">
-                <h2>このアプリを共有</h2>
-                <div class="share-actions-links">
-                    <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E6%96%87%E8%84%88%E8%A7%A3%E6%9E%90+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Fcontext-analysis%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
-                    <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Fcontext-analysis%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
-                    <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Fcontext-analysis%2F" target="_blank" rel="noopener noreferrer">LINE</a>
-                    <button class="round-rect-button" type="button" data-share-copy>URLをコピー</button>
-                </div>
-                <p class="share-copy-status" role="status" aria-live="polite"></p>
-            </section>
-            <!-- SHARE_ACTIONS_END -->
             <div class="related-apps">
                 <div class="title">関連アプリ</div>
                 <div class="app-list">

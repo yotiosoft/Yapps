@@ -10,6 +10,19 @@ function escapeHtml(value) {
   return String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
+function findTitleEnd(html) {
+  const start = html.search(/<div class="title">/);
+  if (start < 0) throw new Error("App title was not found.");
+  const tags = /<\/?div\b[^>]*>/g;
+  tags.lastIndex = start;
+  let depth = 0;
+  for (const match of html.matchAll(tags)) {
+    depth += match[0].startsWith("</") ? -1 : 1;
+    if (depth === 0) return match.index;
+  }
+  throw new Error("App title is not closed.");
+}
+
 for (const app of apps) {
   const path = resolve(root, app.path.slice(1), "index.html");
   const url = new URL(app.path, origin).href;
@@ -37,16 +50,25 @@ for (const app of apps) {
   ].join("\n");
   const body = [
     "<!-- SHARE_ACTIONS_START -->",
-    `<section class="share-actions" aria-label="このアプリを共有">`,
-    `    <h2>このアプリを共有</h2>`,
-    `    <div class="share-actions-links">`,
-    `        <a class="round-rect-button" href="${escapeHtml(xUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>`,
-    `        <a class="round-rect-button" href="${escapeHtml(facebookUrl)}" target="_blank" rel="noopener noreferrer">Facebook</a>`,
-    `        <a class="round-rect-button" href="${escapeHtml(lineUrl)}" target="_blank" rel="noopener noreferrer">LINE</a>`,
-    `        <button class="round-rect-button" type="button" data-share-copy>URLをコピー</button>`,
+    `<details class="share-actions">`,
+    `    <summary class="round-rect-button share-trigger" aria-label="このアプリを共有">`,
+    `        <img src="/img/share.svg" width="20" height="20" alt="">`,
+    `        <span>共有</span>`,
+    `    </summary>`,
+    `    <div class="share-menu">`,
+    `        <div class="share-actions-links">`,
+    `            <a class="round-rect-button" href="${escapeHtml(xUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>`,
+    `            <a class="round-rect-button" href="${escapeHtml(facebookUrl)}" target="_blank" rel="noopener noreferrer">Facebook</a>`,
+    `            <a class="round-rect-button" href="${escapeHtml(lineUrl)}" target="_blank" rel="noopener noreferrer">LINE</a>`,
+    `        </div>`,
+    `        <label class="share-url-label" for="share-url-${escapeHtml(app.id)}">URL</label>`,
+    `        <div class="share-url-row">`,
+    `            <input id="share-url-${escapeHtml(app.id)}" type="url" value="${escapeHtml(url)}" readonly>`,
+    `            <button class="round-rect-button" type="button" data-share-copy>コピー</button>`,
+    `        </div>`,
+    `        <p class="share-copy-status" role="status" aria-live="polite"></p>`,
     `    </div>`,
-    `    <p class="share-copy-status" role="status" aria-live="polite"></p>`,
-    `</section>`,
+    `</details>`,
     "<!-- SHARE_ACTIONS_END -->",
   ].join("\n");
   let html = readFileSync(path, "utf8");
@@ -56,9 +78,11 @@ for (const app of apps) {
   if (!html.includes('href="/button.css"')) html = html.replace(/<\/head>/i, '    <link rel="stylesheet" href="/button.css">\n</head>');
   if (!html.includes('href="/share.css"')) html = html.replace(/<\/head>/i, '    <link rel="stylesheet" href="/share.css">\n    <script defer src="/js/share.js"></script>\n</head>');
   html = html.replace(/<\/head>/i, `${head.split("\n").map(line => "    " + line).join("\n")}\n</head>`);
-  const related = html.match(/^([ \t]*)<(?:div|section) class="related-apps"/m);
-  if (!related) throw new Error(`Related apps insertion point missing: ${path}`);
-  html = html.replace(related[0], `${body.split("\n").map(line => related[1] + line).join("\n")}\n${related[0]}`);
+  const titleEnd = findTitleEnd(html);
+  const lineStart = html.lastIndexOf("\n", titleEnd) + 1;
+  const indentation = html.slice(lineStart, titleEnd);
+  const inserted = body.split("\n").map(line => `${indentation}    ${line}`).join("\n");
+  html = `${html.slice(0, lineStart)}${inserted}\n${html.slice(lineStart)}`;
   writeFileSync(path, html, "utf8");
 }
 console.log(`Generated sharing for ${apps.length} apps.`);

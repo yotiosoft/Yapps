@@ -112,6 +112,27 @@
                         <div class="badge-clientside">Client Side</div>
                         <div class="badge-offline">Offline OK</div>
                     </div>
+                    <!-- SHARE_ACTIONS_START -->
+                    <details class="share-actions">
+                        <summary class="round-rect-button share-trigger" aria-label="このアプリを共有">
+                            <img src="/img/share.svg" width="20" height="20" alt="">
+                            <span>共有</span>
+                        </summary>
+                        <div class="share-menu">
+                            <div class="share-actions-links">
+                                <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E7%94%BB%E5%83%8FRGB%E5%80%A4%E5%8F%96%E5%BE%97+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Fimg2color%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
+                                <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Fimg2color%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
+                                <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Fimg2color%2F" target="_blank" rel="noopener noreferrer">LINE</a>
+                            </div>
+                            <label class="share-url-label" for="share-url-img2color">URL</label>
+                            <div class="share-url-row">
+                                <input id="share-url-img2color" type="url" value="https://yapps.yotiosoft.com/img2color/" readonly>
+                                <button class="round-rect-button" type="button" data-share-copy>コピー</button>
+                            </div>
+                            <p class="share-copy-status" role="status" aria-live="polite"></p>
+                        </div>
+                    </details>
+                    <!-- SHARE_ACTIONS_END -->
                 </div>
                 <p class="summary">
                     画像ファイルをアップロードし、マウスクリックした位置のRGB値を取得します。<br>
@@ -165,18 +186,6 @@
                 </div>
 
                 <!-- 関連アプリセクション -->
-                <!-- SHARE_ACTIONS_START -->
-                <section class="share-actions" aria-label="このアプリを共有">
-                    <h2>このアプリを共有</h2>
-                    <div class="share-actions-links">
-                        <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E7%94%BB%E5%83%8FRGB%E5%80%A4%E5%8F%96%E5%BE%97+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Fimg2color%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
-                        <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Fimg2color%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
-                        <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Fimg2color%2F" target="_blank" rel="noopener noreferrer">LINE</a>
-                        <button class="round-rect-button" type="button" data-share-copy>URLをコピー</button>
-                    </div>
-                    <p class="share-copy-status" role="status" aria-live="polite"></p>
-                </section>
-                <!-- SHARE_ACTIONS_END -->
                 <div class="related-apps">
                     <div class="title">関連アプリ</div>
                     <div class="app-list">

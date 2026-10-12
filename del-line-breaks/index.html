@@ -114,6 +114,27 @@
                         <div class="badge-clientside">Client Side</div>
                         <div class="badge-offline">Offline OK</div>
                     </div>
+                    <!-- SHARE_ACTIONS_START -->
+                    <details class="share-actions">
+                        <summary class="round-rect-button share-trigger" aria-label="このアプリを共有">
+                            <img src="/img/share.svg" width="20" height="20" alt="">
+                            <span>共有</span>
+                        </summary>
+                        <div class="share-menu">
+                            <div class="share-actions-links">
+                                <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E6%94%B9%E8%A1%8C%E3%82%92%E5%89%8A%E9%99%A4+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Fdel-line-breaks%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
+                                <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Fdel-line-breaks%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
+                                <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Fdel-line-breaks%2F" target="_blank" rel="noopener noreferrer">LINE</a>
+                            </div>
+                            <label class="share-url-label" for="share-url-del-line-breaks">URL</label>
+                            <div class="share-url-row">
+                                <input id="share-url-del-line-breaks" type="url" value="https://yapps.yotiosoft.com/del-line-breaks/" readonly>
+                                <button class="round-rect-button" type="button" data-share-copy>コピー</button>
+                            </div>
+                            <p class="share-copy-status" role="status" aria-live="polite"></p>
+                        </div>
+                    </details>
+                    <!-- SHARE_ACTIONS_END -->
                 </div>
                 <p class="summary">
                     文章中の改行コードを削除します。改行をスペースに置き換えることも可能です。<br>
@@ -157,18 +178,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- SHARE_ACTIONS_START -->
-                <section class="share-actions" aria-label="このアプリを共有">
-                    <h2>このアプリを共有</h2>
-                    <div class="share-actions-links">
-                        <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E6%94%B9%E8%A1%8C%E3%82%92%E5%89%8A%E9%99%A4+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Fdel-line-breaks%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
-                        <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Fdel-line-breaks%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
-                        <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Fdel-line-breaks%2F" target="_blank" rel="noopener noreferrer">LINE</a>
-                        <button class="round-rect-button" type="button" data-share-copy>URLをコピー</button>
-                    </div>
-                    <p class="share-copy-status" role="status" aria-live="polite"></p>
-                </section>
-                <!-- SHARE_ACTIONS_END -->
                 <div class="related-apps">
                     <div class="title">関連アプリ</div>
                     <div class="app-list">

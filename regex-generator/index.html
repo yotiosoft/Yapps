@@ -105,6 +105,27 @@
                 <div class="badge-ver">ver.1.0</div>
                 <div class="badge-clientside">Client Side</div>
             </div>
+            <!-- SHARE_ACTIONS_START -->
+            <details class="share-actions">
+                <summary class="round-rect-button share-trigger" aria-label="このアプリを共有">
+                    <img src="/img/share.svg" width="20" height="20" alt="">
+                    <span>共有</span>
+                </summary>
+                <div class="share-menu">
+                    <div class="share-actions-links">
+                        <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Fregex-generator%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
+                        <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Fregex-generator%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
+                        <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Fregex-generator%2F" target="_blank" rel="noopener noreferrer">LINE</a>
+                    </div>
+                    <label class="share-url-label" for="share-url-regex-generator">URL</label>
+                    <div class="share-url-row">
+                        <input id="share-url-regex-generator" type="url" value="https://yapps.yotiosoft.com/regex-generator/" readonly>
+                        <button class="round-rect-button" type="button" data-share-copy>コピー</button>
+                    </div>
+                    <p class="share-copy-status" role="status" aria-live="polite"></p>
+                </div>
+            </details>
+            <!-- SHARE_ACTIONS_END -->
         </div>
         <p class="summary">入力した文字列から正規表現を生成します。利用先の方言や一致範囲、文字数、部分ごとの粒度を指定できます。<br>
             このツールはブラウザ内で実行され、入力内容はサーバに送信されません。</p>
@@ -146,18 +167,6 @@
                 <p class="hint" id="preview-note"></p>
             </section>
         </div>
-        <!-- SHARE_ACTIONS_START -->
-        <section class="share-actions" aria-label="このアプリを共有">
-            <h2>このアプリを共有</h2>
-            <div class="share-actions-links">
-                <a class="round-rect-button" href="https://twitter.com/intent/tweet?text=%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF+-+Yapps&amp;url=https%3A%2F%2Fyapps.yotiosoft.com%2Fregex-generator%2F" target="_blank" rel="noopener noreferrer" aria-label="Xで共有">X</a>
-                <a class="round-rect-button" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyapps.yotiosoft.com%2Fregex-generator%2F" target="_blank" rel="noopener noreferrer">Facebook</a>
-                <a class="round-rect-button" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fyapps.yotiosoft.com%2Fregex-generator%2F" target="_blank" rel="noopener noreferrer">LINE</a>
-                <button class="round-rect-button" type="button" data-share-copy>URLをコピー</button>
-            </div>
-            <p class="share-copy-status" role="status" aria-live="polite"></p>
-        </section>
-        <!-- SHARE_ACTIONS_END -->
         <section class="related-apps"><div class="title">関連アプリ</div><div class="box-horizon-area">
             <!-- RELATED_APPS_START target="regex-generator" -->
                 <div class="box-horizon-wrap">
