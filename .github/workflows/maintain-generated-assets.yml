@@ -45,6 +45,9 @@ jobs:
       - name: Generate structured data
         run: npm run generate:structured-data
 
+      - name: Generate AdSense slots
+        run: npm run generate:adsense
+
       - name: Minify JavaScript files
         run: |
           find . -type f -name "*.js" \
