@@ -4,11 +4,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const apps = JSON.parse(readFileSync(resolve(root, "apps.json"), "utf8")).apps;
-const conditionalTemplate = readFileSync(resolve(root, "templates/adsense.html"), "utf8").trim();
-const alwaysTemplate = readFileSync(resolve(root, "templates/adsense-always.html"), "utf8").trim();
+const adTemplate = readFileSync(resolve(root, "templates/adsense.html"), "utf8").trim();
 const oldMarker = /^[ \t]*<!-- ADSENSE_START -->[\s\S]*?^[ \t]*<!-- ADSENSE_END -->/m;
 const conditionalMarker = /^[ \t]*<!-- ADSENSE_CONDITIONAL_START -->[\s\S]*?^[ \t]*<!-- ADSENSE_CONDITIONAL_END -->\r?\n?/m;
-const fallbackScript = '<script defer src="/js/adsense-fallback.min.js"></script>';
+const fallbackScript = /^[ \t]*<script defer src="\/js\/adsense-fallback\.min\.js"><\/script>\r?\n?/m;
 
 function insertBlock(html, name, template, anchor, indentation) {
   const marker = new RegExp(`^[ \\t]*<!-- ${name}_START -->[\\s\\S]*?^[ \\t]*<!-- ${name}_END -->`, "m");
@@ -36,12 +35,12 @@ for (const app of apps) {
     throw new Error(`${app.path}: head insertion point was not found`);
   }
 
-  // Replace the previous single conditional slot with the permanent slot.
+  // Remove legacy ad markup before generating the two permanent slots.
   let updated = withLoader.replace(oldMarker, "");
-  updated = insertBlock(updated, "ADSENSE_ALWAYS", alwaysTemplate, relatedApps[0], relatedApps[1]);
+  updated = updated.replace(fallbackScript, "");
+  updated = insertBlock(updated, "ADSENSE_ALWAYS", adTemplate, relatedApps[0], relatedApps[1]);
   updated = updated.replace(conditionalMarker, "");
-  updated = insertBlock(updated, "ADSENSE_CONDITIONAL", conditionalTemplate, contents[0], contents[1]);
-  if (!updated.includes(fallbackScript)) updated = updated.replace("</head>", `    ${fallbackScript}\n</head>`);
+  updated = insertBlock(updated, "ADSENSE_TOP", adTemplate, contents[0], contents[1]);
   if (updated !== html) writeFileSync(pagePath, updated, "utf8");
 }
 
