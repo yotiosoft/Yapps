@@ -1,16 +1,18 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const apps = JSON.parse(readFileSync(resolve(root, "apps.json"), "utf8")).apps;
-const adTemplate = readFileSync(resolve(root, "templates/adsense.html"), "utf8").trim();
+const templatePath = resolve(root, "templates/adsense.html");
+const adTemplate = existsSync(templatePath) ? readFileSync(templatePath, "utf8").trim() : "";
 const oldMarker = /^[ \t]*<!-- ADSENSE_START -->[\s\S]*?^[ \t]*<!-- ADSENSE_END -->/m;
 const conditionalMarker = /^[ \t]*<!-- ADSENSE_CONDITIONAL_START -->[\s\S]*?^[ \t]*<!-- ADSENSE_CONDITIONAL_END -->\r?\n?/m;
 const fallbackScript = /^[ \t]*<script defer src="\/js\/adsense-fallback\.min\.js"><\/script>\r?\n?/m;
 
 function insertBlock(html, name, template, anchor, indentation) {
   const marker = new RegExp(`^[ \\t]*<!-- ${name}_START -->[\\s\\S]*?^[ \\t]*<!-- ${name}_END -->`, "m");
+  if (!template) return html.replace(marker, "");
   const block = [
     `${indentation}<!-- ${name}_START -->`,
     ...template.split(/\r?\n/).map((line) => `${indentation}${line}`),
@@ -28,10 +30,10 @@ for (const app of apps) {
   if (!relatedApps) throw new Error(`${app.path}: related apps insertion point was not found`);
   const contents = /^([ \t]*)<(?:main|div) id="contents-wrap"[^>]*>/m.exec(html);
   if (!contents) throw new Error(`${app.path}: contents-wrap insertion point was not found`);
-  const withLoader = html.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+  const withLoader = !adTemplate || html.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
     ? html
     : html.replace("</head>", '    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5605897321593790" crossorigin="anonymous"></script>\n</head>');
-  if (withLoader === html && !html.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")) {
+  if (adTemplate && withLoader === html && !html.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")) {
     throw new Error(`${app.path}: head insertion point was not found`);
   }
 
